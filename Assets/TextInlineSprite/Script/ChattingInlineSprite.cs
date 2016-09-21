@@ -50,7 +50,7 @@ public class ChattingInlineSprite : MonoBehaviour {
 
     void ClickEmojiBtns(GameObject go)
     {
-        inputText.text += "<quad name=" + go.GetComponent<Image>().sprite.name +" size=20 width=1" + " />";
+        inputText.text += "<quad name=" + go.name +" size=20 width=1" + " />";
     }
 
     // Update is called once per frame

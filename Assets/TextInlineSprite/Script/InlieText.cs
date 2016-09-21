@@ -32,6 +32,14 @@ public class InlieText : Text {
     /// </summary>
     private CanvasRenderer m_spriteCanvasRenderer;
 
+    #region 动画标签解析
+    //最多动态表情数量
+    int AnimNum = 4;
+    List<int> m_AnimIndex;
+    Dictionary<int, SpriteTagInfor[]> m_AnimSpiteTag;
+    Dictionary<int, InlineSpriteInfor[]> m_AnimSpriteInfor;
+    #endregion
+
     /// <summary>
     /// 初始化 
     /// </summary>
@@ -39,7 +47,8 @@ public class InlieText : Text {
     {
         //在编辑器中，可能在最开始会出现一张图片，就是因为没有激活文本，在运行中是正常的。可根据需求在编辑器中选择激活...
         base.OnEnable();
-
+        //对齐几何
+        alignByGeometry = true;
         if (m_spriteGraphic == null)
             m_spriteGraphic = GetComponentInChildren<SpriteGraphic>();
         if (m_spriteCanvasRenderer == null)
@@ -55,18 +64,45 @@ public class InlieText : Text {
         base.SetVerticesDirty();
         //解析标签属性
         listTagInfor = new List<SpriteTagInfor>();
+        m_AnimIndex = new List<int>();
+        m_AnimSpiteTag = new Dictionary<int, SpriteTagInfor[]>();
+
         foreach (Match match in m_spriteTagRegex.Matches(text))
         {
-            SpriteTagInfor tempSpriteTag = new SpriteTagInfor();
-            tempSpriteTag.name = match.Groups[1].Value;
-            tempSpriteTag.index = match.Index;
-            tempSpriteTag.size = new Vector2(float.Parse(match.Groups[2].Value)*float.Parse(match.Groups[3].Value), float.Parse(match.Groups[2].Value));
-            tempSpriteTag.Length = match.Length;
-            listTagInfor.Add(tempSpriteTag);
+            #region 解析动画标签
+            if (match.Groups[1].Value.Contains("#")
+                && match.Groups[1].Value != "#")
+            {
+                string[] arrayNames = match.Groups[1].Value.Trim().Split('#');
+                Debug.Log(arrayNames.Length);
+                SpriteTagInfor[] tempArrayTag = new SpriteTagInfor[arrayNames.Length];
+                for (int i = 0; i < tempArrayTag.Length; i++)
+                {
+                    tempArrayTag[i] = new SpriteTagInfor();
+                    tempArrayTag[i].name = arrayNames[i];
+                    tempArrayTag[i].index = match.Index;
+                    tempArrayTag[i].size = new Vector2(float.Parse(match.Groups[2].Value) * float.Parse(match.Groups[3].Value), float.Parse(match.Groups[2].Value));
+                    tempArrayTag[i].Length = match.Length;
+                }
+                listTagInfor.Add(tempArrayTag[0]);
+                m_AnimSpiteTag.Add(listTagInfor.Count - 1, tempArrayTag);
+                m_AnimIndex.Add(listTagInfor.Count - 1);
+            }
+            #endregion
+            else
+            {
+                SpriteTagInfor tempSpriteTag = new SpriteTagInfor();
+                tempSpriteTag.name = match.Groups[1].Value;
+                tempSpriteTag.index = match.Index;
+                tempSpriteTag.size = new Vector2(float.Parse(match.Groups[2].Value) * float.Parse(match.Groups[3].Value), float.Parse(match.Groups[2].Value));
+                tempSpriteTag.Length = match.Length;
+                listTagInfor.Add(tempSpriteTag);
+
+                m_AnimSpiteTag.Add(listTagInfor.Count - 1, new SpriteTagInfor[] { tempSpriteTag });
+                m_AnimIndex.Add(listTagInfor.Count - 1);
+            }
         }
-
         Vector2 extents = rectTransform.rect.size;
-
     }
 
     readonly UIVertex[] m_TempVerts = new UIVertex[4];
@@ -171,6 +207,9 @@ public class InlieText : Text {
     /// <param name="verts"></param>
     void CalcQuadTag(IList<UIVertex> verts)
     {
+
+        m_AnimSpriteInfor = new Dictionary<int, InlineSpriteInfor[]>();
+
         //通过标签信息来设置需要绘制的图片的信息
         listSprite = new List<InlineSpriteInfor>();
         for (int i = 0; i < listTagInfor.Count; i++)
@@ -188,7 +227,7 @@ public class InlieText : Text {
             //获取表情的第一个位置,则计算他的位置为quad占位的第四个点   顶点绘制顺序:       
             //                                                                              0    1
             //                                                                              3    2
-            tempSprite.textpos = verts[((listTagInfor[i].index+1) * 4) - 1].position;
+            tempSprite.textpos = verts[((listTagInfor[i].index + 1) * 4) - 1].position;
 
             //设置图片的位置
             tempSprite.vertices = new Vector3[4];
@@ -202,7 +241,7 @@ public class InlieText : Text {
             for (int j = 0; j < m_spriteAsset.listSpriteInfor.Count; j++)
             {
                 //通过标签的名称去索引spriteAsset里所对应的sprite的名称
-                if (listTagInfor[i].name == m_spriteAsset.listSpriteInfor[j].name)
+                if (listTagInfor[i].name == m_spriteAsset.listSpriteInfor[j].ID.ToString())
                     spriteRect = m_spriteAsset.listSpriteInfor[j].rect;
             }
             Vector2 texSize = new Vector2(m_spriteAsset.texSource.width, m_spriteAsset.texSource.height);
@@ -216,6 +255,44 @@ public class InlieText : Text {
             //声明三角顶点所需要的数组
             tempSprite.triangles = new int[6];
             listSprite.Add(tempSprite);
+
+
+            if (m_AnimSpiteTag[i] != null)
+            {
+                SpriteTagInfor[] tempTagInfor = m_AnimSpiteTag[i];
+                InlineSpriteInfor[] tempSpriteInfor =new InlineSpriteInfor[tempTagInfor.Length];
+                for (int j = 0; j < tempTagInfor.Length; j++)
+                {
+                    tempSpriteInfor[j] =new InlineSpriteInfor();
+                    tempSpriteInfor[j].textpos = verts[((tempTagInfor[j].index + 1) * 4) - 1].position;
+                    //设置图片的位置
+                    tempSpriteInfor[j].vertices = new Vector3[4];
+                    tempSpriteInfor[j].vertices[0] = new Vector3(0, 0, 0) + tempSpriteInfor[j].textpos;
+                    tempSpriteInfor[j].vertices[1] = new Vector3(tempTagInfor[j].size.x, tempTagInfor[j].size.y, 0) + tempSpriteInfor[j].textpos;
+                    tempSpriteInfor[j].vertices[2] = new Vector3(tempTagInfor[j].size.x, 0, 0) + tempSpriteInfor[j].textpos;
+                    tempSpriteInfor[j].vertices[3] = new Vector3(0, tempTagInfor[j].size.y, 0) + tempSpriteInfor[j].textpos;
+
+                    //计算其uv
+                    Rect newSpriteRect = m_spriteAsset.listSpriteInfor[0].rect;
+                    for (int m = 0; m < m_spriteAsset.listSpriteInfor.Count; m++)
+                    {
+                        //通过标签的名称去索引spriteAsset里所对应的sprite的名称
+                        if (tempTagInfor[j].name == m_spriteAsset.listSpriteInfor[m].ID.ToString())
+                            newSpriteRect = m_spriteAsset.listSpriteInfor[m].rect;
+                    }
+                    Vector2 newTexSize = new Vector2(m_spriteAsset.texSource.width, m_spriteAsset.texSource.height);
+
+                    tempSpriteInfor[j].uv = new Vector2[4];
+                    tempSpriteInfor[j].uv[0] = new Vector2(newSpriteRect.x / newTexSize.x, newSpriteRect.y / newTexSize.y);
+                    tempSpriteInfor[j].uv[1] = new Vector2((newSpriteRect.x + newSpriteRect.width) / newTexSize.x, (newSpriteRect.y + newSpriteRect.height) / newTexSize.y);
+                    tempSpriteInfor[j].uv[2] = new Vector2((newSpriteRect.x + newSpriteRect.width) / newTexSize.x, newSpriteRect.y / newTexSize.y);
+                    tempSpriteInfor[j].uv[3] = new Vector2(newSpriteRect.x / newTexSize.x, (newSpriteRect.y + newSpriteRect.height) / newTexSize.y);
+
+                    //声明三角顶点所需要的数组
+                    tempSpriteInfor[j].triangles = new int[6];
+                }
+                m_AnimSpriteInfor.Add(i, tempSpriteInfor);
+            }
         }
     }
     
@@ -272,7 +349,37 @@ public class InlieText : Text {
         m_spriteGraphic.UpdateMaterial();
     }
 
+
+    float fTime = 0.0f;
+    int iIndex = 0;
+    void Update()
+    {
+        fTime += Time.deltaTime;
+        if (fTime >= 0.2f)
+        {
+            for (int i = 0; i < m_AnimIndex.Count; i++)
+            {
+                if (iIndex >= m_AnimSpriteInfor[m_AnimIndex[i]].Length)
+                {
+                    listSprite[m_AnimIndex[i]] = m_AnimSpriteInfor[m_AnimIndex[i]][0];
+                }
+                else
+                {
+                    listSprite[m_AnimIndex[i]] = m_AnimSpriteInfor[m_AnimIndex[i]][iIndex];
+                }
+            }
+            DrawSprite();
+            iIndex++;
+            if (iIndex >= 4)
+            {
+                iIndex = 0;
+            }
+            fTime = 0.0f;
+        }
+    }
+
 }
+
 
 [System.Serializable]
 public class SpriteTagInfor

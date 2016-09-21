@@ -32,9 +32,17 @@
             <img src="https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/03.png"/>
         </p>
     </li>
+	<li>
+        <p>
+            动态biaoqing:
+        </p>
+        <p>
+            <img src="https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/04.gif"/>
+        </p>
+    </li>
     <li>
         <p>
-            之前经过部分同学的反馈,也修改了部分bug,但是对于quad标签占位问题,始终没有得到很好的解决,具体表现为不能准确自动换行，也是这个问题导致始终无法完善，不过也舍不得丢掉，还是放在这里了.
+            最新修改了quad占位的问题，同时避免文本太长改用了ID索引图片，增加了动态表情,用#分离ID号就是动态动态表情
         </p>
     </li>
 </ol>
