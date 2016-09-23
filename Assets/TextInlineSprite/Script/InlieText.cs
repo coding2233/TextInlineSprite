@@ -34,7 +34,7 @@ public class InlieText : Text {
 
     #region 动画标签解析
     //最多动态表情数量
-    int AnimNum = 4;
+    int AnimNum = 8;
     List<int> m_AnimIndex;
     Dictionary<int, SpriteTagInfor[]> m_AnimSpiteTag;
     Dictionary<int, InlineSpriteInfor[]> m_AnimSpriteInfor;
@@ -355,7 +355,7 @@ public class InlieText : Text {
     void Update()
     {
         fTime += Time.deltaTime;
-        if (fTime >= 0.2f)
+        if (fTime >= 0.1f)
         {
             for (int i = 0; i < m_AnimIndex.Count; i++)
             {
@@ -370,7 +370,7 @@ public class InlieText : Text {
             }
             DrawSprite();
             iIndex++;
-            if (iIndex >= 4)
+            if (iIndex >= AnimNum)
             {
                 iIndex = 0;
             }

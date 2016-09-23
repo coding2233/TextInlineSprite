@@ -1,0 +1,4219 @@
+fileFormatVersion: 2
+guid: 0f80732ede17ee84fbda8d7d2448dd61
+timeCreated: 1474622983
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: emoji_lxh_0
+    21300002: emoji_lxh_1
+    21300004: emoji_lxh_2
+    21300006: emoji_lxh_3
+    21300008: emoji_lxh_4
+    21300010: emoji_lxh_5
+    21300012: emoji_lxh_6
+    21300014: emoji_lxh_7
+    21300016: emoji_lxh_8
+    21300018: emoji_lxh_9
+    21300020: emoji_lxh_10
+    21300022: emoji_lxh_11
+    21300024: emoji_lxh_12
+    21300026: emoji_lxh_13
+    21300028: emoji_lxh_14
+    21300030: emoji_lxh_15
+    21300032: emoji_lxh_16
+    21300034: emoji_lxh_17
+    21300036: emoji_lxh_18
+    21300038: emoji_lxh_19
+    21300040: emoji_lxh_20
+    21300042: emoji_lxh_21
+    21300044: emoji_lxh_22
+    21300046: emoji_lxh_23
+    21300048: emoji_lxh_24
+    21300050: emoji_lxh_25
+    21300052: emoji_lxh_26
+    21300054: emoji_lxh_27
+    21300056: emoji_lxh_28
+    21300058: emoji_lxh_29
+    21300060: emoji_lxh_30
+    21300062: emoji_lxh_31
+    21300064: emoji_lxh_32
+    21300066: emoji_lxh_33
+    21300068: emoji_lxh_34
+    21300070: emoji_lxh_35
+    21300072: emoji_lxh_36
+    21300074: emoji_lxh_37
+    21300076: emoji_lxh_38
+    21300078: emoji_lxh_39
+    21300080: emoji_lxh_40
+    21300082: emoji_lxh_41
+    21300084: emoji_lxh_42
+    21300086: emoji_lxh_43
+    21300088: emoji_lxh_44
+    21300090: emoji_lxh_45
+    21300092: emoji_lxh_46
+    21300094: emoji_lxh_47
+    21300096: emoji_lxh_48
+    21300098: emoji_lxh_49
+    21300100: emoji_lxh_50
+    21300102: emoji_lxh_51
+    21300104: emoji_lxh_52
+    21300106: emoji_lxh_53
+    21300108: emoji_lxh_54
+    21300110: emoji_lxh_55
+    21300112: emoji_lxh_56
+    21300114: emoji_lxh_57
+    21300116: emoji_lxh_58
+    21300118: emoji_lxh_59
+    21300120: emoji_lxh_60
+    21300122: emoji_lxh_61
+    21300124: emoji_lxh_62
+    21300126: emoji_lxh_63
+    21300128: emoji_lxh_64
+    21300130: emoji_lxh_65
+    21300132: emoji_lxh_66
+    21300134: emoji_lxh_67
+    21300136: emoji_lxh_68
+    21300138: emoji_lxh_69
+    21300140: emoji_lxh_70
+    21300142: emoji_lxh_71
+    21300144: emoji_lxh_72
+    21300146: emoji_lxh_73
+    21300148: emoji_lxh_74
+    21300150: emoji_lxh_75
+    21300152: emoji_lxh_76
+    21300154: emoji_lxh_77
+    21300156: emoji_lxh_78
+    21300158: emoji_lxh_79
+    21300160: emoji_lxh_80
+    21300162: emoji_lxh_81
+    21300164: emoji_lxh_82
+    21300166: emoji_lxh_83
+    21300168: emoji_lxh_84
+    21300170: emoji_lxh_85
+    21300172: emoji_lxh_86
+    21300174: emoji_lxh_87
+    21300176: emoji_lxh_88
+    21300178: emoji_lxh_89
+    21300180: emoji_lxh_90
+    21300182: emoji_lxh_91
+    21300184: emoji_lxh_92
+    21300186: emoji_lxh_93
+    21300188: emoji_lxh_94
+    21300190: emoji_lxh_95
+    21300192: emoji_lxh_96
+    21300194: emoji_lxh_97
+    21300196: emoji_lxh_98
+    21300198: emoji_lxh_99
+    21300200: emoji_lxh_100
+    21300202: emoji_lxh_101
+    21300204: emoji_lxh_102
+    21300206: emoji_lxh_103
+    21300208: emoji_lxh_104
+    21300210: emoji_lxh_105
+    21300212: emoji_lxh_106
+    21300214: emoji_lxh_107
+    21300216: emoji_lxh_108
+    21300218: emoji_lxh_109
+    21300220: emoji_lxh_110
+    21300222: emoji_lxh_111
+    21300224: emoji_lxh_112
+    21300226: emoji_lxh_113
+    21300228: emoji_lxh_114
+    21300230: emoji_lxh_115
+    21300232: emoji_lxh_116
+    21300234: emoji_lxh_117
+    21300236: emoji_lxh_118
+    21300238: emoji_lxh_119
+    21300240: emoji_lxh_120
+    21300242: emoji_lxh_121
+    21300244: emoji_lxh_122
+    21300246: emoji_lxh_123
+    21300248: emoji_lxh_124
+    21300250: emoji_lxh_125
+    21300252: emoji_lxh_126
+    21300254: emoji_lxh_127
+    21300256: emoji_lxh_128
+    21300258: emoji_lxh_129
+    21300260: emoji_lxh_130
+    21300262: emoji_lxh_131
+    21300264: emoji_lxh_132
+    21300266: emoji_lxh_133
+    21300268: emoji_lxh_134
+    21300270: emoji_lxh_135
+    21300272: emoji_lxh_136
+    21300274: emoji_lxh_137
+    21300276: emoji_lxh_138
+    21300278: emoji_lxh_139
+    21300280: emoji_lxh_140
+    21300282: emoji_lxh_141
+    21300284: emoji_lxh_142
+    21300286: emoji_lxh_143
+    21300288: emoji_lxh_144
+    21300290: emoji_lxh_145
+    21300292: emoji_lxh_146
+    21300294: emoji_lxh_147
+    21300296: emoji_lxh_148
+    21300298: emoji_lxh_149
+    21300300: emoji_lxh_150
+    21300302: emoji_lxh_151
+    21300304: emoji_lxh_152
+    21300306: emoji_lxh_153
+    21300308: emoji_lxh_154
+    21300310: emoji_lxh_155
+    21300312: emoji_lxh_156
+    21300314: emoji_lxh_157
+    21300316: emoji_lxh_158
+    21300318: emoji_lxh_159
+    21300320: emoji_lxh_160
+    21300322: emoji_lxh_161
+    21300324: emoji_lxh_162
+    21300326: emoji_lxh_163
+    21300328: emoji_lxh_164
+    21300330: emoji_lxh_165
+    21300332: emoji_lxh_166
+    21300334: emoji_lxh_167
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: emoji_lxh_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: -7}
+        - {x: 50, y: 50}
+        - {x: -50, y: 50}
+        - {x: -50, y: -48}
+        - {x: 46, y: -48}
+        - {x: 50, y: -44}
+        - {x: 50, y: -27}
+        - {x: 49, y: -19}
+    - name: emoji_lxh_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: -7}
+        - {x: 50, y: 32}
+        - {x: 46, y: 50}
+        - {x: 19, y: 50}
+        - {x: 14, y: 42}
+        - {x: 14, y: 14}
+        - {x: -8, y: 26}
+        - {x: -24, y: 23}
+        - {x: -50, y: -20}
+        - {x: -50, y: -48}
+        - {x: 44, y: -48}
+        - {x: 50, y: -46}
+        - {x: 50, y: -27}
+        - {x: 49, y: -19}
+    - name: emoji_lxh_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 1}
+        - {x: -50, y: -48}
+        - {x: 43, y: -48}
+        - {x: 50, y: -46}
+        - {x: 50, y: 50}
+        - {x: -2, y: 50}
+        - {x: -33, y: 39}
+    - name: emoji_lxh_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: -11}
+        - {x: -50, y: -48}
+        - {x: 50, y: -48}
+        - {x: 50, y: 50}
+        - {x: -4, y: 50}
+        - {x: -34, y: 38}
+    - name: emoji_lxh_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: 50}
+        - {x: 4, y: 48}
+        - {x: -21, y: 28}
+        - {x: -50, y: -19}
+        - {x: -50, y: -48}
+        - {x: 50, y: -48}
+        - {x: 50, y: 38}
+        - {x: 49, y: 50}
+    - name: emoji_lxh_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 50}
+        - {x: -50, y: -1}
+        - {x: -50, y: -48}
+        - {x: 43, y: -48}
+        - {x: 50, y: -47}
+        - {x: 50, y: 28}
+        - {x: 48, y: 43}
+        - {x: 45, y: 50}
+    - name: emoji_lxh_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -47, y: 9}
+        - {x: -50, y: -4}
+        - {x: -50, y: -48}
+        - {x: 39, y: -48}
+        - {x: 50, y: -47}
+        - {x: 50, y: 38}
+        - {x: 49, y: 45}
+        - {x: 48, y: 50}
+        - {x: 9, y: 50}
+        - {x: 5, y: 49}
+    - name: emoji_lxh_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 2000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3, y: 50}
+        - {x: -50, y: -13}
+        - {x: -50, y: -48}
+        - {x: 36, y: -48}
+        - {x: 50, y: -47}
+        - {x: 50, y: 40}
+        - {x: 47, y: 50}
+    - name: emoji_lxh_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 47, y: 26}
+        - {x: 22, y: 32}
+        - {x: -24, y: 32}
+        - {x: -32, y: 18}
+        - {x: -32, y: -42}
+        - {x: -17, y: -48}
+        - {x: 37, y: -48}
+        - {x: 42, y: -43}
+        - {x: 49, y: -9}
+        - {x: 49, y: 19}
+      - - {x: -47, y: 13}
+        - {x: -47, y: 7}
+        - {x: -40, y: 7}
+        - {x: -40, y: 12}
+        - {x: -43, y: 15}
+        - {x: -44, y: 15}
+      - - {x: -43, y: 26}
+        - {x: -44, y: 24}
+        - {x: -44, y: 18}
+        - {x: -37, y: 18}
+        - {x: -37, y: 24}
+        - {x: -38, y: 26}
+      - - {x: -36, y: 34}
+        - {x: -39, y: 31}
+        - {x: -39, y: 29}
+        - {x: -36, y: 26}
+        - {x: -34, y: 26}
+        - {x: -31, y: 29}
+        - {x: -31, y: 32}
+        - {x: -33, y: 34}
+    - name: emoji_lxh_9
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 32}
+        - {x: -22, y: 29}
+        - {x: -33, y: 12}
+        - {x: -33, y: -14}
+        - {x: -24, y: -48}
+        - {x: 41, y: -48}
+        - {x: 49, y: -28}
+        - {x: 49, y: 20}
+        - {x: 34, y: 32}
+      - - {x: 47, y: -41}
+        - {x: 49, y: -43}
+        - {x: 50, y: -43}
+        - {x: 50, y: -37}
+        - {x: 47, y: -38}
+      - - {x: -50, y: -24}
+        - {x: -50, y: -32}
+        - {x: -47, y: -32}
+        - {x: -45, y: -30}
+        - {x: -45, y: -26}
+        - {x: -48, y: -23}
+      - - {x: 47, y: -19}
+        - {x: 49, y: -21}
+        - {x: 50, y: -21}
+        - {x: 50, y: -14}
+        - {x: 47, y: -15}
+      - - {x: -50, y: -15}
+        - {x: -46, y: -15}
+        - {x: -44, y: -14}
+        - {x: -44, y: -9}
+        - {x: -45, y: -7}
+        - {x: -50, y: -7}
+      - - {x: -47, y: 12}
+        - {x: -48, y: 10}
+        - {x: -48, y: 6}
+        - {x: -47, y: 4}
+        - {x: -43, y: 4}
+        - {x: -41, y: 5}
+        - {x: -41, y: 12}
+    - name: emoji_lxh_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 31}
+        - {x: -26, y: -43}
+        - {x: -12, y: -48}
+        - {x: 36, y: -48}
+        - {x: 41, y: -45}
+        - {x: 41, y: 31}
+      - - {x: -50, y: -36}
+        - {x: -50, y: -44}
+        - {x: -47, y: -44}
+        - {x: -45, y: -42}
+        - {x: -45, y: -39}
+        - {x: -48, y: -36}
+      - - {x: -50, y: -13}
+        - {x: -50, y: -21}
+        - {x: -48, y: -21}
+        - {x: -45, y: -18}
+        - {x: -45, y: -16}
+        - {x: -48, y: -13}
+    - name: emoji_lxh_11
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 29}
+        - {x: -24, y: -48}
+        - {x: 37, y: -48}
+        - {x: 39, y: -44}
+        - {x: 39, y: 25}
+        - {x: 38, y: 29}
+      - - {x: -49, y: -33}
+        - {x: -50, y: -34}
+        - {x: -50, y: -42}
+        - {x: -41, y: -42}
+        - {x: -41, y: -35}
+        - {x: -44, y: -33}
+    - name: emoji_lxh_12
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: 30}
+        - {x: -1, y: 38}
+        - {x: -18, y: 38}
+        - {x: -19, y: 36}
+        - {x: -30, y: 18}
+        - {x: -30, y: -21}
+        - {x: -20, y: -48}
+        - {x: 37, y: -48}
+        - {x: 41, y: -42}
+        - {x: 50, y: -14}
+        - {x: 50, y: 14}
+    - name: emoji_lxh_13
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: 33}
+        - {x: -15, y: 33}
+        - {x: -29, y: 6}
+        - {x: -29, y: -32}
+        - {x: -25, y: -45}
+        - {x: -10, y: -48}
+        - {x: 32, y: -48}
+        - {x: 41, y: -43}
+        - {x: 49, y: -27}
+        - {x: 49, y: 10}
+      - - {x: -17, y: 37}
+        - {x: -18, y: 35}
+        - {x: -18, y: 31}
+        - {x: -15, y: 30}
+        - {x: -12, y: 30}
+        - {x: -10, y: 31}
+        - {x: -10, y: 37}
+      - - {x: -25, y: 39}
+        - {x: -28, y: 36}
+        - {x: -28, y: 34}
+        - {x: -24, y: 31}
+        - {x: -21, y: 31}
+        - {x: -19, y: 34}
+        - {x: -19, y: 38}
+        - {x: -22, y: 39}
+    - name: emoji_lxh_14
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 31}
+        - {x: -31, y: 11}
+        - {x: -31, y: -14}
+        - {x: -21, y: -47}
+        - {x: -20, y: -48}
+        - {x: 30, y: -48}
+        - {x: 46, y: -45}
+        - {x: 50, y: -30}
+        - {x: 50, y: 9}
+        - {x: 36, y: 31}
+      - - {x: -28, y: 40}
+        - {x: -35, y: 37}
+        - {x: -36, y: 35}
+        - {x: -36, y: 28}
+        - {x: -28, y: 28}
+        - {x: -21, y: 33}
+        - {x: -21, y: 39}
+        - {x: -22, y: 40}
+      - - {x: -18, y: 39}
+        - {x: -20, y: 37}
+        - {x: -20, y: 35}
+        - {x: -17, y: 32}
+        - {x: -14, y: 32}
+        - {x: -12, y: 34}
+        - {x: -12, y: 37}
+        - {x: -14, y: 39}
+    - name: emoji_lxh_15
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34, y: 29}
+        - {x: -29, y: 29}
+        - {x: -29, y: -11}
+        - {x: -28, y: -18}
+        - {x: -22, y: -41}
+        - {x: -13, y: -48}
+        - {x: 36, y: -48}
+        - {x: 42, y: -38}
+        - {x: 46, y: -16}
+        - {x: 46, y: 28}
+      - - {x: -40, y: 27}
+        - {x: -43, y: 24}
+        - {x: -41, y: 19}
+        - {x: -38, y: 19}
+        - {x: -35, y: 22}
+        - {x: -35, y: 25}
+        - {x: -37, y: 27}
+      - - {x: -34, y: 35}
+        - {x: -37, y: 32}
+        - {x: -37, y: 30}
+        - {x: -34, y: 27}
+        - {x: -32, y: 27}
+        - {x: -29, y: 30}
+        - {x: -29, y: 32}
+        - {x: -32, y: 35}
+      - - {x: -26, y: 39}
+        - {x: -29, y: 38}
+        - {x: -29, y: 31}
+        - {x: -23, y: 31}
+        - {x: -21, y: 35}
+        - {x: -21, y: 37}
+        - {x: -24, y: 39}
+    - name: emoji_lxh_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: -27}
+        - {x: -31, y: -30}
+        - {x: -31, y: -38}
+        - {x: -26, y: -39}
+        - {x: 13, y: -39}
+        - {x: 16, y: -37}
+        - {x: 16, y: -29}
+        - {x: 15, y: -27}
+      - - {x: 39, y: 20}
+        - {x: 13, y: 36}
+        - {x: -24, y: 36}
+        - {x: -41, y: 11}
+        - {x: -41, y: -10}
+        - {x: -40, y: -18}
+        - {x: -37, y: -21}
+        - {x: -7, y: -21}
+        - {x: 40, y: -15}
+        - {x: 43, y: -9}
+        - {x: 43, y: 16}
+    - name: emoji_lxh_17
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -42, y: 31}
+        - {x: -42, y: -39}
+        - {x: 31, y: -39}
+        - {x: 35, y: -35}
+        - {x: 35, y: 20}
+        - {x: 13, y: 31}
+    - name: emoji_lxh_18
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: 15}
+        - {x: 24, y: 11}
+        - {x: 21, y: 18}
+        - {x: 20, y: 21}
+        - {x: 13, y: 24}
+        - {x: -21, y: 24}
+        - {x: -37, y: 8}
+        - {x: -37, y: -25}
+        - {x: -21, y: -40}
+        - {x: 19, y: -40}
+        - {x: 32, y: -24}
+        - {x: 39, y: -13}
+        - {x: 39, y: 18}
+    - name: emoji_lxh_19
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8, y: 23}
+        - {x: -23, y: 14}
+        - {x: -32, y: 5}
+        - {x: -32, y: -34}
+        - {x: -13, y: -40}
+        - {x: 32, y: -40}
+        - {x: 48, y: -29}
+        - {x: 48, y: 2}
+        - {x: 35, y: 23}
+    - name: emoji_lxh_20
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: -27}
+        - {x: -22, y: -27}
+        - {x: -23, y: -32}
+        - {x: -21, y: -37}
+        - {x: -17, y: -39}
+        - {x: 9, y: -39}
+        - {x: 25, y: -37}
+        - {x: 35, y: -35}
+        - {x: 38, y: -34}
+      - - {x: 20, y: 33}
+        - {x: -16, y: 33}
+        - {x: -40, y: 22}
+        - {x: -40, y: -18}
+        - {x: -3, y: -27}
+        - {x: 46, y: -27}
+        - {x: 46, y: 6}
+        - {x: 36, y: 24}
+    - name: emoji_lxh_21
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24, y: 31}
+        - {x: -31, y: 31}
+        - {x: -41, y: 22}
+        - {x: -41, y: -25}
+        - {x: -34, y: -39}
+        - {x: 18, y: -39}
+        - {x: 36, y: -5}
+        - {x: 36, y: 28}
+        - {x: 34, y: 29}
+    - name: emoji_lxh_22
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 23}
+        - {x: -32, y: -30}
+        - {x: -26, y: -40}
+        - {x: 47, y: -40}
+        - {x: 49, y: -28}
+        - {x: 49, y: 0}
+        - {x: 34, y: 23}
+    - name: emoji_lxh_23
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: -27}
+        - {x: -22, y: -28}
+        - {x: -22, y: -36}
+        - {x: -21, y: -39}
+        - {x: 28, y: -39}
+        - {x: 38, y: -37}
+        - {x: 38, y: -28}
+        - {x: 36, y: -27}
+      - - {x: 18, y: 33}
+        - {x: -19, y: 33}
+        - {x: -40, y: 24}
+        - {x: -40, y: -19}
+        - {x: -7, y: -27}
+        - {x: 45, y: -27}
+        - {x: 45, y: 2}
+        - {x: 32, y: 24}
+    - name: emoji_lxh_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: 15}
+        - {x: -43, y: 15}
+        - {x: -49, y: -3}
+        - {x: -49, y: -42}
+        - {x: -23, y: -47}
+        - {x: 46, y: -47}
+        - {x: 50, y: -41}
+        - {x: 50, y: -5}
+        - {x: 47, y: 7}
+    - name: emoji_lxh_25
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: 17}
+        - {x: -41, y: 17}
+        - {x: -49, y: -7}
+        - {x: -49, y: -42}
+        - {x: -23, y: -47}
+        - {x: 35, y: -47}
+        - {x: 50, y: -42}
+        - {x: 50, y: -17}
+        - {x: 27, y: 15}
+    - name: emoji_lxh_26
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: 18}
+        - {x: -40, y: 18}
+        - {x: -50, y: -4}
+        - {x: -50, y: -42}
+        - {x: -14, y: -47}
+        - {x: 40, y: -47}
+        - {x: 50, y: -26}
+        - {x: 50, y: 3}
+        - {x: 33, y: 16}
+    - name: emoji_lxh_27
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 19}
+        - {x: -50, y: -6}
+        - {x: -50, y: -45}
+        - {x: -29, y: -47}
+        - {x: 40, y: -47}
+        - {x: 50, y: -33}
+        - {x: 50, y: -3}
+        - {x: 33, y: 19}
+    - name: emoji_lxh_28
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 10}
+        - {x: -50, y: -3}
+        - {x: -50, y: -45}
+        - {x: -49, y: -47}
+        - {x: 44, y: -47}
+        - {x: 49, y: -39}
+        - {x: 49, y: 5}
+        - {x: 43, y: 10}
+      - - {x: -32, y: 41}
+        - {x: -39, y: 37}
+        - {x: -41, y: 31}
+        - {x: -41, y: 19}
+        - {x: -28, y: 9}
+        - {x: -17, y: 9}
+        - {x: -11, y: 12}
+        - {x: -11, y: 41}
+    - name: emoji_lxh_29
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 21, y: 12}
+        - {x: -3, y: 15}
+        - {x: -35, y: 15}
+        - {x: -50, y: -2}
+        - {x: -50, y: -40}
+        - {x: -45, y: -47}
+        - {x: 38, y: -47}
+        - {x: 50, y: -28}
+        - {x: 50, y: -5}
+        - {x: 49, y: -2}
+      - - {x: -16, y: 49}
+        - {x: -38, y: 49}
+        - {x: -47, y: 44}
+        - {x: -47, y: 23}
+        - {x: -30, y: 15}
+        - {x: -22, y: 15}
+        - {x: -15, y: 20}
+        - {x: -14, y: 29}
+        - {x: -14, y: 47}
+    - name: emoji_lxh_30
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 21, y: 12}
+        - {x: 4, y: 15}
+        - {x: -38, y: 15}
+        - {x: -50, y: -12}
+        - {x: -50, y: -41}
+        - {x: -46, y: -44}
+        - {x: -2, y: -47}
+        - {x: 39, y: -47}
+        - {x: 50, y: -38}
+        - {x: 50, y: -16}
+        - {x: 49, y: -12}
+      - - {x: -43, y: 50}
+        - {x: -48, y: 43}
+        - {x: -48, y: 19}
+        - {x: -42, y: 17}
+        - {x: -18, y: 17}
+        - {x: -16, y: 25}
+        - {x: -16, y: 49}
+        - {x: -17, y: 50}
+    - name: emoji_lxh_31
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: 15}
+        - {x: -41, y: 15}
+        - {x: -50, y: -11}
+        - {x: -50, y: -37}
+        - {x: -45, y: -44}
+        - {x: 3, y: -47}
+        - {x: 37, y: -47}
+        - {x: 50, y: -37}
+        - {x: 50, y: -20}
+        - {x: 36, y: 2}
+      - - {x: -41, y: 50}
+        - {x: -47, y: 47}
+        - {x: -47, y: 27}
+        - {x: -46, y: 20}
+        - {x: -42, y: 19}
+        - {x: -18, y: 19}
+        - {x: -17, y: 21}
+        - {x: -17, y: 46}
+        - {x: -19, y: 50}
+    - name: emoji_lxh_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 48}
+        - {x: -44, y: 42}
+        - {x: -50, y: -3}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 48}
+    - name: emoji_lxh_33
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48, y: 44}
+        - {x: -50, y: 36}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 5}
+        - {x: 32, y: 44}
+    - name: emoji_lxh_34
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 39, y: -11}
+        - {x: 42, y: 17}
+        - {x: 34, y: 35}
+        - {x: 12, y: 42}
+        - {x: -41, y: 42}
+        - {x: -50, y: 19}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: -15}
+        - {x: 46, y: -11}
+    - name: emoji_lxh_35
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 43}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 42}
+        - {x: 47, y: 43}
+    - name: emoji_lxh_36
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 43}
+        - {x: -45, y: 36}
+        - {x: -50, y: -13}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 16}
+        - {x: 38, y: 43}
+    - name: emoji_lxh_37
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -42, y: 45}
+        - {x: -50, y: 27}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 42}
+        - {x: 39, y: 45}
+      - - {x: -50, y: -24}
+        - {x: -47, y: -23}
+        - {x: -47, y: -17}
+        - {x: -49, y: -15}
+        - {x: -50, y: -15}
+    - name: emoji_lxh_38
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 43}
+        - {x: -50, y: 38}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: -5}
+        - {x: 45, y: 43}
+    - name: emoji_lxh_39
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 39}
+        - {x: -34, y: 37}
+        - {x: -44, y: 33}
+        - {x: -50, y: -24}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 4}
+        - {x: 36, y: 39}
+      - - {x: -50, y: -24}
+        - {x: -47, y: -23}
+        - {x: -47, y: -17}
+        - {x: -49, y: -15}
+        - {x: -50, y: -15}
+    - name: emoji_lxh_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31, y: 17}
+        - {x: -9, y: 17}
+        - {x: -33, y: 12}
+        - {x: -34, y: -1}
+        - {x: -34, y: -39}
+        - {x: -32, y: -43}
+        - {x: -26, y: -44}
+        - {x: 27, y: -44}
+        - {x: 46, y: -36}
+        - {x: 46, y: -7}
+        - {x: 45, y: -3}
+      - - {x: -14, y: 44}
+        - {x: -17, y: 44}
+        - {x: -18, y: 42}
+        - {x: -28, y: 37}
+        - {x: -29, y: 36}
+        - {x: -29, y: 22}
+        - {x: -28, y: 21}
+        - {x: -13, y: 21}
+        - {x: -5, y: 33}
+        - {x: -5, y: 39}
+        - {x: -6, y: 42}
+    - name: emoji_lxh_41
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 25}
+        - {x: -42, y: 7}
+        - {x: -42, y: -20}
+        - {x: -35, y: -44}
+        - {x: 34, y: -44}
+        - {x: 45, y: -29}
+        - {x: 45, y: 6}
+        - {x: 25, y: 25}
+      - - {x: -6, y: 33}
+        - {x: -6, y: 39}
+        - {x: -10, y: 44}
+        - {x: -18, y: 44}
+        - {x: -30, y: 38}
+        - {x: -30, y: 24}
+        - {x: -29, y: 21}
+        - {x: -16, y: 21}
+        - {x: -15, y: 23}
+        - {x: -15, y: 26}
+        - {x: -11, y: 27}
+    - name: emoji_lxh_42
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 16}
+        - {x: 18, y: 17}
+        - {x: 1, y: 17}
+        - {x: -35, y: 7}
+        - {x: -44, y: -15}
+        - {x: -44, y: -31}
+        - {x: -39, y: -43}
+        - {x: -29, y: -44}
+        - {x: 23, y: -44}
+        - {x: 46, y: -36}
+        - {x: 46, y: -19}
+        - {x: 40, y: 8}
+      - - {x: -20, y: 44}
+        - {x: -30, y: 37}
+        - {x: -30, y: 21}
+        - {x: -15, y: 21}
+        - {x: -6, y: 29}
+        - {x: -6, y: 41}
+        - {x: -8, y: 44}
+    - name: emoji_lxh_43
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 17}
+        - {x: -34, y: -14}
+        - {x: -34, y: -45}
+        - {x: 12, y: -45}
+        - {x: 44, y: -41}
+        - {x: 48, y: -35}
+        - {x: 48, y: -7}
+        - {x: 28, y: 17}
+      - - {x: -14, y: 44}
+        - {x: -17, y: 44}
+        - {x: -18, y: 42}
+        - {x: -28, y: 37}
+        - {x: -29, y: 36}
+        - {x: -29, y: 22}
+        - {x: -28, y: 21}
+        - {x: -13, y: 21}
+        - {x: -5, y: 33}
+        - {x: -5, y: 39}
+        - {x: -6, y: 42}
+    - name: emoji_lxh_44
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 19}
+        - {x: -48, y: -12}
+        - {x: -48, y: -35}
+        - {x: -28, y: -43}
+        - {x: 11, y: -43}
+        - {x: 31, y: -39}
+        - {x: 38, y: -35}
+        - {x: 38, y: 19}
+      - - {x: -6, y: 44}
+        - {x: -11, y: 46}
+        - {x: -14, y: 46}
+        - {x: -28, y: 37}
+        - {x: -28, y: 23}
+        - {x: -14, y: 23}
+        - {x: -6, y: 28}
+        - {x: -3, y: 34}
+        - {x: -3, y: 40}
+    - name: emoji_lxh_45
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 17}
+        - {x: -41, y: 3}
+        - {x: -41, y: -42}
+        - {x: -31, y: -44}
+        - {x: 35, y: -44}
+        - {x: 44, y: -40}
+        - {x: 44, y: 6}
+        - {x: 42, y: 17}
+      - - {x: -5, y: 33}
+        - {x: -5, y: 39}
+        - {x: -9, y: 44}
+        - {x: -17, y: 44}
+        - {x: -29, y: 37}
+        - {x: -29, y: 24}
+        - {x: -26, y: 21}
+        - {x: -15, y: 21}
+        - {x: -14, y: 23}
+        - {x: -14, y: 26}
+        - {x: -10, y: 27}
+    - name: emoji_lxh_46
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 19}
+        - {x: -48, y: -12}
+        - {x: -48, y: -35}
+        - {x: -28, y: -43}
+        - {x: 11, y: -43}
+        - {x: 31, y: -39}
+        - {x: 38, y: -35}
+        - {x: 38, y: 19}
+      - - {x: -6, y: 44}
+        - {x: -11, y: 46}
+        - {x: -14, y: 46}
+        - {x: -28, y: 37}
+        - {x: -28, y: 23}
+        - {x: -14, y: 23}
+        - {x: -6, y: 28}
+        - {x: -3, y: 34}
+        - {x: -3, y: 40}
+    - name: emoji_lxh_47
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 17}
+        - {x: -41, y: 3}
+        - {x: -41, y: -42}
+        - {x: -31, y: -44}
+        - {x: 35, y: -44}
+        - {x: 44, y: -40}
+        - {x: 44, y: 6}
+        - {x: 42, y: 17}
+      - - {x: -5, y: 33}
+        - {x: -5, y: 39}
+        - {x: -9, y: 44}
+        - {x: -17, y: 44}
+        - {x: -29, y: 37}
+        - {x: -29, y: 24}
+        - {x: -26, y: 21}
+        - {x: -15, y: 21}
+        - {x: -14, y: 23}
+        - {x: -14, y: 26}
+        - {x: -10, y: 27}
+    - name: emoji_lxh_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 21, y: 36}
+        - {x: -31, y: 36}
+        - {x: -33, y: 22}
+        - {x: -33, y: -27}
+        - {x: -20, y: -43}
+        - {x: 20, y: -43}
+        - {x: 39, y: -6}
+        - {x: 39, y: 10}
+        - {x: 37, y: 20}
+    - name: emoji_lxh_49
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 36}
+        - {x: -34, y: 33}
+        - {x: -34, y: -43}
+        - {x: 23, y: -43}
+        - {x: 30, y: -41}
+        - {x: 38, y: -12}
+        - {x: 38, y: 27}
+        - {x: 25, y: 36}
+    - name: emoji_lxh_50
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 37}
+        - {x: 0, y: 37}
+        - {x: -35, y: 30}
+        - {x: -35, y: -42}
+        - {x: -33, y: -43}
+        - {x: 25, y: -43}
+        - {x: 38, y: -24}
+        - {x: 38, y: 26}
+        - {x: 35, y: 32}
+    - name: emoji_lxh_51
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -21, y: 36}
+        - {x: -29, y: 34}
+        - {x: -34, y: 22}
+        - {x: -34, y: -43}
+        - {x: 28, y: -43}
+        - {x: 37, y: -11}
+        - {x: 37, y: 34}
+        - {x: 31, y: 36}
+    - name: emoji_lxh_52
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: 37}
+        - {x: 1, y: 37}
+        - {x: -34, y: 30}
+        - {x: -34, y: -42}
+        - {x: -32, y: -43}
+        - {x: 26, y: -43}
+        - {x: 39, y: -24}
+        - {x: 39, y: 26}
+        - {x: 36, y: 32}
+    - name: emoji_lxh_53
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 32}
+        - {x: -34, y: -11}
+        - {x: -34, y: -43}
+        - {x: 39, y: -43}
+        - {x: 42, y: -36}
+        - {x: 42, y: 22}
+        - {x: 41, y: 32}
+    - name: emoji_lxh_54
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 32}
+        - {x: -34, y: 4}
+        - {x: -34, y: -39}
+        - {x: -26, y: -43}
+        - {x: 35, y: -43}
+        - {x: 43, y: -19}
+        - {x: 43, y: 26}
+        - {x: 38, y: 32}
+    - name: emoji_lxh_55
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 32}
+        - {x: -26, y: 7}
+        - {x: -34, y: -20}
+        - {x: -34, y: -43}
+        - {x: 32, y: -43}
+        - {x: 42, y: -42}
+        - {x: 42, y: 22}
+        - {x: 41, y: 32}
+    - name: emoji_lxh_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 22}
+        - {x: -28, y: 22}
+        - {x: -50, y: -14}
+        - {x: -50, y: -41}
+        - {x: 49, y: -41}
+        - {x: 50, y: -39}
+        - {x: 50, y: -3}
+        - {x: 45, y: 17}
+    - name: emoji_lxh_57
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -34, y: 22}
+        - {x: -50, y: -18}
+        - {x: -50, y: -34}
+        - {x: -34, y: -41}
+        - {x: 47, y: -41}
+        - {x: 49, y: -35}
+        - {x: 49, y: 1}
+        - {x: 46, y: 22}
+    - name: emoji_lxh_58
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: 21}
+        - {x: 35, y: 22}
+        - {x: -28, y: 22}
+        - {x: -50, y: -9}
+        - {x: -50, y: -43}
+        - {x: -13, y: -43}
+        - {x: 45, y: -40}
+        - {x: 50, y: -33}
+        - {x: 50, y: -12}
+    - name: emoji_lxh_59
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 22}
+        - {x: -28, y: 22}
+        - {x: -50, y: -14}
+        - {x: -50, y: -41}
+        - {x: 49, y: -41}
+        - {x: 50, y: -39}
+        - {x: 50, y: -3}
+        - {x: 45, y: 17}
+    - name: emoji_lxh_60
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: 22}
+        - {x: -24, y: 22}
+        - {x: -50, y: -13}
+        - {x: -50, y: -31}
+        - {x: -43, y: -41}
+        - {x: 50, y: -41}
+        - {x: 50, y: -9}
+        - {x: 39, y: 21}
+    - name: emoji_lxh_61
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 22}
+        - {x: -25, y: 19}
+        - {x: -30, y: 7}
+        - {x: -49, y: -24}
+        - {x: -49, y: -41}
+        - {x: 50, y: -41}
+        - {x: 50, y: 22}
+    - name: emoji_lxh_62
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: -41}
+        - {x: 43, y: -41}
+        - {x: 50, y: -39}
+        - {x: 50, y: 19}
+        - {x: 49, y: 22}
+        - {x: -49, y: 22}
+        - {x: -50, y: 17}
+    - name: emoji_lxh_63
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 22}
+        - {x: -49, y: -27}
+        - {x: -49, y: -38}
+        - {x: -48, y: -42}
+        - {x: -45, y: -43}
+        - {x: -17, y: -43}
+        - {x: 50, y: -40}
+        - {x: 50, y: 22}
+    - name: emoji_lxh_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 28}
+        - {x: -39, y: 20}
+        - {x: -45, y: -12}
+        - {x: -45, y: -27}
+        - {x: -42, y: -32}
+        - {x: 45, y: -32}
+        - {x: 49, y: -28}
+        - {x: 49, y: 8}
+        - {x: 10, y: 28}
+    - name: emoji_lxh_65
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 28}
+        - {x: -43, y: 8}
+        - {x: -46, y: -7}
+        - {x: -46, y: -24}
+        - {x: -43, y: -32}
+        - {x: 45, y: -32}
+        - {x: 45, y: 12}
+        - {x: 36, y: 28}
+    - name: emoji_lxh_66
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 28}
+        - {x: -42, y: 19}
+        - {x: -46, y: -5}
+        - {x: -46, y: -30}
+        - {x: -43, y: -32}
+        - {x: 46, y: -32}
+        - {x: 47, y: -28}
+        - {x: 47, y: 6}
+        - {x: 18, y: 28}
+    - name: emoji_lxh_67
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45, y: 27}
+        - {x: -45, y: -32}
+        - {x: 45, y: -32}
+        - {x: 46, y: -29}
+        - {x: 46, y: 7}
+        - {x: 37, y: 27}
+    - name: emoji_lxh_68
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 28}
+        - {x: -45, y: 0}
+        - {x: -45, y: -31}
+        - {x: -44, y: -32}
+        - {x: 47, y: -32}
+        - {x: 47, y: 17}
+        - {x: 43, y: 28}
+    - name: emoji_lxh_69
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 10, y: 28}
+        - {x: -28, y: 28}
+        - {x: -44, y: 14}
+        - {x: -44, y: -32}
+        - {x: 46, y: -32}
+        - {x: 48, y: -26}
+        - {x: 48, y: 3}
+        - {x: 26, y: 25}
+    - name: emoji_lxh_70
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 28}
+        - {x: -45, y: 0}
+        - {x: -45, y: -31}
+        - {x: -44, y: -32}
+        - {x: 47, y: -32}
+        - {x: 47, y: 17}
+        - {x: 43, y: 28}
+    - name: emoji_lxh_71
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 28}
+        - {x: -39, y: 25}
+        - {x: -44, y: 11}
+        - {x: -44, y: -32}
+        - {x: 45, y: -32}
+        - {x: 48, y: -29}
+        - {x: 48, y: 5}
+        - {x: 33, y: 28}
+    - name: emoji_lxh_72
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: -40}
+        - {x: 28, y: -46}
+        - {x: 37, y: -46}
+        - {x: 37, y: -43}
+        - {x: 36, y: -40}
+      - - {x: 27, y: 32}
+        - {x: 10, y: 43}
+        - {x: -13, y: 43}
+        - {x: -39, y: 36}
+        - {x: -44, y: 19}
+        - {x: -44, y: -20}
+        - {x: -32, y: -39}
+        - {x: 11, y: -39}
+        - {x: 12, y: -38}
+        - {x: 24, y: -21}
+        - {x: 27, y: -6}
+      - - {x: 38, y: -13}
+        - {x: 26, y: -13}
+        - {x: 19, y: -19}
+        - {x: 19, y: -28}
+        - {x: 21, y: -33}
+        - {x: 24, y: -35}
+        - {x: 36, y: -35}
+        - {x: 44, y: -32}
+        - {x: 44, y: -19}
+        - {x: 43, y: -17}
+    - name: emoji_lxh_73
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38, y: -31}
+        - {x: -13, y: -47}
+        - {x: 47, y: -47}
+        - {x: 47, y: -17}
+        - {x: 28, y: 38}
+        - {x: -38, y: 38}
+    - name: emoji_lxh_74
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 35}
+        - {x: -41, y: 14}
+        - {x: -41, y: -16}
+        - {x: -26, y: -40}
+        - {x: 12, y: -47}
+        - {x: 45, y: -47}
+        - {x: 45, y: 29}
+        - {x: 44, y: 35}
+    - name: emoji_lxh_75
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: -28}
+        - {x: 23, y: -29}
+        - {x: 18, y: -33}
+        - {x: 18, y: -42}
+        - {x: 20, y: -47}
+        - {x: 46, y: -47}
+        - {x: 48, y: -42}
+        - {x: 48, y: -35}
+        - {x: 41, y: -28}
+      - - {x: -32, y: 36}
+        - {x: -41, y: 22}
+        - {x: -41, y: -7}
+        - {x: -40, y: -12}
+        - {x: -18, y: -39}
+        - {x: 26, y: -39}
+        - {x: 32, y: -8}
+        - {x: 32, y: 34}
+        - {x: 29, y: 36}
+    - name: emoji_lxh_76
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: -40}
+        - {x: 24, y: -42}
+        - {x: 24, y: -45}
+        - {x: 26, y: -47}
+        - {x: 38, y: -47}
+        - {x: 40, y: -45}
+        - {x: 40, y: -42}
+        - {x: 38, y: -40}
+      - - {x: 26, y: -17}
+        - {x: 20, y: -19}
+        - {x: 20, y: -40}
+        - {x: 40, y: -40}
+        - {x: 44, y: -36}
+        - {x: 44, y: -26}
+        - {x: 40, y: -17}
+      - - {x: -24, y: 37}
+        - {x: -29, y: 36}
+        - {x: -46, y: 26}
+        - {x: -46, y: -7}
+        - {x: -31, y: -39}
+        - {x: 7, y: -39}
+        - {x: 30, y: -5}
+        - {x: 30, y: 22}
+        - {x: 20, y: 37}
+    - name: emoji_lxh_77
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: -40}
+        - {x: 26, y: -43}
+        - {x: 26, y: -44}
+        - {x: 29, y: -47}
+        - {x: 35, y: -47}
+        - {x: 38, y: -44}
+        - {x: 38, y: -43}
+        - {x: 35, y: -40}
+      - - {x: -50, y: 39}
+        - {x: -50, y: -8}
+        - {x: -39, y: -39}
+        - {x: 40, y: -39}
+        - {x: 45, y: -30}
+        - {x: 45, y: 2}
+        - {x: 36, y: 39}
+    - name: emoji_lxh_78
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -40}
+        - {x: 27, y: -46}
+        - {x: 36, y: -46}
+        - {x: 36, y: -43}
+        - {x: 35, y: -40}
+      - - {x: -50, y: 35}
+        - {x: -50, y: -12}
+        - {x: -25, y: -39}
+        - {x: 22, y: -39}
+        - {x: 39, y: -35}
+        - {x: 43, y: -31}
+        - {x: 43, y: 24}
+        - {x: 22, y: 35}
+    - name: emoji_lxh_79
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: -40}
+        - {x: 24, y: -42}
+        - {x: 24, y: -45}
+        - {x: 26, y: -47}
+        - {x: 38, y: -47}
+        - {x: 40, y: -45}
+        - {x: 40, y: -42}
+        - {x: 38, y: -40}
+      - - {x: 27, y: 4}
+        - {x: 27, y: 29}
+        - {x: 16, y: 42}
+        - {x: -14, y: 42}
+        - {x: -50, y: 29}
+        - {x: -50, y: 4}
+        - {x: -49, y: -9}
+        - {x: -24, y: -39}
+        - {x: 16, y: -39}
+        - {x: 22, y: -36}
+        - {x: 21, y: -19}
+        - {x: 17, y: -17}
+      - - {x: 38, y: -16}
+        - {x: 21, y: -16}
+        - {x: 20, y: -20}
+        - {x: 20, y: -36}
+        - {x: 24, y: -38}
+        - {x: 37, y: -38}
+        - {x: 43, y: -34}
+        - {x: 43, y: -21}
+    - name: emoji_lxh_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: 40}
+        - {x: -36, y: -2}
+        - {x: -26, y: -45}
+        - {x: 31, y: -45}
+        - {x: 37, y: -33}
+        - {x: 37, y: 40}
+    - name: emoji_lxh_81
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 40}
+        - {x: -35, y: 39}
+        - {x: -35, y: -31}
+        - {x: -30, y: -45}
+        - {x: 29, y: -45}
+        - {x: 34, y: -38}
+        - {x: 34, y: 39}
+        - {x: 33, y: 40}
+    - name: emoji_lxh_82
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 36, y: 40}
+        - {x: -37, y: 40}
+        - {x: -37, y: -37}
+        - {x: -36, y: -45}
+        - {x: 27, y: -45}
+        - {x: 31, y: -40}
+        - {x: 28, y: -28}
+        - {x: 36, y: -14}
+    - name: emoji_lxh_83
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 40}
+        - {x: -35, y: -13}
+        - {x: -24, y: -45}
+        - {x: 23, y: -45}
+        - {x: 34, y: -43}
+        - {x: 35, y: -27}
+        - {x: 35, y: 36}
+        - {x: 34, y: 40}
+    - name: emoji_lxh_84
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: 40}
+        - {x: -36, y: 40}
+        - {x: -36, y: -37}
+        - {x: -35, y: -45}
+        - {x: 28, y: -45}
+        - {x: 32, y: -40}
+        - {x: 29, y: -28}
+        - {x: 37, y: -14}
+    - name: emoji_lxh_85
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 40}
+        - {x: -34, y: 39}
+        - {x: -34, y: -31}
+        - {x: -29, y: -45}
+        - {x: 30, y: -45}
+        - {x: 35, y: -38}
+        - {x: 35, y: 39}
+        - {x: 34, y: 40}
+    - name: emoji_lxh_86
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: 40}
+        - {x: -36, y: 40}
+        - {x: -36, y: -37}
+        - {x: -35, y: -45}
+        - {x: 28, y: -45}
+        - {x: 32, y: -40}
+        - {x: 29, y: -28}
+        - {x: 37, y: -14}
+    - name: emoji_lxh_87
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1000
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 40}
+        - {x: -34, y: 39}
+        - {x: -34, y: -31}
+        - {x: -29, y: -45}
+        - {x: 30, y: -45}
+        - {x: 35, y: -38}
+        - {x: 35, y: 39}
+        - {x: 34, y: 40}
+    - name: emoji_lxh_88
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7, y: 29}
+        - {x: -50, y: -8}
+        - {x: -50, y: -23}
+        - {x: -28, y: -38}
+        - {x: 35, y: -38}
+        - {x: 45, y: -27}
+        - {x: 45, y: 1}
+        - {x: 6, y: 29}
+      - - {x: 28, y: 36}
+        - {x: 28, y: 28}
+        - {x: 30, y: 25}
+        - {x: 33, y: 24}
+        - {x: 36, y: 24}
+        - {x: 40, y: 26}
+        - {x: 40, y: 36}
+    - name: emoji_lxh_89
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 29}
+        - {x: -6, y: 29}
+        - {x: -50, y: -2}
+        - {x: -50, y: -23}
+        - {x: -39, y: -38}
+        - {x: 31, y: -38}
+        - {x: 41, y: -29}
+        - {x: 43, y: -16}
+        - {x: 43, y: 0}
+      - - {x: 33, y: 36}
+        - {x: 26, y: 36}
+        - {x: 21, y: 31}
+        - {x: 21, y: 27}
+        - {x: 26, y: 22}
+        - {x: 35, y: 22}
+        - {x: 37, y: 26}
+        - {x: 37, y: 32}
+        - {x: 35, y: 35}
+    - name: emoji_lxh_90
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8, y: 29}
+        - {x: -49, y: -6}
+        - {x: -49, y: -15}
+        - {x: -39, y: -37}
+        - {x: -33, y: -38}
+        - {x: 36, y: -38}
+        - {x: 42, y: -25}
+        - {x: 42, y: 15}
+        - {x: 19, y: 29}
+      - - {x: 28, y: 36}
+        - {x: 21, y: 35}
+        - {x: 19, y: 29}
+        - {x: 22, y: 22}
+        - {x: 24, y: 21}
+        - {x: 31, y: 21}
+        - {x: 40, y: 26}
+        - {x: 40, y: 35}
+        - {x: 39, y: 36}
+    - name: emoji_lxh_91
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 8, y: 26}
+        - {x: -1, y: 29}
+        - {x: -11, y: 29}
+        - {x: -49, y: -2}
+        - {x: -49, y: -23}
+        - {x: -43, y: -37}
+        - {x: -21, y: -38}
+        - {x: 29, y: -38}
+        - {x: 41, y: -29}
+        - {x: 42, y: -25}
+        - {x: 42, y: 10}
+      - - {x: 11, y: 14}
+        - {x: 12, y: 13}
+        - {x: 21, y: 13}
+        - {x: 41, y: 25}
+        - {x: 41, y: 36}
+        - {x: 24, y: 36}
+        - {x: 12, y: 33}
+        - {x: 11, y: 27}
+    - name: emoji_lxh_92
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 29}
+        - {x: -12, y: 29}
+        - {x: -49, y: -6}
+        - {x: -49, y: -20}
+        - {x: -44, y: -37}
+        - {x: -42, y: -38}
+        - {x: 38, y: -38}
+        - {x: 41, y: -32}
+        - {x: 41, y: 2}
+        - {x: 30, y: 11}
+      - - {x: 25, y: 36}
+        - {x: 18, y: 32}
+        - {x: 14, y: 25}
+        - {x: 14, y: 20}
+        - {x: 17, y: 18}
+        - {x: 18, y: 17}
+        - {x: 27, y: 17}
+        - {x: 37, y: 25}
+        - {x: 37, y: 34}
+        - {x: 35, y: 36}
+    - name: emoji_lxh_93
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 29}
+        - {x: -44, y: 0}
+        - {x: -50, y: -7}
+        - {x: -50, y: -26}
+        - {x: -38, y: -38}
+        - {x: 38, y: -38}
+        - {x: 41, y: -37}
+        - {x: 41, y: 13}
+        - {x: 20, y: 29}
+      - - {x: 21, y: 32}
+        - {x: 13, y: 27}
+        - {x: 13, y: 24}
+        - {x: 17, y: 17}
+        - {x: 23, y: 17}
+        - {x: 30, y: 20}
+        - {x: 30, y: 25}
+        - {x: 26, y: 32}
+    - name: emoji_lxh_94
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7, y: 29}
+        - {x: -8, y: 28}
+        - {x: -50, y: -8}
+        - {x: -50, y: -17}
+        - {x: -48, y: -22}
+        - {x: -35, y: -34}
+        - {x: -21, y: -38}
+        - {x: 35, y: -38}
+        - {x: 42, y: -26}
+        - {x: 42, y: 14}
+        - {x: 15, y: 29}
+      - - {x: 12, y: 23}
+        - {x: 8, y: 18}
+        - {x: 8, y: 16}
+        - {x: 11, y: 12}
+        - {x: 16, y: 12}
+        - {x: 20, y: 14}
+        - {x: 20, y: 19}
+        - {x: 15, y: 23}
+    - name: emoji_lxh_95
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 900
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19, y: 29}
+        - {x: -50, y: -6}
+        - {x: -50, y: -29}
+        - {x: -41, y: -36}
+        - {x: -28, y: -38}
+        - {x: 43, y: -38}
+        - {x: 43, y: 9}
+        - {x: 21, y: 29}
+    - name: emoji_lxh_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: 25}
+        - {x: -9, y: 34}
+        - {x: -24, y: 34}
+        - {x: -43, y: -16}
+        - {x: -43, y: -38}
+        - {x: 34, y: -38}
+        - {x: 46, y: -19}
+        - {x: 46, y: 6}
+        - {x: 43, y: 10}
+    - name: emoji_lxh_97
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 34}
+        - {x: -24, y: 34}
+        - {x: -34, y: 8}
+        - {x: -43, y: -17}
+        - {x: -43, y: -38}
+        - {x: 19, y: -38}
+        - {x: 46, y: -19}
+        - {x: 46, y: 14}
+        - {x: 25, y: 29}
+    - name: emoji_lxh_98
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 5, y: 34}
+        - {x: -29, y: 34}
+        - {x: -44, y: -14}
+        - {x: -44, y: -36}
+        - {x: -30, y: -38}
+        - {x: 9, y: -38}
+        - {x: 30, y: -34}
+        - {x: 47, y: -9}
+        - {x: 47, y: 13}
+    - name: emoji_lxh_99
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 33}
+        - {x: -43, y: -9}
+        - {x: -43, y: -38}
+        - {x: 33, y: -38}
+        - {x: 47, y: -20}
+        - {x: 47, y: 8}
+        - {x: 8, y: 33}
+    - name: emoji_lxh_100
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: 31}
+        - {x: -25, y: 31}
+        - {x: -43, y: -3}
+        - {x: -43, y: -38}
+        - {x: 23, y: -38}
+        - {x: 46, y: -14}
+        - {x: 46, y: 2}
+        - {x: 25, y: 29}
+    - name: emoji_lxh_101
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 32}
+        - {x: -24, y: 32}
+        - {x: -25, y: 29}
+        - {x: -42, y: -10}
+        - {x: -42, y: -34}
+        - {x: -32, y: -38}
+        - {x: 9, y: -38}
+        - {x: 32, y: -33}
+        - {x: 46, y: -6}
+        - {x: 46, y: 6}
+        - {x: 25, y: 29}
+    - name: emoji_lxh_102
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: 28}
+        - {x: -4, y: 33}
+        - {x: -19, y: 33}
+        - {x: -24, y: 31}
+        - {x: -43, y: -15}
+        - {x: -43, y: -36}
+        - {x: -33, y: -38}
+        - {x: 29, y: -38}
+        - {x: 48, y: -15}
+        - {x: 48, y: 5}
+        - {x: 35, y: 15}
+    - name: emoji_lxh_103
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 800
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -21, y: 34}
+        - {x: -22, y: 33}
+        - {x: -42, y: -5}
+        - {x: -42, y: -38}
+        - {x: 24, y: -38}
+        - {x: 47, y: -7}
+        - {x: 47, y: 11}
+        - {x: -4, y: 34}
+    - name: emoji_lxh_104
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31, y: 17}
+        - {x: -18, y: 17}
+        - {x: -31, y: -9}
+        - {x: -31, y: -40}
+        - {x: 8, y: -40}
+        - {x: 36, y: -35}
+        - {x: 40, y: -29}
+        - {x: 40, y: -1}
+      - - {x: -1, y: 32}
+        - {x: -2, y: 29}
+        - {x: -2, y: 25}
+        - {x: 9, y: 16}
+        - {x: 15, y: 16}
+        - {x: 18, y: 20}
+        - {x: 18, y: 29}
+        - {x: 11, y: 32}
+    - name: emoji_lxh_105
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 17}
+        - {x: -19, y: 15}
+        - {x: -31, y: -13}
+        - {x: -31, y: -40}
+        - {x: 37, y: -40}
+        - {x: 40, y: -37}
+        - {x: 40, y: 3}
+        - {x: 31, y: 17}
+      - - {x: -3, y: 26}
+        - {x: 6, y: 14}
+        - {x: 14, y: 14}
+        - {x: 18, y: 15}
+        - {x: 18, y: 25}
+        - {x: 17, y: 27}
+        - {x: 5, y: 31}
+        - {x: -2, y: 31}
+        - {x: -3, y: 28}
+    - name: emoji_lxh_106
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 17}
+        - {x: -30, y: -11}
+        - {x: -30, y: -40}
+        - {x: 28, y: -40}
+        - {x: 40, y: -33}
+        - {x: 40, y: 11}
+        - {x: 34, y: 17}
+      - - {x: -4, y: 32}
+        - {x: -4, y: 24}
+        - {x: -1, y: 19}
+        - {x: 8, y: 19}
+        - {x: 11, y: 23}
+        - {x: 11, y: 31}
+        - {x: 8, y: 32}
+    - name: emoji_lxh_107
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 17}
+        - {x: -26, y: -6}
+        - {x: -29, y: -20}
+        - {x: -29, y: -38}
+        - {x: -27, y: -40}
+        - {x: 8, y: -40}
+        - {x: 30, y: -38}
+        - {x: 40, y: -28}
+        - {x: 40, y: -2}
+        - {x: 30, y: 17}
+      - - {x: 9, y: 32}
+        - {x: -4, y: 32}
+        - {x: -5, y: 28}
+        - {x: -5, y: 23}
+        - {x: 2, y: 16}
+        - {x: 6, y: 16}
+        - {x: 10, y: 19}
+        - {x: 13, y: 23}
+        - {x: 13, y: 28}
+    - name: emoji_lxh_108
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 22}
+        - {x: -34, y: 4}
+        - {x: -34, y: -36}
+        - {x: -33, y: -40}
+        - {x: 37, y: -40}
+        - {x: 39, y: -35}
+        - {x: 39, y: 9}
+        - {x: 18, y: 22}
+      - - {x: 26, y: 33}
+        - {x: 24, y: 31}
+        - {x: 24, y: 22}
+        - {x: 26, y: 21}
+        - {x: 33, y: 21}
+        - {x: 33, y: 30}
+        - {x: 32, y: 33}
+      - - {x: -32, y: 39}
+        - {x: -32, y: 29}
+        - {x: -31, y: 27}
+        - {x: -27, y: 27}
+        - {x: -22, y: 30}
+        - {x: -22, y: 38}
+        - {x: -25, y: 39}
+    - name: emoji_lxh_109
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: 17}
+        - {x: -20, y: 15}
+        - {x: -37, y: 7}
+        - {x: -37, y: -40}
+        - {x: 21, y: -40}
+        - {x: 30, y: -39}
+        - {x: 39, y: -32}
+        - {x: 39, y: 3}
+        - {x: 30, y: 17}
+      - - {x: 23, y: 34}
+        - {x: 21, y: 30}
+        - {x: 21, y: 21}
+        - {x: 25, y: 19}
+        - {x: 32, y: 19}
+        - {x: 35, y: 24}
+        - {x: 35, y: 30}
+        - {x: 31, y: 34}
+      - - {x: 7, y: 36}
+        - {x: 6, y: 35}
+        - {x: 6, y: 31}
+        - {x: 8, y: 25}
+        - {x: 16, y: 25}
+        - {x: 16, y: 33}
+        - {x: 12, y: 36}
+      - - {x: -31, y: 41}
+        - {x: -35, y: 40}
+        - {x: -35, y: 28}
+        - {x: -32, y: 26}
+        - {x: -23, y: 26}
+        - {x: -22, y: 29}
+        - {x: -22, y: 40}
+        - {x: -23, y: 41}
+    - name: emoji_lxh_110
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 28}
+        - {x: -31, y: 15}
+        - {x: -31, y: -40}
+        - {x: 27, y: -40}
+        - {x: 39, y: -34}
+        - {x: 39, y: 28}
+      - - {x: -22, y: 35}
+        - {x: -30, y: 35}
+        - {x: -32, y: 30}
+        - {x: -32, y: 25}
+        - {x: -27, y: 21}
+        - {x: -22, y: 21}
+        - {x: -18, y: 25}
+        - {x: -18, y: 33}
+      - - {x: 4, y: 36}
+        - {x: 3, y: 32}
+        - {x: 3, y: 26}
+        - {x: 7, y: 22}
+        - {x: 14, y: 22}
+        - {x: 18, y: 26}
+        - {x: 18, y: 31}
+        - {x: 15, y: 36}
+    - name: emoji_lxh_111
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 10, y: 23}
+        - {x: -20, y: 15}
+        - {x: -31, y: 9}
+        - {x: -31, y: -40}
+        - {x: 35, y: -40}
+        - {x: 39, y: -29}
+        - {x: 39, y: 12}
+        - {x: 33, y: 23}
+      - - {x: 6, y: 36}
+        - {x: 3, y: 34}
+        - {x: 3, y: 19}
+        - {x: 16, y: 19}
+        - {x: 20, y: 22}
+        - {x: 20, y: 36}
+      - - {x: -28, y: 23}
+        - {x: -26, y: 20}
+        - {x: -21, y: 20}
+        - {x: -17, y: 21}
+        - {x: -17, y: 27}
+        - {x: -18, y: 31}
+        - {x: -23, y: 31}
+        - {x: -28, y: 29}
+    - name: emoji_lxh_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: -13}
+        - {x: 8, y: 12}
+        - {x: -9, y: 12}
+        - {x: -50, y: 2}
+        - {x: -50, y: -41}
+        - {x: 35, y: -41}
+        - {x: 39, y: -33}
+        - {x: 39, y: -18}
+        - {x: 31, y: -12}
+    - name: emoji_lxh_113
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: 11}
+        - {x: -16, y: 11}
+        - {x: -28, y: 8}
+        - {x: -50, y: -26}
+        - {x: -50, y: -42}
+        - {x: -4, y: -42}
+        - {x: 38, y: -40}
+        - {x: 44, y: -29}
+        - {x: 44, y: 0}
+        - {x: 42, y: 6}
+    - name: emoji_lxh_114
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: -15}
+        - {x: 17, y: -17}
+        - {x: 19, y: -14}
+        - {x: 27, y: 5}
+        - {x: -7, y: 14}
+        - {x: -33, y: 14}
+        - {x: -49, y: -26}
+        - {x: -49, y: -39}
+        - {x: -43, y: -42}
+        - {x: 10, y: -42}
+        - {x: 23, y: -41}
+        - {x: 31, y: -32}
+        - {x: 31, y: -18}
+        - {x: 28, y: -12}
+    - name: emoji_lxh_115
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: -5}
+        - {x: 11, y: 5}
+        - {x: -2, y: 18}
+        - {x: -24, y: 18}
+        - {x: -40, y: -17}
+        - {x: -42, y: -29}
+        - {x: -37, y: -31}
+        - {x: -33, y: -31}
+        - {x: -30, y: -34}
+        - {x: -43, y: -30}
+        - {x: -49, y: -31}
+        - {x: -49, y: -44}
+        - {x: 36, y: -44}
+        - {x: 36, y: -26}
+        - {x: 32, y: -23}
+    - name: emoji_lxh_116
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2, y: 8}
+        - {x: -22, y: -9}
+        - {x: -22, y: -33}
+        - {x: -19, y: -41}
+        - {x: 21, y: -41}
+        - {x: 43, y: -39}
+        - {x: 50, y: -36}
+        - {x: 50, y: -6}
+        - {x: 34, y: 8}
+    - name: emoji_lxh_117
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 15}
+        - {x: -29, y: -32}
+        - {x: -27, y: -40}
+        - {x: 36, y: -40}
+        - {x: 50, y: -38}
+        - {x: 50, y: -27}
+        - {x: 22, y: 18}
+        - {x: 16, y: 22}
+        - {x: -27, y: 22}
+      - - {x: 24, y: 11}
+        - {x: 20, y: 7}
+        - {x: 22, y: 2}
+        - {x: 30, y: 2}
+        - {x: 31, y: 4}
+        - {x: 31, y: 8}
+        - {x: 27, y: 11}
+    - name: emoji_lxh_118
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19, y: 18}
+        - {x: -30, y: 18}
+        - {x: -34, y: 17}
+        - {x: -50, y: -14}
+        - {x: -50, y: -41}
+        - {x: 22, y: -41}
+        - {x: 34, y: -40}
+        - {x: 35, y: -36}
+        - {x: 35, y: -10}
+        - {x: 23, y: -3}
+      - - {x: 35, y: -24}
+        - {x: 28, y: -24}
+        - {x: 27, y: -26}
+        - {x: 27, y: -33}
+        - {x: 30, y: -37}
+        - {x: 36, y: -37}
+        - {x: 38, y: -35}
+        - {x: 38, y: -30}
+      - - {x: -5, y: 13}
+        - {x: -7, y: 11}
+        - {x: -7, y: 7}
+        - {x: -5, y: 5}
+        - {x: 0, y: 5}
+        - {x: 3, y: 8}
+        - {x: 3, y: 10}
+        - {x: 0, y: 13}
+    - name: emoji_lxh_119
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 13}
+        - {x: -49, y: -42}
+        - {x: 27, y: -42}
+        - {x: 27, y: 8}
+        - {x: 23, y: 13}
+    - name: emoji_lxh_120
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: 34}
+        - {x: 25, y: 35}
+        - {x: -35, y: 35}
+        - {x: -36, y: 34}
+        - {x: -36, y: -9}
+        - {x: -21, y: -44}
+        - {x: 26, y: -44}
+        - {x: 30, y: -42}
+        - {x: 35, y: 4}
+        - {x: 35, y: 33}
+    - name: emoji_lxh_121
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 38}
+        - {x: -37, y: -24}
+        - {x: -19, y: -44}
+        - {x: 23, y: -44}
+        - {x: 33, y: -38}
+        - {x: 34, y: -24}
+        - {x: 34, y: 38}
+    - name: emoji_lxh_122
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 37}
+        - {x: -40, y: 9}
+        - {x: -20, y: -44}
+        - {x: 24, y: -44}
+        - {x: 33, y: -35}
+        - {x: 38, y: 0}
+        - {x: 38, y: 37}
+    - name: emoji_lxh_123
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 37}
+        - {x: -35, y: 1}
+        - {x: -26, y: -44}
+        - {x: 31, y: -44}
+        - {x: 32, y: -41}
+        - {x: 32, y: 29}
+        - {x: 29, y: 37}
+    - name: emoji_lxh_124
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 37}
+        - {x: -32, y: -9}
+        - {x: -25, y: -43}
+        - {x: -16, y: -44}
+        - {x: 29, y: -44}
+        - {x: 34, y: -35}
+        - {x: 36, y: -17}
+        - {x: 36, y: 37}
+    - name: emoji_lxh_125
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: 38}
+        - {x: -31, y: 38}
+        - {x: -31, y: -18}
+        - {x: -15, y: -44}
+        - {x: 26, y: -44}
+        - {x: 34, y: -37}
+        - {x: 35, y: -29}
+        - {x: 35, y: 36}
+    - name: emoji_lxh_126
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 38}
+        - {x: -31, y: -18}
+        - {x: -18, y: -42}
+        - {x: -10, y: -44}
+        - {x: 28, y: -44}
+        - {x: 36, y: -27}
+        - {x: 36, y: 38}
+    - name: emoji_lxh_127
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: 38}
+        - {x: -31, y: 38}
+        - {x: -31, y: -20}
+        - {x: -18, y: -44}
+        - {x: 38, y: -44}
+        - {x: 38, y: 30}
+        - {x: 36, y: 33}
+    - name: emoji_lxh_128
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 34}
+        - {x: -32, y: 31}
+        - {x: -32, y: 19}
+        - {x: -16, y: -43}
+        - {x: 18, y: -43}
+        - {x: 41, y: 15}
+        - {x: 41, y: 29}
+        - {x: -13, y: 34}
+    - name: emoji_lxh_129
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: 34}
+        - {x: -6, y: 34}
+        - {x: -33, y: 31}
+        - {x: -35, y: 28}
+        - {x: -35, y: 7}
+        - {x: -20, y: -43}
+        - {x: -16, y: -44}
+        - {x: 10, y: -44}
+        - {x: 21, y: -37}
+        - {x: 34, y: 6}
+        - {x: 34, y: 31}
+    - name: emoji_lxh_130
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 10, y: 40}
+        - {x: -38, y: 29}
+        - {x: -38, y: 2}
+        - {x: -29, y: -38}
+        - {x: -12, y: -43}
+        - {x: 23, y: -43}
+        - {x: 28, y: -18}
+        - {x: 28, y: 39}
+        - {x: 25, y: 40}
+    - name: emoji_lxh_131
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31, y: 39}
+        - {x: 13, y: 39}
+        - {x: -37, y: 30}
+        - {x: -40, y: 25}
+        - {x: -40, y: 18}
+        - {x: -30, y: -26}
+        - {x: -6, y: -44}
+        - {x: 16, y: -44}
+        - {x: 31, y: -9}
+        - {x: 32, y: 16}
+        - {x: 32, y: 37}
+    - name: emoji_lxh_132
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 34}
+        - {x: -40, y: -12}
+        - {x: -16, y: -37}
+        - {x: -3, y: -43}
+        - {x: 19, y: -43}
+        - {x: 31, y: -32}
+        - {x: 33, y: -16}
+        - {x: 33, y: 34}
+    - name: emoji_lxh_133
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: 30}
+        - {x: -36, y: 30}
+        - {x: -36, y: 4}
+        - {x: -20, y: -39}
+        - {x: -7, y: -43}
+        - {x: 17, y: -43}
+        - {x: 19, y: -40}
+        - {x: 36, y: 19}
+        - {x: 36, y: 29}
+    - name: emoji_lxh_134
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 40}
+        - {x: -27, y: 40}
+        - {x: -27, y: -3}
+        - {x: -25, y: -38}
+        - {x: -16, y: -41}
+        - {x: 16, y: -41}
+        - {x: 25, y: -36}
+        - {x: 39, y: 5}
+        - {x: 39, y: 33}
+    - name: emoji_lxh_135
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: 43}
+        - {x: -26, y: 43}
+        - {x: -27, y: 35}
+        - {x: -27, y: -28}
+        - {x: -20, y: -39}
+        - {x: -12, y: -42}
+        - {x: 15, y: -42}
+        - {x: 38, y: -28}
+        - {x: 40, y: -5}
+        - {x: 40, y: 40}
+    - name: emoji_lxh_136
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 50}
+        - {x: -25, y: 50}
+        - {x: -26, y: 39}
+        - {x: -21, y: 38}
+        - {x: -19, y: 38}
+        - {x: -17, y: 40}
+        - {x: -18, y: 36}
+        - {x: -20, y: 38}
+        - {x: -22, y: 38}
+        - {x: -28, y: 37}
+        - {x: -37, y: -6}
+        - {x: -37, y: -20}
+        - {x: -32, y: -25}
+        - {x: -29, y: -26}
+        - {x: -27, y: -26}
+        - {x: -26, y: -28}
+        - {x: -29, y: -26}
+        - {x: -30, y: -26}
+        - {x: -35, y: -31}
+        - {x: -37, y: -38}
+        - {x: -37, y: -49}
+        - {x: 27, y: -49}
+        - {x: 35, y: -36}
+        - {x: 35, y: 38}
+    - name: emoji_lxh_137
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 47}
+        - {x: 19, y: 40}
+        - {x: 20, y: 33}
+        - {x: 22, y: 31}
+        - {x: 24, y: 31}
+        - {x: 21, y: 30}
+        - {x: 18, y: 27}
+        - {x: 10, y: 45}
+        - {x: 8, y: 47}
+        - {x: -22, y: 47}
+        - {x: -37, y: 20}
+        - {x: -37, y: -48}
+        - {x: -35, y: -49}
+        - {x: -33, y: -49}
+        - {x: -20, y: -47}
+        - {x: -17, y: -44}
+        - {x: -16, y: -48}
+        - {x: -11, y: -49}
+        - {x: 28, y: -49}
+        - {x: 32, y: -48}
+        - {x: 36, y: -15}
+        - {x: 36, y: 47}
+      - - {x: -10, y: 50}
+        - {x: -20, y: 50}
+        - {x: -25, y: 46}
+        - {x: -25, y: 30}
+        - {x: -16, y: 30}
+        - {x: -13, y: 31}
+        - {x: -9, y: 35}
+        - {x: -9, y: 49}
+    - name: emoji_lxh_138
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 50}
+        - {x: -37, y: 24}
+        - {x: -37, y: -49}
+        - {x: 30, y: -49}
+        - {x: 40, y: -33}
+        - {x: 40, y: 50}
+    - name: emoji_lxh_139
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: 50}
+        - {x: 19, y: 49}
+        - {x: 16, y: 50}
+        - {x: -17, y: 50}
+        - {x: -25, y: 44}
+        - {x: -28, y: 18}
+        - {x: -28, y: -1}
+        - {x: -33, y: -4}
+        - {x: -38, y: -9}
+        - {x: -38, y: -11}
+        - {x: -33, y: -21}
+        - {x: -29, y: -23}
+        - {x: -27, y: -23}
+        - {x: -33, y: -24}
+        - {x: -38, y: -29}
+        - {x: -38, y: -30}
+        - {x: -36, y: -49}
+        - {x: 32, y: -49}
+        - {x: 35, y: -42}
+        - {x: 35, y: 44}
+        - {x: 30, y: 50}
+      - - {x: 17, y: 50}
+        - {x: 2, y: 50}
+        - {x: 2, y: 27}
+        - {x: 3, y: 26}
+        - {x: 13, y: 26}
+        - {x: 16, y: 28}
+        - {x: 17, y: 30}
+    - name: emoji_lxh_140
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 21, y: 50}
+        - {x: 20, y: 47}
+        - {x: 14, y: 50}
+        - {x: -29, y: 50}
+        - {x: -37, y: 27}
+        - {x: -37, y: -41}
+        - {x: -34, y: -48}
+        - {x: -29, y: -49}
+        - {x: 31, y: -49}
+        - {x: 36, y: -23}
+        - {x: 36, y: 30}
+        - {x: 28, y: 50}
+      - - {x: 18, y: 50}
+        - {x: 3, y: 50}
+        - {x: 2, y: 48}
+        - {x: 2, y: 37}
+        - {x: 11, y: 37}
+        - {x: 17, y: 41}
+        - {x: 18, y: 42}
+    - name: emoji_lxh_141
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 50}
+        - {x: -22, y: 50}
+        - {x: -25, y: 39}
+        - {x: -21, y: 38}
+        - {x: -18, y: 38}
+        - {x: -16, y: 40}
+        - {x: -17, y: 37}
+        - {x: -18, y: 38}
+        - {x: -21, y: 38}
+        - {x: -28, y: 36}
+        - {x: -35, y: 1}
+        - {x: -35, y: -47}
+        - {x: -30, y: -49}
+        - {x: 36, y: -49}
+        - {x: 36, y: 32}
+        - {x: 31, y: 45}
+    - name: emoji_lxh_142
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 50}
+        - {x: 8, y: 47}
+        - {x: 4, y: 39}
+        - {x: 7, y: 45}
+        - {x: 8, y: 49}
+        - {x: 8, y: 50}
+        - {x: -11, y: 50}
+        - {x: -13, y: 49}
+        - {x: -34, y: 19}
+        - {x: -38, y: 0}
+        - {x: -38, y: -11}
+        - {x: -33, y: -21}
+        - {x: -29, y: -23}
+        - {x: -27, y: -23}
+        - {x: -25, y: -22}
+        - {x: -26, y: -23}
+        - {x: -26, y: -28}
+        - {x: -28, y: -25}
+        - {x: -33, y: -24}
+        - {x: -38, y: -29}
+        - {x: -38, y: -49}
+        - {x: 33, y: -49}
+        - {x: 37, y: -33}
+        - {x: 39, y: 16}
+        - {x: 39, y: 50}
+    - name: emoji_lxh_143
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: 50}
+        - {x: -36, y: -49}
+        - {x: 34, y: -49}
+        - {x: 36, y: -40}
+        - {x: 36, y: 50}
+      - - {x: 2, y: 37}
+        - {x: 8, y: 37}
+        - {x: 18, y: 42}
+        - {x: 18, y: 50}
+        - {x: 2, y: 50}
+    - name: emoji_lxh_144
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 18}
+        - {x: -38, y: 4}
+        - {x: -38, y: -34}
+        - {x: 41, y: -34}
+        - {x: 47, y: -24}
+        - {x: 47, y: -2}
+        - {x: 13, y: 18}
+      - - {x: -14, y: 40}
+        - {x: -16, y: 36}
+        - {x: -16, y: 30}
+        - {x: -15, y: 28}
+        - {x: -12, y: 25}
+        - {x: -10, y: 25}
+        - {x: -7, y: 26}
+        - {x: -7, y: 38}
+        - {x: -11, y: 40}
+      - - {x: -3, y: 41}
+        - {x: -6, y: 37}
+        - {x: -6, y: 31}
+        - {x: 2, y: 31}
+        - {x: 3, y: 38}
+        - {x: 3, y: 40}
+        - {x: 1, y: 41}
+    - name: emoji_lxh_145
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: 42}
+        - {x: -10, y: 42}
+        - {x: -18, y: 39}
+        - {x: -16, y: 35}
+        - {x: -13, y: 32}
+        - {x: -11, y: 32}
+        - {x: -15, y: 32}
+        - {x: -36, y: 17}
+        - {x: -41, y: -4}
+        - {x: -41, y: -29}
+        - {x: -31, y: -35}
+        - {x: 36, y: -35}
+        - {x: 46, y: -34}
+        - {x: 46, y: 27}
+        - {x: 41, y: 36}
+    - name: emoji_lxh_146
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 17}
+        - {x: 9, y: 24}
+        - {x: -17, y: 24}
+        - {x: -39, y: 8}
+        - {x: -39, y: -32}
+        - {x: -38, y: -34}
+        - {x: 42, y: -34}
+        - {x: 42, y: -16}
+        - {x: 38, y: -8}
+      - - {x: -32, y: 20}
+        - {x: -31, y: 17}
+        - {x: -26, y: 17}
+        - {x: -24, y: 18}
+        - {x: -24, y: 23}
+        - {x: -25, y: 25}
+        - {x: -32, y: 25}
+      - - {x: -37, y: 43}
+        - {x: -39, y: 43}
+        - {x: -42, y: 42}
+        - {x: -42, y: 31}
+        - {x: -32, y: 25}
+        - {x: -26, y: 25}
+        - {x: -24, y: 27}
+        - {x: -24, y: 30}
+        - {x: -29, y: 41}
+    - name: emoji_lxh_147
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 41, y: -34}
+        - {x: 41, y: 29}
+        - {x: 39, y: 33}
+        - {x: -39, y: 33}
+        - {x: -39, y: -34}
+    - name: emoji_lxh_148
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: 8}
+        - {x: 34, y: 5}
+        - {x: 34, y: 1}
+        - {x: 34, y: 4}
+        - {x: 33, y: 7}
+        - {x: 23, y: 25}
+        - {x: -9, y: 25}
+        - {x: -41, y: 6}
+        - {x: -41, y: -30}
+        - {x: -31, y: -35}
+        - {x: 32, y: -35}
+        - {x: 45, y: -7}
+        - {x: 45, y: 5}
+        - {x: 44, y: 7}
+    - name: emoji_lxh_149
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 45, y: 7}
+        - {x: 10, y: 26}
+        - {x: -9, y: 26}
+        - {x: -38, y: 11}
+        - {x: -38, y: -31}
+        - {x: -25, y: -35}
+        - {x: 11, y: -35}
+        - {x: 25, y: -33}
+        - {x: 36, y: -31}
+        - {x: 42, y: -26}
+        - {x: 45, y: -9}
+      - - {x: -9, y: 38}
+        - {x: -11, y: 33}
+        - {x: -11, y: 27}
+        - {x: 1, y: 27}
+        - {x: 10, y: 29}
+        - {x: 10, y: 37}
+        - {x: 8, y: 38}
+    - name: emoji_lxh_150
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1, y: 30}
+        - {x: -7, y: 30}
+        - {x: -34, y: 17}
+        - {x: -41, y: -13}
+        - {x: -41, y: -34}
+        - {x: 40, y: -34}
+        - {x: 41, y: -33}
+        - {x: 41, y: 18}
+        - {x: 40, y: 19}
+    - name: emoji_lxh_151
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24, y: 15}
+        - {x: -30, y: 15}
+        - {x: -39, y: 12}
+        - {x: -40, y: 7}
+        - {x: -40, y: -33}
+        - {x: -31, y: -35}
+        - {x: 37, y: -35}
+        - {x: 40, y: -28}
+        - {x: 40, y: -8}
+        - {x: 32, y: 12}
+    - name: emoji_lxh_152
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: 45}
+        - {x: -24, y: 45}
+        - {x: -50, y: -9}
+        - {x: -50, y: -46}
+        - {x: -46, y: -50}
+        - {x: 0, y: -50}
+        - {x: 48, y: -46}
+        - {x: 48, y: 24}
+        - {x: 46, y: 41}
+    - name: emoji_lxh_153
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38, y: -42}
+        - {x: -40, y: -44}
+        - {x: -40, y: -47}
+        - {x: -37, y: -49}
+        - {x: -30, y: -49}
+        - {x: -29, y: -46}
+        - {x: -29, y: -43}
+        - {x: -31, y: -42}
+      - - {x: -50, y: -42}
+        - {x: -49, y: -43}
+        - {x: 47, y: -43}
+        - {x: 47, y: -4}
+        - {x: 39, y: 43}
+        - {x: -21, y: 43}
+        - {x: -50, y: 0}
+    - name: emoji_lxh_154
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 40}
+        - {x: -50, y: -10}
+        - {x: -50, y: -44}
+        - {x: -47, y: -49}
+        - {x: 19, y: -49}
+        - {x: 48, y: -43}
+        - {x: 48, y: 37}
+        - {x: 42, y: 40}
+    - name: emoji_lxh_155
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -34, y: 43}
+        - {x: -50, y: 7}
+        - {x: -50, y: -48}
+        - {x: -46, y: -50}
+        - {x: -8, y: -50}
+        - {x: 32, y: -46}
+        - {x: 48, y: -43}
+        - {x: 48, y: 43}
+    - name: emoji_lxh_156
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 43}
+        - {x: -50, y: -11}
+        - {x: -50, y: -44}
+        - {x: -46, y: -50}
+        - {x: 49, y: -50}
+        - {x: 49, y: 40}
+        - {x: 26, y: 43}
+    - name: emoji_lxh_157
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 46, y: 40}
+        - {x: 24, y: 44}
+        - {x: -17, y: 44}
+        - {x: -23, y: 41}
+        - {x: -50, y: -21}
+        - {x: -50, y: -43}
+        - {x: -48, y: -49}
+        - {x: 35, y: -49}
+        - {x: 48, y: -43}
+        - {x: 48, y: -21}
+        - {x: 47, y: -14}
+    - name: emoji_lxh_158
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: -42}
+        - {x: -40, y: -44}
+        - {x: -40, y: -47}
+        - {x: -39, y: -49}
+        - {x: -31, y: -49}
+        - {x: -29, y: -48}
+        - {x: -29, y: -44}
+        - {x: -31, y: -42}
+      - - {x: -27, y: 45}
+        - {x: -50, y: 8}
+        - {x: -50, y: -39}
+        - {x: -39, y: -43}
+        - {x: 49, y: -43}
+        - {x: 49, y: 43}
+        - {x: 40, y: 45}
+    - name: emoji_lxh_159
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: -49}
+        - {x: 27, y: -49}
+        - {x: 48, y: -44}
+        - {x: 48, y: 11}
+        - {x: 45, y: 45}
+        - {x: -43, y: 45}
+        - {x: -50, y: -9}
+    - name: emoji_lxh_160
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 33}
+        - {x: -50, y: 26}
+        - {x: -50, y: -50}
+        - {x: 19, y: -50}
+        - {x: 50, y: -45}
+        - {x: 50, y: -14}
+        - {x: 22, y: 33}
+      - - {x: -50, y: -45}
+        - {x: -47, y: -44}
+        - {x: -47, y: -40}
+        - {x: -49, y: -38}
+        - {x: -50, y: -38}
+    - name: emoji_lxh_161
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: -38}
+        - {x: 50, y: -37}
+        - {x: 50, y: -31}
+        - {x: 30, y: -31}
+        - {x: 5, y: -32}
+        - {x: 10, y: -31}
+        - {x: 36, y: -4}
+        - {x: 18, y: 33}
+        - {x: -23, y: 33}
+        - {x: -50, y: 17}
+        - {x: -50, y: -50}
+        - {x: 34, y: -50}
+        - {x: 50, y: -49}
+        - {x: 50, y: -38}
+    - name: emoji_lxh_162
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -21, y: 33}
+        - {x: -50, y: 22}
+        - {x: -50, y: -50}
+        - {x: 13, y: -50}
+        - {x: 50, y: -47}
+        - {x: 50, y: -22}
+        - {x: 25, y: 33}
+      - - {x: -50, y: -45}
+        - {x: -47, y: -44}
+        - {x: -47, y: -40}
+        - {x: -49, y: -38}
+        - {x: -50, y: -38}
+    - name: emoji_lxh_163
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: -50}
+        - {x: 50, y: 33}
+        - {x: -36, y: 33}
+        - {x: -50, y: 29}
+        - {x: -50, y: -50}
+    - name: emoji_lxh_164
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: -40}
+        - {x: 4, y: -40}
+        - {x: 9, y: -38}
+        - {x: 10, y: -34}
+        - {x: 10, y: -25}
+        - {x: 9, y: -24}
+        - {x: 9, y: -19}
+        - {x: 9, y: -21}
+        - {x: 10, y: -22}
+        - {x: 10, y: -29}
+        - {x: 11, y: -36}
+        - {x: 15, y: -40}
+        - {x: 21, y: -40}
+        - {x: 23, y: -39}
+        - {x: 24, y: -37}
+        - {x: 50, y: -37}
+        - {x: 50, y: -30}
+        - {x: 18, y: 28}
+        - {x: -2, y: 33}
+        - {x: -25, y: 33}
+        - {x: -50, y: 15}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: -38}
+        - {x: 27, y: -37}
+    - name: emoji_lxh_165
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 0}
+        - {x: -45, y: -3}
+        - {x: -50, y: -19}
+        - {x: -50, y: -44}
+        - {x: -47, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: -16}
+        - {x: 34, y: 33}
+        - {x: -29, y: 33}
+        - {x: -50, y: 11}
+    - name: emoji_lxh_166
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 33}
+        - {x: -31, y: 33}
+        - {x: -50, y: 13}
+        - {x: -50, y: -50}
+        - {x: 26, y: -50}
+        - {x: 50, y: -46}
+        - {x: 50, y: 0}
+        - {x: 40, y: 23}
+      - - {x: 47, y: 4}
+        - {x: 49, y: 2}
+        - {x: 50, y: 2}
+        - {x: 50, y: 8}
+        - {x: 47, y: 7}
+    - name: emoji_lxh_167
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: -40}
+        - {x: 5, y: -40}
+        - {x: 9, y: -38}
+        - {x: 12, y: -29}
+        - {x: 11, y: -35}
+        - {x: 15, y: -40}
+        - {x: 17, y: -40}
+        - {x: 19, y: -39}
+        - {x: 20, y: -37}
+        - {x: 50, y: -37}
+        - {x: 50, y: -27}
+        - {x: 28, y: 33}
+        - {x: -24, y: 33}
+        - {x: -50, y: 14}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: -38}
+        - {x: 27, y: -37}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -23,7 +23,7 @@ public class SpriteAssetEditor : Editor
             GUILayout.Label("\n");
             EditorGUILayout.ObjectField("", spriteAsset.listSpriteInfor[i].sprite, typeof(Sprite),false);
             EditorGUILayout.IntField("ID:", spriteAsset.listSpriteInfor[i].ID);
-            EditorGUILayout.LabelField("name:", spriteAsset.listSpriteInfor[i].name);
+            spriteAsset.listSpriteInfor[i].name=EditorGUILayout.TextField("name:", spriteAsset.listSpriteInfor[i].name);
             EditorGUILayout.Vector2Field("povit:", spriteAsset.listSpriteInfor[i].pivot);
             EditorGUILayout.RectField("rect:", spriteAsset.listSpriteInfor[i].rect);
             GUILayout.Label("\n");
