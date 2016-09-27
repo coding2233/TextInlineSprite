@@ -21,12 +21,12 @@ public class SpriteAssetEditor : Editor
         for (int i = 0; i < spriteAsset.listSpriteInfor.Count; i++)
         {
             GUILayout.Label("\n");
-            EditorGUILayout.ObjectField("", spriteAsset.listSpriteInfor[i].sprite, typeof(Sprite),false);
+       //     EditorGUILayout.ObjectField("", spriteAsset.listSpriteInfor[i].sprite, typeof(Sprite),false);
             EditorGUILayout.IntField("ID:", spriteAsset.listSpriteInfor[i].ID);
-            spriteAsset.listSpriteInfor[i].name=EditorGUILayout.TextField("name:", spriteAsset.listSpriteInfor[i].name);
-            EditorGUILayout.Vector2Field("povit:", spriteAsset.listSpriteInfor[i].pivot);
-            EditorGUILayout.RectField("rect:", spriteAsset.listSpriteInfor[i].rect);
-            GUILayout.Label("\n");
+            EditorGUILayout.TextField("name:", spriteAsset.listSpriteInfor[i].name);
+         //   EditorGUILayout.Vector2Field("povit:", spriteAsset.listSpriteInfor[i].pivot);
+      //      EditorGUILayout.RectField("rect:", spriteAsset.listSpriteInfor[i].rect);
+        //    GUILayout.Label("\n");
         }
         GUILayout.EndScrollView();
     }

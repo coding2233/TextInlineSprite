@@ -1,169 +1,169 @@
 fileFormatVersion: 2
 guid: 0f80732ede17ee84fbda8d7d2448dd61
-timeCreated: 1474622983
+timeCreated: 1474951757
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: emoji_lxh_0
-    21300002: emoji_lxh_1
-    21300004: emoji_lxh_2
-    21300006: emoji_lxh_3
-    21300008: emoji_lxh_4
-    21300010: emoji_lxh_5
-    21300012: emoji_lxh_6
-    21300014: emoji_lxh_7
-    21300016: emoji_lxh_8
-    21300018: emoji_lxh_9
-    21300020: emoji_lxh_10
-    21300022: emoji_lxh_11
-    21300024: emoji_lxh_12
-    21300026: emoji_lxh_13
-    21300028: emoji_lxh_14
-    21300030: emoji_lxh_15
-    21300032: emoji_lxh_16
-    21300034: emoji_lxh_17
-    21300036: emoji_lxh_18
-    21300038: emoji_lxh_19
-    21300040: emoji_lxh_20
-    21300042: emoji_lxh_21
-    21300044: emoji_lxh_22
-    21300046: emoji_lxh_23
-    21300048: emoji_lxh_24
-    21300050: emoji_lxh_25
-    21300052: emoji_lxh_26
-    21300054: emoji_lxh_27
-    21300056: emoji_lxh_28
-    21300058: emoji_lxh_29
-    21300060: emoji_lxh_30
-    21300062: emoji_lxh_31
-    21300064: emoji_lxh_32
-    21300066: emoji_lxh_33
-    21300068: emoji_lxh_34
-    21300070: emoji_lxh_35
-    21300072: emoji_lxh_36
-    21300074: emoji_lxh_37
-    21300076: emoji_lxh_38
-    21300078: emoji_lxh_39
-    21300080: emoji_lxh_40
-    21300082: emoji_lxh_41
-    21300084: emoji_lxh_42
-    21300086: emoji_lxh_43
-    21300088: emoji_lxh_44
-    21300090: emoji_lxh_45
-    21300092: emoji_lxh_46
-    21300094: emoji_lxh_47
-    21300096: emoji_lxh_48
-    21300098: emoji_lxh_49
-    21300100: emoji_lxh_50
-    21300102: emoji_lxh_51
-    21300104: emoji_lxh_52
-    21300106: emoji_lxh_53
-    21300108: emoji_lxh_54
-    21300110: emoji_lxh_55
-    21300112: emoji_lxh_56
-    21300114: emoji_lxh_57
-    21300116: emoji_lxh_58
-    21300118: emoji_lxh_59
-    21300120: emoji_lxh_60
-    21300122: emoji_lxh_61
-    21300124: emoji_lxh_62
-    21300126: emoji_lxh_63
-    21300128: emoji_lxh_64
-    21300130: emoji_lxh_65
-    21300132: emoji_lxh_66
-    21300134: emoji_lxh_67
-    21300136: emoji_lxh_68
-    21300138: emoji_lxh_69
-    21300140: emoji_lxh_70
-    21300142: emoji_lxh_71
-    21300144: emoji_lxh_72
-    21300146: emoji_lxh_73
-    21300148: emoji_lxh_74
-    21300150: emoji_lxh_75
-    21300152: emoji_lxh_76
-    21300154: emoji_lxh_77
-    21300156: emoji_lxh_78
-    21300158: emoji_lxh_79
-    21300160: emoji_lxh_80
-    21300162: emoji_lxh_81
-    21300164: emoji_lxh_82
-    21300166: emoji_lxh_83
-    21300168: emoji_lxh_84
-    21300170: emoji_lxh_85
-    21300172: emoji_lxh_86
-    21300174: emoji_lxh_87
-    21300176: emoji_lxh_88
-    21300178: emoji_lxh_89
-    21300180: emoji_lxh_90
-    21300182: emoji_lxh_91
-    21300184: emoji_lxh_92
-    21300186: emoji_lxh_93
-    21300188: emoji_lxh_94
-    21300190: emoji_lxh_95
-    21300192: emoji_lxh_96
-    21300194: emoji_lxh_97
-    21300196: emoji_lxh_98
-    21300198: emoji_lxh_99
-    21300200: emoji_lxh_100
-    21300202: emoji_lxh_101
-    21300204: emoji_lxh_102
-    21300206: emoji_lxh_103
-    21300208: emoji_lxh_104
-    21300210: emoji_lxh_105
-    21300212: emoji_lxh_106
-    21300214: emoji_lxh_107
-    21300216: emoji_lxh_108
-    21300218: emoji_lxh_109
-    21300220: emoji_lxh_110
-    21300222: emoji_lxh_111
-    21300224: emoji_lxh_112
-    21300226: emoji_lxh_113
-    21300228: emoji_lxh_114
-    21300230: emoji_lxh_115
-    21300232: emoji_lxh_116
-    21300234: emoji_lxh_117
-    21300236: emoji_lxh_118
-    21300238: emoji_lxh_119
-    21300240: emoji_lxh_120
-    21300242: emoji_lxh_121
-    21300244: emoji_lxh_122
-    21300246: emoji_lxh_123
-    21300248: emoji_lxh_124
-    21300250: emoji_lxh_125
-    21300252: emoji_lxh_126
-    21300254: emoji_lxh_127
-    21300256: emoji_lxh_128
-    21300258: emoji_lxh_129
-    21300260: emoji_lxh_130
-    21300262: emoji_lxh_131
-    21300264: emoji_lxh_132
-    21300266: emoji_lxh_133
-    21300268: emoji_lxh_134
-    21300270: emoji_lxh_135
-    21300272: emoji_lxh_136
-    21300274: emoji_lxh_137
-    21300276: emoji_lxh_138
-    21300278: emoji_lxh_139
-    21300280: emoji_lxh_140
-    21300282: emoji_lxh_141
-    21300284: emoji_lxh_142
-    21300286: emoji_lxh_143
-    21300288: emoji_lxh_144
-    21300290: emoji_lxh_145
-    21300292: emoji_lxh_146
-    21300294: emoji_lxh_147
-    21300296: emoji_lxh_148
-    21300298: emoji_lxh_149
-    21300300: emoji_lxh_150
-    21300302: emoji_lxh_151
-    21300304: emoji_lxh_152
-    21300306: emoji_lxh_153
-    21300308: emoji_lxh_154
-    21300310: emoji_lxh_155
-    21300312: emoji_lxh_156
-    21300314: emoji_lxh_157
-    21300316: emoji_lxh_158
-    21300318: emoji_lxh_159
+    21300000: sick_0
+    21300002: sick_1
+    21300004: sick_2
+    21300006: sick_3
+    21300008: sick_4
+    21300010: sick_5
+    21300012: sick_6
+    21300014: sick_7
+    21300016: watermelon_0
+    21300018: watermelon_1
+    21300020: watermelon_2
+    21300022: watermelon_3
+    21300024: watermelon_4
+    21300026: watermelon_5
+    21300028: watermelon_6
+    21300030: watermelon_7
+    21300032: run_0
+    21300034: run_1
+    21300036: run_2
+    21300038: run_3
+    21300040: run_4
+    21300042: run_5
+    21300044: run_6
+    21300046: run_7
+    21300048: die_0
+    21300050: die_1
+    21300052: die_2
+    21300054: die_3
+    21300056: die_4
+    21300058: die_5
+    21300060: die_6
+    21300062: die_7
+    21300064: meat_0
+    21300066: meat_1
+    21300068: meat_2
+    21300070: meat_3
+    21300072: meat_4
+    21300074: meat_5
+    21300076: meat_6
+    21300078: meat_7
+    21300080: roll_0
+    21300082: roll_1
+    21300084: roll_2
+    21300086: roll_3
+    21300088: roll_4
+    21300090: roll_5
+    21300092: roll_6
+    21300094: roll_7
+    21300096: yawn_0
+    21300098: yawn_1
+    21300100: yawn_2
+    21300102: yawn_3
+    21300104: yawn_4
+    21300106: yawn_5
+    21300108: yawn_6
+    21300110: yawn_7
+    21300112: boring_0
+    21300114: boring_1
+    21300116: boring_2
+    21300118: boring_3
+    21300120: boring_4
+    21300122: boring_5
+    21300124: boring_6
+    21300126: boring_7
+    21300128: happy_0
+    21300130: happy_1
+    21300132: happy_2
+    21300134: happy_3
+    21300136: happy_4
+    21300138: happy_5
+    21300140: happy_6
+    21300142: happy_7
+    21300144: rock_7
+    21300146: rock_6
+    21300148: rock_5
+    21300150: rock_4
+    21300152: rock_3
+    21300154: rock_2
+    21300156: rock_1
+    21300158: rock_0
+    21300160: gargle_0
+    21300162: gargle_1
+    21300164: gargle_2
+    21300166: gargle_3
+    21300168: gargle_4
+    21300170: gargle_5
+    21300172: gargle_6
+    21300174: gargle_7
+    21300176: sleep_7
+    21300178: sleep_6
+    21300180: sleep_5
+    21300182: sleep_4
+    21300184: sleep_3
+    21300186: sleep_2
+    21300188: sleep_1
+    21300190: sleep_0
+    21300192: idle_0
+    21300194: idle_1
+    21300196: idle_2
+    21300198: idle_3
+    21300200: idle_4
+    21300202: idle_5
+    21300204: idle_6
+    21300206: idle_7
+    21300208: pain_7
+    21300210: pain_6
+    21300212: pain_5
+    21300214: pain_4
+    21300216: pain_3
+    21300218: pain_2
+    21300220: pain_1
+    21300222: pain_0
+    21300224: play_0
+    21300226: play_3
+    21300228: play_1
+    21300230: play_2
+    21300232: play_4
+    21300234: play_5
+    21300236: play_6
+    21300238: play_7
+    21300240: rose_0
+    21300242: rose_1
+    21300244: rose_2
+    21300246: rose_3
+    21300248: rose_4
+    21300250: rose_5
+    21300252: rose_6
+    21300254: rose_7
+    21300256: walk_7
+    21300258: walk_6
+    21300260: walk_5
+    21300262: walk_4
+    21300264: walk_3
+    21300266: walk_2
+    21300268: walk_1
+    21300270: walk_0
+    21300272: angry_0
+    21300274: angry_1
+    21300276: angry_2
+    21300278: angry_3
+    21300280: angry_4
+    21300282: angry_5
+    21300284: angry_6
+    21300286: angry_7
+    21300288: bleeding_7
+    21300290: bleeding_6
+    21300292: bleeding_5
+    21300294: bleeding_4
+    21300296: bleeding_3
+    21300298: bleeding_2
+    21300300: bleeding_1
+    21300302: bleeding_0
+    21300304: nurturing_0
+    21300306: nurturing_1
+    21300308: nurturing_2
+    21300310: nurturing_3
+    21300312: nurturing_4
+    21300314: nurturing_5
+    21300316: nurturing_6
+    21300318: nurturing_7
     21300320: emoji_lxh_160
     21300322: emoji_lxh_161
     21300324: emoji_lxh_162
@@ -218,7 +218,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: emoji_lxh_0
+    - name: sick_0
       rect:
         serializedVersion: 2
         x: 0
@@ -237,7 +237,7 @@ TextureImporter:
         - {x: 50, y: -44}
         - {x: 50, y: -27}
         - {x: 49, y: -19}
-    - name: emoji_lxh_1
+    - name: sick_1
       rect:
         serializedVersion: 2
         x: 100
@@ -262,7 +262,7 @@ TextureImporter:
         - {x: 50, y: -46}
         - {x: 50, y: -27}
         - {x: 49, y: -19}
-    - name: emoji_lxh_2
+    - name: sick_2
       rect:
         serializedVersion: 2
         x: 200
@@ -280,7 +280,7 @@ TextureImporter:
         - {x: 50, y: 50}
         - {x: -2, y: 50}
         - {x: -33, y: 39}
-    - name: emoji_lxh_3
+    - name: sick_3
       rect:
         serializedVersion: 2
         x: 300
@@ -297,7 +297,7 @@ TextureImporter:
         - {x: 50, y: 50}
         - {x: -4, y: 50}
         - {x: -34, y: 38}
-    - name: emoji_lxh_4
+    - name: sick_4
       rect:
         serializedVersion: 2
         x: 400
@@ -316,7 +316,7 @@ TextureImporter:
         - {x: 50, y: -48}
         - {x: 50, y: 38}
         - {x: 49, y: 50}
-    - name: emoji_lxh_5
+    - name: sick_5
       rect:
         serializedVersion: 2
         x: 500
@@ -335,7 +335,7 @@ TextureImporter:
         - {x: 50, y: 28}
         - {x: 48, y: 43}
         - {x: 45, y: 50}
-    - name: emoji_lxh_6
+    - name: sick_6
       rect:
         serializedVersion: 2
         x: 600
@@ -356,7 +356,7 @@ TextureImporter:
         - {x: 48, y: 50}
         - {x: 9, y: 50}
         - {x: 5, y: 49}
-    - name: emoji_lxh_7
+    - name: sick_7
       rect:
         serializedVersion: 2
         x: 700
@@ -374,7 +374,7 @@ TextureImporter:
         - {x: 50, y: -47}
         - {x: 50, y: 40}
         - {x: 47, y: 50}
-    - name: emoji_lxh_8
+    - name: watermelon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -415,7 +415,7 @@ TextureImporter:
         - {x: -31, y: 29}
         - {x: -31, y: 32}
         - {x: -33, y: 34}
-    - name: emoji_lxh_9
+    - name: watermelon_1
       rect:
         serializedVersion: 2
         x: 100
@@ -464,7 +464,7 @@ TextureImporter:
         - {x: -43, y: 4}
         - {x: -41, y: 5}
         - {x: -41, y: 12}
-    - name: emoji_lxh_10
+    - name: watermelon_2
       rect:
         serializedVersion: 2
         x: 200
@@ -493,7 +493,7 @@ TextureImporter:
         - {x: -45, y: -18}
         - {x: -45, y: -16}
         - {x: -48, y: -13}
-    - name: emoji_lxh_11
+    - name: watermelon_3
       rect:
         serializedVersion: 2
         x: 300
@@ -516,7 +516,7 @@ TextureImporter:
         - {x: -41, y: -42}
         - {x: -41, y: -35}
         - {x: -44, y: -33}
-    - name: emoji_lxh_12
+    - name: watermelon_4
       rect:
         serializedVersion: 2
         x: 400
@@ -538,7 +538,7 @@ TextureImporter:
         - {x: 41, y: -42}
         - {x: 50, y: -14}
         - {x: 50, y: 14}
-    - name: emoji_lxh_13
+    - name: watermelon_5
       rect:
         serializedVersion: 2
         x: 500
@@ -574,7 +574,7 @@ TextureImporter:
         - {x: -19, y: 34}
         - {x: -19, y: 38}
         - {x: -22, y: 39}
-    - name: emoji_lxh_14
+    - name: watermelon_6
       rect:
         serializedVersion: 2
         x: 600
@@ -611,7 +611,7 @@ TextureImporter:
         - {x: -12, y: 34}
         - {x: -12, y: 37}
         - {x: -14, y: 39}
-    - name: emoji_lxh_15
+    - name: watermelon_7
       rect:
         serializedVersion: 2
         x: 700
@@ -654,7 +654,7 @@ TextureImporter:
         - {x: -21, y: 35}
         - {x: -21, y: 37}
         - {x: -24, y: 39}
-    - name: emoji_lxh_16
+    - name: run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -684,7 +684,7 @@ TextureImporter:
         - {x: 40, y: -15}
         - {x: 43, y: -9}
         - {x: 43, y: 16}
-    - name: emoji_lxh_17
+    - name: run_1
       rect:
         serializedVersion: 2
         x: 100
@@ -701,7 +701,7 @@ TextureImporter:
         - {x: 35, y: -35}
         - {x: 35, y: 20}
         - {x: 13, y: 31}
-    - name: emoji_lxh_18
+    - name: run_2
       rect:
         serializedVersion: 2
         x: 200
@@ -725,7 +725,7 @@ TextureImporter:
         - {x: 32, y: -24}
         - {x: 39, y: -13}
         - {x: 39, y: 18}
-    - name: emoji_lxh_19
+    - name: run_3
       rect:
         serializedVersion: 2
         x: 300
@@ -745,7 +745,7 @@ TextureImporter:
         - {x: 48, y: -29}
         - {x: 48, y: 2}
         - {x: 35, y: 23}
-    - name: emoji_lxh_20
+    - name: run_4
       rect:
         serializedVersion: 2
         x: 400
@@ -773,7 +773,7 @@ TextureImporter:
         - {x: 46, y: -27}
         - {x: 46, y: 6}
         - {x: 36, y: 24}
-    - name: emoji_lxh_21
+    - name: run_5
       rect:
         serializedVersion: 2
         x: 500
@@ -793,7 +793,7 @@ TextureImporter:
         - {x: 36, y: -5}
         - {x: 36, y: 28}
         - {x: 34, y: 29}
-    - name: emoji_lxh_22
+    - name: run_6
       rect:
         serializedVersion: 2
         x: 600
@@ -811,7 +811,7 @@ TextureImporter:
         - {x: 49, y: -28}
         - {x: 49, y: 0}
         - {x: 34, y: 23}
-    - name: emoji_lxh_23
+    - name: run_7
       rect:
         serializedVersion: 2
         x: 700
@@ -838,7 +838,7 @@ TextureImporter:
         - {x: 45, y: -27}
         - {x: 45, y: 2}
         - {x: 32, y: 24}
-    - name: emoji_lxh_24
+    - name: die_0
       rect:
         serializedVersion: 2
         x: 0
@@ -858,7 +858,7 @@ TextureImporter:
         - {x: 50, y: -41}
         - {x: 50, y: -5}
         - {x: 47, y: 7}
-    - name: emoji_lxh_25
+    - name: die_1
       rect:
         serializedVersion: 2
         x: 100
@@ -878,7 +878,7 @@ TextureImporter:
         - {x: 50, y: -42}
         - {x: 50, y: -17}
         - {x: 27, y: 15}
-    - name: emoji_lxh_26
+    - name: die_2
       rect:
         serializedVersion: 2
         x: 200
@@ -898,7 +898,7 @@ TextureImporter:
         - {x: 50, y: -26}
         - {x: 50, y: 3}
         - {x: 33, y: 16}
-    - name: emoji_lxh_27
+    - name: die_3
       rect:
         serializedVersion: 2
         x: 300
@@ -917,7 +917,7 @@ TextureImporter:
         - {x: 50, y: -33}
         - {x: 50, y: -3}
         - {x: 33, y: 19}
-    - name: emoji_lxh_28
+    - name: die_4
       rect:
         serializedVersion: 2
         x: 400
@@ -944,7 +944,7 @@ TextureImporter:
         - {x: -17, y: 9}
         - {x: -11, y: 12}
         - {x: -11, y: 41}
-    - name: emoji_lxh_29
+    - name: die_5
       rect:
         serializedVersion: 2
         x: 500
@@ -974,67 +974,60 @@ TextureImporter:
         - {x: -15, y: 20}
         - {x: -14, y: 29}
         - {x: -14, y: 47}
-    - name: emoji_lxh_30
+    - name: die_6
       rect:
         serializedVersion: 2
         x: 600
-        y: 1700
+        y: 1699
         width: 100
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 21, y: 12}
-        - {x: 4, y: 15}
-        - {x: -38, y: 15}
-        - {x: -50, y: -12}
-        - {x: -50, y: -41}
-        - {x: -46, y: -44}
-        - {x: -2, y: -47}
-        - {x: 39, y: -47}
-        - {x: 50, y: -38}
-        - {x: 50, y: -16}
-        - {x: 49, y: -12}
+      - - {x: -48, y: 16}
+        - {x: -50, y: 7}
+        - {x: -50, y: -39}
+        - {x: -46, y: -42}
+        - {x: 6, y: -46}
+        - {x: 38, y: -46}
+        - {x: 50, y: -37}
+        - {x: 50, y: 3}
+        - {x: 13, y: 16}
       - - {x: -43, y: 50}
-        - {x: -48, y: 43}
-        - {x: -48, y: 19}
-        - {x: -42, y: 17}
-        - {x: -18, y: 17}
-        - {x: -16, y: 25}
-        - {x: -16, y: 49}
-        - {x: -17, y: 50}
-    - name: emoji_lxh_31
+        - {x: -48, y: 44}
+        - {x: -48, y: 20}
+        - {x: -42, y: 18}
+        - {x: -18, y: 18}
+        - {x: -16, y: 26}
+        - {x: -16, y: 50}
+    - name: die_7
       rect:
         serializedVersion: 2
         x: 700
-        y: 1700
+        y: 1695
         width: 100
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 27, y: 15}
-        - {x: -41, y: 15}
-        - {x: -50, y: -11}
-        - {x: -50, y: -37}
-        - {x: -45, y: -44}
-        - {x: 3, y: -47}
-        - {x: 37, y: -47}
-        - {x: 50, y: -37}
-        - {x: 50, y: -20}
-        - {x: 36, y: 2}
-      - - {x: -41, y: 50}
-        - {x: -47, y: 47}
-        - {x: -47, y: 27}
-        - {x: -46, y: 20}
-        - {x: -42, y: 19}
-        - {x: -18, y: 19}
-        - {x: -17, y: 21}
-        - {x: -17, y: 46}
-        - {x: -19, y: 50}
-    - name: emoji_lxh_32
+      - - {x: -36, y: 20}
+        - {x: -50, y: -10}
+        - {x: -50, y: -36}
+        - {x: -17, y: -42}
+        - {x: 48, y: -42}
+        - {x: 50, y: -39}
+        - {x: 50, y: -10}
+        - {x: 31, y: 20}
+      - - {x: -43, y: 50}
+        - {x: -47, y: 46}
+        - {x: -47, y: 31}
+        - {x: -32, y: 24}
+        - {x: -19, y: 24}
+        - {x: -17, y: 29}
+        - {x: -17, y: 50}
+    - name: meat_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1051,7 +1044,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 48}
-    - name: emoji_lxh_33
+    - name: meat_1
       rect:
         serializedVersion: 2
         x: 100
@@ -1068,7 +1061,7 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: 5}
         - {x: 32, y: 44}
-    - name: emoji_lxh_34
+    - name: meat_2
       rect:
         serializedVersion: 2
         x: 200
@@ -1089,7 +1082,7 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: -15}
         - {x: 46, y: -11}
-    - name: emoji_lxh_35
+    - name: meat_3
       rect:
         serializedVersion: 2
         x: 300
@@ -1105,7 +1098,7 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: 42}
         - {x: 47, y: 43}
-    - name: emoji_lxh_36
+    - name: meat_4
       rect:
         serializedVersion: 2
         x: 400
@@ -1123,10 +1116,10 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: 16}
         - {x: 38, y: 43}
-    - name: emoji_lxh_37
+    - name: meat_5
       rect:
         serializedVersion: 2
-        x: 500
+        x: 495
         y: 1600
         width: 100
         height: 100
@@ -1134,18 +1127,19 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -42, y: 45}
-        - {x: -50, y: 27}
+      - - {x: -21, y: 45}
+        - {x: -45, y: 36}
+        - {x: -39, y: -19}
+        - {x: -45, y: -28}
+        - {x: -42, y: -22}
+        - {x: -42, y: -17}
+        - {x: -48, y: -11}
+        - {x: -50, y: -11}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
-        - {x: 50, y: 42}
-        - {x: 39, y: 45}
-      - - {x: -50, y: -24}
-        - {x: -47, y: -23}
-        - {x: -47, y: -17}
-        - {x: -49, y: -15}
-        - {x: -50, y: -15}
-    - name: emoji_lxh_38
+        - {x: 50, y: 37}
+        - {x: 34, y: 45}
+    - name: meat_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1162,7 +1156,7 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: -5}
         - {x: 45, y: 43}
-    - name: emoji_lxh_39
+    - name: meat_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1186,7 +1180,7 @@ TextureImporter:
         - {x: -47, y: -17}
         - {x: -49, y: -15}
         - {x: -50, y: -15}
-    - name: emoji_lxh_40
+    - name: roll_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1219,7 +1213,7 @@ TextureImporter:
         - {x: -5, y: 33}
         - {x: -5, y: 39}
         - {x: -6, y: 42}
-    - name: emoji_lxh_41
+    - name: roll_1
       rect:
         serializedVersion: 2
         x: 100
@@ -1249,7 +1243,7 @@ TextureImporter:
         - {x: -15, y: 23}
         - {x: -15, y: 26}
         - {x: -11, y: 27}
-    - name: emoji_lxh_42
+    - name: roll_2
       rect:
         serializedVersion: 2
         x: 200
@@ -1279,7 +1273,7 @@ TextureImporter:
         - {x: -6, y: 29}
         - {x: -6, y: 41}
         - {x: -8, y: 44}
-    - name: emoji_lxh_43
+    - name: roll_3
       rect:
         serializedVersion: 2
         x: 300
@@ -1309,7 +1303,7 @@ TextureImporter:
         - {x: -5, y: 33}
         - {x: -5, y: 39}
         - {x: -6, y: 42}
-    - name: emoji_lxh_44
+    - name: roll_4
       rect:
         serializedVersion: 2
         x: 400
@@ -1337,7 +1331,7 @@ TextureImporter:
         - {x: -6, y: 28}
         - {x: -3, y: 34}
         - {x: -3, y: 40}
-    - name: emoji_lxh_45
+    - name: roll_5
       rect:
         serializedVersion: 2
         x: 500
@@ -1367,7 +1361,7 @@ TextureImporter:
         - {x: -14, y: 23}
         - {x: -14, y: 26}
         - {x: -10, y: 27}
-    - name: emoji_lxh_46
+    - name: roll_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1395,7 +1389,7 @@ TextureImporter:
         - {x: -6, y: 28}
         - {x: -3, y: 34}
         - {x: -3, y: 40}
-    - name: emoji_lxh_47
+    - name: roll_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1425,7 +1419,7 @@ TextureImporter:
         - {x: -14, y: 23}
         - {x: -14, y: 26}
         - {x: -10, y: 27}
-    - name: emoji_lxh_48
+    - name: yawn_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1445,7 +1439,7 @@ TextureImporter:
         - {x: 39, y: -6}
         - {x: 39, y: 10}
         - {x: 37, y: 20}
-    - name: emoji_lxh_49
+    - name: yawn_1
       rect:
         serializedVersion: 2
         x: 100
@@ -1464,7 +1458,7 @@ TextureImporter:
         - {x: 38, y: -12}
         - {x: 38, y: 27}
         - {x: 25, y: 36}
-    - name: emoji_lxh_50
+    - name: yawn_2
       rect:
         serializedVersion: 2
         x: 200
@@ -1484,7 +1478,7 @@ TextureImporter:
         - {x: 38, y: -24}
         - {x: 38, y: 26}
         - {x: 35, y: 32}
-    - name: emoji_lxh_51
+    - name: yawn_3
       rect:
         serializedVersion: 2
         x: 300
@@ -1503,7 +1497,7 @@ TextureImporter:
         - {x: 37, y: -11}
         - {x: 37, y: 34}
         - {x: 31, y: 36}
-    - name: emoji_lxh_52
+    - name: yawn_4
       rect:
         serializedVersion: 2
         x: 400
@@ -1523,7 +1517,7 @@ TextureImporter:
         - {x: 39, y: -24}
         - {x: 39, y: 26}
         - {x: 36, y: 32}
-    - name: emoji_lxh_53
+    - name: yawn_5
       rect:
         serializedVersion: 2
         x: 500
@@ -1541,7 +1535,7 @@ TextureImporter:
         - {x: 42, y: -36}
         - {x: 42, y: 22}
         - {x: 41, y: 32}
-    - name: emoji_lxh_54
+    - name: yawn_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1560,7 +1554,7 @@ TextureImporter:
         - {x: 43, y: -19}
         - {x: 43, y: 26}
         - {x: 38, y: 32}
-    - name: emoji_lxh_55
+    - name: yawn_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1579,7 +1573,7 @@ TextureImporter:
         - {x: 42, y: -42}
         - {x: 42, y: 22}
         - {x: 41, y: 32}
-    - name: emoji_lxh_56
+    - name: boring_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1598,7 +1592,7 @@ TextureImporter:
         - {x: 50, y: -39}
         - {x: 50, y: -3}
         - {x: 45, y: 17}
-    - name: emoji_lxh_57
+    - name: boring_1
       rect:
         serializedVersion: 2
         x: 100
@@ -1617,7 +1611,7 @@ TextureImporter:
         - {x: 49, y: -35}
         - {x: 49, y: 1}
         - {x: 46, y: 22}
-    - name: emoji_lxh_58
+    - name: boring_2
       rect:
         serializedVersion: 2
         x: 200
@@ -1637,7 +1631,7 @@ TextureImporter:
         - {x: 45, y: -40}
         - {x: 50, y: -33}
         - {x: 50, y: -12}
-    - name: emoji_lxh_59
+    - name: boring_3
       rect:
         serializedVersion: 2
         x: 300
@@ -1656,7 +1650,7 @@ TextureImporter:
         - {x: 50, y: -39}
         - {x: 50, y: -3}
         - {x: 45, y: 17}
-    - name: emoji_lxh_60
+    - name: boring_4
       rect:
         serializedVersion: 2
         x: 400
@@ -1675,7 +1669,7 @@ TextureImporter:
         - {x: 50, y: -41}
         - {x: 50, y: -9}
         - {x: 39, y: 21}
-    - name: emoji_lxh_61
+    - name: boring_5
       rect:
         serializedVersion: 2
         x: 500
@@ -1693,7 +1687,7 @@ TextureImporter:
         - {x: -49, y: -41}
         - {x: 50, y: -41}
         - {x: 50, y: 22}
-    - name: emoji_lxh_62
+    - name: boring_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1711,7 +1705,7 @@ TextureImporter:
         - {x: 49, y: 22}
         - {x: -49, y: 22}
         - {x: -50, y: 17}
-    - name: emoji_lxh_63
+    - name: boring_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1730,27 +1724,28 @@ TextureImporter:
         - {x: -17, y: -43}
         - {x: 50, y: -40}
         - {x: 50, y: 22}
-    - name: emoji_lxh_64
+    - name: happy_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1200
+        y: 1202
         width: 100
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -30, y: 28}
-        - {x: -39, y: 20}
-        - {x: -45, y: -12}
-        - {x: -45, y: -27}
-        - {x: -42, y: -32}
-        - {x: 45, y: -32}
-        - {x: 49, y: -28}
-        - {x: 49, y: 8}
-        - {x: 10, y: 28}
-    - name: emoji_lxh_65
+      - - {x: 0, y: 26}
+        - {x: -23, y: 26}
+        - {x: -39, y: 18}
+        - {x: -45, y: -11}
+        - {x: -45, y: -32}
+        - {x: -41, y: -34}
+        - {x: 45, y: -34}
+        - {x: 49, y: -25}
+        - {x: 49, y: -1}
+        - {x: 39, y: 12}
+    - name: happy_1
       rect:
         serializedVersion: 2
         x: 100
@@ -1769,7 +1764,7 @@ TextureImporter:
         - {x: 45, y: -32}
         - {x: 45, y: 12}
         - {x: 36, y: 28}
-    - name: emoji_lxh_66
+    - name: happy_2
       rect:
         serializedVersion: 2
         x: 200
@@ -1789,7 +1784,7 @@ TextureImporter:
         - {x: 47, y: -28}
         - {x: 47, y: 6}
         - {x: 18, y: 28}
-    - name: emoji_lxh_67
+    - name: happy_3
       rect:
         serializedVersion: 2
         x: 300
@@ -1806,10 +1801,10 @@ TextureImporter:
         - {x: 46, y: -29}
         - {x: 46, y: 7}
         - {x: 37, y: 27}
-    - name: emoji_lxh_68
+    - name: happy_4
       rect:
         serializedVersion: 2
-        x: 400
+        x: 398
         y: 1200
         width: 100
         height: 100
@@ -1817,14 +1812,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -39, y: 28}
-        - {x: -45, y: 0}
-        - {x: -45, y: -31}
-        - {x: -44, y: -32}
-        - {x: 47, y: -32}
-        - {x: 47, y: 17}
-        - {x: 43, y: 28}
-    - name: emoji_lxh_69
+      - - {x: -43, y: -29}
+        - {x: -39, y: -32}
+        - {x: 49, y: -32}
+        - {x: 49, y: -3}
+        - {x: 40, y: 28}
+        - {x: -29, y: 28}
+        - {x: -43, y: 8}
+    - name: happy_5
       rect:
         serializedVersion: 2
         x: 500
@@ -1843,7 +1838,7 @@ TextureImporter:
         - {x: 48, y: -26}
         - {x: 48, y: 3}
         - {x: 26, y: 25}
-    - name: emoji_lxh_70
+    - name: happy_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1861,7 +1856,7 @@ TextureImporter:
         - {x: 47, y: -32}
         - {x: 47, y: 17}
         - {x: 43, y: 28}
-    - name: emoji_lxh_71
+    - name: happy_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1880,7 +1875,7 @@ TextureImporter:
         - {x: 48, y: -29}
         - {x: 48, y: 5}
         - {x: 33, y: 28}
-    - name: emoji_lxh_72
+    - name: rock_7
       rect:
         serializedVersion: 2
         x: 700
@@ -1917,7 +1912,7 @@ TextureImporter:
         - {x: 44, y: -32}
         - {x: 44, y: -19}
         - {x: 43, y: -17}
-    - name: emoji_lxh_73
+    - name: rock_6
       rect:
         serializedVersion: 2
         x: 600
@@ -1934,7 +1929,7 @@ TextureImporter:
         - {x: 47, y: -17}
         - {x: 28, y: 38}
         - {x: -38, y: 38}
-    - name: emoji_lxh_74
+    - name: rock_5
       rect:
         serializedVersion: 2
         x: 500
@@ -1953,7 +1948,7 @@ TextureImporter:
         - {x: 45, y: -47}
         - {x: 45, y: 29}
         - {x: 44, y: 35}
-    - name: emoji_lxh_75
+    - name: rock_4
       rect:
         serializedVersion: 2
         x: 400
@@ -1982,7 +1977,7 @@ TextureImporter:
         - {x: 32, y: -8}
         - {x: 32, y: 34}
         - {x: 29, y: 36}
-    - name: emoji_lxh_76
+    - name: rock_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2017,7 +2012,7 @@ TextureImporter:
         - {x: 30, y: -5}
         - {x: 30, y: 22}
         - {x: 20, y: 37}
-    - name: emoji_lxh_77
+    - name: rock_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2043,7 +2038,7 @@ TextureImporter:
         - {x: 45, y: -30}
         - {x: 45, y: 2}
         - {x: 36, y: 39}
-    - name: emoji_lxh_78
+    - name: rock_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2067,7 +2062,7 @@ TextureImporter:
         - {x: 43, y: -31}
         - {x: 43, y: 24}
         - {x: 22, y: 35}
-    - name: emoji_lxh_79
+    - name: rock_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2106,7 +2101,7 @@ TextureImporter:
         - {x: 37, y: -38}
         - {x: 43, y: -34}
         - {x: 43, y: -21}
-    - name: emoji_lxh_80
+    - name: gargle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2123,7 +2118,7 @@ TextureImporter:
         - {x: 31, y: -45}
         - {x: 37, y: -33}
         - {x: 37, y: 40}
-    - name: emoji_lxh_81
+    - name: gargle_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2142,7 +2137,7 @@ TextureImporter:
         - {x: 34, y: -38}
         - {x: 34, y: 39}
         - {x: 33, y: 40}
-    - name: emoji_lxh_82
+    - name: gargle_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2161,7 +2156,7 @@ TextureImporter:
         - {x: 31, y: -40}
         - {x: 28, y: -28}
         - {x: 36, y: -14}
-    - name: emoji_lxh_83
+    - name: gargle_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2180,7 +2175,7 @@ TextureImporter:
         - {x: 35, y: -27}
         - {x: 35, y: 36}
         - {x: 34, y: 40}
-    - name: emoji_lxh_84
+    - name: gargle_4
       rect:
         serializedVersion: 2
         x: 400
@@ -2199,7 +2194,7 @@ TextureImporter:
         - {x: 32, y: -40}
         - {x: 29, y: -28}
         - {x: 37, y: -14}
-    - name: emoji_lxh_85
+    - name: gargle_5
       rect:
         serializedVersion: 2
         x: 500
@@ -2218,7 +2213,7 @@ TextureImporter:
         - {x: 35, y: -38}
         - {x: 35, y: 39}
         - {x: 34, y: 40}
-    - name: emoji_lxh_86
+    - name: gargle_6
       rect:
         serializedVersion: 2
         x: 600
@@ -2237,7 +2232,7 @@ TextureImporter:
         - {x: 32, y: -40}
         - {x: 29, y: -28}
         - {x: 37, y: -14}
-    - name: emoji_lxh_87
+    - name: gargle_7
       rect:
         serializedVersion: 2
         x: 700
@@ -2256,7 +2251,7 @@ TextureImporter:
         - {x: 35, y: -38}
         - {x: 35, y: 39}
         - {x: 34, y: 40}
-    - name: emoji_lxh_88
+    - name: sleep_7
       rect:
         serializedVersion: 2
         x: 700
@@ -2282,7 +2277,7 @@ TextureImporter:
         - {x: 36, y: 24}
         - {x: 40, y: 26}
         - {x: 40, y: 36}
-    - name: emoji_lxh_89
+    - name: sleep_6
       rect:
         serializedVersion: 2
         x: 600
@@ -2311,7 +2306,7 @@ TextureImporter:
         - {x: 37, y: 26}
         - {x: 37, y: 32}
         - {x: 35, y: 35}
-    - name: emoji_lxh_90
+    - name: sleep_5
       rect:
         serializedVersion: 2
         x: 500
@@ -2340,7 +2335,7 @@ TextureImporter:
         - {x: 40, y: 26}
         - {x: 40, y: 35}
         - {x: 39, y: 36}
-    - name: emoji_lxh_91
+    - name: sleep_4
       rect:
         serializedVersion: 2
         x: 400
@@ -2370,7 +2365,7 @@ TextureImporter:
         - {x: 24, y: 36}
         - {x: 12, y: 33}
         - {x: 11, y: 27}
-    - name: emoji_lxh_92
+    - name: sleep_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2401,7 +2396,7 @@ TextureImporter:
         - {x: 37, y: 25}
         - {x: 37, y: 34}
         - {x: 35, y: 36}
-    - name: emoji_lxh_93
+    - name: sleep_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2429,7 +2424,7 @@ TextureImporter:
         - {x: 30, y: 20}
         - {x: 30, y: 25}
         - {x: 26, y: 32}
-    - name: emoji_lxh_94
+    - name: sleep_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2459,7 +2454,7 @@ TextureImporter:
         - {x: 20, y: 14}
         - {x: 20, y: 19}
         - {x: 15, y: 23}
-    - name: emoji_lxh_95
+    - name: sleep_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2478,7 +2473,7 @@ TextureImporter:
         - {x: 43, y: -38}
         - {x: 43, y: 9}
         - {x: 21, y: 29}
-    - name: emoji_lxh_96
+    - name: idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2498,7 +2493,7 @@ TextureImporter:
         - {x: 46, y: -19}
         - {x: 46, y: 6}
         - {x: 43, y: 10}
-    - name: emoji_lxh_97
+    - name: idle_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2518,7 +2513,7 @@ TextureImporter:
         - {x: 46, y: -19}
         - {x: 46, y: 14}
         - {x: 25, y: 29}
-    - name: emoji_lxh_98
+    - name: idle_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2538,7 +2533,7 @@ TextureImporter:
         - {x: 30, y: -34}
         - {x: 47, y: -9}
         - {x: 47, y: 13}
-    - name: emoji_lxh_99
+    - name: idle_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2556,7 +2551,7 @@ TextureImporter:
         - {x: 47, y: -20}
         - {x: 47, y: 8}
         - {x: 8, y: 33}
-    - name: emoji_lxh_100
+    - name: idle_4
       rect:
         serializedVersion: 2
         x: 400
@@ -2575,7 +2570,7 @@ TextureImporter:
         - {x: 46, y: -14}
         - {x: 46, y: 2}
         - {x: 25, y: 29}
-    - name: emoji_lxh_101
+    - name: idle_5
       rect:
         serializedVersion: 2
         x: 500
@@ -2597,7 +2592,7 @@ TextureImporter:
         - {x: 46, y: -6}
         - {x: 46, y: 6}
         - {x: 25, y: 29}
-    - name: emoji_lxh_102
+    - name: idle_6
       rect:
         serializedVersion: 2
         x: 600
@@ -2619,7 +2614,7 @@ TextureImporter:
         - {x: 48, y: -15}
         - {x: 48, y: 5}
         - {x: 35, y: 15}
-    - name: emoji_lxh_103
+    - name: idle_7
       rect:
         serializedVersion: 2
         x: 700
@@ -2638,7 +2633,7 @@ TextureImporter:
         - {x: 47, y: -7}
         - {x: 47, y: 11}
         - {x: -4, y: 34}
-    - name: emoji_lxh_104
+    - name: pain_7
       rect:
         serializedVersion: 2
         x: 700
@@ -2665,7 +2660,7 @@ TextureImporter:
         - {x: 18, y: 20}
         - {x: 18, y: 29}
         - {x: 11, y: 32}
-    - name: emoji_lxh_105
+    - name: pain_6
       rect:
         serializedVersion: 2
         x: 600
@@ -2693,7 +2688,7 @@ TextureImporter:
         - {x: 5, y: 31}
         - {x: -2, y: 31}
         - {x: -3, y: 28}
-    - name: emoji_lxh_106
+    - name: pain_5
       rect:
         serializedVersion: 2
         x: 500
@@ -2718,7 +2713,7 @@ TextureImporter:
         - {x: 11, y: 23}
         - {x: 11, y: 31}
         - {x: 8, y: 32}
-    - name: emoji_lxh_107
+    - name: pain_4
       rect:
         serializedVersion: 2
         x: 400
@@ -2748,7 +2743,7 @@ TextureImporter:
         - {x: 10, y: 19}
         - {x: 13, y: 23}
         - {x: 13, y: 28}
-    - name: emoji_lxh_108
+    - name: pain_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2781,7 +2776,7 @@ TextureImporter:
         - {x: -22, y: 30}
         - {x: -22, y: 38}
         - {x: -25, y: 39}
-    - name: emoji_lxh_109
+    - name: pain_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2824,7 +2819,7 @@ TextureImporter:
         - {x: -22, y: 29}
         - {x: -22, y: 40}
         - {x: -23, y: 41}
-    - name: emoji_lxh_110
+    - name: pain_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2857,7 +2852,7 @@ TextureImporter:
         - {x: 18, y: 26}
         - {x: 18, y: 31}
         - {x: 15, y: 36}
-    - name: emoji_lxh_111
+    - name: pain_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2890,7 +2885,7 @@ TextureImporter:
         - {x: -18, y: 31}
         - {x: -23, y: 31}
         - {x: -28, y: 29}
-    - name: emoji_lxh_112
+    - name: play_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2910,7 +2905,7 @@ TextureImporter:
         - {x: 39, y: -33}
         - {x: 39, y: -18}
         - {x: 31, y: -12}
-    - name: emoji_lxh_113
+    - name: play_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2931,7 +2926,7 @@ TextureImporter:
         - {x: 44, y: -29}
         - {x: 44, y: 0}
         - {x: 42, y: 6}
-    - name: emoji_lxh_114
+    - name: play_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2956,7 +2951,7 @@ TextureImporter:
         - {x: 31, y: -32}
         - {x: 31, y: -18}
         - {x: 28, y: -12}
-    - name: emoji_lxh_115
+    - name: play_2
       rect:
         serializedVersion: 2
         x: 200
@@ -2982,7 +2977,7 @@ TextureImporter:
         - {x: 36, y: -44}
         - {x: 36, y: -26}
         - {x: 32, y: -23}
-    - name: emoji_lxh_116
+    - name: play_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3002,7 +2997,7 @@ TextureImporter:
         - {x: 50, y: -36}
         - {x: 50, y: -6}
         - {x: 34, y: 8}
-    - name: emoji_lxh_117
+    - name: play_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3029,7 +3024,7 @@ TextureImporter:
         - {x: 31, y: 4}
         - {x: 31, y: 8}
         - {x: 27, y: 11}
-    - name: emoji_lxh_118
+    - name: play_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3066,7 +3061,7 @@ TextureImporter:
         - {x: 3, y: 8}
         - {x: 3, y: 10}
         - {x: 0, y: 13}
-    - name: emoji_lxh_119
+    - name: play_7
       rect:
         serializedVersion: 2
         x: 700
@@ -3082,7 +3077,7 @@ TextureImporter:
         - {x: 27, y: -42}
         - {x: 27, y: 8}
         - {x: 23, y: 13}
-    - name: emoji_lxh_120
+    - name: rose_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3103,7 +3098,7 @@ TextureImporter:
         - {x: 30, y: -42}
         - {x: 35, y: 4}
         - {x: 35, y: 33}
-    - name: emoji_lxh_121
+    - name: rose_1
       rect:
         serializedVersion: 2
         x: 100
@@ -3121,7 +3116,7 @@ TextureImporter:
         - {x: 33, y: -38}
         - {x: 34, y: -24}
         - {x: 34, y: 38}
-    - name: emoji_lxh_122
+    - name: rose_2
       rect:
         serializedVersion: 2
         x: 200
@@ -3139,7 +3134,7 @@ TextureImporter:
         - {x: 33, y: -35}
         - {x: 38, y: 0}
         - {x: 38, y: 37}
-    - name: emoji_lxh_123
+    - name: rose_3
       rect:
         serializedVersion: 2
         x: 300
@@ -3157,7 +3152,7 @@ TextureImporter:
         - {x: 32, y: -41}
         - {x: 32, y: 29}
         - {x: 29, y: 37}
-    - name: emoji_lxh_124
+    - name: rose_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3176,7 +3171,7 @@ TextureImporter:
         - {x: 34, y: -35}
         - {x: 36, y: -17}
         - {x: 36, y: 37}
-    - name: emoji_lxh_125
+    - name: rose_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3195,7 +3190,7 @@ TextureImporter:
         - {x: 34, y: -37}
         - {x: 35, y: -29}
         - {x: 35, y: 36}
-    - name: emoji_lxh_126
+    - name: rose_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3213,7 +3208,7 @@ TextureImporter:
         - {x: 28, y: -44}
         - {x: 36, y: -27}
         - {x: 36, y: 38}
-    - name: emoji_lxh_127
+    - name: rose_7
       rect:
         serializedVersion: 2
         x: 700
@@ -3231,7 +3226,7 @@ TextureImporter:
         - {x: 38, y: -44}
         - {x: 38, y: 30}
         - {x: 36, y: 33}
-    - name: emoji_lxh_128
+    - name: walk_7
       rect:
         serializedVersion: 2
         x: 700
@@ -3250,7 +3245,7 @@ TextureImporter:
         - {x: 41, y: 15}
         - {x: 41, y: 29}
         - {x: -13, y: 34}
-    - name: emoji_lxh_129
+    - name: walk_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3272,7 +3267,7 @@ TextureImporter:
         - {x: 21, y: -37}
         - {x: 34, y: 6}
         - {x: 34, y: 31}
-    - name: emoji_lxh_130
+    - name: walk_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3292,7 +3287,7 @@ TextureImporter:
         - {x: 28, y: -18}
         - {x: 28, y: 39}
         - {x: 25, y: 40}
-    - name: emoji_lxh_131
+    - name: walk_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3314,7 +3309,7 @@ TextureImporter:
         - {x: 31, y: -9}
         - {x: 32, y: 16}
         - {x: 32, y: 37}
-    - name: emoji_lxh_132
+    - name: walk_3
       rect:
         serializedVersion: 2
         x: 300
@@ -3333,7 +3328,7 @@ TextureImporter:
         - {x: 31, y: -32}
         - {x: 33, y: -16}
         - {x: 33, y: 34}
-    - name: emoji_lxh_133
+    - name: walk_2
       rect:
         serializedVersion: 2
         x: 200
@@ -3353,7 +3348,7 @@ TextureImporter:
         - {x: 19, y: -40}
         - {x: 36, y: 19}
         - {x: 36, y: 29}
-    - name: emoji_lxh_134
+    - name: walk_1
       rect:
         serializedVersion: 2
         x: 100
@@ -3373,7 +3368,7 @@ TextureImporter:
         - {x: 25, y: -36}
         - {x: 39, y: 5}
         - {x: 39, y: 33}
-    - name: emoji_lxh_135
+    - name: walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3394,7 +3389,7 @@ TextureImporter:
         - {x: 38, y: -28}
         - {x: 40, y: -5}
         - {x: 40, y: 40}
-    - name: emoji_lxh_136
+    - name: angry_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3429,7 +3424,7 @@ TextureImporter:
         - {x: 27, y: -49}
         - {x: 35, y: -36}
         - {x: 35, y: 38}
-    - name: emoji_lxh_137
+    - name: angry_1
       rect:
         serializedVersion: 2
         x: 100
@@ -3470,7 +3465,7 @@ TextureImporter:
         - {x: -13, y: 31}
         - {x: -9, y: 35}
         - {x: -9, y: 49}
-    - name: emoji_lxh_138
+    - name: angry_2
       rect:
         serializedVersion: 2
         x: 200
@@ -3487,7 +3482,7 @@ TextureImporter:
         - {x: 30, y: -49}
         - {x: 40, y: -33}
         - {x: 40, y: 50}
-    - name: emoji_lxh_139
+    - name: angry_3
       rect:
         serializedVersion: 2
         x: 300
@@ -3526,7 +3521,7 @@ TextureImporter:
         - {x: 13, y: 26}
         - {x: 16, y: 28}
         - {x: 17, y: 30}
-    - name: emoji_lxh_140
+    - name: angry_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3556,7 +3551,7 @@ TextureImporter:
         - {x: 11, y: 37}
         - {x: 17, y: 41}
         - {x: 18, y: 42}
-    - name: emoji_lxh_141
+    - name: angry_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3583,7 +3578,7 @@ TextureImporter:
         - {x: 36, y: -49}
         - {x: 36, y: 32}
         - {x: 31, y: 45}
-    - name: emoji_lxh_142
+    - name: angry_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3619,7 +3614,7 @@ TextureImporter:
         - {x: 37, y: -33}
         - {x: 39, y: 16}
         - {x: 39, y: 50}
-    - name: emoji_lxh_143
+    - name: angry_7
       rect:
         serializedVersion: 2
         x: 700
@@ -3640,7 +3635,7 @@ TextureImporter:
         - {x: 18, y: 42}
         - {x: 18, y: 50}
         - {x: 2, y: 50}
-    - name: emoji_lxh_144
+    - name: bleeding_7
       rect:
         serializedVersion: 2
         x: 700
@@ -3674,7 +3669,7 @@ TextureImporter:
         - {x: 3, y: 38}
         - {x: 3, y: 40}
         - {x: 1, y: 41}
-    - name: emoji_lxh_145
+    - name: bleeding_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3700,7 +3695,7 @@ TextureImporter:
         - {x: 46, y: -34}
         - {x: 46, y: 27}
         - {x: 41, y: 36}
-    - name: emoji_lxh_146
+    - name: bleeding_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3736,7 +3731,7 @@ TextureImporter:
         - {x: -24, y: 27}
         - {x: -24, y: 30}
         - {x: -29, y: 41}
-    - name: emoji_lxh_147
+    - name: bleeding_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3752,7 +3747,7 @@ TextureImporter:
         - {x: 39, y: 33}
         - {x: -39, y: 33}
         - {x: -39, y: -34}
-    - name: emoji_lxh_148
+    - name: bleeding_3
       rect:
         serializedVersion: 2
         x: 300
@@ -3777,7 +3772,7 @@ TextureImporter:
         - {x: 45, y: -7}
         - {x: 45, y: 5}
         - {x: 44, y: 7}
-    - name: emoji_lxh_149
+    - name: bleeding_2
       rect:
         serializedVersion: 2
         x: 200
@@ -3806,7 +3801,7 @@ TextureImporter:
         - {x: 10, y: 29}
         - {x: 10, y: 37}
         - {x: 8, y: 38}
-    - name: emoji_lxh_150
+    - name: bleeding_1
       rect:
         serializedVersion: 2
         x: 100
@@ -3826,7 +3821,7 @@ TextureImporter:
         - {x: 41, y: -33}
         - {x: 41, y: 18}
         - {x: 40, y: 19}
-    - name: emoji_lxh_151
+    - name: bleeding_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3847,7 +3842,7 @@ TextureImporter:
         - {x: 40, y: -28}
         - {x: 40, y: -8}
         - {x: 32, y: 12}
-    - name: emoji_lxh_152
+    - name: nurturing_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3867,7 +3862,7 @@ TextureImporter:
         - {x: 48, y: -46}
         - {x: 48, y: 24}
         - {x: 46, y: 41}
-    - name: emoji_lxh_153
+    - name: nurturing_1
       rect:
         serializedVersion: 2
         x: 100
@@ -3893,7 +3888,7 @@ TextureImporter:
         - {x: 39, y: 43}
         - {x: -21, y: 43}
         - {x: -50, y: 0}
-    - name: emoji_lxh_154
+    - name: nurturing_2
       rect:
         serializedVersion: 2
         x: 200
@@ -3912,7 +3907,7 @@ TextureImporter:
         - {x: 48, y: -43}
         - {x: 48, y: 37}
         - {x: 42, y: 40}
-    - name: emoji_lxh_155
+    - name: nurturing_3
       rect:
         serializedVersion: 2
         x: 300
@@ -3931,7 +3926,7 @@ TextureImporter:
         - {x: 32, y: -46}
         - {x: 48, y: -43}
         - {x: 48, y: 43}
-    - name: emoji_lxh_156
+    - name: nurturing_4
       rect:
         serializedVersion: 2
         x: 400
@@ -3949,7 +3944,7 @@ TextureImporter:
         - {x: 49, y: -50}
         - {x: 49, y: 40}
         - {x: 26, y: 43}
-    - name: emoji_lxh_157
+    - name: nurturing_5
       rect:
         serializedVersion: 2
         x: 500
@@ -3971,7 +3966,7 @@ TextureImporter:
         - {x: 48, y: -43}
         - {x: 48, y: -21}
         - {x: 47, y: -14}
-    - name: emoji_lxh_158
+    - name: nurturing_6
       rect:
         serializedVersion: 2
         x: 600
@@ -3997,7 +3992,7 @@ TextureImporter:
         - {x: 49, y: -43}
         - {x: 49, y: 43}
         - {x: 40, y: 45}
-    - name: emoji_lxh_159
+    - name: nurturing_7
       rect:
         serializedVersion: 2
         x: 700
@@ -4015,203 +4010,6 @@ TextureImporter:
         - {x: 45, y: 45}
         - {x: -43, y: 45}
         - {x: -50, y: -9}
-    - name: emoji_lxh_160
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -23, y: 33}
-        - {x: -50, y: 26}
-        - {x: -50, y: -50}
-        - {x: 19, y: -50}
-        - {x: 50, y: -45}
-        - {x: 50, y: -14}
-        - {x: 22, y: 33}
-      - - {x: -50, y: -45}
-        - {x: -47, y: -44}
-        - {x: -47, y: -40}
-        - {x: -49, y: -38}
-        - {x: -50, y: -38}
-    - name: emoji_lxh_161
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 28, y: -38}
-        - {x: 50, y: -37}
-        - {x: 50, y: -31}
-        - {x: 30, y: -31}
-        - {x: 5, y: -32}
-        - {x: 10, y: -31}
-        - {x: 36, y: -4}
-        - {x: 18, y: 33}
-        - {x: -23, y: 33}
-        - {x: -50, y: 17}
-        - {x: -50, y: -50}
-        - {x: 34, y: -50}
-        - {x: 50, y: -49}
-        - {x: 50, y: -38}
-    - name: emoji_lxh_162
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -21, y: 33}
-        - {x: -50, y: 22}
-        - {x: -50, y: -50}
-        - {x: 13, y: -50}
-        - {x: 50, y: -47}
-        - {x: 50, y: -22}
-        - {x: 25, y: 33}
-      - - {x: -50, y: -45}
-        - {x: -47, y: -44}
-        - {x: -47, y: -40}
-        - {x: -49, y: -38}
-        - {x: -50, y: -38}
-    - name: emoji_lxh_163
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 50, y: -50}
-        - {x: 50, y: 33}
-        - {x: -36, y: 33}
-        - {x: -50, y: 29}
-        - {x: -50, y: -50}
-    - name: emoji_lxh_164
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 23, y: -40}
-        - {x: 4, y: -40}
-        - {x: 9, y: -38}
-        - {x: 10, y: -34}
-        - {x: 10, y: -25}
-        - {x: 9, y: -24}
-        - {x: 9, y: -19}
-        - {x: 9, y: -21}
-        - {x: 10, y: -22}
-        - {x: 10, y: -29}
-        - {x: 11, y: -36}
-        - {x: 15, y: -40}
-        - {x: 21, y: -40}
-        - {x: 23, y: -39}
-        - {x: 24, y: -37}
-        - {x: 50, y: -37}
-        - {x: 50, y: -30}
-        - {x: 18, y: 28}
-        - {x: -2, y: 33}
-        - {x: -25, y: 33}
-        - {x: -50, y: 15}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: -38}
-        - {x: 27, y: -37}
-    - name: emoji_lxh_165
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: 0}
-        - {x: -45, y: -3}
-        - {x: -50, y: -19}
-        - {x: -50, y: -44}
-        - {x: -47, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: -16}
-        - {x: 34, y: 33}
-        - {x: -29, y: 33}
-        - {x: -50, y: 11}
-    - name: emoji_lxh_166
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 9, y: 33}
-        - {x: -31, y: 33}
-        - {x: -50, y: 13}
-        - {x: -50, y: -50}
-        - {x: 26, y: -50}
-        - {x: 50, y: -46}
-        - {x: 50, y: 0}
-        - {x: 40, y: 23}
-      - - {x: 47, y: 4}
-        - {x: 49, y: 2}
-        - {x: 50, y: 2}
-        - {x: 50, y: 8}
-        - {x: 47, y: 7}
-    - name: emoji_lxh_167
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 23, y: -40}
-        - {x: 5, y: -40}
-        - {x: 9, y: -38}
-        - {x: 12, y: -29}
-        - {x: 11, y: -35}
-        - {x: 15, y: -40}
-        - {x: 17, y: -40}
-        - {x: 19, y: -39}
-        - {x: 20, y: -37}
-        - {x: 50, y: -37}
-        - {x: 50, y: -27}
-        - {x: 28, y: 33}
-        - {x: -24, y: 33}
-        - {x: -50, y: 14}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: -38}
-        - {x: 27, y: -37}
     outline: []
   spritePackingTag: 
   userData: 

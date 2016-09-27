@@ -53,7 +53,8 @@ public class InlieText : Text {
             m_spriteGraphic = GetComponentInChildren<SpriteGraphic>();
         if (m_spriteCanvasRenderer == null)
             m_spriteCanvasRenderer = m_spriteGraphic.GetComponentInChildren<CanvasRenderer>();
-        m_spriteAsset = m_spriteGraphic.m_spriteAsset;
+        if (m_spriteGraphic != null)
+            m_spriteAsset = m_spriteGraphic.m_spriteAsset;
     }
 
     /// <summary>
@@ -69,17 +70,26 @@ public class InlieText : Text {
 
         foreach (Match match in m_spriteTagRegex.Matches(text))
         {
+            if (m_spriteAsset == null)
+                return;
+
             #region 解析动画标签
-            if (match.Groups[1].Value.Contains("#")
-                && match.Groups[1].Value != "#")
+            List<string> tempListName = new List<string>();
+            for (int i = 0; i < m_spriteAsset.listSpriteInfor.Count; i++)
             {
-                string[] arrayNames = match.Groups[1].Value.Trim().Split('#');
-                Debug.Log(arrayNames.Length);
-                SpriteTagInfor[] tempArrayTag = new SpriteTagInfor[arrayNames.Length];
+               // Debug.Log((m_spriteAsset.listSpriteInfor[i].name));
+                if (m_spriteAsset.listSpriteInfor[i].name.Contains(match.Groups[1].Value))
+                {
+                    tempListName.Add(m_spriteAsset.listSpriteInfor[i].name);
+                }
+            }
+            if (tempListName.Count > 0)
+            {
+                SpriteTagInfor[] tempArrayTag = new SpriteTagInfor[tempListName.Count];
                 for (int i = 0; i < tempArrayTag.Length; i++)
                 {
                     tempArrayTag[i] = new SpriteTagInfor();
-                    tempArrayTag[i].name = arrayNames[i];
+                    tempArrayTag[i].name = tempListName[i];
                     tempArrayTag[i].index = match.Index;
                     tempArrayTag[i].size = new Vector2(float.Parse(match.Groups[2].Value) * float.Parse(match.Groups[3].Value), float.Parse(match.Groups[2].Value));
                     tempArrayTag[i].Length = match.Length;
@@ -89,18 +99,6 @@ public class InlieText : Text {
                 m_AnimIndex.Add(listTagInfor.Count - 1);
             }
             #endregion
-            else
-            {
-                SpriteTagInfor tempSpriteTag = new SpriteTagInfor();
-                tempSpriteTag.name = match.Groups[1].Value;
-                tempSpriteTag.index = match.Index;
-                tempSpriteTag.size = new Vector2(float.Parse(match.Groups[2].Value) * float.Parse(match.Groups[3].Value), float.Parse(match.Groups[2].Value));
-                tempSpriteTag.Length = match.Length;
-                listTagInfor.Add(tempSpriteTag);
-
-                m_AnimSpiteTag.Add(listTagInfor.Count - 1, new SpriteTagInfor[] { tempSpriteTag });
-                m_AnimIndex.Add(listTagInfor.Count - 1);
-            }
         }
         Vector2 extents = rectTransform.rect.size;
     }
@@ -241,7 +239,7 @@ public class InlieText : Text {
             for (int j = 0; j < m_spriteAsset.listSpriteInfor.Count; j++)
             {
                 //通过标签的名称去索引spriteAsset里所对应的sprite的名称
-                if (listTagInfor[i].name == m_spriteAsset.listSpriteInfor[j].ID.ToString())
+                if (listTagInfor[i].name == m_spriteAsset.listSpriteInfor[j].name)
                     spriteRect = m_spriteAsset.listSpriteInfor[j].rect;
             }
             Vector2 texSize = new Vector2(m_spriteAsset.texSource.width, m_spriteAsset.texSource.height);
@@ -277,7 +275,7 @@ public class InlieText : Text {
                     for (int m = 0; m < m_spriteAsset.listSpriteInfor.Count; m++)
                     {
                         //通过标签的名称去索引spriteAsset里所对应的sprite的名称
-                        if (tempTagInfor[j].name == m_spriteAsset.listSpriteInfor[m].ID.ToString())
+                        if (tempTagInfor[j].name == m_spriteAsset.listSpriteInfor[m].name)
                             newSpriteRect = m_spriteAsset.listSpriteInfor[m].rect;
                     }
                     Vector2 newTexSize = new Vector2(m_spriteAsset.texSource.width, m_spriteAsset.texSource.height);
