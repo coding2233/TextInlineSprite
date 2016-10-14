@@ -55,6 +55,9 @@ public class InlieText : Text {
             m_spriteCanvasRenderer = m_spriteGraphic.GetComponentInChildren<CanvasRenderer>();
         if (m_spriteGraphic != null)
             m_spriteAsset = m_spriteGraphic.m_spriteAsset;
+
+        //启动的是 更新顶点
+        SetVerticesDirty();
     }
 
     /// <summary>
@@ -221,7 +224,7 @@ public class InlieText : Text {
             //}
 
             InlineSpriteInfor tempSprite = new InlineSpriteInfor();
-
+            
             //获取表情的第一个位置,则计算他的位置为quad占位的第四个点   顶点绘制顺序:       
             //                                                                              0    1
             //                                                                              3    2
@@ -262,6 +265,7 @@ public class InlieText : Text {
                 for (int j = 0; j < tempTagInfor.Length; j++)
                 {
                     tempSpriteInfor[j] =new InlineSpriteInfor();
+                    
                     tempSpriteInfor[j].textpos = verts[((tempTagInfor[j].index + 1) * 4) - 1].position;
                     //设置图片的位置
                     tempSpriteInfor[j].vertices = new Vector3[4];

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-public class ChattingInlineSprite : MonoBehaviour {
+public class ChattingInlineSprite_new : MonoBehaviour {
 
     /// <summary>
     /// 用正则取<#name>
@@ -12,7 +12,6 @@ public class ChattingInlineSprite : MonoBehaviour {
     private static readonly Regex m_inputTagRegex =
           new Regex(@"<#(.+?)>", RegexOptions.Singleline);
 
-    public Text scrollViewText;
     private InlineSpriteManager inlineSpriteManager;
     private RectTransform Content;
     public InputField inputText;
@@ -64,18 +63,18 @@ public class ChattingInlineSprite : MonoBehaviour {
         GameObject tempChatItem = Instantiate(goprefab) as GameObject;
         tempChatItem.transform.parent = goContent.transform;
         tempChatItem.transform.localScale = Vector3.one;
-        InlieText tempChatText = tempChatItem.transform.FindChild("Text").GetComponent<InlieText>();
-
+        InlieSpriteText tempChatText = tempChatItem.transform.FindChild("Text").GetComponent<InlieSpriteText>();
+       
         #region 解析输入表情正则
-        string _TempInputText = "";
+        string _TempInputText ="";
         int _TempMatchIndex = 0;
         foreach (Match match in m_inputTagRegex.Matches(inputText.text.Trim()))
         {
-            _TempInputText += inputText.text.Trim().Substring(_TempMatchIndex, match.Index - _TempMatchIndex);
-            _TempInputText += "<quad name=" + match.Groups[1].Value + " size=56 width=1" + " />";
-            _TempMatchIndex = match.Index + match.Length;
+            _TempInputText += inputText.text.Trim().Substring(_TempMatchIndex, match.Index- _TempMatchIndex);
+            _TempInputText+= "<quad name=" + match.Groups[1].Value + " size=56 width=1" + " />";
+            _TempMatchIndex= match.Index + match.Length;
         }
-        _TempInputText += inputText.text.Trim().Substring(_TempMatchIndex, inputText.text.Trim().Length - _TempMatchIndex);
+        _TempInputText+= inputText.text.Trim().Substring(_TempMatchIndex, inputText.text.Trim().Length - _TempMatchIndex);
         #endregion
 
         tempChatText.text = _TempInputText;
@@ -117,7 +116,7 @@ public class ChattingInlineSprite : MonoBehaviour {
         GameObject tempChatItem = Instantiate(goprefab_left) as GameObject;
         tempChatItem.transform.parent = goContent.transform;
         tempChatItem.transform.localScale = Vector3.one;
-        InlieText tempChatText = tempChatItem.transform.FindChild("Text").GetComponent<InlieText>();
+        InlieSpriteText tempChatText = tempChatItem.transform.FindChild("Text").GetComponent<InlieSpriteText>();
         tempChatText.text = strTalk;
         if (tempChatText.preferredWidth + 20.0f < 105.0f)
         {
@@ -157,7 +156,7 @@ public class ChattingInlineSprite : MonoBehaviour {
     void ClickEmojiBtns(GameObject go)
     {
         Debug.Log(go.name);
-        //   inputText.text += "<quad name=" + go.name +" size=56 width=1" + " />";
+       // inputText.text += "<quad name=" + go.name +" size=56 width=1" + " />";
         inputText.text += "<#" + go.name + ">";
     }
 
