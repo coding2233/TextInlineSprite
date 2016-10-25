@@ -2,8 +2,12 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System.Text;
 
-public class InlieSpriteText : Text {
+public class InlieSpriteText : Text, IPointerClickHandler
+{
 
     /// <summary>
     /// 用正则取标签属性 名称-大小-宽度比例
@@ -64,20 +68,25 @@ public class InlieSpriteText : Text {
     }
 
 
-   
+
 
 
     /// <summary>
     /// 在设置顶点时调用
     /// </summary>
+    //解析超链接
+    string m_OutputText;
     public override void SetVerticesDirty()
     {
         base.SetVerticesDirty();
-        
-      //  m_AnimIndex = new List<int>();
+
+        //解析超链接
+        m_OutputText = GetOutputText();
+
+        //  m_AnimIndex = new List<int>();
         m_AnimSpiteTag = new List<SpriteTagInfor[]>();
 
-        foreach (Match match in m_spriteTagRegex.Matches(text))
+        foreach (Match match in m_spriteTagRegex.Matches(m_OutputText))
         {
             if (m_spriteAsset == null)
                 return;
@@ -129,7 +138,7 @@ public class InlieSpriteText : Text {
         Vector2 extents = rectTransform.rect.size;
 
         var settings = GetGenerationSettings(extents);
-        cachedTextGenerator.Populate(text, settings);
+        cachedTextGenerator.Populate(m_OutputText, settings);
 
         Rect inputRect = rectTransform.rect;
 
@@ -208,6 +217,45 @@ public class InlieSpriteText : Text {
         if(m_SGManager!=null)
             m_SGManager.UpdateSpriteInfor();
         //DrawSprite();
+
+        #region 处理超链接的包围盒
+        // 处理超链接包围框
+        UIVertex vert = new UIVertex();
+        foreach (var hrefInfo in m_HrefInfos)
+        {
+            hrefInfo.boxes.Clear();
+            if (hrefInfo.startIndex >= toFill.currentVertCount)
+            {
+                continue;
+            }
+
+            // 将超链接里面的文本顶点索引坐标加入到包围框
+            toFill.PopulateUIVertex(ref vert, hrefInfo.startIndex);
+            var pos = vert.position;
+            var bounds = new Bounds(pos, Vector3.zero);
+            for (int i = hrefInfo.startIndex, m = hrefInfo.endIndex; i < m; i++)
+            {
+                if (i >= toFill.currentVertCount)
+                {
+                    break;
+                }
+
+                toFill.PopulateUIVertex(ref vert, i);
+                pos = vert.position;
+                if (pos.x < bounds.min.x) // 换行重新添加包围框
+                {
+                    hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
+                    bounds = new Bounds(pos, Vector3.zero);
+                }
+                else
+                {
+                    bounds.Encapsulate(pos); // 扩展包围框
+                }
+            }
+            hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
+        }
+        #endregion
+
     }
 
 
@@ -277,5 +325,110 @@ public class InlieSpriteText : Text {
         CalcQuadTag(_OldVerts);
     }
     #endregion
+
+
+
+    #region 超链接
+    /// <summary>
+    /// 超链接信息列表
+    /// </summary>
+    private readonly List<HrefInfo> m_HrefInfos = new List<HrefInfo>();
+
+    /// <summary>
+    /// 文本构造器
+    /// </summary>
+    private static readonly StringBuilder s_TextBuilder = new StringBuilder();
+
+    /// <summary>
+    /// 超链接正则
+    /// </summary>
+    private static readonly Regex s_HrefRegex =
+        new Regex(@"<a href=([^>\n\s]+)>(.*?)(</a>)", RegexOptions.Singleline);
+
+    [System.Serializable]
+    public class HrefClickEvent : UnityEvent<string> { }
+
+    [SerializeField]
+    private HrefClickEvent m_onHrefClick = new HrefClickEvent();
+
+    /// <summary>
+    /// 超链接点击事件
+    /// </summary>
+    public HrefClickEvent onHrefClick
+    {
+        get { return m_onHrefClick; }
+        set { m_onHrefClick = value; }
+    }
+
+    /// <summary>
+    /// 获取超链接解析后的最后输出文本
+    /// </summary>
+    /// <returns></returns>
+    protected string GetOutputText()
+    {
+        s_TextBuilder.Length = 0;
+        m_HrefInfos.Clear();
+        var indexText = 0;
+        foreach (Match match in s_HrefRegex.Matches(text))
+        {
+            s_TextBuilder.Append(text.Substring(indexText, match.Index - indexText));
+            s_TextBuilder.Append("<color=blue>");  // 超链接颜色
+
+            var group = match.Groups[1];
+            var hrefInfo = new HrefInfo
+            {
+                startIndex = s_TextBuilder.Length * 4, // 超链接里的文本起始顶点索引
+                endIndex = (s_TextBuilder.Length + match.Groups[2].Length - 1) * 4 + 3,
+                name = group.Value
+            };
+            m_HrefInfos.Add(hrefInfo);
+
+            s_TextBuilder.Append(match.Groups[2].Value);
+            s_TextBuilder.Append("</color>");
+            indexText = match.Index + match.Length;
+        }
+        s_TextBuilder.Append(text.Substring(indexText, text.Length - indexText));
+        return s_TextBuilder.ToString();
+    }
+
+    /// <summary>
+    /// 点击事件检测是否点击到超链接文本
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Vector2 lp;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransform, eventData.position, eventData.pressEventCamera, out lp);
+
+        foreach (var hrefInfo in m_HrefInfos)
+        {
+            var boxes = hrefInfo.boxes;
+            for (var i = 0; i < boxes.Count; ++i)
+            {
+                if (boxes[i].Contains(lp))
+                {
+                    m_onHrefClick.Invoke(hrefInfo.name);
+                    return;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 超链接信息类
+    /// </summary>
+    private class HrefInfo
+    {
+        public int startIndex;
+
+        public int endIndex;
+
+        public string name;
+
+        public readonly List<Rect> boxes = new List<Rect>();
+    }
+    #endregion
+
 
 }
