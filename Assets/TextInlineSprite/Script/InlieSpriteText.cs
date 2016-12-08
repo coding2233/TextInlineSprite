@@ -256,7 +256,52 @@ public class InlieSpriteText : Text, IPointerClickHandler
         }
         #endregion
 
+        #region 处理超链接的下划线--拉伸实现
+        TextGenerator _UnderlineText = new TextGenerator();
+        _UnderlineText.Populate("_", settings);
+        IList<UIVertex> _TUT = _UnderlineText.verts;
+
+        foreach (var hrefInfo in m_HrefInfos)
+        {
+            if (hrefInfo.startIndex >= toFill.currentVertCount)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < hrefInfo.boxes.Count; i++)
+            {
+                Vector3 _StartBoxPos = new Vector3(hrefInfo.boxes[i].x, hrefInfo.boxes[i].y, 0.0f);
+                Vector3 _EndBoxPos = _StartBoxPos + new Vector3(hrefInfo.boxes[i].width, 0.0f, 0.0f);
+                AddUnderlineQuad(toFill, _TUT, _StartBoxPos, _EndBoxPos);
+            }
+
+        }
+        #endregion
+
     }
+
+    #region 添加下划线
+    void AddUnderlineQuad(VertexHelper _VToFill, IList<UIVertex> _VTUT, Vector3 _VStartPos, Vector3 _VEndPos)
+    {
+        Vector3[] _TUnderlinePos = new Vector3[4];
+        _TUnderlinePos[0] = _VStartPos;
+        _TUnderlinePos[1] = _VEndPos;
+        _TUnderlinePos[2] = _VEndPos + new Vector3(0, fontSize * 0.2f, 0);
+        _TUnderlinePos[3] = _VStartPos + new Vector3(0, fontSize * 0.2f, 0);
+
+        for (int i = 0; i < 4; ++i)
+        {
+            int tempVertsIndex = i & 3;
+            m_TempVerts[tempVertsIndex] = _VTUT[i % 4];
+            m_TempVerts[tempVertsIndex].color = Color.blue;
+
+            m_TempVerts[tempVertsIndex].position = _TUnderlinePos[i];
+
+            if (tempVertsIndex == 3)
+                _VToFill.AddUIVertexQuad(m_TempVerts);
+        }
+    }
+    #endregion
 
 
     private IList<UIVertex> _OldVerts;

@@ -60,8 +60,13 @@ public class InlieText : Text, IPointerClickHandler
         if (m_spriteGraphic != null)
             m_spriteAsset = m_spriteGraphic.m_spriteAsset;
 
+     
+
+
         //启动的是 更新顶点
         SetVerticesDirty();
+
+       
     }
 
     /// <summary>
@@ -75,7 +80,6 @@ public class InlieText : Text, IPointerClickHandler
 
         //解析超链接
         m_OutputText = GetOutputText();
-
 
         //解析标签属性
         listTagInfor = new List<SpriteTagInfor>();
@@ -116,7 +120,7 @@ public class InlieText : Text, IPointerClickHandler
         }
         Vector2 extents = rectTransform.rect.size;
     }
-
+    
     readonly UIVertex[] m_TempVerts = new UIVertex[4];
     /// <summary>
     /// 绘制模型
@@ -128,7 +132,7 @@ public class InlieText : Text, IPointerClickHandler
 
         if (font == null)
             return;
-
+       
         // We don't care if we the font Texture changes while we are doing our Update.
         // The end result of cachedTextGenerator will be valid for this instance.
         // Otherwise we can get issues like Case 619238.
@@ -155,6 +159,8 @@ public class InlieText : Text, IPointerClickHandler
         float unitsPerPixel = 1 / pixelsPerUnit;
         //Last 4 verts are always a new line...
         int vertCount = verts.Count - 4;
+
+        
 
         toFill.Clear();
 
@@ -196,7 +202,7 @@ public class InlieText : Text, IPointerClickHandler
                     toFill.AddUIVertexQuad(m_TempVerts);
             }
         }
-
+            
         //计算标签 计算偏移值后 再计算标签的值
         List<UIVertex> vertsTemp = new List<UIVertex>();
         for (int i = 0; i < vertCount; i++)
@@ -211,7 +217,7 @@ public class InlieText : Text, IPointerClickHandler
         
         //绘制图片
         DrawSprite();
-
+        
         #region 处理超链接的包围盒
         // 处理超链接包围框
         UIVertex vert = new UIVertex();
@@ -249,7 +255,52 @@ public class InlieText : Text, IPointerClickHandler
             hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
         }
         #endregion
+
+        #region 处理超链接的下划线--拉伸实现
+        TextGenerator _UnderlineText = new TextGenerator();
+        _UnderlineText.Populate("_", settings);
+        IList<UIVertex> _TUT = _UnderlineText.verts;
+
+        foreach (var hrefInfo in m_HrefInfos)
+        {
+            if (hrefInfo.startIndex >= toFill.currentVertCount)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < hrefInfo.boxes.Count; i++)
+            {
+                Vector3 _StartBoxPos = new Vector3(hrefInfo.boxes[i].x, hrefInfo.boxes[i].y, 0.0f);
+                Vector3 _EndBoxPos = _StartBoxPos+ new Vector3(hrefInfo.boxes[i].width, 0.0f, 0.0f);
+                AddUnderlineQuad(toFill, _TUT, _StartBoxPos, _EndBoxPos);
+            }
+
+        }
+        #endregion
     }
+
+    #region 添加下划线
+    void AddUnderlineQuad(VertexHelper _VToFill, IList<UIVertex> _VTUT, Vector3 _VStartPos, Vector3 _VEndPos)
+    {
+        Vector3[] _TUnderlinePos = new Vector3[4];
+        _TUnderlinePos[0] = _VStartPos;
+        _TUnderlinePos[1] = _VEndPos;
+        _TUnderlinePos[2] = _VEndPos + new Vector3(0, fontSize * 0.2f, 0);
+        _TUnderlinePos[3] = _VStartPos + new Vector3(0, fontSize * 0.2f, 0);
+
+        for (int i = 0; i < 4; ++i)
+        {
+            int tempVertsIndex = i & 3;
+            m_TempVerts[tempVertsIndex] = _VTUT[i % 4];
+            m_TempVerts[tempVertsIndex].color = Color.blue;
+
+            m_TempVerts[tempVertsIndex].position = _TUnderlinePos[i];
+
+            if (tempVertsIndex == 3)
+                _VToFill.AddUIVertexQuad(m_TempVerts);
+        }
+    }
+    #endregion
 
     /// <summary>
     /// 解析quad标签  主要清除quad乱码 获取表情的位置
