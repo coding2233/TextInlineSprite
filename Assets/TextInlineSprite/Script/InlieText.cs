@@ -159,26 +159,24 @@ public class InlieText : Text, IPointerClickHandler
         float unitsPerPixel = 1 / pixelsPerUnit;
         //Last 4 verts are always a new line...
         int vertCount = verts.Count - 4;
-
         
-
         toFill.Clear();
 
         //清楚乱码
         for (int i = 0; i < listTagInfor.Count; i++)
         {
             //UGUIText不支持<quad/>标签，表现为乱码，我这里将他的uv全设置为0,清除乱码
-            for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 +4; m++)
+            for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 + listTagInfor[i].Length*4; m++)
             {
                 UIVertex tempVertex = verts[m];
                 tempVertex.uv0 = Vector2.zero;
                 verts[m] = tempVertex;
             }
         }
-            //计算标签   其实应该计算偏移值后 再计算标签的值    算了 后面再继续改吧
-            //  CalcQuadTag(verts);
+        //计算标签   其实应该计算偏移值后 再计算标签的值    算了 后面再继续改吧
+        //     CalcQuadTag(verts);
 
-            if (roundingOffset != Vector2.zero)
+        if (roundingOffset != Vector2.zero)
         {
             for (int i = 0; i < vertCount; ++i)
             {
@@ -211,7 +209,7 @@ public class InlieText : Text, IPointerClickHandler
             toFill.PopulateUIVertex(ref tempVer,i);
             vertsTemp.Add(tempVer);
         }
-        CalcQuadTag(vertsTemp);
+       CalcQuadTag(vertsTemp);
 
         m_DisableFontTextureRebuiltCallback = false;
         
@@ -308,27 +306,30 @@ public class InlieText : Text, IPointerClickHandler
     /// <param name="verts"></param>
     void CalcQuadTag(IList<UIVertex> verts)
     {
-
         m_AnimSpriteInfor = new Dictionary<int, InlineSpriteInfor[]>();
 
         //通过标签信息来设置需要绘制的图片的信息
         listSprite = new List<InlineSpriteInfor>();
         for (int i = 0; i < listTagInfor.Count; i++)
         {
-            ////UGUIText不支持<quad/>标签，表现为乱码，我这里将他的uv全设置为0,清除乱码
-            //for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 + 18*4; m++)
+            //UGUIText不支持<quad/>标签，表现为乱码，我这里将他的uv全设置为0,清除乱码
+            //for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 + listTagInfor[i].Length * 4; m++)
             //{
             //    UIVertex tempVertex = verts[m];
+            //    Debug.Log(listTagInfor[i].index + "  " + m + "  " +tempVertex.position + "  " + tempVertex.tangent+ "   "+tempVertex.uv0);
+
             //    tempVertex.uv0 = Vector2.zero;
             //    verts[m] = tempVertex;
             //}
 
             InlineSpriteInfor tempSprite = new InlineSpriteInfor();
-            
+
             //获取表情的第一个位置,则计算他的位置为quad占位的第四个点   顶点绘制顺序:       
             //                                                                              0    1
             //                                                                              3    2
-            tempSprite.textpos = verts[((listTagInfor[i].index + 1) * 4) - 1].position;
+            //tempSprite.textpos = verts[((listTagInfor[i].index + 1) * 4) - 1].position;
+            tempSprite.textpos = verts[((listTagInfor[i].index - 1) * 4) +2].position;
+
 
             //设置图片的位置
             tempSprite.vertices = new Vector3[4];

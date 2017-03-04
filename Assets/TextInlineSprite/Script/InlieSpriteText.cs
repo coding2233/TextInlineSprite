@@ -165,7 +165,7 @@ public class InlieSpriteText : Text, IPointerClickHandler
             if (m_AnimSpiteTag[i].Length > 0)
             {
                 //UGUIText不支持<quad/>标签，表现为乱码，我这里将他的uv全设置为0,清除乱码
-                for (int m = m_AnimSpiteTag[i][0].index * 4; m < m_AnimSpiteTag[i][0].index * 4 + 4; m++)
+                for (int m = m_AnimSpiteTag[i][0].index * 4; m < m_AnimSpiteTag[i][0].index * 4 + m_AnimSpiteTag[i][0].Length*4; m++)
                 {
                     UIVertex tempVertex = verts[m];
                     tempVertex.uv0 = Vector2.zero;
