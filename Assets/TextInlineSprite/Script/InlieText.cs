@@ -60,13 +60,9 @@ public class InlieText : Text, IPointerClickHandler
         if (m_spriteGraphic != null)
             m_spriteAsset = m_spriteGraphic.m_spriteAsset;
 
-     
-
-
         //启动的是 更新顶点
         SetVerticesDirty();
 
-       
     }
 
     /// <summary>
@@ -329,7 +325,6 @@ public class InlieText : Text, IPointerClickHandler
             //                                                                              3    2
             //tempSprite.textpos = verts[((listTagInfor[i].index + 1) * 4) - 1].position;
             tempSprite.textpos = verts[((listTagInfor[i].index - 1) * 4) +2].position;
-
 
             //设置图片的位置
             tempSprite.vertices = new Vector3[4];

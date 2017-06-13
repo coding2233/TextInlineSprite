@@ -20,7 +20,7 @@ public class SpriteInfor
     /// <summary>
     /// ID
     /// </summary>
-    public int ID;
+    public int  ID;
     /// <summary>
     /// 名称
     /// </summary>
@@ -37,4 +37,8 @@ public class SpriteInfor
     /// 精灵
     /// </summary>
     public Sprite sprite;
+
+    public float size;
+    public float width;
+    public string tag;
 }
