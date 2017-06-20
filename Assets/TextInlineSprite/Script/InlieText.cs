@@ -162,7 +162,7 @@ public class InlieText : Text, IPointerClickHandler
         for (int i = 0; i < listTagInfor.Count; i++)
         {
             //UGUIText不支持<quad/>标签，表现为乱码，我这里将他的uv全设置为0,清除乱码
-            for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 + listTagInfor[i].Length*4; m++)
+            for (int m = listTagInfor[i].index * 4; m < listTagInfor[i].index * 4 ; m++)
             {
                 UIVertex tempVertex = verts[m];
                 tempVertex.uv0 = Vector2.zero;
@@ -452,6 +452,8 @@ public class InlieText : Text, IPointerClickHandler
     int iIndex = 0;
     void Update()
     {
+        if( m_AnimSpriteInfor==null||m_AnimSpriteInfor.Count <= 0)
+            return;
         fTime += Time.deltaTime;
         if (fTime >= 0.1f)
         {

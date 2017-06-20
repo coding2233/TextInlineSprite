@@ -12,6 +12,9 @@ public class SpriteAsset : ScriptableObject
     /// 所有sprite信息 SpriteAssetInfor类为具体的信息类
     /// </summary>
     public List<SpriteInfor> listSpriteInfor;
+
+    public List<SpriteInforGroup> listSpriteGroup;
+
 }
 
 [System.Serializable]
@@ -37,8 +40,23 @@ public class SpriteInfor
     /// 精灵
     /// </summary>
     public Sprite sprite;
-
+    /// <summary>
+    /// 表情大小
+    /// </summary>
     public float size;
+    /// <summary>
+    /// 宽度比例0-1
+    /// </summary>
     public float width;
+    /// <summary>
+    /// 标签
+    /// </summary>
     public string tag;
+}
+
+[System.Serializable]
+public class SpriteInforGroup
+{
+    public string tag;
+    public List<SpriteInfor> listSpriteInfor;
 }

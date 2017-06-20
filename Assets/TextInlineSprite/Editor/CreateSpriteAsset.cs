@@ -30,6 +30,7 @@ public static class CreateSpriteAsset
             spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
             spriteAsset.texSource = sourceTex;
             spriteAsset.listSpriteInfor = GetSpritesInfor(sourceTex);
+            spriteAsset.listSpriteGroup = GetAssetSpriteInfor(sourceTex);
             AssetDatabase.CreateAsset(spriteAsset, filePath + fileNameWithoutExtension + ".asset");
         }
     }
@@ -57,4 +58,51 @@ public static class CreateSpriteAsset
         }
         return m_sprites;
     }
+    public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
+    {
+        List<SpriteInforGroup> _listGroup = new List<SpriteInforGroup>();
+        string filePath = UnityEditor.AssetDatabase.GetAssetPath(tex);
+
+        Object[] objects = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(filePath);
+
+        List<SpriteInfor> _tempSprite = new List<SpriteInfor>();
+
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].GetType() != typeof(Sprite))
+                continue;
+                SpriteInfor temp = new SpriteInfor();
+                Sprite sprite = objects[i] as Sprite;
+                temp.ID = i;
+                temp.name = sprite.name;
+                temp.pivot = sprite.pivot;
+                temp.rect = sprite.rect;
+                temp.sprite = sprite;
+                temp.tag = sprite.name;
+                 _tempSprite.Add(temp);
+        }
+
+        for (int i = 0; i < _tempSprite.Count; i++)
+        {
+            SpriteInforGroup _tempGroup = new SpriteInforGroup();
+            _tempGroup.tag = _tempSprite[i].tag;
+            _tempGroup.listSpriteInfor = new List<SpriteInfor>();
+            _tempGroup.listSpriteInfor.Add(_tempSprite[i]);
+            for (int j = 0; j < _tempSprite.Count; j++)
+            {
+                if (j > i && _tempGroup.tag == _tempSprite[j].tag)
+                {
+                    _tempGroup.listSpriteInfor.Add(_tempSprite[j]);
+                    _tempSprite.RemoveAt(j);
+                    j--;
+                }
+            }
+            _listGroup.Add(_tempGroup);
+            _tempSprite.RemoveAt(i);
+            i--;
+        }
+
+        return _listGroup;
+    }
+    
 }
