@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class SpriteAsset : ScriptableObject
 {
+    public int ID;
     /// <summary>
     /// 图片资源
     /// </summary>
@@ -52,6 +53,10 @@ public class SpriteInfor
     /// 标签
     /// </summary>
     public string tag;
+    /// <summary>
+    /// uv
+    /// </summary>
+    public Vector2[] uv;
 }
 
 [System.Serializable]
@@ -59,4 +64,6 @@ public class SpriteInforGroup
 {
     public string tag;
     public List<SpriteInfor> listSpriteInfor;
+    public float width;
+    public float size;
 }

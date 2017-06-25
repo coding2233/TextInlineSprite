@@ -67,6 +67,7 @@ public static class CreateSpriteAsset
 
         List<SpriteInfor> _tempSprite = new List<SpriteInfor>();
 
+        Vector2 _texSize = tex.texelSize;
         for (int i = 0; i < objects.Length; i++)
         {
             if (objects[i].GetType() != typeof(Sprite))
@@ -79,6 +80,9 @@ public static class CreateSpriteAsset
                 temp.rect = sprite.rect;
                 temp.sprite = sprite;
                 temp.tag = sprite.name;
+                temp.size = 34.0f;
+                temp.width = 1.0f;
+                temp.uv = GetSpriteUV(_texSize, sprite.rect);
                  _tempSprite.Add(temp);
         }
 
@@ -86,11 +90,13 @@ public static class CreateSpriteAsset
         {
             SpriteInforGroup _tempGroup = new SpriteInforGroup();
             _tempGroup.tag = _tempSprite[i].tag;
+            _tempGroup.size = 34.0f;
+            _tempGroup.width = 1.0f;
             _tempGroup.listSpriteInfor = new List<SpriteInfor>();
             _tempGroup.listSpriteInfor.Add(_tempSprite[i]);
-            for (int j = 0; j < _tempSprite.Count; j++)
+            for (int j = i+1; j < _tempSprite.Count; j++)
             {
-                if (j > i && _tempGroup.tag == _tempSprite[j].tag)
+                if ( _tempGroup.tag == _tempSprite[j].tag)
                 {
                     _tempGroup.listSpriteInfor.Add(_tempSprite[j]);
                     _tempSprite.RemoveAt(j);
@@ -103,6 +109,16 @@ public static class CreateSpriteAsset
         }
 
         return _listGroup;
+    }
+
+    private static Vector2[] GetSpriteUV(Vector2 texSize,Rect _sprRect)
+    {
+        Vector2[] uv = new Vector2[4];
+        uv[0] = new Vector2(_sprRect.x / texSize.x, _sprRect.y / texSize.y);
+        uv[1] = new Vector2((_sprRect.x + _sprRect.width) / texSize.x, (_sprRect.y + _sprRect.height) / texSize.y);
+        uv[2] = new Vector2((_sprRect.x + _sprRect.width) / texSize.x, _sprRect.y / texSize.y);
+        uv[3] = new Vector2(_sprRect.x / texSize.x, (_sprRect.y + _sprRect.height) / texSize.y);
+        return uv;
     }
     
 }
