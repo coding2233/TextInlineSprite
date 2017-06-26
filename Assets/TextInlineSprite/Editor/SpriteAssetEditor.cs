@@ -42,7 +42,7 @@ public class SpriteAssetEditor : Editor
         ve2ScorllView = GUILayout.BeginScrollView(ve2ScorllView);
 
         #region 标题栏
-        EditorGUILayout.HelpBox("Number Of Tags:" + spriteAsset.listSpriteGroup.Count + "     Number Of Sprite:" + spriteAsset.listSpriteInfor.Count, MessageType.Info);
+        EditorGUILayout.HelpBox("Number Of Tags:" + spriteAsset.listSpriteGroup.Count + "     Number Of Group:" + spriteAsset.listSpriteGroup.Count, MessageType.Info);
 
         GUILayout.BeginVertical("HelpBox");
         GUILayout.BeginHorizontal();
@@ -118,6 +118,16 @@ public class SpriteAssetEditor : Editor
             }
             #endregion
 
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Size:", GUILayout.Width(40));
+            EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].size, GUILayout.Width(40));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Size:", GUILayout.Width(40));
+            EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].width, GUILayout.Width(40));
+            GUILayout.EndHorizontal();
+
             #region 未展开的sprite组，播放序列帧动画（帧数大于1的序列帧动画才播放）
             if (showIndex != i && spriteAsset.listSpriteGroup[i].listSpriteInfor.Count > 0)
             {
@@ -176,16 +186,6 @@ public class SpriteAssetEditor : Editor
                         gm.ShowAsContext();
                     }
                     GUILayout.EndHorizontal();
-
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label("Size:", GUILayout.Width(50));
-                    spriteAsset.listSpriteGroup[i].listSpriteInfor[j].size=EditorGUILayout.FloatField(spriteAsset.listSpriteGroup[i].listSpriteInfor[j].size);
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label("Width:", GUILayout.Width(50));
-                    spriteAsset.listSpriteGroup[i].listSpriteInfor[j].width= EditorGUILayout.FloatField(spriteAsset.listSpriteGroup[i].listSpriteInfor[j].width);
-                    GUILayout.EndHorizontal();
                     
                     GUI.enabled = false;
 
@@ -199,6 +199,14 @@ public class SpriteAssetEditor : Editor
                     EditorGUILayout.RectField("", spriteAsset.listSpriteGroup[i].listSpriteInfor[j].rect);
                     GUILayout.EndHorizontal();
 
+                    for (int m= 0; m < spriteAsset.listSpriteGroup[i].listSpriteInfor[j].uv.Length; m++)
+                    {
+                        GUILayout.BeginHorizontal();
+                        GUILayout.Label("UV"+m+":", GUILayout.Width(50));
+                        EditorGUILayout.Vector2Field("", spriteAsset.listSpriteGroup[i].listSpriteInfor[j].uv[m]);
+                        GUILayout.EndHorizontal();
+                    }
+                   
                     GUI.enabled = true;
 
                     GUILayout.EndVertical();

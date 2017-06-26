@@ -21,7 +21,7 @@ public class SpriteGraphic : MaskableGraphic {
     protected override void OnEnable()
     {
         //不调用父类的OnEnable 他默认会渲染整张图片
-        base.OnEnable();  
+       // base.OnEnable();  
     }
 
 #if UNITY_EDITOR

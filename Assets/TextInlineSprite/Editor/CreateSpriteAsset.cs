@@ -29,35 +29,11 @@ public static class CreateSpriteAsset
         {
             spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
             spriteAsset.texSource = sourceTex;
-            spriteAsset.listSpriteInfor = GetSpritesInfor(sourceTex);
             spriteAsset.listSpriteGroup = GetAssetSpriteInfor(sourceTex);
             AssetDatabase.CreateAsset(spriteAsset, filePath + fileNameWithoutExtension + ".asset");
         }
     }
-    public static List<SpriteInfor> GetSpritesInfor(Texture2D tex)
-    {
-        List<SpriteInfor> m_sprites = new List<SpriteInfor>();
-
-        string filePath = UnityEditor.AssetDatabase.GetAssetPath(tex);
-
-        Object[] objects = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(filePath);
-
-        for (int i = 0; i < objects.Length; i++)
-        {
-            if (objects[i].GetType() == typeof(Sprite))
-            {
-                SpriteInfor temp = new SpriteInfor();
-                Sprite sprite = objects[i] as Sprite;
-                temp.ID = i;
-                temp.name = sprite.name;
-                temp.pivot = sprite.pivot;
-                temp.rect = sprite.rect;
-                temp.sprite = sprite;
-                m_sprites.Add(temp);
-            }
-        }
-        return m_sprites;
-    }
+   
     public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
     {
         List<SpriteInforGroup> _listGroup = new List<SpriteInforGroup>();
@@ -67,7 +43,7 @@ public static class CreateSpriteAsset
 
         List<SpriteInfor> _tempSprite = new List<SpriteInfor>();
 
-        Vector2 _texSize = tex.texelSize;
+        Vector2 _texSize = new Vector2(tex.width, tex.height);
         for (int i = 0; i < objects.Length; i++)
         {
             if (objects[i].GetType() != typeof(Sprite))
@@ -80,8 +56,6 @@ public static class CreateSpriteAsset
                 temp.rect = sprite.rect;
                 temp.sprite = sprite;
                 temp.tag = sprite.name;
-                temp.size = 34.0f;
-                temp.width = 1.0f;
                 temp.uv = GetSpriteUV(_texSize, sprite.rect);
                  _tempSprite.Add(temp);
         }
@@ -90,8 +64,8 @@ public static class CreateSpriteAsset
         {
             SpriteInforGroup _tempGroup = new SpriteInforGroup();
             _tempGroup.tag = _tempSprite[i].tag;
-            _tempGroup.size = 34.0f;
-            _tempGroup.width = 1.0f;
+            //_tempGroup.size = 24.0f;
+            //_tempGroup.width = 1.0f;
             _tempGroup.listSpriteInfor = new List<SpriteInfor>();
             _tempGroup.listSpriteInfor.Add(_tempSprite[i]);
             for (int j = i+1; j < _tempSprite.Count; j++)
@@ -114,10 +88,10 @@ public static class CreateSpriteAsset
     private static Vector2[] GetSpriteUV(Vector2 texSize,Rect _sprRect)
     {
         Vector2[] uv = new Vector2[4];
-        uv[0] = new Vector2(_sprRect.x / texSize.x, _sprRect.y / texSize.y);
-        uv[1] = new Vector2((_sprRect.x + _sprRect.width) / texSize.x, (_sprRect.y + _sprRect.height) / texSize.y);
+        uv[0] = new Vector2(_sprRect.x / texSize.x, (_sprRect.y+_sprRect.height) / texSize.y);
+        uv[1] = new Vector2((_sprRect.x + _sprRect.width) / texSize.x, (_sprRect.y +_sprRect.height) / texSize.y);
         uv[2] = new Vector2((_sprRect.x + _sprRect.width) / texSize.x, _sprRect.y / texSize.y);
-        uv[3] = new Vector2(_sprRect.x / texSize.x, (_sprRect.y + _sprRect.height) / texSize.y);
+        uv[3] = new Vector2(_sprRect.x / texSize.x, _sprRect.y / texSize.y);
         return uv;
     }
     

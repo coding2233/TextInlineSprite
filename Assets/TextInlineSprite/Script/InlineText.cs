@@ -1,5 +1,5 @@
 ﻿/// ========================================================
-/// file：InlineText_New.cs
+/// file：InlineText.cs
 /// brief：
 /// author： coding2233
 /// date：
@@ -13,20 +13,18 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System.Text;
 
-public class InlineText_New : Text
+public class InlineText : Text
 {
-    // 用正则取  [图集ID#表情Tag]
+    // 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
     private static readonly Regex _InputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)\]", RegexOptions.Singleline);
-
-    // 用正则取标签属性 名称-大小-宽度比例
-    private static readonly Regex _SpriteTagRegex = new Regex(@"<quad name=(.+?) size=(\d*\.?\d+%?) width=(\d*\.?\d+%?) />", RegexOptions.Singleline);
     //文本表情管理器
     private InlineManager _InlineManager;
     //更新后的文本
     private string _OutputText = "";
     //表情位置索引信息
     Dictionary<int, SpriteTagInfo> _SpriteInfo = new Dictionary<int, SpriteTagInfo>();
-
+    //图集ID，相关信息
+    Dictionary<int, List<SpriteTagInfo>> _DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
     protected override void Start()
     {
         OnEnable();
@@ -119,12 +117,15 @@ public class InlineText_New : Text
       
     }
 
-
+  
     #region 计算Quad占位信息
+
     void CalcQuadInfo(IList<UIVertex> verts)
     {
         foreach (var item in _SpriteInfo)
         {
+            if ((item.Key + 4) > verts.Count)
+                continue;
             for (int i = item.Key; i < item.Key + 4; i++)
             {
                 //清除乱码
@@ -136,7 +137,38 @@ public class InlineText_New : Text
             //    Debug.Log(i+"   位置:" + tempVertex.position);
             }
         }
+        //绘制表情
+        UpdateDrawnSprite();
     }
+    #endregion
+
+    #region 绘制表情
+    void UpdateDrawnSprite()
+    {
+        _DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
+        foreach (var item in _SpriteInfo)
+        {
+            int _id = item.Value._ID;
+            string _tag = item.Value._Tag;
+
+            //更新绘制表情的信息
+            List<SpriteTagInfo> _listSpriteInfo = null;
+            if (_DrawSpriteInfo.ContainsKey(_id))
+                _listSpriteInfo = _DrawSpriteInfo[_id];
+            else
+            {
+                _listSpriteInfo = new List<SpriteTagInfo>();
+                _DrawSpriteInfo.Add(_id, _listSpriteInfo);
+            }
+            _listSpriteInfo.Add(item.Value);
+        }
+      
+        foreach (var item in _DrawSpriteInfo)
+        {
+            _InlineManager.UpdateTextInfo(item.Key, this, item.Value);
+        }
+    }
+
     #endregion
 
 
@@ -187,7 +219,7 @@ public class InlineText_New : Text
                     _Tag = _tempTag,
                     _Size = new Vector2(_tempGroup.size * _tempGroup.width, _tempGroup.size),
                     _Pos = new Vector3[4],
-
+                    _UV = _tempGroup.listSpriteInfor[0].uv
                 };
                 if (!_SpriteInfo.ContainsKey(_tempIndex))
                     _SpriteInfo.Add(_tempIndex, _tempSpriteTag);
@@ -227,6 +259,8 @@ public class SpriteTagInfo
     public Vector2 _Size;
     //表情位置
     public Vector3[] _Pos;
+    //uv
+    public Vector2[] _UV;
 }
 
 

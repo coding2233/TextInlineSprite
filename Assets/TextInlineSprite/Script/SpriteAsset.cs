@@ -4,7 +4,14 @@ using System.Collections.Generic;
 
 public class SpriteAsset : ScriptableObject
 {
+    /// <summary>
+    /// 图集ID
+    /// </summary>
     public int ID;
+    /// <summary>
+    /// 静态表情
+    /// </summary>
+    public bool _IsStatic;
     /// <summary>
     /// 图片资源
     /// </summary>
@@ -12,10 +19,7 @@ public class SpriteAsset : ScriptableObject
     /// <summary>
     /// 所有sprite信息 SpriteAssetInfor类为具体的信息类
     /// </summary>
-    public List<SpriteInfor> listSpriteInfor;
-
     public List<SpriteInforGroup> listSpriteGroup;
-
 }
 
 [System.Serializable]
@@ -42,14 +46,6 @@ public class SpriteInfor
     /// </summary>
     public Sprite sprite;
     /// <summary>
-    /// 表情大小
-    /// </summary>
-    public float size;
-    /// <summary>
-    /// 宽度比例0-1
-    /// </summary>
-    public float width;
-    /// <summary>
     /// 标签
     /// </summary>
     public string tag;
@@ -62,8 +58,8 @@ public class SpriteInfor
 [System.Serializable]
 public class SpriteInforGroup
 {
-    public string tag;
-    public List<SpriteInfor> listSpriteInfor;
-    public float width;
-    public float size;
+    public string tag="";
+    public List<SpriteInfor> listSpriteInfor=new List<SpriteInfor>();
+    public float width=1.0f;
+    public float size=24.0f;
 }
