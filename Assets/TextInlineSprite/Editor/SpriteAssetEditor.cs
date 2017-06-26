@@ -46,6 +46,7 @@ public class SpriteAssetEditor : Editor
 
         GUILayout.BeginVertical("HelpBox");
         GUILayout.BeginHorizontal();
+        spriteAsset.ID = EditorGUILayout.IntField("ID:", spriteAsset.ID);
         playSpeed = EditorGUILayout.FloatField("FrameSpeed", playSpeed);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
@@ -120,12 +121,12 @@ public class SpriteAssetEditor : Editor
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Size:", GUILayout.Width(40));
-            EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].size, GUILayout.Width(40));
+            spriteAsset.listSpriteGroup[i].size=EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].size, GUILayout.Width(40));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Size:", GUILayout.Width(40));
-            EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].width, GUILayout.Width(40));
+            GUILayout.Label("Width:", GUILayout.Width(40));
+            spriteAsset.listSpriteGroup[i].width=EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].width, GUILayout.Width(40));
             GUILayout.EndHorizontal();
 
             #region 未展开的sprite组，播放序列帧动画（帧数大于1的序列帧动画才播放）

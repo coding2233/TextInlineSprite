@@ -18,6 +18,9 @@ public class InlineManager : MonoBehaviour {
     private Dictionary<int, SpriteGraphicInfo> _IndexSpriteGraphic = new Dictionary<int, SpriteGraphicInfo>();
     //绘制的模型数据索引
     private Dictionary<int, Dictionary<InlineText, MeshInfo>> _TextMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
+    //静态表情
+    [SerializeField]
+    private bool _IsStatic;
     //动画速度
     [SerializeField]
     [Range(1,10)]
@@ -31,7 +34,8 @@ public class InlineManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //动态表情
-       DrawSpriteAnimation();
+        if(!_IsStatic)
+            DrawSpriteAnimation();
     }
 
 #if UNITY_EDITOR
