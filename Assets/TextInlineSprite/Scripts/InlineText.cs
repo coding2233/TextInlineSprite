@@ -12,8 +12,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System.Text;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
-public class InlineText : Text
+public class InlineText : Text,IPointerClickHandler
 {
     // 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
     private static readonly Regex _InputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)\]", RegexOptions.Singleline);
@@ -25,10 +27,15 @@ public class InlineText : Text
     Dictionary<int, SpriteTagInfo> _SpriteInfo = new Dictionary<int, SpriteTagInfo>();
     //图集ID，相关信息
     Dictionary<int, List<SpriteTagInfo>> _DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
-    protected override void Start()
-    {
-        OnEnable();
-    }
+
+    #region 超链接
+    [System.Serializable]
+    public class HrefClickEvent : UnityEvent<string> { }
+    //点击事件监听
+    public HrefClickEvent OnHrefClick = new HrefClickEvent();
+    // 超链接信息列表  
+    private readonly List<HrefInfo> _ListHrefInfos = new List<HrefInfo>();
+    #endregion
 
     /// <summary>
     /// 初始化 
@@ -87,7 +94,9 @@ public class InlineText : Text
 
         //计算quad占位的信息
         CalcQuadInfo(verts);
-
+        //计算包围盒
+        CalcBoundsInfo(toFill);
+        
         if (roundingOffset != Vector2.zero)
         {
             for (int i = 0; i < vertCount; ++i)
@@ -170,6 +179,46 @@ public class InlineText : Text
 
     #endregion
 
+    #region 处理超链接的包围盒
+    void CalcBoundsInfo(VertexHelper toFill)
+    {
+        // 处理超链接包围框  
+        UIVertex vert = new UIVertex();
+        foreach (var hrefInfo in _ListHrefInfos)
+        {
+            hrefInfo.boxes.Clear();
+            if (hrefInfo.startIndex >= toFill.currentVertCount)
+            {
+                continue;
+            }
+
+            // 将超链接里面的文本顶点索引坐标加入到包围框  
+            toFill.PopulateUIVertex(ref vert, hrefInfo.startIndex);
+            var pos = vert.position;
+            var bounds = new Bounds(pos, Vector3.zero);
+            for (int i = hrefInfo.startIndex, m = hrefInfo.endIndex; i < m; i++)
+            {
+                if (i >= toFill.currentVertCount)
+                {
+                    break;
+                }
+
+                toFill.PopulateUIVertex(ref vert, i);
+                pos = vert.position;
+                if (pos.x < bounds.min.x) // 换行重新添加包围框  
+                {
+                    hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
+                    bounds = new Bounds(pos, Vector3.zero);
+                }
+                else
+                {
+                    bounds.Encapsulate(pos); // 扩展包围框  
+                }
+            }
+            hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
+        }
+    }
+    #endregion
 
     #region 根据正则规则更新文本
     private string GetOutputText()
@@ -190,13 +239,13 @@ public class InlineText : Text
                 _textBuilder.Append(text.Substring(_textIndex, match.Index - _textIndex));
                 _textBuilder.Append("<color=blue>");
 
-                //var hrefInfo = new HrefInfo
-                //{
-                //    startIndex = _textBuilder.Length * 4, // 超链接里的文本起始顶点索引
-                //    endIndex = (_textBuilder.Length + match.Groups[2].Length - 1) * 4 + 3,
-                //   // name = group.Value
-                //};
-                ////     m_HrefInfos.Add(hrefInfo);
+                var hrefInfo = new HrefInfo
+                {
+                    startIndex = _textBuilder.Length * 4, // 超链接里的文本起始顶点索引
+                    endIndex = (_textBuilder.Length + match.Groups[2].Length - 1) * 4 + 3,
+                     name = match.Groups[2].Value
+                };
+                _ListHrefInfos.Add(hrefInfo);
 
                 _textBuilder.Append("[" + match.Groups[2].Value + "]</color>");
             }
@@ -245,6 +294,31 @@ public class InlineText : Text
     }
     #endregion
 
+
+
+    #region 点击事件检测是否点击到超链接文本  
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Vector2 lp;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransform, eventData.position, eventData.pressEventCamera, out lp);
+
+        foreach (var hrefInfo in _ListHrefInfos)
+        {
+            var boxes = hrefInfo.boxes;
+            for (var i = 0; i < boxes.Count; ++i)
+            {
+                if (boxes[i].Contains(lp))
+                {
+                    OnHrefClick.Invoke(hrefInfo.name);
+                    return;
+                }
+            }
+        }
+    }
+    #endregion
+
+ 
 }
 
 

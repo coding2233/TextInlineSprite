@@ -50,6 +50,9 @@ public class SpriteAssetEditor : Editor
         playSpeed = EditorGUILayout.FloatField("FrameSpeed", playSpeed);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
+        spriteAsset._IsStatic = EditorGUILayout.Toggle("Static:", spriteAsset._IsStatic);
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
         if (GUILayout.Button("Add Tag"))
         {
             addTag = !addTag;
