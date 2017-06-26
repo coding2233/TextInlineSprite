@@ -134,7 +134,6 @@ public class InlineText : Text
                 verts[i] = tempVertex;
                 //计算位置
                 item.Value._Pos[i - item.Key] = tempVertex.position;
-            //    Debug.Log(i+"   位置:" + tempVertex.position);
             }
         }
         //绘制表情

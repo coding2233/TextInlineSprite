@@ -77,10 +77,13 @@ public class InlineManager : MonoBehaviour {
 
     public void UpdateTextInfo(int _id,InlineText _key, List<SpriteTagInfo> _value)
     {
-        if (!_TextMeshInfo.ContainsKey(_id)|| _value.Count<=0)
+        if (!_IndexSpriteGraphic.ContainsKey(_id)||!_TextMeshInfo.ContainsKey(_id)|| _value.Count<=0)
             return;
         int _spriteTagCount = _value.Count;
-      
+        Vector3 _textPos = _key.transform.position;
+        Vector3 _spritePos = _IndexSpriteGraphic[_id]._SpriteGraphic.transform.position;
+        Vector3 _disPos = _textPos - _spritePos;
+
         MeshInfo _meshInfo = new MeshInfo();
         _meshInfo._Tag = new string[_spriteTagCount];
         _meshInfo._Vertices = new Vector3[_spriteTagCount * 4];
@@ -93,10 +96,10 @@ public class InlineManager : MonoBehaviour {
             //标签
             _meshInfo._Tag[i] = _value[i]._Tag;
             //顶点位置
-            _meshInfo._Vertices[m + 0] = _value[i]._Pos[0];
-            _meshInfo._Vertices[m + 1] = _value[i]._Pos[1];
-            _meshInfo._Vertices[m + 2] = _value[i]._Pos[2];
-            _meshInfo._Vertices[m + 3] = _value[i]._Pos[3];
+            _meshInfo._Vertices[m + 0] = _value[i]._Pos[0]+ _disPos;
+            _meshInfo._Vertices[m + 1] = _value[i]._Pos[1] + _disPos;
+            _meshInfo._Vertices[m + 2] = _value[i]._Pos[2] + _disPos;
+            _meshInfo._Vertices[m + 3] = _value[i]._Pos[3] + _disPos;
             //uv
             _meshInfo._UV[m + 0] = _value[i]._UV[0];
             _meshInfo._UV[m + 1] = _value[i]._UV[1];
@@ -104,7 +107,13 @@ public class InlineManager : MonoBehaviour {
             _meshInfo._UV[m + 3] = _value[i]._UV[3];
         }
         if (_TextMeshInfo[_id].ContainsKey(_key))
-            _TextMeshInfo[_id][_key] = _meshInfo;
+        {
+            MeshInfo _oldMeshInfo = _TextMeshInfo[_id][_key];
+            if (_meshInfo.Equals(_oldMeshInfo))
+                return;
+            else
+                _TextMeshInfo[_id][_key] = _meshInfo;
+        }
         else
             _TextMeshInfo[_id].Add(_key, _meshInfo);
 
@@ -232,6 +241,20 @@ public class InlineManager : MonoBehaviour {
         public Vector3[] _Vertices;
         public Vector2[] _UV;
         public int[] _Triangles;
+
+        //比较数据是否一样
+        public bool Equals(MeshInfo _value)
+        {
+            if (_Tag.Length!= _value._Tag.Length|| _Vertices.Length!= _value._Vertices.Length)
+                return false;
+            for (int i = 0; i < _Tag.Length; i++)
+                if (_Tag[i] != _value._Tag[i])
+                    return false;
+            for (int i = 0; i < _Vertices.Length; i++)
+                if (_Vertices[i] != _value._Vertices[i])
+                    return false;
+            return true;
+        }
     }
     #endregion
 }
