@@ -127,6 +127,25 @@ public class InlineText : Text, IPointerClickHandler
 
     }
 
+    #region 文本所占的长宽
+    public override float preferredWidth
+    {
+        get
+        {
+            var settings = GetGenerationSettings(Vector2.zero);
+            return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+        }
+    }
+    public override float preferredHeight
+    {
+        get
+        {
+            var settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
+            return cachedTextGeneratorForLayout.GetPreferredHeight(_OutputText, settings) / pixelsPerUnit;
+        }
+    }
+    #endregion
+
 
     #region 计算Quad占位信息
 
