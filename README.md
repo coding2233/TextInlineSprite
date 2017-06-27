@@ -1,19 +1,20 @@
-﻿<p>
-    <strong>UGUI图文混排</strong>
-</p>
-﻿<p>
-    unity2017好像直接内嵌支持图文混排，期待下个版本的unity吧，就不用纠结我杂乱的代码了，我也可以偷懒了
-</p>
-<hr/>
-<p>
-    unity支持最低版本为5.3，下面为展示截图，具体看scene
-</p>
-<p>
-    <img src="https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_01.gif"/>
-</p>
-<p>
-    <img src="https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_02.gif"/>
-</p>
-<p>
-    <img src="https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_03.png"/>
-</p>
+﻿**功能介绍**
+1.此插件是基于UGUI所做的图文混排功能，常用于聊天系统的表情嵌入;
+2.可支持静/动态表情,支持超链接;
+3.实现原理，是基于UGUI的富文本，使用quad标签进行占位。
+4.使用了Asset文件来存储本地的表情信息，并
+5.Text根据正则表达式，解析文本，读取相应的表情信息，并在相应位置绘制相应的Sprite;
+6.正则表达式为[图集ID#表情标签]，图集ID为-1时，表示此标签为超链接，图集ID为0时，可省略不写;
+
+**使用步骤**
+1.选择一张表情图片，导入在unity里，并设置为Texture Type为Sprite(2D and UI);
+2.右键选择图片，点击Create/Sprite Asset,创建图集资源;
+3.针对Asset文件，可以设置图集的ID、是否为静态表情，和标签等属性，同为一个动态表情的Sprite应该设置为同一个标签;
+4.点击菜单栏GameObject/UI/Textline,即可创建UI;
+5.在InlineText组件中输入[#emoji_0],即可显示表情;
+
+**截图展示**
+![ 标签对应表情](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_01.gif)
+![聊天示例](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_02.gif)
+![更新后，功能展示](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/text01.gif)
+![更新后，聊天测试](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/text02.jpg)

@@ -29,16 +29,17 @@ public class SpriteAssetEditor : Editor
 
         Init();
 
-        EditorApplication.update += RefreshFrameAnimation;
+   //     EditorApplication.update += RefreshFrameAnimation;
     }
 
     public void OnDisable()
     {
-        EditorApplication.update -= RefreshFrameAnimation;
+    //    EditorApplication.update -= RefreshFrameAnimation;
     }
     
     public override void OnInspectorGUI()
     {
+
         ve2ScorllView = GUILayout.BeginScrollView(ve2ScorllView);
 
         #region 标题栏
@@ -222,6 +223,7 @@ public class SpriteAssetEditor : Editor
         }
 
         GUILayout.EndScrollView();
+        //unity
         EditorUtility.SetDirty(spriteAsset);
     }
 
