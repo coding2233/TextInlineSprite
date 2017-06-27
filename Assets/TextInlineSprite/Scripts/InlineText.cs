@@ -14,8 +14,9 @@ using System.Text.RegularExpressions;
 using System.Text;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using System;
 
-public class InlineText : Text,IPointerClickHandler
+public class InlineText : Text, IPointerClickHandler
 {
     // 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
     private static readonly Regex _InputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)\]", RegexOptions.Singleline);
@@ -95,8 +96,8 @@ public class InlineText : Text,IPointerClickHandler
         //计算quad占位的信息
         CalcQuadInfo(verts);
         //计算包围盒
-        CalcBoundsInfo(toFill);
-        
+        CalcBoundsInfo(verts,toFill,settings);
+
         if (roundingOffset != Vector2.zero)
         {
             for (int i = 0; i < vertCount; ++i)
@@ -121,12 +122,12 @@ public class InlineText : Text,IPointerClickHandler
                     toFill.AddUIVertexQuad(m_TempVerts);
             }
         }
-   
+
         m_DisableFontTextureRebuiltCallback = false;
-      
+
     }
 
-  
+
     #region 计算Quad占位信息
 
     void CalcQuadInfo(IList<UIVertex> verts)
@@ -170,7 +171,7 @@ public class InlineText : Text,IPointerClickHandler
             }
             _listSpriteInfo.Add(item.Value);
         }
-      
+
         foreach (var item in _DrawSpriteInfo)
         {
             _InlineManager.UpdateTextInfo(item.Key, this, item.Value);
@@ -180,33 +181,35 @@ public class InlineText : Text,IPointerClickHandler
     #endregion
 
     #region 处理超链接的包围盒
-    void CalcBoundsInfo(VertexHelper toFill)
+    void CalcBoundsInfo(IList<UIVertex> verts, VertexHelper toFill,TextGenerationSettings settings)
     {
+        #region 包围框
         // 处理超链接包围框  
         UIVertex vert = new UIVertex();
         foreach (var hrefInfo in _ListHrefInfos)
         {
             hrefInfo.boxes.Clear();
-            if (hrefInfo.startIndex >= toFill.currentVertCount)
+            if (hrefInfo.startIndex >= verts.Count)
             {
                 continue;
             }
 
             // 将超链接里面的文本顶点索引坐标加入到包围框  
-            toFill.PopulateUIVertex(ref vert, hrefInfo.startIndex);
+            vert = verts[hrefInfo.startIndex];
             var pos = vert.position;
             var bounds = new Bounds(pos, Vector3.zero);
             for (int i = hrefInfo.startIndex, m = hrefInfo.endIndex; i < m; i++)
             {
-                if (i >= toFill.currentVertCount)
+                if (i >= verts.Count)
                 {
                     break;
                 }
 
-                toFill.PopulateUIVertex(ref vert, i);
+                vert = verts[i];
                 pos = vert.position;
-                if (pos.x < bounds.min.x) // 换行重新添加包围框  
+                if (pos.x < bounds.min.x)
                 {
+                    // 换行重新添加包围框  
                     hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
                     bounds = new Bounds(pos, Vector3.zero);
                 }
@@ -215,8 +218,40 @@ public class InlineText : Text,IPointerClickHandler
                     bounds.Encapsulate(pos); // 扩展包围框  
                 }
             }
+            //添加包围盒
             hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
         }
+        #endregion
+
+        #region 添加下划线
+        TextGenerator _UnderlineText = new TextGenerator();
+        _UnderlineText.Populate("_", settings);
+        IList<UIVertex> _TUT = _UnderlineText.verts;
+        foreach (var item in _ListHrefInfos)
+        {
+            for (int i = 0; i < item.boxes.Count; i++)
+            {
+                //计算下划线的位置
+                Vector3[] _ulPos = new Vector3[4];
+                _ulPos[0] = item.boxes[i].position + new Vector2(0.0f, fontSize * 0.2f);
+                _ulPos[1] = _ulPos[0]+new Vector3(item.boxes[i].width,0.0f);
+                _ulPos[2] = item.boxes[i].position + new Vector2(item.boxes[i].width, 0.0f);
+                _ulPos[3] =item.boxes[i].position;
+                //绘制下划线
+                for (int j = 0; j < 4; j++)
+                {
+                    m_TempVerts[j] = _TUT[j];
+                    m_TempVerts[j].color = Color.blue;
+                    m_TempVerts[j].position = _ulPos[j];
+                    if (j == 3)
+                        toFill.AddUIVertexQuad(m_TempVerts);
+                }
+
+            }
+        }
+
+        #endregion
+
     }
     #endregion
 
@@ -226,28 +261,31 @@ public class InlineText : Text,IPointerClickHandler
         _SpriteInfo = new Dictionary<int, SpriteTagInfo>();
         StringBuilder _textBuilder = new StringBuilder();
         int _textIndex = 0;
-        
+
         foreach (Match match in _InputTagRegex.Matches(text))
         {
             int _tempID = 0;
             if (!string.IsNullOrEmpty(match.Groups[1].Value))
                 _tempID = int.Parse(match.Groups[1].Value);
-            string _tempTag= match.Groups[2].Value;
+            string _tempTag = match.Groups[2].Value;
             //更新超链接
             if (_tempID == -1)
             {
                 _textBuilder.Append(text.Substring(_textIndex, match.Index - _textIndex));
                 _textBuilder.Append("<color=blue>");
+                int _startIndex = _textBuilder.Length * 4;
+                _textBuilder.Append("[" + match.Groups[2].Value + "]");
+                int _endIndex = _textBuilder.Length * 4 - 2;
+                _textBuilder.Append("</color>");
 
                 var hrefInfo = new HrefInfo
                 {
-                    startIndex = _textBuilder.Length * 4, // 超链接里的文本起始顶点索引
-                    endIndex = (_textBuilder.Length + match.Groups[2].Length - 1) * 4 + 3,
-                     name = match.Groups[2].Value
+                    startIndex = _startIndex, // 超链接里的文本起始顶点索引
+                    endIndex = _endIndex,
+                    name = match.Groups[2].Value
                 };
                 _ListHrefInfos.Add(hrefInfo);
 
-                _textBuilder.Append("[" + match.Groups[2].Value + "]</color>");
             }
             //更新表情
             else
@@ -256,7 +294,7 @@ public class InlineText : Text,IPointerClickHandler
                     || !_InlineManager._IndexSpriteInfo[_tempID].ContainsKey(_tempTag))
                     continue;
                 SpriteInforGroup _tempGroup = _InlineManager._IndexSpriteInfo[_tempID][_tempTag];
-                
+
                 _textBuilder.Append(text.Substring(_textIndex, match.Index - _textIndex));
                 int _tempIndex = _textBuilder.Length * 4;
                 _textBuilder.Append(@"<quad size=" + _tempGroup.size + " width=" + _tempGroup.width + " />");
@@ -316,11 +354,11 @@ public class InlineText : Text,IPointerClickHandler
             }
         }
     }
+
+
     #endregion
 
- 
 }
-
 
 public class SpriteTagInfo
 {
