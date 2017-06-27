@@ -1,19 +1,19 @@
-﻿**功能介绍**
-1.此插件是基于UGUI所做的图文混排功能，常用于聊天系统的表情嵌入;
-2.可支持静/动态表情,支持超链接;
-3.实现原理，是基于UGUI的富文本，使用quad标签进行占位。
-4.使用了Asset文件来存储本地的表情信息，并
-5.Text根据正则表达式，解析文本，读取相应的表情信息，并在相应位置绘制相应的Sprite;
-6.正则表达式为[图集ID#表情标签]，图集ID为-1时，表示此标签为超链接，图集ID为0时，可省略不写;
-
-**使用步骤**
-1.选择一张表情图片，导入在unity里，并设置为Texture Type为Sprite(2D and UI);
-2.右键选择图片，点击Create/Sprite Asset,创建图集资源;
-3.针对Asset文件，可以设置图集的ID、是否为静态表情，和标签等属性，同为一个动态表情的Sprite应该设置为同一个标签;
-4.点击菜单栏GameObject/UI/Textline,即可创建UI;
-5.在InlineText组件中输入[#emoji_0],即可显示表情;
-
-**截图展示**
+﻿<p>**功能介绍**</p>
+<p>1.此插件是基于UGUI所做的图文混排功能，常用于聊天系统的表情嵌入;</p>
+<p>2.可支持静/动态表情,支持超链接;</p>
+<p>3.实现原理，是基于UGUI的富文本，使用quad标签进行占位。</p>
+<p>4.使用了Asset文件来存储本地的表情信息;</p>
+<p>5.Text根据正则表达式，解析文本，读取相应的表情信息，并在相应位置绘制相应的Sprite;</p>
+<p>6.正则表达式为[图集ID#表情标签]，图集ID为-1时，表示此标签为超链接，图集ID为0时，可省略不写;</p>
+<p></p>
+<p>**使用步骤**</p>
+<p>1.选择一张表情图片，导入在unity里，并设置为Texture Type为Sprite(2D and UI);</p>
+<p>2.右键选择图片，点击Create/Sprite Asset,创建图集资源;</p>
+<p>3.针对Asset文件，可以设置图集的ID、是否为静态表情，和标签等属性，同为一个动态表情的Sprite应该设置为同一个标签;</p>
+<p>4.点击菜单栏GameObject/UI/Textline,即可创建UI;</p>
+<p>5.在InlineText组件中输入[#emoji_0],即可显示表情;</p>
+<p></p>
+<p>**截图展示**</p>
 ![ 标签对应表情](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_01.gif)
 ![聊天示例](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/tw04_02.gif)
 ![更新后，功能展示](https://github.com/coding2233/TextInlineSprite/blob/master/ShotScreens/text01.gif)
