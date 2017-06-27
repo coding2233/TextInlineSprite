@@ -26,30 +26,19 @@ public class InlineManager : MonoBehaviour {
     [Range(1,10)]
     private float _AnimationSpeed = 5.0f;
 
-	//// Use this for initialization
-	//void Awake () {
- //       Initialize();
- //   }
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+        Initialize();
+    }
+
+    // Update is called once per frame
+    void Update () {
         //动态表情
         if(!_IsStatic)
             DrawSpriteAnimation();
     }
-
-    private void OnEnable()
-    {
-        Initialize();
-    }
-
-#if UNITY_EDITOR
-    public void OnValidate()
-    {
-        Initialize();
-    }
-#endif
-
+   
     #region 初始化
     void Initialize()
     {

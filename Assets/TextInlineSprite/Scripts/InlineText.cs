@@ -56,11 +56,19 @@ public class InlineText : Text, IPointerClickHandler
         SetVerticesDirty();
     }
 
+    public void ActiveText()
+    {
+        OnEnable();
+    }
+
     public override void SetVerticesDirty()
     {
         base.SetVerticesDirty();
         if (!_InlineManager)
+        {
+            _OutputText = m_Text;
             return;
+        }
 
         //设置新文本
         _OutputText = GetOutputText();
@@ -148,7 +156,6 @@ public class InlineText : Text, IPointerClickHandler
 
 
     #region 计算Quad占位信息
-
     void CalcQuadInfo(IList<UIVertex> verts)
     {
         foreach (var item in _SpriteInfo)
@@ -373,8 +380,6 @@ public class InlineText : Text, IPointerClickHandler
             }
         }
     }
-
-
     #endregion
 
 }
