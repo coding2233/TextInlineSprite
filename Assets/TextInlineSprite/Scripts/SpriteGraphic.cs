@@ -5,19 +5,17 @@ using System.Collections;
 public class SpriteGraphic : MaskableGraphic {
 
     public SpriteAsset m_spriteAsset;
-
     public override Texture mainTexture
     {
         get
         {
-            if (m_spriteAsset == null|| m_spriteAsset.texSource == null)
+            if (m_spriteAsset == null|| m_spriteAsset.texSource==null)
                 return s_WhiteTexture;
             else
                 return m_spriteAsset.texSource;
         }
     }
     
-
     protected override void OnEnable()
     {
         //不调用父类的OnEnable 他默认会渲染整张图片

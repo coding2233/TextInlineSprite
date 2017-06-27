@@ -26,10 +26,10 @@ public class InlineManager : MonoBehaviour {
     [Range(1,10)]
     private float _AnimationSpeed = 5.0f;
 
-	// Use this for initialization
-	void Awake () {
-        Initialize();
-    }
+	//// Use this for initialization
+	//void Awake () {
+ //       Initialize();
+ //   }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,8 +38,13 @@ public class InlineManager : MonoBehaviour {
             DrawSpriteAnimation();
     }
 
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
 #if UNITY_EDITOR
-    protected void OnValidate()
+    public void OnValidate()
     {
         Initialize();
     }

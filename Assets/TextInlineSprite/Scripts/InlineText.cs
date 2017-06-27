@@ -16,6 +16,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
 
+[ExecuteInEditMode]
 public class InlineText : Text, IPointerClickHandler
 {
     // 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
@@ -37,7 +38,7 @@ public class InlineText : Text, IPointerClickHandler
     // 超链接信息列表  
     private readonly List<HrefInfo> _ListHrefInfos = new List<HrefInfo>();
     #endregion
-
+    
     /// <summary>
     /// 初始化 
     /// </summary>
@@ -63,7 +64,6 @@ public class InlineText : Text, IPointerClickHandler
 
         //设置新文本
         _OutputText = GetOutputText();
-
     }
 
     readonly UIVertex[] m_TempVerts = new UIVertex[4];

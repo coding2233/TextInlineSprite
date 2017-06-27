@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public static class CreateSpriteAsset
 {
-    [MenuItem("Assets/Create/UGUI Sprite Asset",false,10)]
+    [MenuItem("Assets/Create/Sprite Asset",false,10)]
     static void main()
     {
         Object target = Selection.activeObject;
