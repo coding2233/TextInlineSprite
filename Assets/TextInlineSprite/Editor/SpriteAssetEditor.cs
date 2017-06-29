@@ -48,7 +48,7 @@ public class SpriteAssetEditor : Editor
         GUILayout.BeginVertical("HelpBox");
         GUILayout.BeginHorizontal();
         spriteAsset.ID = EditorGUILayout.IntField("ID:", spriteAsset.ID);
-        playSpeed = EditorGUILayout.FloatField("FrameSpeed", playSpeed);
+      //  playSpeed = EditorGUILayout.FloatField("FrameSpeed", playSpeed);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         spriteAsset._IsStatic = EditorGUILayout.Toggle("Static:", spriteAsset._IsStatic);
