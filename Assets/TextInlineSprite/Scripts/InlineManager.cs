@@ -25,7 +25,7 @@ public class InlineManager : MonoBehaviour {
     [SerializeField]
     [Range(1,10)]
     private float _AnimationSpeed = 5.0f;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -86,7 +86,6 @@ public class InlineManager : MonoBehaviour {
         for (int i = 0; i < _value.Count; i++)
         {
             int m = i * 4;
-            int n = i * 6;
             //标签
             _meshInfo._Tag[i] = _value[i]._Tag;
             //顶点位置
@@ -110,7 +109,7 @@ public class InlineManager : MonoBehaviour {
         }
         else
             _TextMeshInfo[_id].Add(_key, _meshInfo);
-
+        
         //更新图片
         DrawSprites(_id);
     }
@@ -140,7 +139,7 @@ public class InlineManager : MonoBehaviour {
                     continue;
                 if (!_TextMeshInfo.ContainsKey(item.Key) || _TextMeshInfo[item.Key].Count <= 0)
                     continue;
-                SpriteGraphic _spriteGraphic = _IndexSpriteGraphic[item.Key]._SpriteGraphic;
+
                 //Mesh _mesh = _IndexSpriteGraphic[item.Key]._Mesh;
                 Dictionary<InlineText, MeshInfo> _data = _TextMeshInfo[item.Key];
                 foreach (var item02 in _data)

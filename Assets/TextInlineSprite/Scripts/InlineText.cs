@@ -16,7 +16,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
 
-[ExecuteInEditMode]
 public class InlineText : Text, IPointerClickHandler
 {
     // 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
@@ -38,14 +37,38 @@ public class InlineText : Text, IPointerClickHandler
     // 超链接信息列表  
     private readonly List<HrefInfo> _ListHrefInfos = new List<HrefInfo>();
     #endregion
-    
-    /// <summary>
-    /// 初始化 
-    /// </summary>
-    protected override void OnEnable()
+
+    ///// <summary>
+    ///// 初始化 
+    ///// </summary>
+    //protected override void OnEnable()
+    //{
+    //    //
+    //    base.OnEnable();
+    //    //支持富文本
+    //    supportRichText = true;
+    //    //对齐几何
+    //    alignByGeometry = true;
+    //    if (!_InlineManager)
+    //        _InlineManager = GetComponentInParent<InlineManager>();
+    //    //启动的是 更新顶点
+    //    SetVerticesDirty();
+    //}
+
+    protected override void Start()
     {
-        //
-        base.OnEnable();
+        ActiveText();
+    }
+
+#if UNITY_EDITOR
+    protected override void OnValidate()
+    {
+        ActiveText();
+    }
+#endif
+
+    public void ActiveText()
+    {
         //支持富文本
         supportRichText = true;
         //对齐几何
@@ -54,11 +77,6 @@ public class InlineText : Text, IPointerClickHandler
             _InlineManager = GetComponentInParent<InlineManager>();
         //启动的是 更新顶点
         SetVerticesDirty();
-    }
-
-    public void ActiveText()
-    {
-        OnEnable();
     }
 
     public override void SetVerticesDirty()
@@ -184,7 +202,6 @@ public class InlineText : Text, IPointerClickHandler
         foreach (var item in _SpriteInfo)
         {
             int _id = item.Value._ID;
-            string _tag = item.Value._Tag;
 
             //更新绘制表情的信息
             List<SpriteTagInfo> _listSpriteInfo = null;
