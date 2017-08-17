@@ -27,7 +27,7 @@ public class InlineManager : MonoBehaviour {
     private float _AnimationSpeed = 5.0f;
     
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         Initialize();
     }
@@ -63,8 +63,7 @@ public class InlineManager : MonoBehaviour {
                 }
                 _IndexSpriteInfo.Add(_spriteAsset.ID, _spriteGroup);
                 _TextMeshInfo.Add(_spriteAsset.ID, new Dictionary<InlineText, MeshInfo>());
-            }
-
+            }              
         }
     }
     #endregion
