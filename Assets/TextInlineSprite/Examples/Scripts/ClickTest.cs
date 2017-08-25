@@ -29,9 +29,9 @@ public class ClickTest : MonoBehaviour {
         _text.OnHrefClick.RemoveListener(OnHrefClick);
     }
 
-    private void OnHrefClick(string hrefName)
+    private void OnHrefClick(string hrefName,int id)
     {
-        Debug.Log("点击了 " + hrefName);
+        Debug.Log("点击了 " + hrefName+"  id:"+id);
         //  Application.OpenURL("www.baidu.com");  
     }
 }

@@ -31,7 +31,7 @@ public class InlineText : Text, IPointerClickHandler
 
     #region 超链接
     [System.Serializable]
-    public class HrefClickEvent : UnityEvent<string> { }
+    public class HrefClickEvent : UnityEvent<string,int> { }
     //点击事件监听
     public HrefClickEvent OnHrefClick = new HrefClickEvent();
     // 超链接信息列表  
@@ -323,11 +323,11 @@ public class InlineText : Text, IPointerClickHandler
         foreach (Match match in _InputTagRegex.Matches(text))
         {
             int _tempID = 0;
-            if (!string.IsNullOrEmpty(match.Groups[1].Value))
+            if (!string.IsNullOrEmpty(match.Groups[1].Value)&& !match.Groups[1].Value.Equals("-"))
                 _tempID = int.Parse(match.Groups[1].Value);
             string _tempTag = match.Groups[2].Value;
             //更新超链接
-            if (_tempID == -1)
+            if (_tempID <0 )
             {
                 _textBuilder.Append(text.Substring(_textIndex, match.Index - _textIndex));
                 _textBuilder.Append("<color=blue>");
@@ -338,6 +338,7 @@ public class InlineText : Text, IPointerClickHandler
 
                 var hrefInfo = new HrefInfo
                 {
+                    id = Mathf.Abs(_tempID),
                     startIndex = _startIndex, // 超链接里的文本起始顶点索引
                     endIndex = _endIndex,
                     name = match.Groups[2].Value
@@ -380,6 +381,8 @@ public class InlineText : Text, IPointerClickHandler
     #region  超链接信息类
     private class HrefInfo
     {
+        public int id;
+
         public int startIndex;
 
         public int endIndex;
@@ -406,7 +409,7 @@ public class InlineText : Text, IPointerClickHandler
             {
                 if (boxes[i].Contains(lp))
                 {
-                    OnHrefClick.Invoke(hrefInfo.name);
+                    OnHrefClick.Invoke(hrefInfo.name, hrefInfo.id);
                     return;
                 }
             }
