@@ -114,16 +114,13 @@ public class InlineText : Text, IPointerClickHandler
         float unitsPerPixel = 1 / pixelsPerUnit;
         //Last 4 verts are always a new line... (\n)
         int vertCount = verts.Count - 4;
-
         Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
         roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
         toFill.Clear();
 
-        //计算quad占位的信息
-        CalcQuadInfo(verts);
-        //计算包围盒
-        CalcBoundsInfo(verts,toFill,settings);
+        ClearQuadUVs(verts);
 
+        List<Vector3> _listVertsPos = new List<Vector3>();
         if (roundingOffset != Vector2.zero)
         {
             for (int i = 0; i < vertCount; ++i)
@@ -135,6 +132,7 @@ public class InlineText : Text, IPointerClickHandler
                 m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
                 if (tempVertsIndex == 3)
                     toFill.AddUIVertexQuad(m_TempVerts);
+                _listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
             }
         }
         else
@@ -146,8 +144,15 @@ public class InlineText : Text, IPointerClickHandler
                 m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
                 if (tempVertsIndex == 3)
                     toFill.AddUIVertexQuad(m_TempVerts);
+                _listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
+             
             }
         }
+
+        //计算quad占位的信息
+        CalcQuadInfo(_listVertsPos);
+        //计算包围盒
+        CalcBoundsInfo(_listVertsPos, toFill, settings);
 
         m_DisableFontTextureRebuiltCallback = false;
 
@@ -173,8 +178,8 @@ public class InlineText : Text, IPointerClickHandler
     #endregion
 
 
-    #region 计算Quad占位信息
-    void CalcQuadInfo(IList<UIVertex> verts)
+    #region 清除乱码
+    private void ClearQuadUVs(IList<UIVertex> verts)
     {
         foreach (var item in _SpriteInfo)
         {
@@ -186,8 +191,21 @@ public class InlineText : Text, IPointerClickHandler
                 UIVertex tempVertex = verts[i];
                 tempVertex.uv0 = Vector2.zero;
                 verts[i] = tempVertex;
-                //计算位置
-                item.Value._Pos[i - item.Key] = tempVertex.position;
+            }
+        }
+    }
+#endregion
+
+    #region 计算Quad占位信息
+    void CalcQuadInfo(List<Vector3> _listVertsPos)
+    {
+        foreach (var item in _SpriteInfo)
+        {
+            if ((item.Key + 4) > _listVertsPos.Count)
+                continue;
+            for (int i = item.Key; i < item.Key + 4; i++)
+            {
+                item.Value._Pos[i - item.Key] = _listVertsPos[i];
             }
         }
         //绘制表情
@@ -224,32 +242,29 @@ public class InlineText : Text, IPointerClickHandler
     #endregion
 
     #region 处理超链接的包围盒
-    void CalcBoundsInfo(IList<UIVertex> verts, VertexHelper toFill,TextGenerationSettings settings)
+    void CalcBoundsInfo(List<Vector3> _listVertsPos, VertexHelper toFill,TextGenerationSettings settings)
     {
         #region 包围框
         // 处理超链接包围框  
-        UIVertex vert = new UIVertex();
         foreach (var hrefInfo in _ListHrefInfos)
         {
             hrefInfo.boxes.Clear();
-            if (hrefInfo.startIndex >= verts.Count)
+            if (hrefInfo.startIndex >= _listVertsPos.Count)
             {
                 continue;
             }
 
             // 将超链接里面的文本顶点索引坐标加入到包围框  
-            vert = verts[hrefInfo.startIndex];
-            var pos = vert.position;
+            var pos = _listVertsPos[hrefInfo.startIndex];
             var bounds = new Bounds(pos, Vector3.zero);
             for (int i = hrefInfo.startIndex, m = hrefInfo.endIndex; i < m; i++)
             {
-                if (i >= verts.Count)
+                if (i >= _listVertsPos.Count)
                 {
                     break;
                 }
 
-                vert = verts[i];
-                pos = vert.position;
+                pos = _listVertsPos[i];
                 if (pos.x < bounds.min.x)
                 {
                     // 换行重新添加包围框  
