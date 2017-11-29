@@ -75,9 +75,17 @@ public class InlineManager : MonoBehaviour {
         int _spriteTagCount = _value.Count;
         Vector3 _textPos = _key.transform.position;
         Vector3 _spritePos = _IndexSpriteGraphic[_id]._SpriteGraphic.transform.position;
-        Vector3 _disPos = (_textPos - _spritePos)*(1.0f/ _key.pixelsPerUnit); 
+        Vector3 _disPos = (_textPos - _spritePos)*(1.0f/ _key.pixelsPerUnit);
+        //新增摄像机模式的位置判断
+        if (_key.canvas != null)
+        {
+            if (_key.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+            {
+                _disPos = _disPos / _key.canvas.transform.localScale.x;
+            }
+        }
 
-         MeshInfo _meshInfo = new MeshInfo();
+        MeshInfo _meshInfo = new MeshInfo();
         _meshInfo._Tag = new string[_spriteTagCount];
         _meshInfo._Vertices = new Vector3[_spriteTagCount * 4];
         _meshInfo._UV = new Vector2[_spriteTagCount * 4];
