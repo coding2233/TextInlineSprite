@@ -79,9 +79,10 @@ public class InlineManager : MonoBehaviour {
         //新增摄像机模式的位置判断
         if (_key.canvas != null)
         {
-            if (_key.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+            if (_key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
-                _disPos = _disPos / _key.canvas.transform.localScale.x;
+                Vector3 _scale = _key.canvas.transform.localScale;
+                _disPos = new Vector3(_disPos.x / _scale.x, _disPos.y / _scale.y, _disPos.z / _scale.z);
             }
         }
 
