@@ -28,9 +28,11 @@ public class InlineText : Text, IPointerClickHandler
     Dictionary<int, SpriteTagInfo> _SpriteInfo = new Dictionary<int, SpriteTagInfo>();
     //图集ID，相关信息
     Dictionary<int, List<SpriteTagInfo>> _DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
+	//保留之前的图集ID，相关信息
+	Dictionary<int, List<SpriteTagInfo>> _OldDrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
 
-    #region 超链接
-    [System.Serializable]
+	#region 超链接
+	[System.Serializable]
     public class HrefClickEvent : UnityEvent<string,int> { }
     //点击事件监听
     public HrefClickEvent OnHrefClick = new HrefClickEvent();
@@ -66,8 +68,8 @@ public class InlineText : Text, IPointerClickHandler
         ActiveText();
     }
 #endif
-
-    public void ActiveText()
+	
+	public void ActiveText()
     {
         //支持富文本
         supportRichText = true;
@@ -216,7 +218,10 @@ public class InlineText : Text, IPointerClickHandler
     #region 绘制表情
     void UpdateDrawnSprite()
     {
-        _DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
+		//记录之前的信息
+	    _OldDrawSpriteInfo = _DrawSpriteInfo;
+
+		_DrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
         foreach (var item in _SpriteInfo)
         {
             int _id = item.Value._ID;
@@ -233,7 +238,14 @@ public class InlineText : Text, IPointerClickHandler
             _listSpriteInfo.Add(item.Value);
         }
 
-        foreach (var item in _DrawSpriteInfo)
+		//没有表情时也要提醒manager删除之前的信息
+	    foreach (var item in _OldDrawSpriteInfo)
+	    {
+		    if(!_DrawSpriteInfo.ContainsKey(item.Key))
+			    _InlineManager.RemoveTextInfo(item.Key,this);
+		}
+
+	    foreach (var item in _DrawSpriteInfo)
         {
             _InlineManager.UpdateTextInfo(item.Key, this, item.Value);
         }

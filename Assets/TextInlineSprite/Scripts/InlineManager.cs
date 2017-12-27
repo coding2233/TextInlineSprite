@@ -25,9 +25,9 @@ public class InlineManager : MonoBehaviour {
     [SerializeField]
     [Range(1,10)]
     private float _AnimationSpeed = 5.0f;
-    
-    // Use this for initialization
-    void OnEnable()
+	
+	// Use this for initialization
+	void OnEnable()
     {
         Initialize();
     }
@@ -122,11 +122,16 @@ public class InlineManager : MonoBehaviour {
         DrawSprites(_id);
     }
 
+	/// <summary>
+	/// 移除文本 
+	/// </summary>
+	/// <param name="_id"></param>
+	/// <param name="_key"></param>
     public void RemoveTextInfo(int _id,InlineText _key)
     {
-        if (!_TextMeshInfo.ContainsKey(_id)|| _TextMeshInfo[_id].ContainsKey(_key))
+        if (!_TextMeshInfo.ContainsKey(_id)|| !_TextMeshInfo[_id].ContainsKey(_key))
             return;
-        _TextMeshInfo.Remove(_id);
+	    _TextMeshInfo[_id].Remove(_key);
         //更新图片
         DrawSprites(_id);
     }
@@ -177,13 +182,28 @@ public class InlineManager : MonoBehaviour {
     }
     #endregion
 
-    #region 绘制图片
+	/// <summary>
+	/// 清除所有的精灵
+	/// </summary>
+	public void ClearAllSprites()
+	{
+		Dictionary<int, Dictionary<InlineText, MeshInfo>> _temp = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
+		foreach (var item in _TextMeshInfo)
+			_temp[item.Key] = new Dictionary<InlineText, MeshInfo>();
+		_TextMeshInfo = _temp;
+
+		foreach (var item in _IndexSpriteGraphic)
+			DrawSprites(item.Key);
+	}
+
+	#region 绘制图片
     private void DrawSprites(int _id)
     {
         if (!_IndexSpriteGraphic.ContainsKey(_id)
             || !_TextMeshInfo.ContainsKey(_id))
             return;
-        SpriteGraphic _spriteGraphic = _IndexSpriteGraphic[_id]._SpriteGraphic;
+
+		SpriteGraphic _spriteGraphic = _IndexSpriteGraphic[_id]._SpriteGraphic;
         Mesh _mesh = _IndexSpriteGraphic[_id]._Mesh;
         Dictionary<InlineText, MeshInfo> _data = _TextMeshInfo[_id];
         List<Vector3> _vertices = new List<Vector3>();
@@ -191,7 +211,10 @@ public class InlineManager : MonoBehaviour {
         List<int> _triangles = new List<int>();
         foreach (var item in _data)
         {
-            for (int i = 0; i < item.Value._Vertices.Length; i++)
+			if (item.Key == null)
+				continue;
+
+			for (int i = 0; i < item.Value._Vertices.Length; i++)
             {
                 //添加顶点
                 _vertices.Add(item.Value._Vertices[i]);
