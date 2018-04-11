@@ -110,9 +110,7 @@ public class InlineManager : MonoBehaviour {
         if (_TextMeshInfo[_id].ContainsKey(_key))
         {
             MeshInfo _oldMeshInfo = _TextMeshInfo[_id][_key];
-            if (_meshInfo.Equals(_oldMeshInfo))
-                return;
-            else
+            if (!_meshInfo.Equals(_oldMeshInfo))
                 _TextMeshInfo[_id][_key] = _meshInfo;
         }
         else
