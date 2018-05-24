@@ -75,15 +75,16 @@ public class InlineManager : MonoBehaviour {
         int _spriteTagCount = _value.Count;
         Vector3 _textPos = _key.transform.position;
         Vector3 _spritePos = _IndexSpriteGraphic[_id]._SpriteGraphic.transform.position;
-        Vector3 _disPos = (_textPos - _spritePos)*(1.0f/ _key.pixelsPerUnit);
-        //新增摄像机模式的位置判断
-        if (_key.canvas != null)
+		Vector3 _disPos = (_textPos - _spritePos)*(1.0f/ _key.pixelsPerUnit);
+		//新增摄像机模式的位置判断
+		if (_key.canvas != null)
         {
             if (_key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
                 Vector3 _scale = _key.canvas.transform.localScale;
-                _disPos = new Vector3(_disPos.x / _scale.x, _disPos.y / _scale.y, _disPos.z / _scale.z);
-            }
+				_disPos = new Vector3(_disPos.x / _scale.x, _disPos.y / _scale.y, _disPos.z / _scale.z);
+				_disPos /= (1.0f / _key.pixelsPerUnit);
+			}
         }
 
         MeshInfo _meshInfo = new MeshInfo();
