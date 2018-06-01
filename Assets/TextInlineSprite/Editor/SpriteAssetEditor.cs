@@ -5,27 +5,27 @@ using System.Collections.Generic;
 [CustomEditor(typeof(SpriteAsset))]
 public class SpriteAssetEditor : Editor
 {
-    private SpriteAsset spriteAsset;
-    private Vector2 ve2ScorllView;
+    private SpriteAsset _spriteAsset;
+    private Vector2 _ve2ScorllView;
     //当前的所有标签
-    private List<string> tags;
+    private List<string> _tags;
     //当前的所有标签序列动画索引
-    private List<int> playIndexs;
-    private float playIndex;
+    private List<int> _playIndexs;
+    private float _playIndex;
     //当前展开的标签索引
-    private int showIndex;
+    private int _showIndex;
     //序列帧播放速度
-    private float playSpeed;
+    private float _playSpeed;
     //添加标签
-    private bool addTag;
+    private bool _addTag;
     //添加的标签的名称
-    private string addTagName;
+    private string _addTagName;
 
     public void OnEnable()
     {
-        spriteAsset = (SpriteAsset)target;
+        _spriteAsset = (SpriteAsset)target;
 
-        playSpeed = 6;
+        _playSpeed = 6;
 
         Init();
 
@@ -40,41 +40,41 @@ public class SpriteAssetEditor : Editor
     public override void OnInspectorGUI()
     {
 
-        ve2ScorllView = GUILayout.BeginScrollView(ve2ScorllView);
+        _ve2ScorllView = GUILayout.BeginScrollView(_ve2ScorllView);
 
         #region 标题栏
-        EditorGUILayout.HelpBox("Number Of Tags:" + spriteAsset.listSpriteGroup.Count + "     Number Of Group:" + spriteAsset.listSpriteGroup.Count, MessageType.Info);
+        EditorGUILayout.HelpBox("Number Of Tags:" + _spriteAsset.ListSpriteGroup.Count + "     Number Of Group:" + _spriteAsset.ListSpriteGroup.Count, MessageType.Info);
 
         GUILayout.BeginVertical("HelpBox");
         GUILayout.BeginHorizontal();
-        spriteAsset.ID = EditorGUILayout.IntField("ID:", spriteAsset.ID);
-      //  playSpeed = EditorGUILayout.FloatField("FrameSpeed", playSpeed);
+        _spriteAsset.Id = EditorGUILayout.IntField("ID:", _spriteAsset.Id);
+      //  _playSpeed = EditorGUILayout.FloatField("FrameSpeed", _playSpeed);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        spriteAsset._IsStatic = EditorGUILayout.Toggle("Static:", spriteAsset._IsStatic);
+        _spriteAsset.IsStatic = EditorGUILayout.Toggle("Static:", _spriteAsset.IsStatic);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Add Tag"))
         {
-            addTag = !addTag;
+            _addTag = !_addTag;
         }
         GUILayout.EndHorizontal();
-        if (addTag)
+        if (_addTag)
         {
             GUILayout.BeginHorizontal();
-            addTagName = EditorGUILayout.TextField(addTagName);
+            _addTagName = EditorGUILayout.TextField(_addTagName);
             if (GUILayout.Button("sure", "minibutton"))
             {
-                if (addTagName == "")
+                if (_addTagName == "")
                 {
                     Debug.Log("请输入新建标签的名称！");
                 }
                 else
                 {
-                    SpriteInforGroup spriteInforGroup = spriteAsset.listSpriteGroup.Find(
+                    SpriteInforGroup spriteInforGroup = _spriteAsset.ListSpriteGroup.Find(
                         delegate (SpriteInforGroup sig)
                         {
-                            return sig.tag == addTagName;
+                            return sig.Tag == _addTagName;
                         });
 
                     if (spriteInforGroup != null)
@@ -106,53 +106,53 @@ public class SpriteAssetEditor : Editor
         GUILayout.EndHorizontal();
         #endregion
 
-        for (int i = 0; i < spriteAsset.listSpriteGroup.Count; i++)
+        for (int i = 0; i < _spriteAsset.ListSpriteGroup.Count; i++)
         {
             GUILayout.BeginHorizontal("HelpBox");
             #region 展开与收缩按钮
-            if (GUILayout.Button(spriteAsset.listSpriteGroup[i].tag, showIndex == i ? "OL Minus" : "OL Plus"))
+            if (GUILayout.Button(_spriteAsset.ListSpriteGroup[i].Tag, _showIndex == i ? "OL Minus" : "OL Plus"))
             {
-                if (showIndex == i)
+                if (_showIndex == i)
                 {
-                    showIndex = -1;
+                    _showIndex = -1;
                 }
                 else
                 {
-                    showIndex = i;
+                    _showIndex = i;
                 }
             }
             #endregion
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Size:", GUILayout.Width(40));
-            spriteAsset.listSpriteGroup[i].size=EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].size, GUILayout.Width(40));
+            _spriteAsset.ListSpriteGroup[i].Size=EditorGUILayout.FloatField("", _spriteAsset.ListSpriteGroup[i].Size, GUILayout.Width(40));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Width:", GUILayout.Width(40));
-            spriteAsset.listSpriteGroup[i].width=EditorGUILayout.FloatField("", spriteAsset.listSpriteGroup[i].width, GUILayout.Width(40));
+            _spriteAsset.ListSpriteGroup[i].Width=EditorGUILayout.FloatField("", _spriteAsset.ListSpriteGroup[i].Width, GUILayout.Width(40));
             GUILayout.EndHorizontal();
 
             #region 未展开的sprite组，播放序列帧动画（帧数大于1的序列帧动画才播放）
-            if (showIndex != i && spriteAsset.listSpriteGroup[i].listSpriteInfor.Count > 0)
+            if (_showIndex != i && _spriteAsset.ListSpriteGroup[i].ListSpriteInfor.Count > 0)
             {
-                if (playIndexs[i] >= spriteAsset.listSpriteGroup[i].listSpriteInfor.Count)
-                    playIndexs[i] = 0;
+                if (_playIndexs[i] >= _spriteAsset.ListSpriteGroup[i].ListSpriteInfor.Count)
+                    _playIndexs[i] = 0;
 
                 GUI.enabled = false;
-                EditorGUILayout.ObjectField("", spriteAsset.listSpriteGroup[i].listSpriteInfor[playIndexs[i]].sprite, typeof(Sprite), false);
+                EditorGUILayout.ObjectField("", _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[_playIndexs[i]].Sprite, typeof(Sprite), false);
                 GUI.enabled = true;
             }
             #endregion
             GUILayout.EndHorizontal();
 
             #region 展开的sprite组，显示所有sprite属性
-            if (showIndex == i)
+            if (_showIndex == i)
             {
-                for (int j = 0; j < spriteAsset.listSpriteGroup[i].listSpriteInfor.Count; j++)
+                for (int j = 0; j < _spriteAsset.ListSpriteGroup[i].ListSpriteInfor.Count; j++)
                 {
                     GUILayout.BeginHorizontal("sprite" + j, "window");
-                    spriteAsset.listSpriteGroup[i].listSpriteInfor[j].sprite = EditorGUILayout.ObjectField("", spriteAsset.listSpriteGroup[i].listSpriteInfor[j].sprite, typeof(Sprite), false, GUILayout.Width(80)) as Sprite;
+                    _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Sprite = EditorGUILayout.ObjectField("", _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Sprite, typeof(Sprite), false, GUILayout.Width(80)) as Sprite;
 
                     GUILayout.FlexibleSpace();
 
@@ -162,30 +162,30 @@ public class SpriteAssetEditor : Editor
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("ID:", GUILayout.Width(50));
-                    spriteAsset.listSpriteGroup[i].listSpriteInfor[j].ID = EditorGUILayout.IntField(spriteAsset.listSpriteGroup[i].listSpriteInfor[j].ID);
+                    _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Id = EditorGUILayout.IntField(_spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Id);
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Name:", GUILayout.Width(50));
-                    spriteAsset.listSpriteGroup[i].listSpriteInfor[j].name = EditorGUILayout.TextField(spriteAsset.listSpriteGroup[i].listSpriteInfor[j].name);
+                    _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Name = EditorGUILayout.TextField(_spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Name);
                     GUILayout.EndHorizontal();
 
                     GUI.enabled = true;
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Tag:", GUILayout.Width(50));
-                    if (GUILayout.Button(spriteAsset.listSpriteGroup[i].listSpriteInfor[j].tag, "MiniPopup"))
+                    if (GUILayout.Button(_spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Tag, "MiniPopup"))
                     {
                         GenericMenu gm = new GenericMenu();
-                        for (int n = 0; n < tags.Count; n++)
+                        for (int n = 0; n < _tags.Count; n++)
                         {
                             int i2 = i;
                             int j2 = j;
                             int n2 = n;
-                            gm.AddItem(new GUIContent(tags[n2]), false, 
+                            gm.AddItem(new GUIContent(_tags[n2]), false, 
                                 delegate () 
                                 {
-                                    ChangeTag(tags[n2], spriteAsset.listSpriteGroup[i2].listSpriteInfor[j2]);
+                                    ChangeTag(_tags[n2], _spriteAsset.ListSpriteGroup[i2].ListSpriteInfor[j2]);
                                 });
                         }
                         gm.ShowAsContext();
@@ -196,19 +196,19 @@ public class SpriteAssetEditor : Editor
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Pivot:", GUILayout.Width(50));
-                    EditorGUILayout.Vector2Field("",spriteAsset.listSpriteGroup[i].listSpriteInfor[j].pivot);
+                    EditorGUILayout.Vector2Field("",_spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Pivot);
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Rect:", GUILayout.Width(50));
-                    EditorGUILayout.RectField("", spriteAsset.listSpriteGroup[i].listSpriteInfor[j].rect);
+                    EditorGUILayout.RectField("", _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Rect);
                     GUILayout.EndHorizontal();
 
-                    for (int m= 0; m < spriteAsset.listSpriteGroup[i].listSpriteInfor[j].uv.Length; m++)
+                    for (int m= 0; m < _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Uv.Length; m++)
                     {
                         GUILayout.BeginHorizontal();
                         GUILayout.Label("UV"+m+":", GUILayout.Width(50));
-                        EditorGUILayout.Vector2Field("", spriteAsset.listSpriteGroup[i].listSpriteInfor[j].uv[m]);
+                        EditorGUILayout.Vector2Field("", _spriteAsset.ListSpriteGroup[i].ListSpriteInfor[j].Uv[m]);
                         GUILayout.EndHorizontal();
                     }
                    
@@ -224,22 +224,22 @@ public class SpriteAssetEditor : Editor
 
         GUILayout.EndScrollView();
         //unity
-        EditorUtility.SetDirty(spriteAsset);
+        EditorUtility.SetDirty(_spriteAsset);
     }
 
     private void Init()
     {
-        tags = new List<string>();
-        playIndexs = new List<int>();
-        for (int i = 0; i < spriteAsset.listSpriteGroup.Count; i++)
+        _tags = new List<string>();
+        _playIndexs = new List<int>();
+        for (int i = 0; i < _spriteAsset.ListSpriteGroup.Count; i++)
         {
-            tags.Add(spriteAsset.listSpriteGroup[i].tag);
-            playIndexs.Add(0);
+            _tags.Add(_spriteAsset.ListSpriteGroup[i].Tag);
+            _playIndexs.Add(0);
         }
-        playIndex = 0;
-        showIndex = -1;
-        addTag = false;
-        addTagName = "";
+        _playIndex = 0;
+        _showIndex = -1;
+        _addTag = false;
+        _addTagName = "";
     }
 
     /// <summary>
@@ -247,41 +247,41 @@ public class SpriteAssetEditor : Editor
     /// </summary>
     private void ChangeTag(string newTag, SpriteInfor si)
     {
-        if (newTag == si.tag)
+        if (newTag == si.Tag)
             return;
 
         //从旧的组中移除
-        SpriteInforGroup oldSpriteInforGroup = spriteAsset.listSpriteGroup.Find(
+        SpriteInforGroup oldSpriteInforGroup = _spriteAsset.ListSpriteGroup.Find(
             delegate (SpriteInforGroup sig)
             {
-                return sig.tag == si.tag;
+                return sig.Tag == si.Tag;
             });
-        if (oldSpriteInforGroup != null && oldSpriteInforGroup.listSpriteInfor.Contains(si))
+        if (oldSpriteInforGroup != null && oldSpriteInforGroup.ListSpriteInfor.Contains(si))
         {
-            oldSpriteInforGroup.listSpriteInfor.Remove(si);
+            oldSpriteInforGroup.ListSpriteInfor.Remove(si);
         }
 
         //如果旧的组为空，则删掉旧的组
-        if (oldSpriteInforGroup.listSpriteInfor.Count <= 0)
+        if (oldSpriteInforGroup.ListSpriteInfor.Count <= 0)
         {
-            spriteAsset.listSpriteGroup.Remove(oldSpriteInforGroup);
+            _spriteAsset.ListSpriteGroup.Remove(oldSpriteInforGroup);
             Init();
         }
 
-        si.tag = newTag;
+        si.Tag = newTag;
         //添加到新的组
-        SpriteInforGroup newSpriteInforGroup = spriteAsset.listSpriteGroup.Find(
+        SpriteInforGroup newSpriteInforGroup = _spriteAsset.ListSpriteGroup.Find(
             delegate (SpriteInforGroup sig)
             {
-                return sig.tag == newTag;
+                return sig.Tag == newTag;
             });
         if (newSpriteInforGroup != null)
         {
-            newSpriteInforGroup.listSpriteInfor.Add(si);
-            newSpriteInforGroup.listSpriteInfor.Sort((a, b) => a.ID.CompareTo(b.ID));
+            newSpriteInforGroup.ListSpriteInfor.Add(si);
+            newSpriteInforGroup.ListSpriteInfor.Sort((a, b) => a.Id.CompareTo(b.Id));
         }
 
-        EditorUtility.SetDirty(spriteAsset);
+        EditorUtility.SetDirty(_spriteAsset);
     }
 
     /// <summary>
@@ -289,18 +289,18 @@ public class SpriteAssetEditor : Editor
     /// </summary>
     private void RefreshFrameAnimation()
     {
-        if (playIndex < 1)
+        if (_playIndex < 1)
         {
-            playIndex += Time.deltaTime * 0.1f * playSpeed;
+            _playIndex += Time.deltaTime * 0.1f * _playSpeed;
         }
-        if (playIndex >= 1)
+        if (_playIndex >= 1)
         {
-            playIndex = 0;
-            for (int i = 0; i < playIndexs.Count; i++)
+            _playIndex = 0;
+            for (int i = 0; i < _playIndexs.Count; i++)
             {
-                playIndexs[i] += 1;
-                if (playIndexs[i] >= spriteAsset.listSpriteGroup[i].listSpriteInfor.Count)
-                    playIndexs[i] = 0;
+                _playIndexs[i] += 1;
+                if (_playIndexs[i] >= _spriteAsset.ListSpriteGroup[i].ListSpriteInfor.Count)
+                    _playIndexs[i] = 0;
             }
             Repaint();
         }
@@ -312,14 +312,14 @@ public class SpriteAssetEditor : Editor
     private void AddTagSure()
     {
         SpriteInforGroup sig = new SpriteInforGroup();
-        sig.tag = addTagName;
-        sig.listSpriteInfor = new List<SpriteInfor>();
+        sig.Tag = _addTagName;
+        sig.ListSpriteInfor = new List<SpriteInfor>();
 
-        spriteAsset.listSpriteGroup.Insert(0, sig);
+        _spriteAsset.ListSpriteGroup.Insert(0, sig);
 
         Init();
 
-        EditorUtility.SetDirty(spriteAsset);
+        EditorUtility.SetDirty(_spriteAsset);
     }
 
     /// <summary>
@@ -327,11 +327,11 @@ public class SpriteAssetEditor : Editor
     /// </summary>
     private void ClearTag()
     {
-        for (int i = 0; i < spriteAsset.listSpriteGroup.Count; i++)
+        for (int i = 0; i < _spriteAsset.ListSpriteGroup.Count; i++)
         {
-            if (spriteAsset.listSpriteGroup[i].listSpriteInfor.Count <= 0)
+            if (_spriteAsset.ListSpriteGroup[i].ListSpriteInfor.Count <= 0)
             {
-                spriteAsset.listSpriteGroup.RemoveAt(i);
+                _spriteAsset.ListSpriteGroup.RemoveAt(i);
                 i -= 1;
             }
         }

@@ -12,20 +12,26 @@ using UnityEngine;
 
 public class InlineManager : MonoBehaviour {
 
-    //所有的精灵消息
-    public Dictionary<int, Dictionary<string, SpriteInforGroup>> _IndexSpriteInfo=new Dictionary<int, Dictionary<string, SpriteInforGroup>>();
+	#region 属性
+	//所有的精灵消息
+	public Dictionary<int, Dictionary<string, SpriteInforGroup>> IndexSpriteInfo=new Dictionary<int, Dictionary<string, SpriteInforGroup>>();
     //绘制图集的索引
-    private Dictionary<int, SpriteGraphicInfo> _IndexSpriteGraphic = new Dictionary<int, SpriteGraphicInfo>();
+    private readonly Dictionary<int, SpriteGraphicInfo> _indexSpriteGraphic = new Dictionary<int, SpriteGraphicInfo>();
     //绘制的模型数据索引
-    private Dictionary<int, Dictionary<InlineText, MeshInfo>> _TextMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
+    private Dictionary<int, Dictionary<InlineText, MeshInfo>> _textMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
     //静态表情
     [SerializeField]
-    private bool _IsStatic;
+    private bool _isStatic=true;
     //动画速度
     [SerializeField]
     [Range(1,10)]
-    private float _AnimationSpeed = 5.0f;
-	
+    private float _animationSpeed = 5.0f;
+	//动画时间
+	float _animationTime = 0.0f;
+	//动画索引
+	int _animationIndex = 0;
+	#endregion
+
 	// Use this for initialization
 	void OnEnable()
     {
@@ -35,143 +41,141 @@ public class InlineManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //动态表情
-        if(!_IsStatic)
+        if(!_isStatic)
             DrawSpriteAnimation();
     }
    
     #region 初始化
     void Initialize()
     {
-        SpriteGraphic[] _spriteGraphic = GetComponentsInChildren<SpriteGraphic>();
-        for (int i = 0; i < _spriteGraphic.Length; i++)
+        SpriteGraphic[] spriteGraphics = GetComponentsInChildren<SpriteGraphic>();
+        for (int i = 0; i < spriteGraphics.Length; i++)
         {
-            SpriteAsset _spriteAsset = _spriteGraphic[i].m_spriteAsset;
-            if (!_IndexSpriteGraphic.ContainsKey(_spriteAsset.ID)&&!_IndexSpriteInfo.ContainsKey(_spriteAsset.ID))
+            SpriteAsset mSpriteAsset = spriteGraphics[i].m_spriteAsset;
+            if (!_indexSpriteGraphic.ContainsKey(mSpriteAsset.Id)&&!IndexSpriteInfo.ContainsKey(mSpriteAsset.Id))
             {
-                SpriteGraphicInfo _spriteGraphicInfo = new SpriteGraphicInfo()
+                SpriteGraphicInfo spriteGraphicInfo = new SpriteGraphicInfo()
                 {
-                    _SpriteGraphic = _spriteGraphic[i],
-                    _Mesh = new Mesh(),
+                    SpriteGraphic = spriteGraphics[i],
+                    Mesh = new Mesh(),
                 };
-                _IndexSpriteGraphic.Add(_spriteAsset.ID, _spriteGraphicInfo);
+                _indexSpriteGraphic.Add(mSpriteAsset.Id, spriteGraphicInfo);
 
-                Dictionary<string, SpriteInforGroup> _spriteGroup = new Dictionary<string, SpriteInforGroup>();
-                foreach (var item in _spriteAsset.listSpriteGroup)
+                Dictionary<string, SpriteInforGroup> spriteGroup = new Dictionary<string, SpriteInforGroup>();
+                foreach (var item in mSpriteAsset.ListSpriteGroup)
                 {
-                    if (!_spriteGroup.ContainsKey(item.tag) && item .listSpriteInfor!=null&& item.listSpriteInfor.Count > 0)
-                        _spriteGroup.Add(item.tag, item);
+                    if (!spriteGroup.ContainsKey(item.Tag) && item .ListSpriteInfor!=null&& item.ListSpriteInfor.Count > 0)
+                        spriteGroup.Add(item.Tag, item);
                 }
-                _IndexSpriteInfo.Add(_spriteAsset.ID, _spriteGroup);
-                _TextMeshInfo.Add(_spriteAsset.ID, new Dictionary<InlineText, MeshInfo>());
+                IndexSpriteInfo.Add(mSpriteAsset.Id, spriteGroup);
+                _textMeshInfo.Add(mSpriteAsset.Id, new Dictionary<InlineText, MeshInfo>());
             }              
         }
     }
     #endregion
 
-    public void UpdateTextInfo(int _id,InlineText _key, List<SpriteTagInfo> _value)
+    public void UpdateTextInfo(int id,InlineText key, List<SpriteTagInfo> value)
     {
-        if (!_IndexSpriteGraphic.ContainsKey(_id)||!_TextMeshInfo.ContainsKey(_id)|| _value.Count<=0)
+        if (!_indexSpriteGraphic.ContainsKey(id)||!_textMeshInfo.ContainsKey(id)|| value.Count<=0)
             return;
-        int _spriteTagCount = _value.Count;
-        Vector3 _textPos = _key.transform.position;
-        Vector3 _spritePos = _IndexSpriteGraphic[_id]._SpriteGraphic.transform.position;
-		Vector3 _disPos = (_textPos - _spritePos)*(1.0f/ _key.pixelsPerUnit);
+        int spriteTagCount = value.Count;
+        Vector3 textPos = key.transform.position;
+        Vector3 spritePos = _indexSpriteGraphic[id].SpriteGraphic.transform.position;
+		Vector3 disPos = (textPos - spritePos)*(1.0f/ key.pixelsPerUnit);
 		//新增摄像机模式的位置判断
-		if (_key.canvas != null)
+		if (key.canvas != null)
         {
-            if (_key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            if (key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
-                Vector3 _scale = _key.canvas.transform.localScale;
-				_disPos = new Vector3(_disPos.x / _scale.x, _disPos.y / _scale.y, _disPos.z / _scale.z);
-				_disPos /= (1.0f / _key.pixelsPerUnit);
+                Vector3 scale = key.canvas.transform.localScale;
+				disPos = new Vector3(disPos.x / scale.x, disPos.y / scale.y, disPos.z / scale.z);
+				disPos /= (1.0f / key.pixelsPerUnit);
 			}
         }
 
-        MeshInfo _meshInfo = new MeshInfo();
-        _meshInfo._Tag = new string[_spriteTagCount];
-        _meshInfo._Vertices = new Vector3[_spriteTagCount * 4];
-        _meshInfo._UV = new Vector2[_spriteTagCount * 4];
-        _meshInfo._Triangles = new int[_spriteTagCount * 6];
-        for (int i = 0; i < _value.Count; i++)
+        MeshInfo meshInfo = new MeshInfo();
+        meshInfo.Tag = new string[spriteTagCount];
+        meshInfo.Vertices = new Vector3[spriteTagCount * 4];
+        meshInfo.Uv = new Vector2[spriteTagCount * 4];
+        meshInfo.Triangles = new int[spriteTagCount * 6];
+        for (int i = 0; i < value.Count; i++)
         {
             int m = i * 4;
             //标签
-            _meshInfo._Tag[i] = _value[i]._Tag;
+            meshInfo.Tag[i] = value[i].Tag;
             //顶点位置
-            _meshInfo._Vertices[m + 0] = _value[i]._Pos[0]+ _disPos;
-            _meshInfo._Vertices[m + 1] = _value[i]._Pos[1] + _disPos;
-            _meshInfo._Vertices[m + 2] = _value[i]._Pos[2] + _disPos;
-            _meshInfo._Vertices[m + 3] = _value[i]._Pos[3] + _disPos;
+            meshInfo.Vertices[m + 0] = value[i].Pos[0]+ disPos;
+            meshInfo.Vertices[m + 1] = value[i].Pos[1] + disPos;
+            meshInfo.Vertices[m + 2] = value[i].Pos[2] + disPos;
+            meshInfo.Vertices[m + 3] = value[i].Pos[3] + disPos;
             //uv
-            _meshInfo._UV[m + 0] = _value[i]._UV[0];
-            _meshInfo._UV[m + 1] = _value[i]._UV[1];
-            _meshInfo._UV[m + 2] = _value[i]._UV[2];
-            _meshInfo._UV[m + 3] = _value[i]._UV[3];
+            meshInfo.Uv[m + 0] = value[i].Uv[0];
+            meshInfo.Uv[m + 1] = value[i].Uv[1];
+            meshInfo.Uv[m + 2] = value[i].Uv[2];
+            meshInfo.Uv[m + 3] = value[i].Uv[3];
         }
-        if (_TextMeshInfo[_id].ContainsKey(_key))
+        if (_textMeshInfo[id].ContainsKey(key))
         {
-            MeshInfo _oldMeshInfo = _TextMeshInfo[_id][_key];
-            if (!_meshInfo.Equals(_oldMeshInfo))
-                _TextMeshInfo[_id][_key] = _meshInfo;
+            MeshInfo oldMeshInfo = _textMeshInfo[id][key];
+            if (!meshInfo.Equals(oldMeshInfo))
+                _textMeshInfo[id][key] = meshInfo;
         }
         else
-            _TextMeshInfo[_id].Add(_key, _meshInfo);
+            _textMeshInfo[id].Add(key, meshInfo);
         
         //更新图片
-        DrawSprites(_id);
+        DrawSprites(id);
     }
 
 	/// <summary>
 	/// 移除文本 
 	/// </summary>
-	/// <param name="_id"></param>
-	/// <param name="_key"></param>
-    public void RemoveTextInfo(int _id,InlineText _key)
+	/// <param name="id"></param>
+	/// <param name="key"></param>
+    public void RemoveTextInfo(int id,InlineText key)
     {
-        if (!_TextMeshInfo.ContainsKey(_id)|| !_TextMeshInfo[_id].ContainsKey(_key))
+        if (!_textMeshInfo.ContainsKey(id)|| !_textMeshInfo[id].ContainsKey(key))
             return;
-	    _TextMeshInfo[_id].Remove(_key);
+	    _textMeshInfo[id].Remove(key);
         //更新图片
-        DrawSprites(_id);
+        DrawSprites(id);
     }
 
     #region 播放动态表情
-    float _animationTime = 0.0f;
-    int _AnimationIndex = 0;
     private void DrawSpriteAnimation()
     {
-        _animationTime += Time.deltaTime* _AnimationSpeed;
+        _animationTime += Time.deltaTime* _animationSpeed;
         if (_animationTime >= 1.0f)
         {
-            _AnimationIndex++;
+            _animationIndex++;
             //绘制表情
-            foreach (var item in _IndexSpriteGraphic)
+            foreach (var item in _indexSpriteGraphic)
             {
-                if (item.Value._SpriteGraphic.m_spriteAsset._IsStatic)
+                if (item.Value.SpriteGraphic.m_spriteAsset.IsStatic)
                     continue;
-                if (!_TextMeshInfo.ContainsKey(item.Key) || _TextMeshInfo[item.Key].Count <= 0)
+                if (!_textMeshInfo.ContainsKey(item.Key) || _textMeshInfo[item.Key].Count <= 0)
                     continue;
 
-                //Mesh _mesh = _IndexSpriteGraphic[item.Key]._Mesh;
-                Dictionary<InlineText, MeshInfo> _data = _TextMeshInfo[item.Key];
+                //Mesh _mesh = _indexSpriteGraphic[item.Key].Mesh;
+                Dictionary<InlineText, MeshInfo> _data = _textMeshInfo[item.Key];
                 foreach (var item02 in _data)
                 {
-                    for (int i = 0; i < item02.Value._Tag.Length; i++)
+                    for (int i = 0; i < item02.Value.Tag.Length; i++)
                     {
-                        List<SpriteInfor> _listSpriteInfo = _IndexSpriteInfo[item.Key][item02.Value._Tag[i]].listSpriteInfor;
+                        List<SpriteInfor> _listSpriteInfo = IndexSpriteInfo[item.Key][item02.Value.Tag[i]].ListSpriteInfor;
                         if (_listSpriteInfo.Count <= 1)
                             continue;
-                        int _index = _AnimationIndex % _listSpriteInfo.Count;
+                        int _index = _animationIndex % _listSpriteInfo.Count;
                         
                         int m = i * 4;
-                        item02.Value._UV[m + 0] = _listSpriteInfo[_index].uv[0];
-                        item02.Value._UV[m + 1] = _listSpriteInfo[_index].uv[1];
-                        item02.Value._UV[m + 2] = _listSpriteInfo[_index].uv[2];
-                        item02.Value._UV[m + 3] = _listSpriteInfo[_index].uv[3];
+                        item02.Value.Uv[m + 0] = _listSpriteInfo[_index].Uv[0];
+                        item02.Value.Uv[m + 1] = _listSpriteInfo[_index].Uv[1];
+                        item02.Value.Uv[m + 2] = _listSpriteInfo[_index].Uv[2];
+                        item02.Value.Uv[m + 3] = _listSpriteInfo[_index].Uv[3];
                         
                     }
                 }
-               // _IndexSpriteGraphic[item.Key]._Mesh = _mesh;
+               // _indexSpriteGraphic[item.Key].Mesh = _mesh;
                 DrawSprites(item.Key);
             }
 
@@ -187,94 +191,94 @@ public class InlineManager : MonoBehaviour {
 	public void ClearAllSprites()
 	{
 		Dictionary<int, Dictionary<InlineText, MeshInfo>> _temp = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
-		foreach (var item in _TextMeshInfo)
+		foreach (var item in _textMeshInfo)
 			_temp[item.Key] = new Dictionary<InlineText, MeshInfo>();
-		_TextMeshInfo = _temp;
+		_textMeshInfo = _temp;
 
-		foreach (var item in _IndexSpriteGraphic)
+		foreach (var item in _indexSpriteGraphic)
 			DrawSprites(item.Key);
 	}
 
 	#region 绘制图片
-    private void DrawSprites(int _id)
+    private void DrawSprites(int id)
     {
-        if (!_IndexSpriteGraphic.ContainsKey(_id)
-            || !_TextMeshInfo.ContainsKey(_id))
+        if (!_indexSpriteGraphic.ContainsKey(id)
+            || !_textMeshInfo.ContainsKey(id))
             return;
 
-		SpriteGraphic _spriteGraphic = _IndexSpriteGraphic[_id]._SpriteGraphic;
-        Mesh _mesh = _IndexSpriteGraphic[_id]._Mesh;
-        Dictionary<InlineText, MeshInfo> _data = _TextMeshInfo[_id];
-        List<Vector3> _vertices = new List<Vector3>();
-        List<Vector2> _uv = new List<Vector2>();
-        List<int> _triangles = new List<int>();
-        foreach (var item in _data)
+		SpriteGraphic spriteGraphic = _indexSpriteGraphic[id].SpriteGraphic;
+        Mesh mesh = _indexSpriteGraphic[id].Mesh;
+        Dictionary<InlineText, MeshInfo> data = _textMeshInfo[id];
+        List<Vector3> vertices = new List<Vector3>();
+        List<Vector2> uv = new List<Vector2>();
+        List<int> triangles = new List<int>();
+        foreach (var item in data)
         {
 			if (item.Key == null)
 				continue;
 
-			for (int i = 0; i < item.Value._Vertices.Length; i++)
+			for (int i = 0; i < item.Value.Vertices.Length; i++)
             {
                 //添加顶点
-                _vertices.Add(item.Value._Vertices[i]);
+                vertices.Add(item.Value.Vertices[i]);
                 //添加uv
-                _uv.Add(item.Value._UV[i]);
+                uv.Add(item.Value.Uv[i]);
             }
             //添加顶点索引
-            for (int i = 0; i < item.Value._Triangles.Length; i++)
-                _triangles.Add(item.Value._Triangles[i]);
+            for (int i = 0; i < item.Value.Triangles.Length; i++)
+                triangles.Add(item.Value.Triangles[i]);
         }
         //计算顶点绘制顺序
-        for (int i = 0; i < _triangles.Count; i++)
+        for (int i = 0; i < triangles.Count; i++)
         {
             if (i % 6 == 0)
             {
                 int num = i / 6;
-                _triangles[i + 0] = 0 + 4 * num;
-                _triangles[i + 1] = 1 + 4 * num;
-                _triangles[i + 2] = 2 + 4 * num;
+                triangles[i + 0] = 0 + 4 * num;
+                triangles[i + 1] = 1 + 4 * num;
+                triangles[i + 2] = 2 + 4 * num;
 
-                _triangles[i + 3] = 0 + 4 * num;
-                _triangles[i + 4] = 2 + 4 * num;
-                _triangles[i + 5] = 3 + 4 * num;
+                triangles[i + 3] = 0 + 4 * num;
+                triangles[i + 4] = 2 + 4 * num;
+                triangles[i + 5] = 3 + 4 * num;
             }
         }
-        _mesh.Clear();
-        _mesh.vertices = _vertices.ToArray();
-        _mesh.uv = _uv.ToArray();
-        _mesh.triangles = _triangles.ToArray();
+        mesh.Clear();
+        mesh.vertices = vertices.ToArray();
+        mesh.uv = uv.ToArray();
+        mesh.triangles = triangles.ToArray();
 
-        _spriteGraphic.canvasRenderer.SetMesh(_mesh);
-        _spriteGraphic.UpdateMaterial();
+        spriteGraphic.canvasRenderer.SetMesh(mesh);
+        spriteGraphic.UpdateMaterial();
     }
     #endregion
 
     #region 精灵组信息
     private class SpriteGraphicInfo
     {
-        public SpriteGraphic _SpriteGraphic;
-        public Mesh _Mesh;
+        public SpriteGraphic SpriteGraphic;
+        public Mesh Mesh;
     }
     #endregion
 
     #region 模型数据信息
     private class MeshInfo
     {
-        public string[] _Tag;
-        public Vector3[] _Vertices;
-        public Vector2[] _UV;
-        public int[] _Triangles;
+        public string[] Tag;
+        public Vector3[] Vertices;
+        public Vector2[] Uv;
+        public int[] Triangles;
 
         //比较数据是否一样
-        public bool Equals(MeshInfo _value)
+        public bool Equals(MeshInfo value)
         {
-            if (_Tag.Length!= _value._Tag.Length|| _Vertices.Length!= _value._Vertices.Length)
+            if (Tag.Length!= value.Tag.Length|| Vertices.Length!= value.Vertices.Length)
                 return false;
-            for (int i = 0; i < _Tag.Length; i++)
-                if (_Tag[i] != _value._Tag[i])
+            for (int i = 0; i < Tag.Length; i++)
+                if (Tag[i] != value.Tag[i])
                     return false;
-            for (int i = 0; i < _Vertices.Length; i++)
-                if (_Vertices[i] != _value._Vertices[i])
+            for (int i = 0; i < Vertices.Length; i++)
+                if (Vertices[i] != value.Vertices[i])
                     return false;
             return true;
         }

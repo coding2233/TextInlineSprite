@@ -34,8 +34,8 @@ public class ChatTest : MonoBehaviour {
 
         GameObject _chatClone = Instantiate(_PreChatItem);
         _chatClone.transform.SetParent( _ChatParent);
-        InlineText _chatText = _chatClone.transform.FindChild("Text").GetComponent<InlineText>();
-        Image _chatImage= _chatClone.transform.FindChild("BG").GetComponent<Image>();
+        InlineText _chatText = _chatClone.transform.Find("Text").GetComponent<InlineText>();
+        Image _chatImage= _chatClone.transform.Find("BG").GetComponent<Image>();
         _chatText.text = _chatString;
       //  _chatText.ActiveText();
         Vector2 _imagSize = _ChatTextSize;

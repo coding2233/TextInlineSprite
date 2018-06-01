@@ -9,10 +9,10 @@ public class SpriteGraphic : MaskableGraphic {
     {
         get
         {
-            if (m_spriteAsset == null|| m_spriteAsset.texSource==null)
+            if (m_spriteAsset == null|| m_spriteAsset.TexSource==null)
                 return s_WhiteTexture;
             else
-                return m_spriteAsset.texSource;
+                return m_spriteAsset.TexSource;
         }
     }
     

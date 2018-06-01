@@ -28,8 +28,8 @@ public static class CreateSpriteAsset
         if (isNewAsset)
         {
             spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
-            spriteAsset.texSource = sourceTex;
-            spriteAsset.listSpriteGroup = GetAssetSpriteInfor(sourceTex);
+            spriteAsset.TexSource = sourceTex;
+            spriteAsset.ListSpriteGroup = GetAssetSpriteInfor(sourceTex);
             AssetDatabase.CreateAsset(spriteAsset, filePath + fileNameWithoutExtension + ".asset");
         }
     }
@@ -50,29 +50,29 @@ public static class CreateSpriteAsset
                 continue;
                 SpriteInfor temp = new SpriteInfor();
                 Sprite sprite = objects[i] as Sprite;
-                temp.ID = i;
-                temp.name = sprite.name;
-                temp.pivot = sprite.pivot;
-                temp.rect = sprite.rect;
-                temp.sprite = sprite;
-                temp.tag = sprite.name;
-                temp.uv = GetSpriteUV(_texSize, sprite.rect);
+                temp.Id = i;
+                temp.Name = sprite.name;
+                temp.Pivot = sprite.pivot;
+                temp.Rect = sprite.rect;
+                temp.Sprite = sprite;
+                temp.Tag = sprite.name;
+                temp.Uv = GetSpriteUV(_texSize, sprite.rect);
                  _tempSprite.Add(temp);
         }
 
         for (int i = 0; i < _tempSprite.Count; i++)
         {
             SpriteInforGroup _tempGroup = new SpriteInforGroup();
-            _tempGroup.tag = _tempSprite[i].tag;
-            //_tempGroup.size = 24.0f;
-            //_tempGroup.width = 1.0f;
-            _tempGroup.listSpriteInfor = new List<SpriteInfor>();
-            _tempGroup.listSpriteInfor.Add(_tempSprite[i]);
+            _tempGroup.Tag = _tempSprite[i].Tag;
+            //_tempGroup.Size = 24.0f;
+            //_tempGroup.Width = 1.0f;
+            _tempGroup.ListSpriteInfor = new List<SpriteInfor>();
+            _tempGroup.ListSpriteInfor.Add(_tempSprite[i]);
             for (int j = i+1; j < _tempSprite.Count; j++)
             {
-                if ( _tempGroup.tag == _tempSprite[j].tag)
+                if ( _tempGroup.Tag == _tempSprite[j].Tag)
                 {
-                    _tempGroup.listSpriteInfor.Add(_tempSprite[j]);
+                    _tempGroup.ListSpriteInfor.Add(_tempSprite[j]);
                     _tempSprite.RemoveAt(j);
                     j--;
                 }
