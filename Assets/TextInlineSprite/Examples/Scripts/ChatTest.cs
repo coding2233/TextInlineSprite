@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EmojiUI;
 
 public class ChatTest : MonoBehaviour {
 

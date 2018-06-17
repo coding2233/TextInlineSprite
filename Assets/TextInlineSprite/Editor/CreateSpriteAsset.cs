@@ -3,83 +3,89 @@ using System.Collections;
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+using EmojiUI;
 
 public static class CreateSpriteAsset
 {
     [MenuItem("Assets/Create/Sprite Asset",false,10)]
-    static void main()
+    static void CreateSpriteAssets()
     {
-        Object target = Selection.activeObject;
-        if (target == null || target.GetType() != typeof(Texture2D))
-            return;
-
-        Texture2D sourceTex = target as Texture2D;
-        //整体路径
-        string filePathWithName = AssetDatabase.GetAssetPath(sourceTex);
-        //带后缀的文件名
-        string fileNameWithExtension = Path.GetFileName(filePathWithName);
-        //不带后缀的文件名
-        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePathWithName);
-        //不带文件名的路径
-        string filePath = filePathWithName.Replace(fileNameWithExtension, "");
-
-        SpriteAsset spriteAsset = AssetDatabase.LoadAssetAtPath(filePath + fileNameWithoutExtension + ".asset", typeof(SpriteAsset)) as SpriteAsset;
-        bool isNewAsset = spriteAsset == null ? true : false;
-        if (isNewAsset)
+        string[] guids =  Selection.assetGUIDs;
+        for(int i =0; i < guids.Length;++i)
         {
-            spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
-            spriteAsset.TexSource = sourceTex;
-            spriteAsset.ListSpriteGroup = GetAssetSpriteInfor(sourceTex);
-            AssetDatabase.CreateAsset(spriteAsset, filePath + fileNameWithoutExtension + ".asset");
+            string guid = guids[i];
+            string filepath = AssetDatabase.GUIDToAssetPath(guid);
+            GenerateSpriteInfo(filepath);
         }
+
+        AssetDatabase.Refresh();
+    }
+
+    static void GenerateSpriteInfo(string unitypath)
+    {
+        Texture2D sourceTex = AssetDatabase.LoadAssetAtPath<Texture2D>(unitypath);
+        if(sourceTex != null)
+        {
+            string Extensionname = Path.GetExtension(unitypath);
+            string filePath = unitypath.Replace(Extensionname, ".asset");
+
+            SpriteAsset spriteAsset = AssetDatabase.LoadAssetAtPath(filePath, typeof(SpriteAsset)) as SpriteAsset;
+            int tag = 0;
+            if (spriteAsset != null)
+            {
+                tag = spriteAsset.ID;
+            }
+
+            //replace
+            spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
+            spriteAsset.ID = tag;
+            spriteAsset.AssetName = sourceTex.ToString();
+            spriteAsset.texSource = sourceTex;
+            spriteAsset.listSpriteGroup = GetAssetSpriteInfor(sourceTex);
+            AssetDatabase.CreateAsset(spriteAsset, filePath);
+        }
+
     }
    
-    public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
+    static List<SpriteInfoGroup> GetAssetSpriteInfor(Texture2D tex)
     {
-        List<SpriteInforGroup> _listGroup = new List<SpriteInforGroup>();
-        string filePath = UnityEditor.AssetDatabase.GetAssetPath(tex);
+        string filePath = AssetDatabase.GetAssetPath(tex);
+        Object[] objects = AssetDatabase.LoadAllAssetsAtPath(filePath);
 
-        Object[] objects = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(filePath);
+        List<SpriteInfoGroup> _listGroup = new List<SpriteInfoGroup>();
+        List<SpriteInfo> allSprites = new List<SpriteInfo>();
 
-        List<SpriteInfor> _tempSprite = new List<SpriteInfor>();
-
-        Vector2 _texSize = new Vector2(tex.width, tex.height);
+        Vector2 texelSize = new Vector2(tex.width, tex.height);
         for (int i = 0; i < objects.Length; i++)
         {
-            if (objects[i].GetType() != typeof(Sprite))
-                continue;
-                SpriteInfor temp = new SpriteInfor();
-                Sprite sprite = objects[i] as Sprite;
-                temp.Id = i;
-                temp.Name = sprite.name;
-                temp.Pivot = sprite.pivot;
-                temp.Rect = sprite.rect;
-                temp.Sprite = sprite;
-                temp.Tag = sprite.name;
-                temp.Uv = GetSpriteUV(_texSize, sprite.rect);
-                 _tempSprite.Add(temp);
-        }
+            Sprite sprite = objects[i] as Sprite;
 
-        for (int i = 0; i < _tempSprite.Count; i++)
-        {
-            SpriteInforGroup _tempGroup = new SpriteInforGroup();
-            _tempGroup.Tag = _tempSprite[i].Tag;
-            //_tempGroup.Size = 24.0f;
-            //_tempGroup.Width = 1.0f;
-            _tempGroup.ListSpriteInfor = new List<SpriteInfor>();
-            _tempGroup.ListSpriteInfor.Add(_tempSprite[i]);
-            for (int j = i+1; j < _tempSprite.Count; j++)
+            if (sprite != null)
             {
-                if ( _tempGroup.Tag == _tempSprite[j].Tag)
+                SpriteInfo seeked = allSprites.Find(p => p.tag == sprite.name);
+                if(seeked == null)
                 {
-                    _tempGroup.ListSpriteInfor.Add(_tempSprite[j]);
-                    _tempSprite.RemoveAt(j);
-                    j--;
+                    SpriteInfo temp = new SpriteInfo();
+                    temp.sprite = sprite;
+                    temp.tag = sprite.name;
+                    temp.uv = GetSpriteUV(texelSize, sprite.rect);
+                    allSprites.Add(temp);
                 }
             }
+
+        }
+
+        for (int i = 0; i < allSprites.Count; i++)
+        {
+            SpriteInfo info = allSprites[i];
+
+            SpriteInfoGroup _tempGroup = new SpriteInfoGroup();
+            _tempGroup.tag = info.tag;
+            _tempGroup.size = Mathf.Max(info.sprite.rect.size.x, info.sprite.rect.size.y);
+            _tempGroup.width =1;
+            _tempGroup.spritegroups.Add(info);
+
             _listGroup.Add(_tempGroup);
-            _tempSprite.RemoveAt(i);
-            i--;
         }
 
         return _listGroup;

@@ -1,0 +1,277 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efe682ead7eb154f97508822f9d073c, type: 3}
+  m_Name: emoji
+  m_EditorClassIdentifier: 
+  AssetName: emoji
+  ID: 0
+  texSource: {fileID: 2800000, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  listSpriteGroup:
+  - tag: emoji_0
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300000, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_0
+      uv:
+      - {x: 0.05078125, y: 0.94736844}
+      - {x: 0.19726562, y: 0.94736844}
+      - {x: 0.19726562, y: 0.7679426}
+      - {x: 0.05078125, y: 0.7679426}
+  - tag: emoji_1
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300002, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_1
+      uv:
+      - {x: 0.23046875, y: 0.94736844}
+      - {x: 0.37695312, y: 0.94736844}
+      - {x: 0.37695312, y: 0.7679426}
+      - {x: 0.23046875, y: 0.7679426}
+  - tag: emoji_2
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300004, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_2
+      uv:
+      - {x: 0.45507812, y: 0.95454544}
+      - {x: 0.60546875, y: 0.95454544}
+      - {x: 0.60546875, y: 0.75717705}
+      - {x: 0.45507812, y: 0.75717705}
+  - tag: emoji_3
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300006, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_3
+      uv:
+      - {x: 0.6376953, y: 0.95454544}
+      - {x: 0.7832031, y: 0.95454544}
+      - {x: 0.7832031, y: 0.7619617}
+      - {x: 0.6376953, y: 0.7619617}
+  - tag: emoji_4
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300008, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_4
+      uv:
+      - {x: 0.8251953, y: 0.9533493}
+      - {x: 0.9765625, y: 0.9533493}
+      - {x: 0.9765625, y: 0.7595694}
+      - {x: 0.8251953, y: 0.7595694}
+  - tag: emoji_5
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300010, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_5
+      uv:
+      - {x: 0.040039062, y: 0.73564595}
+      - {x: 0.18066406, y: 0.73564595}
+      - {x: 0.18066406, y: 0.5514354}
+      - {x: 0.040039062, y: 0.5514354}
+  - tag: emoji_6
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300012, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_6
+      uv:
+      - {x: 0.22460938, y: 0.7296651}
+      - {x: 0.37402344, y: 0.7296651}
+      - {x: 0.37402344, y: 0.5466507}
+      - {x: 0.22460938, y: 0.5466507}
+  - tag: emoji_7
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300014, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_7
+      uv:
+      - {x: 0.45898438, y: 0.7296651}
+      - {x: 0.60058594, y: 0.7296651}
+      - {x: 0.60058594, y: 0.5394737}
+      - {x: 0.45898438, y: 0.5394737}
+  - tag: emoji_8
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300016, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_8
+      uv:
+      - {x: 0.640625, y: 0.7296651}
+      - {x: 0.7939453, y: 0.7296651}
+      - {x: 0.7939453, y: 0.53708136}
+      - {x: 0.640625, y: 0.53708136}
+  - tag: emoji_9
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300018, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_9
+      uv:
+      - {x: 0.8222656, y: 0.7296651}
+      - {x: 0.96972656, y: 0.7296651}
+      - {x: 0.96972656, y: 0.54545456}
+      - {x: 0.8222656, y: 0.54545456}
+  - tag: emoji_10
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300020, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_10
+      uv:
+      - {x: 0.053710938, y: 0.51913875}
+      - {x: 0.1875, y: 0.51913875}
+      - {x: 0.1875, y: 0.33014354}
+      - {x: 0.053710938, y: 0.33014354}
+  - tag: emoji_11
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300022, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_11
+      uv:
+      - {x: 0.23925781, y: 0.5167464}
+      - {x: 0.36621094, y: 0.5167464}
+      - {x: 0.36621094, y: 0.3325359}
+      - {x: 0.23925781, y: 0.3325359}
+  - tag: emoji_12
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300024, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_12
+      uv:
+      - {x: 0.45703125, y: 0.5167464}
+      - {x: 0.5957031, y: 0.5167464}
+      - {x: 0.5957031, y: 0.31339714}
+      - {x: 0.45703125, y: 0.31339714}
+  - tag: emoji_13
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300026, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_13
+      uv:
+      - {x: 0.6386719, y: 0.5215311}
+      - {x: 0.78808594, y: 0.5215311}
+      - {x: 0.78808594, y: 0.319378}
+      - {x: 0.6386719, y: 0.319378}
+  - tag: emoji_14
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300028, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_14
+      uv:
+      - {x: 0.83203125, y: 0.51913875}
+      - {x: 0.95996094, y: 0.51913875}
+      - {x: 0.95996094, y: 0.31459332}
+      - {x: 0.83203125, y: 0.31459332}
+  - tag: emoji_15
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300030, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_15
+      uv:
+      - {x: 0.064453125, y: 0.27631578}
+      - {x: 0.20214844, y: 0.27631578}
+      - {x: 0.20214844, y: 0.09569378}
+      - {x: 0.064453125, y: 0.09569378}
+  - tag: emoji_16
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300032, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_16
+      uv:
+      - {x: 0.2548828, y: 0.28349283}
+      - {x: 0.3857422, y: 0.28349283}
+      - {x: 0.3857422, y: 0.098086126}
+      - {x: 0.2548828, y: 0.098086126}
+  - tag: emoji_17
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300034, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_17
+      uv:
+      - {x: 0.45507812, y: 0.2751196}
+      - {x: 0.60058594, y: 0.2751196}
+      - {x: 0.60058594, y: 0.07296651}
+      - {x: 0.45507812, y: 0.07296651}
+  - tag: emoji_18
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300036, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_18
+      uv:
+      - {x: 0.6455078, y: 0.27870813}
+      - {x: 0.7841797, y: 0.27870813}
+      - {x: 0.7841797, y: 0.08014354}
+      - {x: 0.6455078, y: 0.08014354}
+  - tag: emoji_19
+    width: 1
+    size: 25
+    x: 0
+    y: 0
+    spritegroups:
+    - sprite: {fileID: 21300038, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+      tag: emoji_19
+      uv:
+      - {x: 0.8232422, y: 0.27631578}
+      - {x: 0.9707031, y: 0.27631578}
+      - {x: 0.9707031, y: 0.08133971}
+      - {x: 0.8232422, y: 0.08133971}
