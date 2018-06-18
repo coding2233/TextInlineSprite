@@ -58,6 +58,25 @@ namespace EmojiUI
         private List<HrefInfo> _ListHrefInfos;
         #endregion
 
+        public override float preferredWidth
+        {
+            get
+            {
+                var settings = GetGenerationSettings(Vector2.zero);
+                return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+            }
+        }
+
+
+        public override float preferredHeight
+        {
+            get
+            {
+                var settings = GetGenerationSettings(new Vector2(GetPixelAdjustedRect().size.x, 0.0f));
+                return cachedTextGeneratorForLayout.GetPreferredHeight(_OutputText, settings) / pixelsPerUnit;
+            }
+        }
+
         protected override void Start()
         {
             base.Start();
