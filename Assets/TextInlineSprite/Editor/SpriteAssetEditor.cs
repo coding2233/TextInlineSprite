@@ -150,7 +150,7 @@ namespace EmojiUI
                     for (int j = 0; j < group.spritegroups.Count; ++j)
                     {
                         SpriteInfo info = group.spritegroups[j];
-                        float value = Mathf.Max(info.sprite.rect.x, info.sprite.rect.y);
+                        float value = Mathf.Max(info.sprite.rect.width, info.sprite.rect.height);
                         group.size = Mathf.Max(value, group.size);
                         group.width = 1;
                     }

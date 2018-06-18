@@ -408,12 +408,12 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    _textBuilder.AppendFormat("<quad material=1 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, tagSprites.size, tagSprites.width);
+                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, tagSprites.size, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
                         SpriteTagInfo _tempSpriteTag = RenderTagList[Index];
-                        if(Id != _tempSpriteTag._ID || TagName != _tempSpriteTag._Tag)
+                        if(Id != _tempSpriteTag._ID || TagName != _tempSpriteTag._Tag || _tempIndex != _tempSpriteTag._Position)
                         {
                             _tempSpriteTag._ID = Id;
                             _tempSpriteTag._Tag = TagName;

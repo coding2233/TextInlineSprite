@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EmojiUI;
+using TMPro;
+using TMPro.SpriteAssetUtilities;
 
 public class ChatTest : MonoBehaviour {
 
@@ -22,10 +24,11 @@ public class ChatTest : MonoBehaviour {
     private RectTransform _ViewContent;
     [SerializeField]
     private InputField _InputText;
-    
-    Vector2 _ChatTextSize = new Vector2(330.0f, 26.0f);
-    float _ViewHight = 0.0f;
-	
+
+    public CalFps cal;
+
+    public int testcnt;
+
     #region 点击发送
     public void OnClickSend()
     {
@@ -33,23 +36,26 @@ public class ChatTest : MonoBehaviour {
         if (string.IsNullOrEmpty(_chatString))
             return;
 
-        GameObject _chatClone = Instantiate(_PreChatItem);
-        _chatClone.transform.SetParent( _ChatParent);
-        InlineText _chatText = _chatClone.transform.Find("Text").GetComponent<InlineText>();
-        Image _chatImage= _chatClone.transform.Find("BG").GetComponent<Image>();
-        _chatText.text = _chatString;
-      //  _chatText.ActiveText();
-        Vector2 _imagSize = _ChatTextSize;
-        if (_chatText.preferredWidth < _ChatTextSize.x)
-            _imagSize.x = _chatText.preferredWidth+0.3f;
-        if(_chatText.preferredHeight> _ChatTextSize.y)
-            _imagSize.y = _chatText.preferredHeight+0.8f;
-        _chatImage.rectTransform.sizeDelta = _imagSize;
-        Vector2 _pos = new Vector2(0.0f, _ViewHight);
-        _chatClone.GetComponent<RectTransform>().anchoredPosition= _pos;
-    
-        _ViewHight += -_imagSize.y - 20.0f;
-        _ViewContent.sizeDelta = new Vector2(_ViewContent.sizeDelta.x,Mathf.Abs( _ViewHight));
+        for(int i =0;i < testcnt;++i)
+        {
+            GameObject _chatClone = Instantiate(_PreChatItem);
+            _chatClone.transform.SetParent(_ChatParent);
+
+            InlineText _chatText = _chatClone.GetComponentInChildren<InlineText>();
+            if (_chatText != null)
+            {
+                _chatText.text = _chatString;
+            }
+
+            TextMeshProUGUI textmesh = _chatClone.GetComponentInChildren<TextMeshProUGUI>();
+            if (textmesh != null)
+            {
+                textmesh.text = _chatString;
+            }
+        }
+
+        cal.Reset();
+
     }
     #endregion
 }
