@@ -58,15 +58,74 @@ namespace EmojiUI
         private List<HrefInfo> _ListHrefInfos;
         #endregion
 
+        private float? _pw;
+
         public override float preferredWidth
         {
             get
             {
-                var settings = GetGenerationSettings(Vector2.zero);
-                return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+                if(_pw == null)
+                {
+                    //its override from uGUI Code ,but has bug?
+
+                    //var settings = GetGenerationSettings(Vector2.zero);
+                    //return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+
+                    //next idea
+                    Vector2 extents = rectTransform.rect.size;
+
+                    var settings = GetGenerationSettings(extents);
+                    cachedTextGenerator.Populate(_OutputText, settings);
+    
+                    if(cachedTextGenerator.lineCount > 1)
+                    {
+                        float? minx = null;
+                        float? maxx = null;
+                        IList<UIVertex> verts = cachedTextGenerator.verts;
+                        int maxIndex = cachedTextGenerator.lines[1].startCharIdx;
+
+                        for (int i = 0, index = 0; i < verts.Count; i += 4, index++)
+                        {
+                            UIVertex v0 = verts[i];
+                            UIVertex v2 = verts[i + 1];
+                            float min = v0.position.x;
+                            float max = v2.position.x;
+
+                            if (minx.HasValue == false)
+                            {
+                                minx = min;
+                            }
+                            else
+                            {
+                                minx = Mathf.Min(minx.Value, min);
+                            }
+
+                            if (maxx.HasValue == false)
+                            {
+                                maxx = max;
+                            }
+                            else
+                            {
+                                maxx = Mathf.Max(maxx.Value, max);
+                            }
+
+                            if (index > maxIndex)
+                            {
+                                break;
+                            }
+                        }
+
+                        _pw = (maxx - minx);
+                    }
+                    else
+                    {
+                        _pw = cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+                    }
+                   
+                }
+                return _pw.Value;
             }
         }
-
 
         public override float preferredHeight
         {
@@ -75,6 +134,55 @@ namespace EmojiUI
                 var settings = GetGenerationSettings(new Vector2(GetPixelAdjustedRect().size.x, 0.0f));
                 return cachedTextGeneratorForLayout.GetPreferredHeight(_OutputText, settings) / pixelsPerUnit;
             }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+
+            Vector3 size = new Vector3(preferredWidth, preferredHeight, 0);
+            Vector3 fixsize = transform.TransformDirection(rectTransform.rect.size);
+            Vector3 textsize =transform.TransformDirection(size);
+
+            Vector3 fixpos = transform.position ;
+            if(this.alignment == TextAnchor.LowerCenter)
+            {
+                fixpos += new Vector3(0, -0.5f * (fixsize.y - textsize.y) , 0);
+            }
+            else if(this.alignment == TextAnchor.LowerLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.LowerRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleCenter)
+            {
+                fixpos += new Vector3(0, 0, 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x),0, 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0, 0);
+            }
+            else if (this.alignment == TextAnchor.UpperCenter)
+            {
+                fixpos += new Vector3(0, 0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.UpperLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.UpperRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            }
+
+            Gizmos.DrawWireCube(fixpos, textsize);
         }
 
         protected override void Start()
@@ -97,6 +205,7 @@ namespace EmojiUI
             base.SetVerticesDirty();
             if (!Application.isPlaying || !Manager)
             {
+                _pw = null;
                 _OutputText = m_Text;
                 return;
             }
@@ -106,11 +215,13 @@ namespace EmojiUI
             {
                 _OutputText = outtext;
                 needupdate = true;
+                _pw = null;
             }
             else
             {
                 _OutputText = m_Text;
                 needupdate = true;
+                _pw = null;
             }
         }
 
