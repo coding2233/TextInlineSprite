@@ -427,7 +427,8 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, tagSprites.size, tagSprites.width);
+                    float autosize = Mathf.Min(tagSprites.size, this.rectTransform.rect.height);
+                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
