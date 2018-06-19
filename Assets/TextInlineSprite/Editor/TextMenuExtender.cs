@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using EmojiUI;
 
 public class TextMenuExtender
 {
@@ -10,10 +11,10 @@ public class TextMenuExtender
     static void CreateCustomGameObject(MenuCommand menuCommand)
     {
         GameObject go = null;
-        InlineManager inline = AssetDatabase.LoadAssetAtPath<InlineManager>("Assets/TextInlineSprite/Prefabs/TextInline.prefab");
-        if (inline)
+        InlineManager _inline = AssetDatabase.LoadAssetAtPath<InlineManager>("Assets/TextInlineSprite/Prefabs/TextInline.prefab");
+        if (_inline)
         {
-            go = GameObject.Instantiate(inline).gameObject;
+            go = GameObject.Instantiate(_inline).gameObject;
         }
         else
         {
@@ -21,14 +22,14 @@ public class TextMenuExtender
             go.AddComponent<InlineText>();
         }
         go.name = "InlinText";
-        GameObject parent = menuCommand.context as GameObject;
-        if (parent == null)
+        GameObject _parent = menuCommand.context as GameObject;
+        if (_parent == null)
         {
-            parent = new GameObject("Canvas");
-            parent.layer = LayerMask.NameToLayer("UI");
-            parent.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-            parent.AddComponent<CanvasScaler>();
-            parent.AddComponent<GraphicRaycaster>();
+            _parent = new GameObject("Canvas");
+            _parent.layer = LayerMask.NameToLayer("UI");
+            _parent.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            _parent.AddComponent<CanvasScaler>();
+            _parent.AddComponent<GraphicRaycaster>();
 
             EventSystem _es = GameObject.FindObjectOfType<EventSystem>();
             if (!_es)
@@ -37,7 +38,7 @@ public class TextMenuExtender
                 _es.gameObject.AddComponent<StandaloneInputModule>();
             }
         }
-        GameObjectUtility.SetParentAndAlign(go, parent);
+        GameObjectUtility.SetParentAndAlign(go, _parent);
         //注册返回事件
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
