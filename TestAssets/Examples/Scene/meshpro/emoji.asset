@@ -1,0 +1,332 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2019389346, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Name: emoji
+  m_EditorClassIdentifier: 
+  hashCode: 123227204
+  material: {fileID: 21580996926465624}
+  materialHashCode: 0
+  spriteSheet: {fileID: 2800000, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  spriteInfoList:
+  - id: 0
+    x: 52
+    y: 642
+    width: 150
+    height: 150
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 150
+    scale: 1
+    name: emoji_0
+    hashCode: 1050437579
+    unicode: 0
+    pivot: {x: -75, y: 75}
+    sprite: {fileID: 21300000, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 1
+    x: 236
+    y: 642
+    width: 150
+    height: 150
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 150
+    scale: 1
+    name: emoji_1
+    hashCode: 1050437578
+    unicode: 0
+    pivot: {x: -75, y: 75}
+    sprite: {fileID: 21300002, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 2
+    x: 653
+    y: 637
+    width: 149
+    height: 161
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 149
+    scale: 1
+    name: emoji_3
+    hashCode: 1050437576
+    unicode: 0
+    pivot: {x: -74.5, y: 80.5}
+    sprite: {fileID: 21300006, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 3
+    x: 845
+    y: 635
+    width: 155
+    height: 162
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 155
+    scale: 1
+    name: emoji_4
+    hashCode: 1050437583
+    unicode: 0
+    pivot: {x: -77.5, y: 81}
+    sprite: {fileID: 21300008, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 4
+    x: 466
+    y: 633
+    width: 154
+    height: 165
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 154
+    scale: 1
+    name: emoji_2
+    hashCode: 1050437577
+    unicode: 0
+    pivot: {x: -77, y: 82.5}
+    sprite: {fileID: 21300004, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 5
+    x: 41
+    y: 461
+    width: 144
+    height: 154
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 144
+    scale: 1
+    name: emoji_5
+    hashCode: 1050437582
+    unicode: 0
+    pivot: {x: -72, y: 77}
+    sprite: {fileID: 21300010, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 6
+    x: 230
+    y: 457
+    width: 153
+    height: 153
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 153
+    scale: 1
+    name: emoji_6
+    hashCode: 1050437581
+    unicode: 0
+    pivot: {x: -76.5, y: 76.5}
+    sprite: {fileID: 21300012, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 7
+    x: 842
+    y: 456
+    width: 151
+    height: 154
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 151
+    scale: 1
+    name: emoji_9
+    hashCode: 1050437570
+    unicode: 0
+    pivot: {x: -75.5, y: 77}
+    sprite: {fileID: 21300018, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 8
+    x: 470
+    y: 451
+    width: 145
+    height: 159
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 145
+    scale: 1
+    name: emoji_7
+    hashCode: 1050437580
+    unicode: 0
+    pivot: {x: -72.5, y: 79.5}
+    sprite: {fileID: 21300014, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 9
+    x: 656
+    y: 449
+    width: 157
+    height: 161
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 157
+    scale: 1
+    name: emoji_8
+    hashCode: 1050437571
+    unicode: 0
+    pivot: {x: -78.5, y: 80.5}
+    sprite: {fileID: 21300016, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 10
+    x: 245
+    y: 278
+    width: 130
+    height: 154
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 130
+    scale: 1
+    name: emoji_11
+    hashCode: 304701755
+    unicode: 0
+    pivot: {x: -65, y: 77}
+    sprite: {fileID: 21300022, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 11
+    x: 55
+    y: 276
+    width: 137
+    height: 158
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 137
+    scale: 1
+    name: emoji_10
+    hashCode: 304701754
+    unicode: 0
+    pivot: {x: -68.5, y: 79}
+    sprite: {fileID: 21300020, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 12
+    x: 654
+    y: 267
+    width: 153
+    height: 169
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 153
+    scale: 1
+    name: emoji_13
+    hashCode: 304701753
+    unicode: 0
+    pivot: {x: -76.5, y: 84.5}
+    sprite: {fileID: 21300026, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 13
+    x: 852
+    y: 263
+    width: 131
+    height: 171
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 131
+    scale: 1
+    name: emoji_14
+    hashCode: 304701758
+    unicode: 0
+    pivot: {x: -65.5, y: 85.5}
+    sprite: {fileID: 21300028, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 14
+    x: 468
+    y: 262
+    width: 142
+    height: 170
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 142
+    scale: 1
+    name: emoji_12
+    hashCode: 304701752
+    unicode: 0
+    pivot: {x: -71, y: 85}
+    sprite: {fileID: 21300024, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 15
+    x: 261
+    y: 82
+    width: 134
+    height: 155
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 134
+    scale: 1
+    name: emoji_16
+    hashCode: 304701756
+    unicode: 0
+    pivot: {x: -67, y: 77.5}
+    sprite: {fileID: 21300032, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 16
+    x: 66
+    y: 80
+    width: 141
+    height: 151
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 141
+    scale: 1
+    name: emoji_15
+    hashCode: 304701759
+    unicode: 0
+    pivot: {x: -70.5, y: 75.5}
+    sprite: {fileID: 21300030, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 17
+    x: 843
+    y: 68
+    width: 151
+    height: 163
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 151
+    scale: 1
+    name: emoji_19
+    hashCode: 304701747
+    unicode: 0
+    pivot: {x: -75.5, y: 81.5}
+    sprite: {fileID: 21300038, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 18
+    x: 661
+    y: 67
+    width: 142
+    height: 166
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 142
+    scale: 1
+    name: emoji_18
+    hashCode: 304701746
+    unicode: 0
+    pivot: {x: -71, y: 83}
+    sprite: {fileID: 21300036, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  - id: 19
+    x: 466
+    y: 61
+    width: 149
+    height: 169
+    xOffset: 1
+    yOffset: 120
+    xAdvance: 149
+    scale: 1
+    name: emoji_17
+    hashCode: 304701757
+    unicode: 0
+    pivot: {x: -74.5, y: 84.5}
+    sprite: {fileID: 21300034, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+  fallbackSpriteAssets: []
+--- !u!21 &21580996926465624
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TextMeshPro/Sprite
+  m_Shader: {fileID: 4800000, guid: 3a1c68c8292caf046bd21158886c5e40, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 4d583ec90f85e0c45bfe51d798299336, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
