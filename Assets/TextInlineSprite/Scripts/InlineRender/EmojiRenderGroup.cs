@@ -661,7 +661,7 @@ namespace EmojiUI
                     CanvasGraphicGroup group = GraphicTasks[i];
                     if (group != null)
                     {
-                        group.isDirty = true;
+                        group.isDirty = value;
                     }
                 }
             }

@@ -25,6 +25,7 @@ namespace EmojiUI
         private static StringBuilder _textBuilder;
         private static UIVertex[] m_TempVerts = new UIVertex[4];
         private static TextGenerator _UnderlineText;
+        private TextGenerator _SpaceGen;
         private List<Vector3> _listVertsPos;
         private InlineManager _InlineManager;
         //文本表情管理器
@@ -58,6 +59,170 @@ namespace EmojiUI
         private List<HrefInfo> _ListHrefInfos;
         #endregion
 
+        private float? _pw;
+
+        public override float preferredWidth
+        {
+            get
+            {
+                if(_pw == null)
+                {
+                    //its override from uGUI Code ,but has bug?
+
+                    //var settings = GetGenerationSettings(Vector2.zero);
+                    //return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+
+                    //next idea
+                    Vector2 extents = rectTransform.rect.size;
+
+                    var settings = GetGenerationSettings(extents);
+                    cachedTextGenerator.Populate(_OutputText, settings);
+    
+                    if(cachedTextGenerator.lineCount > 1)
+                    {
+                        float? minx = null;
+                        float? maxx = null;
+                        IList<UIVertex> verts = cachedTextGenerator.verts;
+                        int maxIndex = cachedTextGenerator.lines[1].startCharIdx;
+
+                        for (int i = 0, index = 0; i < verts.Count; i += 4, index++)
+                        {
+                            UIVertex v0 = verts[i];
+                            UIVertex v2 = verts[i + 1];
+                            float min = v0.position.x;
+                            float max = v2.position.x;
+
+                            if (minx.HasValue == false)
+                            {
+                                minx = min;
+                            }
+                            else
+                            {
+                                minx = Mathf.Min(minx.Value, min);
+                            }
+
+                            if (maxx.HasValue == false)
+                            {
+                                maxx = max;
+                            }
+                            else
+                            {
+                                maxx = Mathf.Max(maxx.Value, max);
+                            }
+
+                            if (index > maxIndex)
+                            {
+                                break;
+                            }
+                        }
+
+                        _pw = (maxx - minx);
+                    }
+                    else
+                    {
+                        //_pw = cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
+                        float? minx = null;
+                        float? maxx = null;
+                        IList<UIVertex> verts = cachedTextGenerator.verts;
+                        int maxIndex = cachedTextGenerator.characterCount;
+
+                        for (int i = 0, index = 0; i < verts.Count; i += 4, index++)
+                        {
+                            UIVertex v0 = verts[i];
+                            UIVertex v2 = verts[i + 1];
+                            float min = v0.position.x;
+                            float max = v2.position.x;
+
+                            if (minx.HasValue == false)
+                            {
+                                minx = min;
+                            }
+                            else
+                            {
+                                minx = Mathf.Min(minx.Value, min);
+                            }
+
+                            if (maxx.HasValue == false)
+                            {
+                                maxx = max;
+                            }
+                            else
+                            {
+                                maxx = Mathf.Max(maxx.Value, max);
+                            }
+
+                            if (index > maxIndex)
+                            {
+                                break;
+                            }
+                        }
+
+                        _pw = (maxx - minx);
+                    }
+                   
+                }
+                return _pw.Value;
+            }
+        }
+
+        public override float preferredHeight
+        {
+            get
+            {
+                var settings = GetGenerationSettings(new Vector2(GetPixelAdjustedRect().size.x, 0.0f));
+                return cachedTextGeneratorForLayout.GetPreferredHeight(_OutputText, settings) / pixelsPerUnit;
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+
+            Vector3 size = new Vector3(preferredWidth, preferredHeight, 0);
+            Vector3 fixsize = transform.TransformDirection(rectTransform.rect.size);
+            Vector3 textsize =transform.TransformDirection(size);
+
+            Vector3 fixpos = transform.position ;
+            if(this.alignment == TextAnchor.LowerCenter)
+            {
+                fixpos += new Vector3(0, -0.5f * (fixsize.y - textsize.y) , 0);
+            }
+            else if(this.alignment == TextAnchor.LowerLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.LowerRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleCenter)
+            {
+                fixpos += new Vector3(0, 0, 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x),0, 0);
+            }
+            else if (this.alignment == TextAnchor.MiddleRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0, 0);
+            }
+            else if (this.alignment == TextAnchor.UpperCenter)
+            {
+                fixpos += new Vector3(0, 0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.UpperLeft)
+            {
+                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            }
+            else if (this.alignment == TextAnchor.UpperRight)
+            {
+                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            }
+
+            Gizmos.DrawWireCube(fixpos, textsize);
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -78,6 +243,7 @@ namespace EmojiUI
             base.SetVerticesDirty();
             if (!Application.isPlaying || !Manager)
             {
+                _pw = null;
                 _OutputText = m_Text;
                 return;
             }
@@ -87,11 +253,13 @@ namespace EmojiUI
             {
                 _OutputText = outtext;
                 needupdate = true;
+                _pw = null;
             }
             else
             {
                 _OutputText = m_Text;
                 needupdate = true;
+                _pw = null;
             }
         }
 
@@ -239,20 +407,27 @@ namespace EmojiUI
                     if ((pos + 4) > _listVertsPos.Count)
                         continue;
 
-                    for (int m = pos; m < pos + 4; m++)
-                    {
-                        info._Pos[m - pos] = _listVertsPos[m];
-                    }
+                    Vector3 p1 = _listVertsPos[pos];
+
+                    info._Pos[0] = p1 ;
+                    info._Pos[1] = _listVertsPos[pos+1];
+                    info._Pos[2] = _listVertsPos[pos+2];
+                    info._Pos[3] = _listVertsPos[pos+3];
+
+                    //info._Pos[0] = p1 + new Vector3(0, info._Size.y, 0);
+                    //info._Pos[1] = p1 + new Vector3(info._Size.x, info._Size.y, 0);
+                    //info._Pos[2] = p1 + new Vector3(info._Size.x, 0, 0);
+                    //info._Pos[3] = p1;
+
+
                 }
             }
 
         }
 
-
-        #region 处理超链接的包围盒
         void CalcBoundsInfo(VertexHelper toFill, TextGenerationSettings settings)
         {
-            #region 包围框
+
             if(_ListHrefInfos != null && _ListHrefInfos.Count >0)
             {
 
@@ -294,7 +469,7 @@ namespace EmojiUI
                     hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
                 }
 
-                #region 添加下划线
+
                 if(_UnderlineText == null)
                 {
                     _UnderlineText = new TextGenerator();
@@ -338,17 +513,8 @@ namespace EmojiUI
 
                     }
                 }
-
-                #endregion
             }
-
-            #endregion
-
-
         }
-        #endregion
-
-        #region 根据正则规则更新文本
 
         public List<SpriteTagInfo> PopEmojiData()
         {
@@ -408,7 +574,40 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, tagSprites.size, tagSprites.width);
+                    float autosize = Mathf.Min(tagSprites.size, this.rectTransform.rect.height-8);
+
+                    if(_SpaceGen == null)
+                    {
+                        Vector2 extents = rectTransform.rect.size;
+
+                        TextGenerationSettings settings = GetGenerationSettings(extents);
+
+                        _SpaceGen = new TextGenerator();
+                        //two sapceing
+                        _SpaceGen.Populate("   ", settings);
+                    }
+
+                    //IList<UIVertex> spaceverts = _SpaceGen.verts;
+                    //float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
+                    //float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+                    //float deltawid = spaceverts[4].position.x - spaceverts[1].position.x;
+                    //float spacesize = Mathf.Max(spacewid, spaceheight);
+
+                    //int fillspacecnt = Mathf.RoundToInt( autosize / spacesize);
+                    //if(autosize > spacesize)
+                    //{
+                    //    fillspacecnt = Mathf.RoundToInt((autosize + deltawid) / (spacesize+ deltawid));
+                    //}
+                    //else
+                    //{
+                    //    fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
+                    //}
+                    //for(int i =0; i < fillspacecnt;i++)
+                    //{
+                    //    _textBuilder.Append(" ");
+                    //}
+
+                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
@@ -417,7 +616,7 @@ namespace EmojiUI
                         {
                             _tempSpriteTag._ID = Id;
                             _tempSpriteTag._Tag = TagName;
-                            _tempSpriteTag._Size = new Vector2(tagSprites.size * tagSprites.width, tagSprites.size);
+                            _tempSpriteTag._Size = new Vector2(autosize * tagSprites.width, autosize);
                             _tempSpriteTag._Position = _tempIndex;
                             _tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
                         }
@@ -428,7 +627,7 @@ namespace EmojiUI
                         {
                             _ID = Id,
                             _Tag = TagName,
-                            _Size = new Vector2(tagSprites.size * tagSprites.width, tagSprites.size),
+                            _Size = new Vector2(autosize * tagSprites.width, autosize),
                             _Pos = new Vector3[4],
                             _Position = _tempIndex,
                             _UV = tagSprites.spritegroups[0].uv
@@ -521,7 +720,6 @@ namespace EmojiUI
             _textBuilder.Append(newinfo.Substring(_textIndex, newinfo.Length - _textIndex));
             return _textBuilder.ToString();
         }
-        #endregion
 
 
         #region 点击事件检测是否点击到超链接文本  

@@ -39,7 +39,7 @@ public static class CreateSpriteAsset
             //replace
             spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
             spriteAsset.ID = tag;
-            spriteAsset.AssetName = sourceTex.ToString();
+            spriteAsset.AssetName = Path.GetFileNameWithoutExtension(filePath);
             spriteAsset.texSource = sourceTex;
             spriteAsset.listSpriteGroup = GetAssetSpriteInfor(sourceTex);
             AssetDatabase.CreateAsset(spriteAsset, filePath);
