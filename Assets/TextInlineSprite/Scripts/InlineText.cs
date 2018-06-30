@@ -48,6 +48,7 @@ namespace EmojiUI
         List<SpriteTagInfo> RenderTagList;
 
         private bool needupdate;
+        private bool updatespace =true;
         private string _OutputText = "";
 
         #region 超链接
@@ -183,6 +184,7 @@ namespace EmojiUI
             Vector3 textsize =transform.TransformDirection(size);
 
             Vector3 fixpos = transform.position ;
+            //可简化
             if(this.alignment == TextAnchor.LowerCenter)
             {
                 fixpos += new Vector3(0, -0.5f * (fixsize.y - textsize.y) , 0);
@@ -234,7 +236,7 @@ namespace EmojiUI
         {
             base.OnEnable();
 
-            supportRichText = true;
+           // supportRichText = true;
             SetVerticesDirty();
         }
 
@@ -249,7 +251,7 @@ namespace EmojiUI
             }
 
             string outtext = GetOutputText(m_Text);
-            if(RenderTagList != null && RenderTagList.Count >0)
+            if (RenderTagList != null && RenderTagList.Count > 0)
             {
                 _OutputText = outtext;
                 needupdate = true;
@@ -400,6 +402,7 @@ namespace EmojiUI
         {
             if(RenderTagList != null)
             {
+                float height = this.preferredHeight /2;
                 for(int i =0; i < RenderTagList.Count;++i)
                 {
                     SpriteTagInfo info = RenderTagList[i];
@@ -409,17 +412,17 @@ namespace EmojiUI
 
                     Vector3 p1 = _listVertsPos[pos];
 
-                    info._Pos[0] = p1 ;
-                    info._Pos[1] = _listVertsPos[pos+1];
-                    info._Pos[2] = _listVertsPos[pos+2];
-                    info._Pos[3] = _listVertsPos[pos+3];
+                    //info._Pos[0] = p1 ;
+                    //info._Pos[1] = _listVertsPos[pos+1];
+                    //info._Pos[2] = _listVertsPos[pos+2];
+                    //info._Pos[3] = _listVertsPos[pos+3];
+                    //int cid = ((int)alignment) /3;
+                    //int rid = ((int)alignment) % 3;
 
-                    //info._Pos[0] = p1 + new Vector3(0, info._Size.y, 0);
-                    //info._Pos[1] = p1 + new Vector3(info._Size.x, info._Size.y, 0);
-                    //info._Pos[2] = p1 + new Vector3(info._Size.x, 0, 0);
-                    //info._Pos[3] = p1;
-
-
+                    info._Pos[0] = p1 + new Vector3(0, info._Size.y/2 + height, 0);
+                    info._Pos[1] = p1 + new Vector3(info._Size.x,info._Size.y/ 2 + height , 0);
+                    info._Pos[2] = p1 + new Vector3(info._Size.x, height - info._Size.y / 2, 0);
+                    info._Pos[3] = p1 + new Vector3(0, height - info._Size.y / 2, 0);
                 }
             }
 
@@ -574,40 +577,42 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    float autosize = Mathf.Min(tagSprites.size, this.rectTransform.rect.height-8);
-
-                    if(_SpaceGen == null)
-                    {
-                        Vector2 extents = rectTransform.rect.size;
-
-                        TextGenerationSettings settings = GetGenerationSettings(extents);
-
+                    float h = Mathf.Max(1, this.rectTransform.rect.height - 8);
+                    float autosize = Mathf.Min(h, tagSprites.size);
+                    if (_SpaceGen == null)
+                    { 
                         _SpaceGen = new TextGenerator();
-                        //two sapceing
-                        _SpaceGen.Populate("   ", settings);
+   
                     }
 
-                    //IList<UIVertex> spaceverts = _SpaceGen.verts;
-                    //float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
-                    //float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
-                    //float deltawid = spaceverts[4].position.x - spaceverts[1].position.x;
-                    //float spacesize = Mathf.Max(spacewid, spaceheight);
+                    if(updatespace)
+                    {
+                        Vector2 extents = rectTransform.rect.size;
+                        TextGenerationSettings settings = GetGenerationSettings(extents);
+                        _SpaceGen.Populate(" ", settings);
+                        updatespace = false;
+                    }
 
-                    //int fillspacecnt = Mathf.RoundToInt( autosize / spacesize);
-                    //if(autosize > spacesize)
-                    //{
-                    //    fillspacecnt = Mathf.RoundToInt((autosize + deltawid) / (spacesize+ deltawid));
-                    //}
-                    //else
-                    //{
-                    //    fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
-                    //}
-                    //for(int i =0; i < fillspacecnt;i++)
-                    //{
-                    //    _textBuilder.Append(" ");
-                    //}
+                    IList<UIVertex> spaceverts = _SpaceGen.verts;
+                    float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
+                    float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+                    float spacesize = Mathf.Max(spacewid, spaceheight);
+     
+                    int fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
+                    if (autosize > spacesize)
+                    {
+                        fillspacecnt = Mathf.RoundToInt((autosize ) / (spacesize ));
+                    }
+                    else
+                    {
+                        fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
+                    }
+                    for (int i = 0; i < fillspacecnt; i++)
+                    {
+                        _textBuilder.Append(" ");
+                    }
 
-                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
+                    //_textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
@@ -718,6 +723,8 @@ namespace EmojiUI
             }
 
             _textBuilder.Append(newinfo.Substring(_textIndex, newinfo.Length - _textIndex));
+
+            updatespace = true;
             return _textBuilder.ToString();
         }
 
