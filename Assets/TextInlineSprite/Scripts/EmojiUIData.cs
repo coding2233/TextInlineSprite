@@ -48,9 +48,26 @@ namespace EmojiUI
         //表情位置
         public Vector3[] _Pos;
         //位置索引
-        public int _Position;
+        private int _Position =-1;
         //uv
         public Vector2[] _UV;
+
+        private const int dv = 100000;
+
+        public void FillIdxAndPlaceHolder(int idx,int cnt)
+        {
+            _Position = cnt * dv + idx;
+        }
+
+        public int GetPlaceHolderCnt()
+        {
+            return _Position / dv;
+        }
+
+        public int GetPositionIdx()
+        {
+            return _Position % dv;
+        }
     }
 
     public class UnitMeshInfo:IEquatable<UnitMeshInfo>
