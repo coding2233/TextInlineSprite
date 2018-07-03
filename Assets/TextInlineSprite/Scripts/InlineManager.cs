@@ -143,6 +143,8 @@ namespace EmojiUI
             EmojiTools.EndSample();
 
             RebuildTagList();
+
+            ForceRebuild();
         }
 
         void LateUpdate()
@@ -344,6 +346,17 @@ namespace EmojiUI
             if (_Render != null)
             {
                 _Render.DisRendering(_key);
+            }
+            EmojiTools.EndSample();
+        }
+
+        public void ForceRebuild()
+        {
+            EmojiTools.BeginSample("Emoji_ForceRebuild");
+            InlineText[] alltexts = GetComponentsInChildren<InlineText>();
+            for (int i = 0; i < alltexts.Length; i++)
+            {
+                alltexts[i].SetVerticesDirty();
             }
             EmojiTools.EndSample();
         }

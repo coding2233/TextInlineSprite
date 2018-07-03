@@ -46,8 +46,9 @@ namespace EmojiUI
         }
 
         List<SpriteTagInfo> RenderTagList;
-
+        private const string palceholder = "1";
         private bool needupdate;
+        private bool updatespace =true;
         private string _OutputText = "";
 
         #region 超链接
@@ -178,49 +179,62 @@ namespace EmojiUI
         {
             Gizmos.color = Color.blue;
 
-            Vector3 size = new Vector3(preferredWidth, preferredHeight, 0);
-            Vector3 fixsize = transform.TransformDirection(rectTransform.rect.size);
-            Vector3 textsize =transform.TransformDirection(size);
+            var corners = new Vector3[4];
+            rectTransform.GetWorldCorners(corners);
 
-            Vector3 fixpos = transform.position ;
-            if(this.alignment == TextAnchor.LowerCenter)
-            {
-                fixpos += new Vector3(0, -0.5f * (fixsize.y - textsize.y) , 0);
-            }
-            else if(this.alignment == TextAnchor.LowerLeft)
-            {
-                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
-            }
-            else if (this.alignment == TextAnchor.LowerRight)
-            {
-                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
-            }
-            else if (this.alignment == TextAnchor.MiddleCenter)
-            {
-                fixpos += new Vector3(0, 0, 0);
-            }
-            else if (this.alignment == TextAnchor.MiddleLeft)
-            {
-                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x),0, 0);
-            }
-            else if (this.alignment == TextAnchor.MiddleRight)
-            {
-                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0, 0);
-            }
-            else if (this.alignment == TextAnchor.UpperCenter)
-            {
-                fixpos += new Vector3(0, 0.5f * (fixsize.y - textsize.y), 0);
-            }
-            else if (this.alignment == TextAnchor.UpperLeft)
-            {
-                fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
-            }
-            else if (this.alignment == TextAnchor.UpperRight)
-            {
-                fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
-            }
+            Gizmos.DrawLine(corners[0], corners[1]);
+            Gizmos.DrawLine(corners[1], corners[2]);
+            Gizmos.DrawLine(corners[3], corners[3]);
+            Gizmos.DrawLine(corners[3], corners[0]);
+            //Vector3 size = new Vector3(preferredWidth, preferredHeight, 0);
+            //Vector3 fixsize = transform.TransformDirection(rectTransform.rect.size);
+            //Vector3 textsize = transform.TransformDirection(size);
 
-            Gizmos.DrawWireCube(fixpos, textsize);
+            //Vector3 fixpos = transform.position;
+            //int cid = ((int)alignment) / 3;
+            //int rid = ((int)alignment) % 3;
+            //float pivx = this.rectTransform.pivot.x;
+            //float pivy = this.rectTransform.pivot.y;
+
+            ////可简化
+            //if (this.alignment == TextAnchor.LowerCenter)
+            //{
+            //    fixpos += new Vector3(0, -0.5f * (fixsize.y - textsize.y), 0);
+            //}
+            //else if (this.alignment == TextAnchor.LowerLeft)
+            //{
+            //    fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            //}
+            //else if (this.alignment == TextAnchor.LowerRight)
+            //{
+            //    fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), -0.5f * (fixsize.y - textsize.y), 0);
+            //}
+            //else if (this.alignment == TextAnchor.MiddleCenter)
+            //{
+            //    fixpos += new Vector3(0, 0, 0);
+            //}
+            //else if (this.alignment == TextAnchor.MiddleLeft)
+            //{
+            //    fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), 0, 0);
+            //}
+            //else if (this.alignment == TextAnchor.MiddleRight)
+            //{
+            //    fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0, 0);
+            //}
+            //else if (this.alignment == TextAnchor.UpperCenter)
+            //{
+            //    fixpos += new Vector3(0, 0.5f * (fixsize.y - textsize.y), 0);
+            //}
+            //else if (this.alignment == TextAnchor.UpperLeft)
+            //{
+            //    fixpos += new Vector3(-0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            //}
+            //else if (this.alignment == TextAnchor.UpperRight)
+            //{
+            //    fixpos += new Vector3(0.5f * (fixsize.x - textsize.x), 0.5f * (fixsize.y - textsize.y), 0);
+            //}
+
+          //  Gizmos.DrawWireCube(fixpos, textsize);
         }
 
         protected override void Start()
@@ -234,7 +248,7 @@ namespace EmojiUI
         {
             base.OnEnable();
 
-            supportRichText = true;
+           // supportRichText = true;
             SetVerticesDirty();
         }
 
@@ -249,7 +263,7 @@ namespace EmojiUI
             }
 
             string outtext = GetOutputText(m_Text);
-            if(RenderTagList != null && RenderTagList.Count >0)
+            if (RenderTagList != null && RenderTagList.Count > 0)
             {
                 _OutputText = outtext;
                 needupdate = true;
@@ -321,6 +335,17 @@ namespace EmojiUI
                     _listVertsPos.Clear();
             }
 
+
+            int NextSkipMin = -10;
+            int NextSkipMax = -10;
+            int TagIndex = 0;
+            if (RenderTagList != null && RenderTagList.Count > 0)
+            {
+                var data = RenderTagList[TagIndex];
+                NextSkipMin = data.GetPositionIdx();
+                NextSkipMax = NextSkipMin + 4 * data.GetPlaceHolderCnt();
+            }
+
             if (roundingOffset != Vector2.zero)
             {
                 for (int i = 0; i < vertCount; ++i)
@@ -330,11 +355,38 @@ namespace EmojiUI
                     m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
                     m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
                     m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
-                    if (tempVertsIndex == 3)
-                        toFill.AddUIVertexQuad(m_TempVerts);
+
+                    if(NextSkipMin >=0 && i >= NextSkipMin && i <= NextSkipMax)
+                    {
+
+                    }
+                    else
+                    {
+                        if (tempVertsIndex == 3)
+                            toFill.AddUIVertexQuad(m_TempVerts);
+                    }
+
 
                     if (RenderTagList != null && RenderTagList.Count > 0)
+                    {
+                        if (i == NextSkipMax)
+                        {
+                            TagIndex++;
+                            if (RenderTagList.Count > TagIndex)
+                            {
+                                var data = RenderTagList[TagIndex];
+                                NextSkipMin = data.GetPositionIdx();
+                                NextSkipMax = NextSkipMin + 4 * data.GetPlaceHolderCnt();
+                            }
+                            else
+                            {
+                                NextSkipMin = -10;
+                            }
+                        }
+
                         _listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
+                    }
+
                 }
             }
             else
@@ -344,12 +396,37 @@ namespace EmojiUI
                     int tempVertsIndex = i & 3;
                     m_TempVerts[tempVertsIndex] = verts[i];
                     m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-                    if (tempVertsIndex == 3)
-                        toFill.AddUIVertexQuad(m_TempVerts);
 
-                    if(RenderTagList != null && RenderTagList.Count > 0)
+                    if (NextSkipMin >= 0 && i >= NextSkipMin && i <= NextSkipMax)
+                    {
+    
+                    }
+                    else
+                    {
+                        if (tempVertsIndex == 3)
+                            toFill.AddUIVertexQuad(m_TempVerts);
+                    }
+
+
+                    if (RenderTagList != null && RenderTagList.Count > 0)
+                    {
+                        if (i == NextSkipMax)
+                        {
+                            TagIndex++;
+                            if (RenderTagList.Count > TagIndex)
+                            {
+                                var data = RenderTagList[TagIndex];
+                                NextSkipMin = data.GetPositionIdx();
+                                NextSkipMax = NextSkipMin + 4 * data.GetPlaceHolderCnt();
+                            }
+                            else
+                            {
+                                NextSkipMin = -10;
+                            }
+                        }
+
                         _listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
-
+                    }
                 }
             }
 
@@ -381,7 +458,7 @@ namespace EmojiUI
                 for (int i = 0; i < RenderTagList.Count; ++i)
                 {
                     SpriteTagInfo info = RenderTagList[i];
-                    int pos = info._Position;
+                    int pos = info.GetPositionIdx();
                     if ((pos + 4) > verts.Count)
                         continue;
                     for (int m = pos; m < pos + 4; m++)
@@ -403,23 +480,23 @@ namespace EmojiUI
                 for(int i =0; i < RenderTagList.Count;++i)
                 {
                     SpriteTagInfo info = RenderTagList[i];
-                    int pos = info._Position;
+                    int pos = info.GetPositionIdx();
                     if ((pos + 4) > _listVertsPos.Count)
                         continue;
 
-                    Vector3 p1 = _listVertsPos[pos];
+                    Vector3 p1 = _listVertsPos[pos+3];
 
-                    info._Pos[0] = p1 ;
-                    info._Pos[1] = _listVertsPos[pos+1];
-                    info._Pos[2] = _listVertsPos[pos+2];
-                    info._Pos[3] = _listVertsPos[pos+3];
+                    //info._Pos[0] = p1 ;
+                    //info._Pos[1] = _listVertsPos[pos+1];
+                    //info._Pos[2] = _listVertsPos[pos+2];
+                    //info._Pos[3] = _listVertsPos[pos+3];
+                    //int cid = ((int)alignment) /3;
+                    //int rid = ((int)alignment) % 3;
 
-                    //info._Pos[0] = p1 + new Vector3(0, info._Size.y, 0);
-                    //info._Pos[1] = p1 + new Vector3(info._Size.x, info._Size.y, 0);
-                    //info._Pos[2] = p1 + new Vector3(info._Size.x, 0, 0);
-                    //info._Pos[3] = p1;
-
-
+                    info._Pos[0] = p1 + new Vector3(0, info._Size.y , 0);
+                    info._Pos[1] = p1 + new Vector3(info._Size.x,info._Size.y, 0);
+                    info._Pos[2] = p1 + new Vector3(info._Size.x,0, 0);
+                    info._Pos[3] = p1 + new Vector3(0, 0 ,0);
                 }
             }
 
@@ -574,50 +651,44 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    float autosize = Mathf.Min(tagSprites.size, this.rectTransform.rect.height-8);
-
-                    if(_SpaceGen == null)
-                    {
-                        Vector2 extents = rectTransform.rect.size;
-
-                        TextGenerationSettings settings = GetGenerationSettings(extents);
-
+                    float h = Mathf.Max(1, this.rectTransform.rect.height - 8);
+                    float autosize = Mathf.Min(h, tagSprites.size);
+                    if (_SpaceGen == null)
+                    { 
                         _SpaceGen = new TextGenerator();
-                        //two sapceing
-                        _SpaceGen.Populate("   ", settings);
                     }
 
-                    //IList<UIVertex> spaceverts = _SpaceGen.verts;
-                    //float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
-                    //float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
-                    //float deltawid = spaceverts[4].position.x - spaceverts[1].position.x;
-                    //float spacesize = Mathf.Max(spacewid, spaceheight);
+                    if(updatespace)
+                    {
+                        Vector2 extents = rectTransform.rect.size;
+                        TextGenerationSettings settings = GetGenerationSettings(extents);
+                        _SpaceGen.Populate(palceholder, settings);
+                        updatespace = false;
+                    }
 
-                    //int fillspacecnt = Mathf.RoundToInt( autosize / spacesize);
-                    //if(autosize > spacesize)
-                    //{
-                    //    fillspacecnt = Mathf.RoundToInt((autosize + deltawid) / (spacesize+ deltawid));
-                    //}
-                    //else
-                    //{
-                    //    fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
-                    //}
-                    //for(int i =0; i < fillspacecnt;i++)
-                    //{
-                    //    _textBuilder.Append(" ");
-                    //}
+                    IList<UIVertex> spaceverts = _SpaceGen.verts;
+                    float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
+                    float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+                    float spacesize = Mathf.Max(spacewid, spaceheight);
+     
+                    int fillspacecnt = Mathf.CeilToInt(autosize / spacesize);
 
-                    _textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
+                    for (int i = 0; i < fillspacecnt; i++)
+                    {
+                        _textBuilder.Append(palceholder);
+                    }
+
+                    //_textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
                         SpriteTagInfo _tempSpriteTag = RenderTagList[Index];
-                        if(Id != _tempSpriteTag._ID || TagName != _tempSpriteTag._Tag || _tempIndex != _tempSpriteTag._Position)
+                        if(Id != _tempSpriteTag._ID || TagName != _tempSpriteTag._Tag || _tempIndex != _tempSpriteTag.GetPositionIdx())
                         {
                             _tempSpriteTag._ID = Id;
                             _tempSpriteTag._Tag = TagName;
                             _tempSpriteTag._Size = new Vector2(autosize * tagSprites.width, autosize);
-                            _tempSpriteTag._Position = _tempIndex;
+                            _tempSpriteTag.FillIdxAndPlaceHolder(_tempIndex, fillspacecnt);
                             _tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
                         }
                     }
@@ -629,9 +700,10 @@ namespace EmojiUI
                             _Tag = TagName,
                             _Size = new Vector2(autosize * tagSprites.width, autosize),
                             _Pos = new Vector3[4],
-                            _Position = _tempIndex,
                             _UV = tagSprites.spritegroups[0].uv
                         };
+
+                        _tempSpriteTag.FillIdxAndPlaceHolder(_tempIndex, fillspacecnt);
 
                         RenderTagList.Add(_tempSpriteTag);
                     }
@@ -718,6 +790,8 @@ namespace EmojiUI
             }
 
             _textBuilder.Append(newinfo.Substring(_textIndex, newinfo.Length - _textIndex));
+
+            updatespace = true;
             return _textBuilder.ToString();
         }
 
