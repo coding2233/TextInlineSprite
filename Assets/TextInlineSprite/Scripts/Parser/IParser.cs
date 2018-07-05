@@ -6,7 +6,9 @@ namespace EmojiUI
 {
     public interface IParser
     {
+        int Hot { get; set; }
 
+        bool ParsetContent(string data);
     }
 
 }
