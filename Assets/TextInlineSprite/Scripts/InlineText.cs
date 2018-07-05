@@ -636,6 +636,37 @@ namespace EmojiUI
             return false;
         }
 
+        internal void FillSpriteTag( SpriteTagInfo tagInfo)
+        {
+            if (_SpaceGen == null)
+            {
+                _SpaceGen = new TextGenerator();
+            }
+
+            if (updatespace)
+            {
+                Vector2 extents = rectTransform.rect.size;
+                TextGenerationSettings settings = GetGenerationSettings(extents);
+                _SpaceGen.Populate(palceholder, settings);
+                updatespace = false;
+            }
+
+            IList<UIVertex> spaceverts = _SpaceGen.verts;
+            float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
+            float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+
+
+            float autosize = Mathf.Min(tagSprites.size, Mathf.Max(spacewid, spaceheight));
+            float spacesize = Mathf.Max(spacewid, spaceheight);
+
+            int fillspacecnt = Mathf.CeilToInt(autosize / spacesize);
+
+            for (int i = 0; i < fillspacecnt; i++)
+            {
+                _textBuilder.Append(palceholder);
+            }
+        }
+
         bool ParseEmoji(string newInfo,int Index, int Id, string TagName, Match match, ref int _textIndex)
         {
             if (Manager != null && Manager.CanRendering(Id) && Manager.CanRendering(TagName))
@@ -680,7 +711,6 @@ namespace EmojiUI
                     {
                         _textBuilder.Append(palceholder);
                     }
-                    Debug.LogError(autosize);
 
                     //_textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 

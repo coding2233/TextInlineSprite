@@ -11,7 +11,7 @@ namespace EmojiUI
 
         Regex regex { get; }
 
-        bool ParsetContent(string data);
+        bool ParsetContent(Match data,out SpriteTagInfo info);
     }
 
 }
