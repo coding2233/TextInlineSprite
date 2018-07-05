@@ -325,7 +325,7 @@ namespace EmojiUI
             roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
             toFill.Clear();
 
-            ClearQuadUVs(verts);
+            //ClearQuadUVs(verts);
 
             if(RenderTagList != null && RenderTagList.Count >0)
             {
@@ -477,7 +477,8 @@ namespace EmojiUI
         {
             if(RenderTagList != null)
             {
-                for(int i =0; i < RenderTagList.Count;++i)
+                Rect rect = rectTransform.rect;
+                for(int i = RenderTagList.Count -1; i >= 0;--i)
                 {
                     SpriteTagInfo info = RenderTagList[i];
                     int pos = info.GetPositionIdx();
@@ -651,8 +652,7 @@ namespace EmojiUI
                     _textBuilder.Append(newInfo.Substring(_textIndex, match.Index - _textIndex));
                     int _tempIndex = _textBuilder.Length * 4;
 
-                    float h = Mathf.Max(1, this.rectTransform.rect.height - 8);
-                    float autosize = Mathf.Min(h, tagSprites.size);
+
                     if (_SpaceGen == null)
                     { 
                         _SpaceGen = new TextGenerator();
@@ -669,6 +669,9 @@ namespace EmojiUI
                     IList<UIVertex> spaceverts = _SpaceGen.verts;
                     float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
                     float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+
+     
+                    float autosize = Mathf.Min( tagSprites.size,Mathf.Max(spacewid,spaceheight));
                     float spacesize = Mathf.Max(spacewid, spaceheight);
      
                     int fillspacecnt = Mathf.CeilToInt(autosize / spacesize);
@@ -677,20 +680,18 @@ namespace EmojiUI
                     {
                         _textBuilder.Append(palceholder);
                     }
+                    Debug.LogError(autosize);
 
                     //_textBuilder.AppendFormat("<quad material=0 x={0} y={1} size={2} width={3} />", tagSprites.x, tagSprites.y, autosize, tagSprites.width);
 
                     if (RenderTagList.Count > Index)
                     {
                         SpriteTagInfo _tempSpriteTag = RenderTagList[Index];
-                        if(Id != _tempSpriteTag._ID || TagName != _tempSpriteTag._Tag || _tempIndex != _tempSpriteTag.GetPositionIdx())
-                        {
-                            _tempSpriteTag._ID = Id;
-                            _tempSpriteTag._Tag = TagName;
-                            _tempSpriteTag._Size = new Vector2(autosize * tagSprites.width, autosize);
-                            _tempSpriteTag.FillIdxAndPlaceHolder(_tempIndex, fillspacecnt);
-                            _tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
-                        }
+                        _tempSpriteTag._ID = Id;
+                        _tempSpriteTag._Tag = TagName;
+                        _tempSpriteTag._Size = new Vector2(autosize, autosize);
+                        _tempSpriteTag.FillIdxAndPlaceHolder(_tempIndex, fillspacecnt);
+                        _tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
                     }
                     else
                     {
@@ -698,7 +699,7 @@ namespace EmojiUI
                         {
                             _ID = Id,
                             _Tag = TagName,
-                            _Size = new Vector2(autosize * tagSprites.width, autosize),
+                            _Size = new Vector2(autosize , autosize),
                             _Pos = new Vector3[4],
                             _UV = tagSprites.spritegroups[0].uv
                         };
@@ -718,7 +719,7 @@ namespace EmojiUI
             }
             else if(Manager)
             {
-                Debug.LogErrorFormat("not found that atlas:{0} or Tag:{1}", Id, TagName);
+                //Debug.LogErrorFormat("not found that atlas:{0} or Tag:{1}", Id, TagName);
             }
             return false;
         }
