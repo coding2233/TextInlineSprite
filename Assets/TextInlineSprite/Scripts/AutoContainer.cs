@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Text.RegularExpressions;
 namespace EmojiUI
 {
     public class AutoContainer 
@@ -11,9 +11,11 @@ namespace EmojiUI
 #else
         public const int hot = 100;
 #endif
-
         private List<IParser> parsers = new List<IParser>(8);
 
+        private Regex TagRegex = new Regex(@"{\S+}");
+
+        private List<SpriteTagInfo> tagList;
 
         public void Add(IParser data)
         {
@@ -23,7 +25,6 @@ namespace EmojiUI
                 Debug.LogErrorFormat("has contains it  :{0}", data);
             }
 #endif
-
             parsers.Add(data);
         }
 
@@ -32,17 +33,18 @@ namespace EmojiUI
             return parsers.Remove(data);
         }
 
-        public void DoStep()
+        public void DoParser(string content)
         {
-            bool needfix = false;
+            if (tagList == null)
+                tagList = new List<SpriteTagInfo>(8);
+            else
+                tagList.Clear();
+
             for (int i = 0; i < parsers.Count;++i)
             {
                 var data = parsers[i];
 
             }
-
-            //reset
-            
         }
     }
 
