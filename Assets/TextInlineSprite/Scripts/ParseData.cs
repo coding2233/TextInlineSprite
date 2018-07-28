@@ -14,6 +14,8 @@ namespace EmojiUI
 		int ID { get; }
 		Vector3[] pos { get; set; }
 		Vector2[] uv { get; set; }
+
+		void Fill(VertexHelper filler);
 	}
 
 	public struct ParsedData : IEquatable<ParsedData>

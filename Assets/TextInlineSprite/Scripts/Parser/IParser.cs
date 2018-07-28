@@ -10,9 +10,7 @@ namespace EmojiUI
 	{
 		int Hot { get; set; }
 
-		bool ParsetContent(Match data, ref ParsedData parsedData);
-
-		void DoFillText(InlineText text, StringBuilder stringBuilder, Match match, int Index, ParsedData tagInfo);
+		bool ParsetContent(InlineText text,StringBuilder textfiller, Match data,int matchindex);
 
 		void DoFillMesh();
 

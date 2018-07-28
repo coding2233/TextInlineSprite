@@ -24,7 +24,7 @@ namespace EmojiUI
 			}
 		}
 
-		private const string palceholder = "1";
+		public const string palceholder = "1";
 
 		private const string ParsetLeft = "\\[";
 
@@ -84,12 +84,9 @@ namespace EmojiUI
 							var parser = parsers[i];
 
 							ParsedData tagInfo = new ParsedData();
-							if (parser.ParsetContent(matchstr, ref tagInfo))
+							if (parser.ParsetContent(text,fillbuilder,matchstr,m))
 							{
 								parser.Hot++;
-
-								parser.DoFillText(fillbuilder, matchstr, m, tagInfo);
-		
 								if (parser.Hot > hot)
 								{
 									needfix = true;

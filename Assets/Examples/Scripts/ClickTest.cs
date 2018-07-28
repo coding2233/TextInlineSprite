@@ -23,12 +23,12 @@ public class ClickTest : MonoBehaviour
 
 	void OnEnable()
 	{
-		_text.OnHrefClick.AddListener(OnHrefClick);
+		
 	}
 
 	void OnDisable()
 	{
-		_text.OnHrefClick.RemoveListener(OnHrefClick);
+		
 	}
 
 	private void OnHrefClick(string hrefName, int id)
