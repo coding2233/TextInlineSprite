@@ -22,6 +22,7 @@ namespace EmojiUI
 	{
 		private static StringBuilder _textBuilder = new StringBuilder();
 		private static UIVertex[] m_TempVerts = new UIVertex[4];
+		private static UIVertex[] m_TagVerts = new UIVertex[4];
 		
 		private TextGenerator _SpaceGen;
 		private InlineManager _InlineManager;
@@ -42,124 +43,9 @@ namespace EmojiUI
 			}
 		}
 
-		List<IFillData> RenderTagList;
-
+		List<IFillData> _renderTagList;
 		private string _lasttext ;
-		private string _OutputText = "";
-//		private float? _pw;
-//
-//		public override float preferredWidth
-//		{
-//			get
-//			{
-//				if (_pw == null)
-//				{
-//					//its override from uGUI Code ,but has bug?
-//
-//					//var settings = GetGenerationSettings(Vector2.zero);
-//					//return cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
-//
-//					//next idea
-//					Vector2 extents = rectTransform.rect.size;
-//
-//					var settings = GetGenerationSettings(extents);
-//					cachedTextGenerator.Populate(_OutputText, settings);
-//
-//					if (cachedTextGenerator.lineCount > 1)
-//					{
-//						float? minx = null;
-//						float? maxx = null;
-//						IList<UIVertex> verts = cachedTextGenerator.verts;
-//						int maxIndex = cachedTextGenerator.lines[1].startCharIdx;
-//
-//						for (int i = 0, index = 0; i < verts.Count; i += 4, index++)
-//						{
-//							UIVertex v0 = verts[i];
-//							UIVertex v2 = verts[i + 1];
-//							float min = v0.position.x;
-//							float max = v2.position.x;
-//
-//							if (minx.HasValue == false)
-//							{
-//								minx = min;
-//							}
-//							else
-//							{
-//								minx = Mathf.Min(minx.Value, min);
-//							}
-//
-//							if (maxx.HasValue == false)
-//							{
-//								maxx = max;
-//							}
-//							else
-//							{
-//								maxx = Mathf.Max(maxx.Value, max);
-//							}
-//
-//							if (index > maxIndex)
-//							{
-//								break;
-//							}
-//						}
-//
-//						_pw = (maxx - minx);
-//					}
-//					else
-//					{
-//						//_pw = cachedTextGeneratorForLayout.GetPreferredWidth(_OutputText, settings) / pixelsPerUnit;
-//						float? minx = null;
-//						float? maxx = null;
-//						IList<UIVertex> verts = cachedTextGenerator.verts;
-//						int maxIndex = cachedTextGenerator.characterCount;
-//
-//						for (int i = 0, index = 0; i < verts.Count; i += 4, index++)
-//						{
-//							UIVertex v0 = verts[i];
-//							UIVertex v2 = verts[i + 1];
-//							float min = v0.position.x;
-//							float max = v2.position.x;
-//
-//							if (minx.HasValue == false)
-//							{
-//								minx = min;
-//							}
-//							else
-//							{
-//								minx = Mathf.Min(minx.Value, min);
-//							}
-//
-//							if (maxx.HasValue == false)
-//							{
-//								maxx = max;
-//							}
-//							else
-//							{
-//								maxx = Mathf.Max(maxx.Value, max);
-//							}
-//
-//							if (index > maxIndex)
-//							{
-//								break;
-//							}
-//						}
-//
-//						_pw = (maxx - minx);
-//					}
-//
-//				}
-//				return _pw.Value;
-//			}
-//		}
-//
-//		public override float preferredHeight
-//		{
-//			get
-//			{
-//				var settings = GetGenerationSettings(new Vector2(GetPixelAdjustedRect().size.x, 0.0f));
-//				return cachedTextGeneratorForLayout.GetPreferredHeight(_OutputText, settings) / pixelsPerUnit;
-//			}
-//		}
+		private string _outputText = "";
 
 		void OnDrawGizmos()
 		{
@@ -191,34 +77,61 @@ namespace EmojiUI
 		public override void SetVerticesDirty()
 		{
 			base.SetVerticesDirty();
-			if (!Manager)
+			if (Application.isPlaying)
 			{
-				_OutputText = m_Text;
-				return;
+				if (!Manager)
+				{
+					_outputText = m_Text;
+					return;
+				}
+				else if(Manager.HasInit)
+				{
+					DoUpdateEmoji();
+				}
+				else
+				{
+					StartCoroutine(WaitManagerInited());
+				}
+			
+
+			}
+		}
+
+		IEnumerator WaitManagerInited()
+		{
+			while (Manager != null && !Manager.HasInit)
+			{
+				yield return null;
 			}
 
+			DoUpdateEmoji();
+		}
+
+		void DoUpdateEmoji()
+		{
 			if(m_Text != null && !m_Text.Equals(_lasttext) )
 			{
-				ParserTransmit.mIns.DoParser(this, _textBuilder, m_Text);
+				ClearFillData();
+				_lasttext = m_Text;
+				ParserTransmit.mIns.DoParse(this, _textBuilder, m_Text);
 
-				_OutputText = _textBuilder.ToString();
+				_outputText = _textBuilder.ToString();
 				_textBuilder.Length = 0;
 
-				Debug.LogError(_OutputText);
+				Debug.LogError(_outputText);
 			}
 
-			Manager.Register(this);
-
+			
 		}
 
 		protected override void OnDestroy()
 		{
 			base.OnDestroy();
 
-			if (RenderTagList != null)
+			if (_renderTagList != null)
 			{
-				ListPool<IFillData>.Release(RenderTagList);
-				RenderTagList = null;
+				ListPool<IFillData>.Release(_renderTagList);
+				_renderTagList = null;
 			}
 
 			if (Manager)
@@ -242,7 +155,7 @@ namespace EmojiUI
 			Vector2 extents = rectTransform.rect.size;
 
 			var settings = GetGenerationSettings(extents);
-			cachedTextGenerator.PopulateWithErrors(_OutputText, settings, gameObject);
+			cachedTextGenerator.PopulateWithErrors(_outputText, settings, gameObject);
 
 			// Apply the offset to the vertices
 			IList<UIVertex> verts = cachedTextGenerator.verts;
@@ -252,8 +165,27 @@ namespace EmojiUI
 			Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
 			roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
 			toFill.Clear();
-	
-				
+
+			
+			int nextfilldata = -1;
+			int fillindex = -1;
+			int startfilldata = -1;
+			
+			if (_renderTagList != null && _renderTagList.Count  >0)
+			{
+				var data = _renderTagList[0];
+				nextfilldata = data.GetPositionIdx() ;
+				//at least one 
+				startfilldata = nextfilldata - (data.GetFillCnt()-1) * 4-3;
+				fillindex = 0;
+
+				Manager.Register(this);
+			}
+			else
+			{
+				Manager.UnRegister(this);
+			}
+			
 			if (roundingOffset != Vector2.zero)
 			{
 				for (int i = 0; i < vertCount; ++i)
@@ -264,9 +196,40 @@ namespace EmojiUI
 					m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
 					m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
 
-					if (tempVertsIndex == 3)
-						toFill.AddUIVertexQuad(m_TempVerts);
+					//first
+					if (startfilldata >= 0 && i == startfilldata)
+					{
+						m_TagVerts[0] = m_TempVerts[tempVertsIndex];
+					}
+					//second
+					if (nextfilldata >= 0 && i == nextfilldata - 2)
+					{
+						m_TagVerts[1] = m_TempVerts[tempVertsIndex];
+					}
+					//third
+					if (nextfilldata >= 0 && i == nextfilldata - 1)
+					{
+						m_TagVerts[2] = m_TempVerts[tempVertsIndex];
+					}
+					//fourth
+					if (startfilldata >= 0 && i == startfilldata + 3)
+					{
+						m_TagVerts[3] = m_TempVerts[tempVertsIndex];
+					}
 
+					if (tempVertsIndex == 3)
+					{
+						//skip
+						if ( i < startfilldata || i > nextfilldata )
+						{
+							toFill.AddUIVertexQuad(m_TempVerts);
+						}
+
+						if (nextfilldata >=0 && i >= nextfilldata)
+						{
+							FillNextTag(ref startfilldata,ref nextfilldata,ref fillindex);
+						}
+					}
 				}
 			}
 			else
@@ -277,48 +240,100 @@ namespace EmojiUI
 					m_TempVerts[tempVertsIndex] = verts[i];
 					m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
 
+					//first
+					if (startfilldata >= 0 && i == startfilldata)
+					{
+						m_TagVerts[0] = m_TempVerts[tempVertsIndex];
+					}
+					//second
+					if (nextfilldata >= 0 && i == nextfilldata - 2)
+					{
+						m_TagVerts[1] = m_TempVerts[tempVertsIndex];
+					}
+					//third
+					if (nextfilldata >= 0 && i == nextfilldata - 1)
+					{
+						m_TagVerts[2] = m_TempVerts[tempVertsIndex];
+					}
+					//fourth
+					if (startfilldata >= 0 && i == startfilldata + 3)
+					{
+						m_TagVerts[3] = m_TempVerts[tempVertsIndex];
+					}
+
 					if (tempVertsIndex == 3)
-						toFill.AddUIVertexQuad(m_TempVerts);
+					{
+						//skip
+						if ( startfilldata == -1 || (startfilldata >=0 && i < startfilldata) ||  (nextfilldata >= 0 &&  i > nextfilldata ))
+						{
+							toFill.AddUIVertexQuad(m_TempVerts);
+						}
+
+						if (nextfilldata >=0 && i >= nextfilldata)
+						{
+							FillNextTag(ref startfilldata,ref nextfilldata,ref fillindex);
+						}
+					}
 				}
 			}
 
 			m_DisableFontTextureRebuiltCallback = false;
 
-			if(RenderTagList != null)
+		}
+
+		void FillNextTag(ref int startfilldata,ref int nextfilldata,ref int fillindex)
+		{
+			if(_renderTagList != null && fillindex >=0)
 			{
-				for(int i =0; i < RenderTagList.Count;++i)
-					RenderTagList[i].Fill(toFill);
+				//fill current
+				var current = _renderTagList[fillindex];
+				current.Fill(m_TagVerts);
+
+				fillindex++;
+				if (fillindex < _renderTagList.Count)
+				{
+					//update next
+					var data = _renderTagList[fillindex];
+					nextfilldata = data.GetPositionIdx();
+					startfilldata = nextfilldata - (data.GetFillCnt() - 1) * 4 - 3;
+				}
+				else
+				{
+					startfilldata = -1;
+					nextfilldata = -1;
+					fillindex = -1;
+				}
 			}
 		}
 
 
 		internal List<IFillData> PopEmojiData()
 		{
-			return RenderTagList;
+			return _renderTagList;
 		}
 
-		internal void ClearFillData(IFillData data)
+		void ClearFillData()
 		{
-			if(RenderTagList != null)
+			if(_renderTagList != null)
 			{
-				RenderTagList.Clear();
+				_renderTagList.Clear();
 			}
 		}
 
 		internal void AddFillData(IFillData data)
 		{
-			if(RenderTagList == null)
+			if(_renderTagList == null)
 			{
-				RenderTagList = ListPool<IFillData>.Get();
+				_renderTagList = ListPool<IFillData>.Get();
 			}
-			this.RenderTagList.Add(data);
+			this._renderTagList.Add(data);
 		}
 
 		internal void RemoveFillData(IFillData data)
 		{
-			if(RenderTagList != null)
+			if(_renderTagList != null)
 			{
-				RenderTagList.Remove(data);
+				_renderTagList.Remove(data);
 			}
 		}	
 	}

@@ -12,9 +12,6 @@ namespace EmojiUI
 
 		bool ParsetContent(InlineText text,StringBuilder textfiller, Match data,int matchindex);
 
-		void DoFillMesh();
-
-		void RecordTextUpdate(InlineText text);
 	}
 
 }

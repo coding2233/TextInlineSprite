@@ -10,6 +10,14 @@ namespace EmojiUI
 	{
 		private static TextGenerator _UnderlineText;
 		public int Hot { get; set; }
+		
+		private const string palceholder = "1";
+
+		private TextGenerator _SpaceGen;
+
+		private int cacheframecnt;
+
+		private InlineText cachetext;
 
 		public void DoFillMesh()
 		{
@@ -21,19 +29,18 @@ namespace EmojiUI
 			throw new System.NotImplementedException();
 		}
 
-		internal void FillSpriteTag(StringBuilder stringBuilder, Match match, int Index, ParsedData tagInfo)
+		void FillSpriteTag(InlineText text,StringBuilder stringBuilder, Match match,int matchindex, int atlasId,string atlasTag)
 		{
-			int Id = tagInfo.atlasID;
-			string TagName = tagInfo.atlasTag;
-			if (Manager != null && Manager.CanRendering(Id) && Manager.CanRendering(TagName))
+
+			if (text.Manager != null && text.Manager.CanRendering(atlasId) && text.Manager.CanRendering(atlasTag))
 			{
 				SpriteAsset sprAsset;
-				SpriteInfoGroup tagSprites = Manager.FindSpriteGroup(TagName, out sprAsset);
+				SpriteInfoGroup tagSprites = text.Manager.FindSpriteGroup(atlasTag, out sprAsset);
 				if (tagSprites != null && tagSprites.spritegroups.Count > 0)
 				{
-					if (!Manager.isRendering(sprAsset))
+					if (!text.Manager.isRendering(sprAsset))
 					{
-						Manager.PushRenderAtlas(sprAsset);
+						text.Manager.PushRenderAtlas(sprAsset);
 					}
 
 					if (_SpaceGen == null)
@@ -41,18 +48,20 @@ namespace EmojiUI
 						_SpaceGen = new TextGenerator();
 					}
 
-					if (updatespace)
+					if (cacheframecnt != Time.frameCount || cachetext != text)
 					{
-						Vector2 extents = rectTransform.rect.size;
-						TextGenerationSettings settings = GetGenerationSettings(extents);
+						cacheframecnt = Time.frameCount;
+						cachetext = text;
+						
+						Vector2 extents = text.rectTransform.rect.size;
+						TextGenerationSettings settings = text.GetGenerationSettings(extents);
 						_SpaceGen.Populate(palceholder, settings);
-						updatespace = false;
+	
 					}
 
 					IList<UIVertex> spaceverts = _SpaceGen.verts;
 					float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
 					float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
-
 
 					float autosize = Mathf.Min(tagSprites.size, Mathf.Max(spacewid, spaceheight));
 					float spacesize = Mathf.Max(spacewid, spaceheight);
@@ -64,34 +73,19 @@ namespace EmojiUI
 						stringBuilder.Append(palceholder);
 					}
 
-					if (RenderTagList == null)
+					if (fillspacecnt > 0)
 					{
-						RenderTagList = ListPool<IFillData>.Get();
-					}
+						SpriteTagInfo tempSpriteTag = new SpriteTagInfo();
+						tempSpriteTag.ID = atlasId;
+						tempSpriteTag.Tag = atlasTag;
+						tempSpriteTag.Size = new Vector2(autosize, autosize);
+						tempSpriteTag.pos = new Vector3[4];
+						tempSpriteTag.uv = tagSprites.spritegroups[0].uv;
+					
+			
+						tempSpriteTag.FillIdxAndPlaceHolder(stringBuilder.Length * 4-1,matchindex,fillspacecnt);
 
-					if (RenderTagList.Count > Index)
-					{
-						SpriteTagInfo _tempSpriteTag = RenderTagList[Index];
-						_tempSpriteTag._ID = Id;
-						_tempSpriteTag._Tag = TagName;
-						_tempSpriteTag._Size = new Vector2(autosize, autosize);
-						_tempSpriteTag.FillIdxAndPlaceHolder(match.Index, fillspacecnt);
-						_tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
-					}
-					else
-					{
-						SpriteTagInfo _tempSpriteTag = new SpriteTagInfo
-						{
-							_ID = Id,
-							_Tag = TagName,
-							_Size = new Vector2(autosize, autosize),
-							_Pos = new Vector3[4],
-							_UV = tagSprites.spritegroups[0].uv
-						};
-
-						_tempSpriteTag.FillIdxAndPlaceHolder(match.Index, fillspacecnt);
-
-						RenderTagList.Add(_tempSpriteTag);
+						text.AddFillData(tempSpriteTag);
 					}
 				}
 
@@ -110,32 +104,30 @@ namespace EmojiUI
 				string tagKey = null;
 				if (index != -1)
 				{
-					string subID = value.Substring(1, index - 1);
-					if (subID.Length > 0 && !int.TryParse(subID, out atlasId))
+					string subId = value.Substring(1, index - 1);
+					if (subId.Length > 0 && !int.TryParse(subId, out atlasId))
 					{
-						Debug.LogErrorFormat("{0} convert failed ", subID);
+						Debug.LogErrorFormat("{0} convert failed ", subId);
 					}
-					else if (subID.Length > 0)
+					else if (subId.Length > 0)
 					{
 						atlasId = -1;
 					}
-					else if (subID.Length == 0)
+					else if (subId.Length == 0)
 					{
 						atlasId = 0;
 					}
 
 					tagKey = value.Substring(index + 1, value.Length - index - 2);
+					
+					FillSpriteTag(text,textfiller,data,matchindex,atlasId,tagKey);
 
-					parsedData.atlasID = atlasId;
-					parsedData.atlasTag = tagKey;
 
 				}
 				else
 				{
 					tagKey = value.Substring(1, value.Length - 2);
-
-					parsedData.atlasID = atlasId;
-					parsedData.atlasTag = tagKey;
+					FillSpriteTag(text,textfiller,data,matchindex,atlasId,tagKey);
 
 				}
 				return true;

@@ -1,11 +1,4 @@
-﻿/// ========================================================
-/// file：InlineManager.cs
-/// brief：
-/// author： coding2233
-/// date：
-/// version：v1.0
-/// ========================================================
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,16 +9,17 @@ using UnityEditor;
 
 namespace EmojiUI
 {
-	[DefaultExecutionOrder(-99999)]
 	public class InlineManager : MonoBehaviour
 	{
-		private List<SpriteAsset> sharedAtlases = new List<SpriteAsset>();
+		private readonly List<SpriteAsset> _sharedAtlases = new List<SpriteAsset>();
 
-		private Dictionary<string, SpriteInfoGroup> alltags = new Dictionary<string, SpriteInfoGroup>();
+		private readonly Dictionary<string, SpriteInfoGroup> _alltags = new Dictionary<string, SpriteInfoGroup>();
 
-		private IEmojiRender _Render;
+		private IEmojiRender _render;
 
 		public List<string> PreparedAtlas = new List<string>();
+		
+		public bool HasInit { get; private set; }
 
 #if UNITY_EDITOR
 		[SerializeField]
@@ -56,9 +50,9 @@ namespace EmojiUI
 			}
 		}
 
-		private List<SpriteAsset> unityallAtlases;
+		private List<SpriteAsset> _unityallAtlases;
 
-		private List<string> lostAssets;
+		private List<string> _lostAssets;
 #endif
 		[SerializeField]
 		private float _animationspeed = 5f;
@@ -70,9 +64,9 @@ namespace EmojiUI
 			}
 			set
 			{
-				if (_Render != null)
+				if (_render != null)
 				{
-					_Render.Speed = value;
+					_render.Speed = value;
 				}
 				_animationspeed = value;
 			}
@@ -80,7 +74,7 @@ namespace EmojiUI
 
 		[SerializeField]
 		private EmojiRenderType _renderType = EmojiRenderType.RenderUnit;
-		public EmojiRenderType renderType
+		public EmojiRenderType RenderType
 		{
 			get
 			{
@@ -95,6 +89,7 @@ namespace EmojiUI
 				}
 			}
 		}
+
 
 		void Awake()
 		{
@@ -114,19 +109,20 @@ namespace EmojiUI
 
 		void Initialize()
 		{
+			HasInit = true;
 #if UNITY_EDITOR
 			string[] result = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(SpriteAsset).FullName));
 
-			if (result.Length > 0 && unityallAtlases == null)
+			if (result.Length > 0 && _unityallAtlases == null)
 			{
-				unityallAtlases = new List<SpriteAsset>(result.Length);
+				_unityallAtlases = new List<SpriteAsset>(result.Length);
 				for (int i = 0; i < result.Length; ++i)
 				{
 					string path = AssetDatabase.GUIDToAssetPath(result[i]);
 					SpriteAsset asset = AssetDatabase.LoadAssetAtPath<SpriteAsset>(path);
 					if (asset)
 					{
-						unityallAtlases.Add(asset);
+						_unityallAtlases.Add(asset);
 					}
 				}
 			}
@@ -151,9 +147,9 @@ namespace EmojiUI
 		void LateUpdate()
 		{
 			EmojiTools.BeginSample("Emoji_LateUpdate");
-			if (_Render != null)
+			if (_render != null)
 			{
-				_Render.LateUpdate();
+				_render.LateUpdate();
 			}
 			EmojiTools.EndSample();
 		}
@@ -161,21 +157,21 @@ namespace EmojiUI
 		private void OnDestroy()
 		{
 #if UNITY_EDITOR
-			if (lostAssets != null)
+			if (_lostAssets != null)
 			{
-				for (int i = 0; i < lostAssets.Count; ++i)
+				for (int i = 0; i < _lostAssets.Count; ++i)
 				{
-					string asset = lostAssets[i];
+					string asset = _lostAssets[i];
 					Debug.LogError(string.Format("not prepred atlasAsset named :{0}", asset));
 				}
 			}
 #endif
-			if (_Render != null)
+			if (_render != null)
 			{
-				_Render.Dispose();
+				_render.Dispose();
 			}
 
-			_Render = null;
+			_render = null;
 			EmojiTools.RemoveUnityMemory(this);
 		}
 
@@ -186,17 +182,17 @@ namespace EmojiUI
 
 		void InitRender()
 		{
-			if (_Render == null || _Render.renderType != renderType)
+			if (_render == null || _render.renderType != RenderType)
 			{
 
-				if (renderType == EmojiRenderType.RenderGroup)
+				if (RenderType == EmojiRenderType.RenderGroup)
 				{
 					EmojiRenderGroup newRender = new EmojiRenderGroup(this);
 					newRender.Speed = AnimationSpeed;
 
-					if (_Render != null)
+					if (_render != null)
 					{
-						List<InlineText> list = _Render.GetAllRenders();
+						List<InlineText> list = _render.GetAllRenders();
 						if (list != null)
 						{
 							for (int i = 0; i < list.Count; ++i)
@@ -207,7 +203,7 @@ namespace EmojiUI
 							}
 						}
 
-						List<SpriteAsset> atlaslist = _Render.GetAllRenderAtlas();
+						List<SpriteAsset> atlaslist = _render.GetAllRenderAtlas();
 						if (atlaslist != null)
 						{
 							for (int i = 0; i < atlaslist.Count; ++i)
@@ -217,20 +213,20 @@ namespace EmojiUI
 									newRender.PrepareAtlas(atlas);
 							}
 						}
-						_Render.Dispose();
+						_render.Dispose();
 					}
 
-					_Render = newRender;
+					_render = newRender;
 
 				}
-				else if (renderType == EmojiRenderType.RenderUnit)
+				else if (RenderType == EmojiRenderType.RenderUnit)
 				{
 					UnitRender newRender = new UnitRender(this);
 					newRender.Speed = AnimationSpeed;
 
-					if (_Render != null)
+					if (_render != null)
 					{
-						List<InlineText> list = _Render.GetAllRenders();
+						List<InlineText> list = _render.GetAllRenders();
 						if (list != null)
 						{
 							for (int i = 0; i < list.Count; ++i)
@@ -241,7 +237,7 @@ namespace EmojiUI
 							}
 						}
 
-						List<SpriteAsset> atlaslist = _Render.GetAllRenderAtlas();
+						List<SpriteAsset> atlaslist = _render.GetAllRenderAtlas();
 						if (atlaslist != null)
 						{
 							for (int i = 0; i < atlaslist.Count; ++i)
@@ -252,10 +248,10 @@ namespace EmojiUI
 							}
 						}
 
-						_Render.Dispose();
+						_render.Dispose();
 					}
 
-					_Render = newRender;
+					_render = newRender;
 				}
 				else
 				{
@@ -279,23 +275,23 @@ namespace EmojiUI
 		void RebuildTagList()
 		{
 			EmojiTools.BeginSample("Emoji_rebuildTags");
-			alltags.Clear();
+			_alltags.Clear();
 #if UNITY_EDITOR
-			if (unityallAtlases != null)
+			if (_unityallAtlases != null)
 			{
-				for (int i = 0; i < unityallAtlases.Count; ++i)
+				for (int i = 0; i < _unityallAtlases.Count; ++i)
 				{
-					SpriteAsset asset = unityallAtlases[i];
+					SpriteAsset asset = _unityallAtlases[i];
 					for (int j = 0; j < asset.listSpriteGroup.Count; ++j)
 					{
 						SpriteInfoGroup infogroup = asset.listSpriteGroup[j];
 						SpriteInfoGroup group;
-						if (alltags.TryGetValue(infogroup.tag, out group))
+						if (_alltags.TryGetValue(infogroup.tag, out group))
 						{
 							Debug.LogErrorFormat("already exist :{0} ", infogroup.tag);
 						}
 
-						alltags[infogroup.tag] = infogroup;
+						_alltags[infogroup.tag] = infogroup;
 					}
 				}
 			}
@@ -323,12 +319,12 @@ namespace EmojiUI
 		public IEmojiRender Register(InlineText _key)
 		{
 			EmojiTools.BeginSample("Emoji_Register");
-			if (_Render != null)
+			if (_render != null)
 			{
-				if (_Render.TryRendering(_key))
+				if (_render.TryRendering(_key))
 				{
 					EmojiTools.EndSample();
-					return _Render;
+					return _render;
 				}
 			}
 			EmojiTools.EndSample();
@@ -344,9 +340,9 @@ namespace EmojiUI
 		public void UnRegister(InlineText _key)
 		{
 			EmojiTools.BeginSample("Emoji_UnRegister");
-			if (_Render != null)
+			if (_render != null)
 			{
-				_Render.DisRendering(_key);
+				_render.DisRendering(_key);
 			}
 			EmojiTools.EndSample();
 		}
@@ -368,32 +364,32 @@ namespace EmojiUI
 		public void ClearAllSprites()
 		{
 			EmojiTools.BeginSample("Emoji_ClearAll");
-			if (_Render != null)
+			if (_render != null)
 			{
-				_Render.Clear();
+				_render.Clear();
 			}
 			EmojiTools.EndSample();
 		}
 
 		public bool isRendering(SpriteAsset _spriteAsset)
 		{
-			return _spriteAsset != null && _Render != null && _Render.isRendingAtlas(_spriteAsset);
+			return _spriteAsset != null && _render != null && _render.isRendingAtlas(_spriteAsset);
 		}
 
 		public bool CanRendering(string tagName)
 		{
-			return alltags != null && alltags.ContainsKey(tagName);
+			return _alltags != null && _alltags.ContainsKey(tagName);
 		}
 
 		public bool CanRendering(int atlasId)
 		{
 
 #if UNITY_EDITOR
-			if (unityallAtlases != null)
+			if (_unityallAtlases != null)
 			{
-				for (int i = 0; i < unityallAtlases.Count; ++i)
+				for (int i = 0; i < _unityallAtlases.Count; ++i)
 				{
-					SpriteAsset asset = unityallAtlases[i];
+					SpriteAsset asset = _unityallAtlases[i];
 					if (asset.ID == atlasId)
 					{
 						return true;
@@ -420,11 +416,11 @@ namespace EmojiUI
 			EmojiTools.BeginSample("Emoji_PushRenderAtlas");
 			if (!isRendering(_spriteAsset) && _spriteAsset != null)
 			{
-				_Render.PrepareAtlas(_spriteAsset);
+				_render.PrepareAtlas(_spriteAsset);
 
-				if (!sharedAtlases.Contains(_spriteAsset))
+				if (!_sharedAtlases.Contains(_spriteAsset))
 				{
-					sharedAtlases.Add(_spriteAsset);
+					_sharedAtlases.Add(_spriteAsset);
 				}
 			}
 			EmojiTools.EndSample();
@@ -438,11 +434,11 @@ namespace EmojiUI
 			resultatlas = null;
 
 			SpriteInfoGroup result = null;
-			if (unityallAtlases != null)
+			if (_unityallAtlases != null)
 			{
-				for (int i = 0; i < unityallAtlases.Count; ++i)
+				for (int i = 0; i < _unityallAtlases.Count; ++i)
 				{
-					SpriteAsset asset = unityallAtlases[i];
+					SpriteAsset asset = _unityallAtlases[i];
 					for (int j = 0; j < asset.listSpriteGroup.Count; ++j)
 					{
 						SpriteInfoGroup group = asset.listSpriteGroup[j];
@@ -456,13 +452,13 @@ namespace EmojiUI
 				}
 			}
 
-			if (lostAssets == null)
-				lostAssets = new List<string>();
+			if (_lostAssets == null)
+				_lostAssets = new List<string>();
 
 			if (resultatlas != null && !PreparedAtlas.Contains(resultatlas.AssetName))
 			{
-				if (!lostAssets.Contains(resultatlas.AssetName))
-					lostAssets.Add(resultatlas.AssetName);
+				if (!_lostAssets.Contains(resultatlas.AssetName))
+					_lostAssets.Add(resultatlas.AssetName);
 			}
 			EmojiTools.EndSample();
 			return result;
@@ -497,11 +493,11 @@ namespace EmojiUI
 			EmojiTools.BeginSample("Emoji_FindAtlas");
 #if UNITY_EDITOR
 			SpriteAsset result = null;
-			if (unityallAtlases != null)
+			if (_unityallAtlases != null)
 			{
-				for (int i = 0; i < unityallAtlases.Count; ++i)
+				for (int i = 0; i < _unityallAtlases.Count; ++i)
 				{
-					SpriteAsset asset = unityallAtlases[i];
+					SpriteAsset asset = _unityallAtlases[i];
 					if (asset.ID.Equals(atlasID))
 					{
 						result = asset;
@@ -510,13 +506,13 @@ namespace EmojiUI
 				}
 			}
 
-			if (lostAssets == null)
-				lostAssets = new List<string>();
+			if (_lostAssets == null)
+				_lostAssets = new List<string>();
 
 			if (result != null && !PreparedAtlas.Contains(result.AssetName))
 			{
-				if (!lostAssets.Contains(result.AssetName))
-					lostAssets.Add(result.AssetName);
+				if (!_lostAssets.Contains(result.AssetName))
+					_lostAssets.Add(result.AssetName);
 			}
 			EmojiTools.EndSample();
 			return result;
@@ -541,11 +537,11 @@ namespace EmojiUI
 			EmojiTools.BeginSample("FindAtlas");
 #if UNITY_EDITOR
 			SpriteAsset result = null;
-			if (unityallAtlases != null)
+			if (_unityallAtlases != null)
 			{
-				for (int i = 0; i < unityallAtlases.Count; ++i)
+				for (int i = 0; i < _unityallAtlases.Count; ++i)
 				{
-					SpriteAsset asset = unityallAtlases[i];
+					SpriteAsset asset = _unityallAtlases[i];
 					if (asset.AssetName.Equals(atlasname))
 					{
 						result = asset;
@@ -554,13 +550,13 @@ namespace EmojiUI
 				}
 			}
 
-			if (lostAssets == null)
-				lostAssets = new List<string>();
+			if (_lostAssets == null)
+				_lostAssets = new List<string>();
 
 			if (!PreparedAtlas.Contains(atlasname))
 			{
-				if (!lostAssets.Contains(atlasname))
-					lostAssets.Add(atlasname);
+				if (!_lostAssets.Contains(atlasname))
+					_lostAssets.Add(atlasname);
 			}
 			EmojiTools.EndSample();
 			return result;

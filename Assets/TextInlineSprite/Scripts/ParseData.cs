@@ -15,58 +15,66 @@ namespace EmojiUI
 		Vector3[] pos { get; set; }
 		Vector2[] uv { get; set; }
 
-		void Fill(VertexHelper filler);
+		int Fill(UIVertex[] filler);
+
+		int GetFillCnt();
+
+		int GetPositionIdx();
+
+		int GetTagIndex();
 	}
 
-	public struct ParsedData : IEquatable<ParsedData>
-	{
-		public int atlasID;
-		public string atlasTag;
-
-		public bool Equals(ParsedData other)
-		{
-			if (this.atlasID != other.atlasID)
-				return false;
-
-			if (this.atlasTag != other.atlasTag)
-				return false;
-
-			return true;
-		}
-	}
 	#endregion
 
 	public class SpriteTagInfo:IFillData
 	{
-		private int _Position = -1;
-		private const int dv = 100000;
-
-
+		private int _position ;
+		private const int Dv = 1000;
+		private const int DV2 = Dv * Dv;
+		
 		public int ID { get; set; }
 
 		public Vector3[] pos { get; set; }
 
 		public Vector2[] uv { get; set; }
 
-		//custom
-
 		public Vector2 Size { get; set; }
 
 		public string Tag { get; set; }
 
-		public void FillIdxAndPlaceHolder(int idx, int cnt)
+		public void FillIdxAndPlaceHolder(int idx, int tagidx,int fillcnt)
 		{
-			_Position = cnt * dv + idx;
+			_position =fillcnt *DV2 + tagidx * Dv + idx;
 		}
 
-		public int GetPlaceHolderCnt()
+		public int GetTagIndex()
 		{
-			return _Position / dv;
+			return (_position / Dv) % Dv;
 		}
 
 		public int GetPositionIdx()
 		{
-			return _Position % dv;
+			return _position % Dv;
+		}
+
+		public int GetFillCnt()
+		{
+			return _position / DV2;
+		}
+		
+		public int Fill(UIVertex[] filler)
+		{
+			int index = GetPositionIdx();
+			if (index >= 0)
+			{
+				pos[0] = filler[0].position;
+				pos[1] = filler[1].position;
+				pos[2] = filler[2].position;
+				pos[3] = filler[3].position;
+
+			}
+
+			return -1;
 		}
 
 	}

@@ -24,7 +24,7 @@ namespace EmojiUI
 			}
 		}
 
-		public const string palceholder = "1";
+
 
 		private const string ParsetLeft = "\\[";
 
@@ -32,9 +32,9 @@ namespace EmojiUI
 
 		public static int hot = 100;
 
-		private List<IParser> parsers = new List<IParser>(8);
+		private readonly List<IParser> _parsers = new List<IParser>(8);
 
-		private Regex TagRegex = new Regex(string.Format(@"{0}(\-{{0,1}}\d{{0,}})#(.+?){1}", ParsetLeft, ParsetRight), RegexOptions.Singleline);
+		private readonly Regex _tagRegex = new Regex(string.Format(@"{0}(\-{{0,1}}\d{{0,}})#(.+?){1}", ParsetLeft, ParsetRight), RegexOptions.Singleline);
 
 		private ParserTransmit()
 		{
@@ -44,24 +44,25 @@ namespace EmojiUI
 
 		public void AddParser(IParser parser)
 		{
-			if (Application.isEditor && parsers.Contains(parser))
+			if (Application.isEditor && _parsers.Contains(parser))
 			{
 				Debug.LogErrorFormat("has contains it  :{0}", parser);
 			}
 
-			parsers.Add(parser);
+			_parsers.Add(parser);
 		}
 
 		public bool RemoveParser(IParser parser)
 		{
-			return parsers.Remove(parser);
+			return _parsers.Remove(parser);
 		}
 
-		public void DoParser(InlineText text, StringBuilder fillbuilder, string content)
+		public void DoParse(InlineText text, StringBuilder fillbuilder, string content)
 		{
-			if (parsers.Count > 0)
+
+			if (_parsers.Count > 0)
 			{
-				MatchCollection matches = TagRegex.Matches(content);
+				MatchCollection matches = _tagRegex.Matches(content);
 				if (matches.Count > 0)
 				{
 					bool needfix = false;
@@ -72,18 +73,12 @@ namespace EmojiUI
 
 						fillbuilder.Append(content.Substring(index, matchstr.Index - index));
 
-						if (m == matches.Count - 1)
-						{
-							fillbuilder.Append(content.Substring(matchstr.Index + matchstr.Length));
-						}
-
 						index = matchstr.Index + matchstr.Length;
 
-						for (int i = 0; i < parsers.Count; ++i)
+						for (int i = 0; i < _parsers.Count; ++i)
 						{
-							var parser = parsers[i];
+							var parser = _parsers[i];
 
-							ParsedData tagInfo = new ParsedData();
 							if (parser.ParsetContent(text,fillbuilder,matchstr,m))
 							{
 								parser.Hot++;
@@ -93,16 +88,21 @@ namespace EmojiUI
 								}
 							}
 						}
+						
+						if (m == matches.Count - 1)
+						{
+							fillbuilder.Append(content.Substring(matchstr.Index + matchstr.Length));
+						}
 					}
 
 					//reset and fix
-					if (needfix && this.parsers.Count >1)
-						this.parsers.Sort(SortList);
+					if (needfix && this._parsers.Count >1)
+						this._parsers.Sort(SortList);
 
 					//
-					for (int i = 0; i < parsers.Count; ++i)
+					for (int i = 0; i < _parsers.Count; ++i)
 					{
-						var parser = parsers[i];
+						var parser = _parsers[i];
 						parser.Hot = 0;
 					}
 				}

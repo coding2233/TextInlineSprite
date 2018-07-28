@@ -29,7 +29,7 @@ namespace EmojiUI
             serializedObject.Update();
 
             manager.OpenDebug =EditorGUILayout.Toggle("Debug", manager.OpenDebug);
-            manager.renderType = (EmojiRenderType)EditorGUILayout.EnumPopup("Rendetype", manager.renderType);
+            manager.RenderType = (EmojiRenderType)EditorGUILayout.EnumPopup("Rendetype", manager.RenderType);
             manager.AnimationSpeed = EditorGUILayout.Slider("AnimationSpeed", manager.AnimationSpeed, 0, 100);
 
             foldout = EditorGUILayout.Foldout(foldout, "prepared:"+manager.PreparedAtlas.Count);

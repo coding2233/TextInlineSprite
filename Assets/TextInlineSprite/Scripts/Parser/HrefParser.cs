@@ -10,27 +10,10 @@ namespace EmojiUI
 	{
 
 		public int Hot { get; set; }
-
-		public void DoFillMesh()
+		public bool ParsetContent(InlineText text, StringBuilder textfiller, Match data,int matchindex)
 		{
 			throw new System.NotImplementedException();
 		}
-
-		public void RecordTextUpdate(InlineText text)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public void DoFillText(InlineText text, StringBuilder stringBuilder, Match match, int Index, ParsedData tagInfo)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public bool ParsetContent(InlineText text,StringBuilder textfiller, Match data,int matchindex)
-		{
-			return false;
-		}
-
 	}
 
 }
