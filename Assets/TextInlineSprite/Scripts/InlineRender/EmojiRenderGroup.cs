@@ -220,6 +220,7 @@ namespace EmojiUI
 					if (target != null)
 					{
 						target.Draw(null);
+						target.SetDirtyMask();
 						target.SetVerticesDirty();
 					}
 
@@ -391,6 +392,7 @@ namespace EmojiUI
 							else
 							{
 								group.graphic.Draw(null);
+								group.graphic.SetDirtyMask();
 								group.graphic.SetVerticesDirty();
 							}
 						}

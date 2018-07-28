@@ -162,6 +162,7 @@ namespace EmojiUI
 						if (target != null)
 						{
 							target.Draw(null);
+							target.SetDirtyMask();
 							target.SetVerticesDirty();
 						}
 					}
@@ -251,16 +252,12 @@ namespace EmojiUI
 						if (renderData == null)
 							renderData = new Dictionary<Graphic, UnitMeshInfo>(emojidata.Count);
 
-						List<SpriteGraphic> joblist = ListPool<SpriteGraphic>.Get();
-
 						for (int j = 0; j < emojidata.Count; ++j)
 						{
 							IFillData taginfo = emojidata[j];
 							if (taginfo == null || taginfo.ignore)
 								continue;
-							SpriteGraphic job = Parse(text, taginfo, joblist);
-							if (job)
-								joblist.Add(job);
+							Parse(text, taginfo);
 						}
 
 						List<SpriteGraphic> list;
@@ -270,15 +267,14 @@ namespace EmojiUI
 							{
 								SpriteGraphic graphic = list[j];
 								//not render
-								if (graphic != null && !joblist.Contains(graphic))
+								if (graphic != null && !graphic.isDirty)
 								{
 									graphic.Draw(null);
+									graphic.SetDirtyMask();
 									graphic.SetVerticesDirty();
 								}
 							}
 						}
-
-						ListPool<SpriteGraphic>.Release(joblist);
 					}
 					else
 					{
@@ -292,6 +288,7 @@ namespace EmojiUI
 								if (graphic != null)
 								{
 									graphic.Draw(null);
+									graphic.SetDirtyMask();
 									graphic.SetVerticesDirty();
 								}
 							}
@@ -326,7 +323,6 @@ namespace EmojiUI
 							List<IFillData> emojidata = text.PopEmojiData();
 							if (emojidata != null && emojidata.Count > 0 && allatlas != null && allatlas.Count > 0)
 							{
-								List<SpriteGraphic> joblist = ListPool<SpriteGraphic>.Get();
 								for (int j = 0; j < emojidata.Count; ++j)
 								{
 									IFillData taginfo = emojidata[j];
@@ -351,13 +347,10 @@ namespace EmojiUI
 											if (renderData == null)
 												renderData = new Dictionary<Graphic, UnitMeshInfo>(emojidata.Count);
 
-											RefreshSubUIMesh(text, target, asset, taginfo.pos, taginfo.uv, joblist);
-											joblist.Add(target);
+											RefreshSubUIMesh(text, target, asset, taginfo.pos, taginfo.uv);
 										}
 									}
 								}
-
-								ListPool<SpriteGraphic>.Release(joblist);
 							}
 						}
 					}
@@ -367,16 +360,16 @@ namespace EmojiUI
 			EmojiTools.EndSample();
 		}
 
-		SpriteGraphic Parse(InlineText text, IFillData taginfo, List<SpriteGraphic> joblist)
+		SpriteGraphic Parse(InlineText text, IFillData taginfo)
 		{
 			if (taginfo != null)
 			{
-				return ParsePosAndUV(text, taginfo.ID, taginfo.pos, taginfo.uv, joblist);
+				return ParsePosAndUV(text, taginfo.ID, taginfo.pos, taginfo.uv);
 			}
 			return null;
 		}
 
-		SpriteGraphic ParsePosAndUV(InlineText text, int ID, Vector3[] Pos, Vector2[] UV, List<SpriteGraphic> joblist)
+		SpriteGraphic ParsePosAndUV(InlineText text, int ID, Vector3[] Pos, Vector2[] UV)
 		{
 			EmojiTools.BeginSample("Emoji_UnitParsePosAndUV");
 			SpriteAsset matchAsset = null;
@@ -400,7 +393,7 @@ namespace EmojiUI
 					list.Add(target);
 				}
 
-				RefreshSubUIMesh(text, target, matchAsset, Pos, UV, joblist);
+				RefreshSubUIMesh(text, target, matchAsset, Pos, UV);
 
 				EmojiTools.EndSample();
 				return target;
@@ -413,7 +406,7 @@ namespace EmojiUI
 			return null;
 		}
 
-		void RefreshSubUIMesh(InlineText text, SpriteGraphic target, SpriteAsset matchAsset, Vector3[] Pos, Vector2[] UV, List<SpriteGraphic> joblist)
+		void RefreshSubUIMesh(InlineText text, SpriteGraphic target, SpriteAsset matchAsset, Vector3[] Pos, Vector2[] UV)
 		{
 			// set mesh
 			tempMesh.SetAtlas(matchAsset);
@@ -445,7 +438,7 @@ namespace EmojiUI
 
 			if (!currentMesh.Equals(tempMesh))
 			{
-				if (joblist != null && joblist.Contains(target))
+				if (target.isDirty)
 				{
 					currentMesh.AddCopy(tempMesh);
 					tempMesh.Clear();
@@ -459,11 +452,13 @@ namespace EmojiUI
 			if (currentMesh.VertCnt() > 3 && currentMesh.UVCnt() > 3)
 			{
 				target.Draw(this);
+				target.SetDirtyMask();
 				target.SetVerticesDirty();
 			}
 			else
 			{
 				target.Draw(null);
+				target.SetDirtyMask();
 				target.SetVerticesDirty();
 			}
 		}

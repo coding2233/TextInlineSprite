@@ -26,6 +26,13 @@ namespace EmojiUI
 			}
 		}
 
+		public bool isDirty { get; protected set; }
+
+		public void SetDirtyMask()
+		{
+			isDirty = true;
+		}
+
 		public void Draw(IEmojiRender rd)
 		{
 			_Render = rd;
@@ -57,6 +64,7 @@ namespace EmojiUI
 			{
 				_Render.FillMesh(this, vh);
 			}
+			isDirty = false;
 		}
 
 		void OnDrawGizmos()
