@@ -16,17 +16,90 @@ namespace EmojiUI
 			
 		}
 
-		public void DoFillText(InlineText text, StringBuilder stringBuilder, Match match, int Index, ParsedData tagInfo)
-		{
-			
-		}
-
 		public void RecordTextUpdate(InlineText text)
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public bool ParsetContent(Match data, ref ParsedData parsedData)
+		internal void FillSpriteTag(StringBuilder stringBuilder, Match match, int Index, ParsedData tagInfo)
+		{
+			int Id = tagInfo.atlasID;
+			string TagName = tagInfo.atlasTag;
+			if (Manager != null && Manager.CanRendering(Id) && Manager.CanRendering(TagName))
+			{
+				SpriteAsset sprAsset;
+				SpriteInfoGroup tagSprites = Manager.FindSpriteGroup(TagName, out sprAsset);
+				if (tagSprites != null && tagSprites.spritegroups.Count > 0)
+				{
+					if (!Manager.isRendering(sprAsset))
+					{
+						Manager.PushRenderAtlas(sprAsset);
+					}
+
+					if (_SpaceGen == null)
+					{
+						_SpaceGen = new TextGenerator();
+					}
+
+					if (updatespace)
+					{
+						Vector2 extents = rectTransform.rect.size;
+						TextGenerationSettings settings = GetGenerationSettings(extents);
+						_SpaceGen.Populate(palceholder, settings);
+						updatespace = false;
+					}
+
+					IList<UIVertex> spaceverts = _SpaceGen.verts;
+					float spacewid = spaceverts[1].position.x - spaceverts[0].position.x;
+					float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
+
+
+					float autosize = Mathf.Min(tagSprites.size, Mathf.Max(spacewid, spaceheight));
+					float spacesize = Mathf.Max(spacewid, spaceheight);
+
+					int fillspacecnt = Mathf.CeilToInt(autosize / spacesize);
+
+					for (int i = 0; i < fillspacecnt; i++)
+					{
+						stringBuilder.Append(palceholder);
+					}
+
+					if (RenderTagList == null)
+					{
+						RenderTagList = ListPool<IFillData>.Get();
+					}
+
+					if (RenderTagList.Count > Index)
+					{
+						SpriteTagInfo _tempSpriteTag = RenderTagList[Index];
+						_tempSpriteTag._ID = Id;
+						_tempSpriteTag._Tag = TagName;
+						_tempSpriteTag._Size = new Vector2(autosize, autosize);
+						_tempSpriteTag.FillIdxAndPlaceHolder(match.Index, fillspacecnt);
+						_tempSpriteTag._UV = tagSprites.spritegroups[0].uv;
+					}
+					else
+					{
+						SpriteTagInfo _tempSpriteTag = new SpriteTagInfo
+						{
+							_ID = Id,
+							_Tag = TagName,
+							_Size = new Vector2(autosize, autosize),
+							_Pos = new Vector3[4],
+							_UV = tagSprites.spritegroups[0].uv
+						};
+
+						_tempSpriteTag.FillIdxAndPlaceHolder(match.Index, fillspacecnt);
+
+						RenderTagList.Add(_tempSpriteTag);
+					}
+				}
+
+			}
+		}
+
+
+		public bool ParsetContent(InlineText text,StringBuilder textfiller, Match data,int matchindex)
 		{
 
 			string value = data.Value;

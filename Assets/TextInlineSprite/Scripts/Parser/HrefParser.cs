@@ -26,7 +26,7 @@ namespace EmojiUI
 			throw new System.NotImplementedException();
 		}
 
-		public bool ParsetContent(Match data, ref ParsedData parsedData)
+		public bool ParsetContent(InlineText text,StringBuilder textfiller, Match data,int matchindex)
 		{
 			return false;
 		}
