@@ -106,6 +106,10 @@ namespace EmojiUI
 						parser.Hot = 0;
 					}
 				}
+				else
+				{
+					fillbuilder.Append(content);
+				}
 			}
 			else
 			{

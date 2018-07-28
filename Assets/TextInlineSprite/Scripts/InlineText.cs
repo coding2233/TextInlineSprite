@@ -22,7 +22,7 @@ namespace EmojiUI
 	{
 		private static StringBuilder _textBuilder = new StringBuilder();
 		private static UIVertex[] m_TempVerts = new UIVertex[4];
-		private static UIVertex[] m_TagVerts = new UIVertex[4];
+		private static Vector3[] m_TagVerts = new Vector3[2];
 		
 		private TextGenerator _SpaceGen;
 		private InlineManager _InlineManager;
@@ -67,13 +67,6 @@ namespace EmojiUI
 			EmojiTools.AddUnityMemory(this);
 		}
 
-#if UNITY_EDITOR
-		protected override void OnValidate()
-		{
-			//do nothing
-		}
-#endif
-
 		public override void SetVerticesDirty()
 		{
 			base.SetVerticesDirty();
@@ -82,7 +75,6 @@ namespace EmojiUI
 				if (!Manager)
 				{
 					_outputText = m_Text;
-					return;
 				}
 				else if(Manager.HasInit)
 				{
@@ -92,8 +84,10 @@ namespace EmojiUI
 				{
 					StartCoroutine(WaitManagerInited());
 				}
-			
-
+			}
+			else
+			{
+				_outputText = m_Text;
 			}
 		}
 
@@ -117,11 +111,7 @@ namespace EmojiUI
 
 				_outputText = _textBuilder.ToString();
 				_textBuilder.Length = 0;
-
-				Debug.LogError(_outputText);
-			}
-
-			
+			}	
 		}
 
 		protected override void OnDestroy()
@@ -199,22 +189,13 @@ namespace EmojiUI
 					//first
 					if (startfilldata >= 0 && i == startfilldata)
 					{
-						m_TagVerts[0] = m_TempVerts[tempVertsIndex];
+						m_TagVerts[0]= m_TempVerts[tempVertsIndex].position;
 					}
-					//second
-					if (nextfilldata >= 0 && i == nextfilldata - 2)
-					{
-						m_TagVerts[1] = m_TempVerts[tempVertsIndex];
-					}
+
 					//third
 					if (nextfilldata >= 0 && i == nextfilldata - 1)
 					{
-						m_TagVerts[2] = m_TempVerts[tempVertsIndex];
-					}
-					//fourth
-					if (startfilldata >= 0 && i == startfilldata + 3)
-					{
-						m_TagVerts[3] = m_TempVerts[tempVertsIndex];
+						m_TagVerts[1] = m_TempVerts[tempVertsIndex].position;
 					}
 
 					if (tempVertsIndex == 3)
@@ -243,22 +224,13 @@ namespace EmojiUI
 					//first
 					if (startfilldata >= 0 && i == startfilldata)
 					{
-						m_TagVerts[0] = m_TempVerts[tempVertsIndex];
+						m_TagVerts[0] = m_TempVerts[tempVertsIndex].position;
 					}
-					//second
-					if (nextfilldata >= 0 && i == nextfilldata - 2)
-					{
-						m_TagVerts[1] = m_TempVerts[tempVertsIndex];
-					}
+
 					//third
 					if (nextfilldata >= 0 && i == nextfilldata - 1)
 					{
-						m_TagVerts[2] = m_TempVerts[tempVertsIndex];
-					}
-					//fourth
-					if (startfilldata >= 0 && i == startfilldata + 3)
-					{
-						m_TagVerts[3] = m_TempVerts[tempVertsIndex];
+						m_TagVerts[1] = m_TempVerts[tempVertsIndex].position;
 					}
 
 					if (tempVertsIndex == 3)
@@ -287,7 +259,7 @@ namespace EmojiUI
 			{
 				//fill current
 				var current = _renderTagList[fillindex];
-				current.Fill(m_TagVerts);
+				current.Fill(m_TagVerts[0],m_TagVerts[1]);
 
 				fillindex++;
 				if (fillindex < _renderTagList.Count)

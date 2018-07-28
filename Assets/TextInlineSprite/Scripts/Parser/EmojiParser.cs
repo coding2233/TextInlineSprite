@@ -64,9 +64,9 @@ namespace EmojiUI
 					float spaceheight = spaceverts[0].position.y - spaceverts[3].position.y;
 
 					float autosize = Mathf.Min(tagSprites.size, Mathf.Max(spacewid, spaceheight));
-					float spacesize = Mathf.Max(spacewid, spaceheight);
+					float spacesize = Mathf.Min(spacewid, spaceheight);
 
-					int fillspacecnt = Mathf.CeilToInt(autosize / spacesize);
+					int fillspacecnt = Mathf.RoundToInt(autosize / spacesize);
 
 					for (int i = 0; i < fillspacecnt; i++)
 					{
