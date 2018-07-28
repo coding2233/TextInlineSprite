@@ -1,4 +1,4 @@
-﻿
+﻿#define EMOJI_RUNTIME
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +15,12 @@ namespace EmojiUI
 
 		private readonly Dictionary<string, SpriteInfoGroup> _alltags = new Dictionary<string, SpriteInfoGroup>();
 
+		private readonly Dictionary<string, KeyValuePair<SpriteAsset, SpriteInfoGroup>> _spritemap = new Dictionary<string, KeyValuePair<SpriteAsset, SpriteInfoGroup>>();
+
 		private IEmojiRender _render;
 
 		public List<string> PreparedAtlas = new List<string>();
-		
+
 		public bool HasInit { get; private set; }
 
 #if UNITY_EDITOR
@@ -276,7 +278,8 @@ namespace EmojiUI
 		{
 			EmojiTools.BeginSample("Emoji_rebuildTags");
 			_alltags.Clear();
-#if UNITY_EDITOR
+			_spritemap.Clear();
+#if UNITY_EDITOR && !EMOJI_RUNTIME
 			if (_unityallAtlases != null)
 			{
 				for (int i = 0; i < _unityallAtlases.Count; ++i)
@@ -297,21 +300,22 @@ namespace EmojiUI
 			}
 
 #else
-            for (int i = 0; i < sharedAtlases.Count; ++i)
-            {
-                SpriteAsset asset = sharedAtlases[i];
-                for (int j = 0; j < asset.listSpriteGroup.Count; ++j)
-                {
-                    SpriteInfoGroup infogroup = asset.listSpriteGroup[j];
-                    SpriteInfoGroup group;
-                    if (alltags.TryGetValue(infogroup.tag, out group))
-                    {
-                        Debug.LogErrorFormat("already exist :{0} ", infogroup.tag);
-                    }
+			for (int i = 0; i < _sharedAtlases.Count; ++i)
+			{
+				SpriteAsset asset = _sharedAtlases[i];
+				for (int j = 0; j < asset.listSpriteGroup.Count; ++j)
+				{
+					SpriteInfoGroup infogroup = asset.listSpriteGroup[j];
+					SpriteInfoGroup group;
+					if (_alltags.TryGetValue(infogroup.tag, out group))
+					{
+						Debug.LogErrorFormat("already exist :{0} ", infogroup.tag);
+					}
 
-                    alltags[infogroup.tag] = infogroup;
-                }
-            }
+					_alltags[infogroup.tag] = infogroup;
+					_spritemap[infogroup.tag] = new KeyValuePair<SpriteAsset, SpriteInfoGroup>(asset, infogroup);
+				}
+			}
 #endif
 			EmojiTools.EndSample();
 		}
@@ -384,7 +388,7 @@ namespace EmojiUI
 		public bool CanRendering(int atlasId)
 		{
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !EMOJI_RUNTIME
 			if (_unityallAtlases != null)
 			{
 				for (int i = 0; i < _unityallAtlases.Count; ++i)
@@ -399,15 +403,15 @@ namespace EmojiUI
 
 			return false;
 #else
-            for (int i = 0; i < sharedAtlases.Count; ++i)
-            {
-                SpriteAsset asset = sharedAtlases[i];
-                if (asset.ID == atlasId)
-                {
-                    return true;
-                }
-            }
-            return false;
+			for (int i = 0; i < _sharedAtlases.Count; ++i)
+			{
+				SpriteAsset asset = _sharedAtlases[i];
+				if (asset.ID == atlasId)
+				{
+					return true;
+				}
+			}
+			return false;
 #endif
 		}
 
@@ -429,10 +433,9 @@ namespace EmojiUI
 		public SpriteInfoGroup FindSpriteGroup(string TagName, out SpriteAsset resultatlas)
 		{
 			EmojiTools.BeginSample("Emoji_FindSpriteGroup");
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !EMOJI_RUNTIME
 
 			resultatlas = null;
-
 			SpriteInfoGroup result = null;
 			if (_unityallAtlases != null)
 			{
@@ -463,35 +466,23 @@ namespace EmojiUI
 			EmojiTools.EndSample();
 			return result;
 #else
-            resultatlas = null;
-
-            SpriteInfoGroup result = null;
-            if(sharedAtlases != null)
-            {
-                for (int i = 0; i < sharedAtlases.Count; ++i)
-                {
-                    SpriteAsset asset = sharedAtlases[i];
-                    for (int j = 0; j < asset.listSpriteGroup.Count; ++j)
-                    {
-                        SpriteInfoGroup group = asset.listSpriteGroup[j];
-                        if (group.tag.Equals(TagName))
-                        {
-                            result = group;
-                            resultatlas = asset;
-                            break;
-                        }
-                    }
-                }
-            }
-            EmojiTools.EndSample();
-            return result;
+			resultatlas = null;
+			SpriteInfoGroup result = null;
+			KeyValuePair<SpriteAsset, SpriteInfoGroup> data;
+			if (_spritemap.TryGetValue(TagName,out data))
+			{
+				result = data.Value;
+				resultatlas = data.Key;
+			}
+			EmojiTools.EndSample();
+			return result;
 #endif
 		}
 
 		public SpriteAsset FindAtlas(int atlasID)
 		{
 			EmojiTools.BeginSample("Emoji_FindAtlas");
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !EMOJI_RUNTIME
 			SpriteAsset result = null;
 			if (_unityallAtlases != null)
 			{
@@ -517,17 +508,17 @@ namespace EmojiUI
 			EmojiTools.EndSample();
 			return result;
 #else
-            for (int i = 0; i < sharedAtlases.Count; ++i)
-            {
-                SpriteAsset asset = sharedAtlases[i];
-                if (asset.ID.Equals(atlasID))
-                {
-                    EmojiTools.EndSample();
-                    return asset;
-                }
-            }
-            EmojiTools.EndSample();
-            return null;
+			for (int i = 0; i < _sharedAtlases.Count; ++i)
+			{
+				SpriteAsset asset = _sharedAtlases[i];
+				if (asset.ID.Equals(atlasID))
+				{
+					EmojiTools.EndSample();
+					return asset;
+				}
+			}
+			EmojiTools.EndSample();
+			return null;
 #endif
 		}
 
@@ -535,7 +526,7 @@ namespace EmojiUI
 		public SpriteAsset FindAtlas(string atlasname)
 		{
 			EmojiTools.BeginSample("FindAtlas");
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !EMOJI_RUNTIME
 			SpriteAsset result = null;
 			if (_unityallAtlases != null)
 			{
@@ -561,23 +552,23 @@ namespace EmojiUI
 			EmojiTools.EndSample();
 			return result;
 #else
-            for (int i = 0; i < sharedAtlases.Count; ++i)
-            {
-                SpriteAsset asset = sharedAtlases[i];
-                if (asset.AssetName.Equals(atlasname))
-                {
-                    EmojiTools.EndSample();
-                    return asset;
-                }
-            }
+			for (int i = 0; i < _sharedAtlases.Count; ++i)
+			{
+				SpriteAsset asset = _sharedAtlases[i];
+				if (asset.AssetName.Equals(atlasname))
+				{
+					EmojiTools.EndSample();
+					return asset;
+				}
+			}
 
-            SpriteAsset newasset = InstantiateSpriteAsset(atlasname);
-            if(newasset != null)
-            {
-                sharedAtlases.Add(newasset);
-            }
-            EmojiTools.EndSample();
-            return newasset;
+			SpriteAsset newasset = InstantiateSpriteAsset(atlasname);
+			if (newasset != null)
+			{
+				_sharedAtlases.Add(newasset);
+			}
+			EmojiTools.EndSample();
+			return newasset;
 #endif
 
 		}
