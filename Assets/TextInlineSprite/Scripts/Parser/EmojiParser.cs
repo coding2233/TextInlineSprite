@@ -105,9 +105,9 @@ namespace EmojiUI
 				if (index != -1)
 				{
 					string subId = value.Substring(1, index - 1);
-					if (subId.Length > 0 && !int.TryParse(subId, out atlasId))
+					if (subId.Length > 0 && int.TryParse(subId, out atlasId))
 					{
-						Debug.LogErrorFormat("{0} convert failed ", subId);
+						//Debug.LogErrorFormat("{0} convert success ", subId);
 					}
 					else if (subId.Length > 0)
 					{

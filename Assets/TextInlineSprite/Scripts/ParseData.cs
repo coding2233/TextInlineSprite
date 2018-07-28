@@ -15,6 +15,8 @@ namespace EmojiUI
 		Vector3[] pos { get; set; }
 		Vector2[] uv { get; set; }
 
+		bool ignore { get; set; }
+
 		int Fill(Vector3 start, Vector3 end);
 
 		int GetFillCnt();
@@ -39,6 +41,8 @@ namespace EmojiUI
 		public Vector2[] uv { get; set; }
 
 		public Vector2 Size { get; set; }
+
+		public bool ignore { get; set; }
 
 		public string Tag { get; set; }
 
@@ -67,8 +71,6 @@ namespace EmojiUI
 			int index = GetPositionIdx();
 			if (index >= 0)
 			{
-				float w = Mathf.Abs(end.x - start.x);
-				float h = Mathf .Abs( end.y - start.y);
 				Vector3 center = (start + end) / 2;
 				pos[3] = center + new Vector3(-Size.x / 2,-Size.y / 2, 0);
 				pos[2] = center + new Vector3(Size.x / 2, -Size.y / 2, 0);

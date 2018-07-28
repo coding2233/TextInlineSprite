@@ -368,6 +368,8 @@ namespace EmojiUI
 						for (int j = 0; j < emojidata.Count; ++j)
 						{
 							IFillData taginfo = emojidata[j];
+							if (taginfo == null || taginfo.ignore)
+								continue;
 							Graphic job = Parse(text, taginfo, joblist);
 							if (job)
 							{
@@ -427,6 +429,8 @@ namespace EmojiUI
 								for (int j = 0; j < emojidata.Count; ++j)
 								{
 									IFillData taginfo = emojidata[j];
+									if (taginfo == null || taginfo.ignore)
+										continue;
 									SpriteAsset asset = null;
 									SpriteInfoGroup groupinfo = manager.FindSpriteGroup(taginfo.Tag, out asset);
 									if (groupinfo != null && groupinfo.spritegroups.Count > 1)
