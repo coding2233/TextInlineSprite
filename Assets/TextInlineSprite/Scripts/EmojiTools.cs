@@ -10,120 +10,120 @@ using System;
 
 namespace EmojiUI
 {
-    internal static class EmojiTools 
-    {
+	internal static class EmojiTools
+	{
 #if DebugInfo
 
-        private static long unitymemorysize;
+		private static long unitymemorysize;
 
-        private static long? last;
+		private static long? last;
 
-        private static DumpClass dumptarget;
+		private static DumpClass dumptarget;
 
-        private class DumpClass:MonoBehaviour
-        {
-            private void OnGUI()
-            {
-                GUILayout.Label(DumpDebugInfo());
-            }
-        }
+		private class DumpClass : MonoBehaviour
+		{
+			private void OnGUI()
+			{
+				GUILayout.Label(DumpDebugInfo());
+			}
+		}
 
 #endif
 
-        public static void StartDumpGUI()
-        {
+		public static void StartDumpGUI()
+		{
 
 #if DebugInfo
-            if(dumptarget == null)
-            {
-                Camera  camera = GameObject.FindObjectOfType<Camera>();
-                if(camera != null)
-                {
-                    dumptarget = camera.GetComponent<DumpClass>();
-                    if (dumptarget == null)
-                        dumptarget = camera.gameObject.AddComponent<DumpClass>();
-                    else
-                        dumptarget.enabled = true;
-                }
-            }
+			if (dumptarget == null)
+			{
+				Camera camera = GameObject.FindObjectOfType<Camera>();
+				if (camera != null)
+				{
+					dumptarget = camera.GetComponent<DumpClass>();
+					if (dumptarget == null)
+						dumptarget = camera.gameObject.AddComponent<DumpClass>();
+					else
+						dumptarget.enabled = true;
+				}
+			}
 #endif
-        }
+		}
 
-        public static void EndDumpGUI()
-        {
+		public static void EndDumpGUI()
+		{
 
 #if DebugInfo
-            if (dumptarget != null)
-            {
-                Camera camera = GameObject.FindObjectOfType<Camera>();
-                if (camera != null)
-                {
-                    dumptarget = camera.GetComponent<DumpClass>();
-                    if (dumptarget != null)
-                    {
-                        dumptarget.enabled = false;
-                    }
-                }
-            }
+			if (dumptarget != null)
+			{
+				Camera camera = GameObject.FindObjectOfType<Camera>();
+				if (camera != null)
+				{
+					dumptarget = camera.GetComponent<DumpClass>();
+					if (dumptarget != null)
+					{
+						dumptarget.enabled = false;
+					}
+				}
+			}
 #endif
-        }
+		}
 
-        static String[] units = new String[] { "B", "KB", "MB", "GB", "TB", "PB" };  
-        static String Getsize(double size)  
-        {  
-            double mod = 1024;  
-            int i = 0;  
-            while (size >= mod)  
-            {  
-                size /= mod;  
-                i++;  
-            }  
-            return String.Format("{0:0.##} {1}", size, units[i]);  
-        }  
+		static String[] units = new String[] { "B", "KB", "MB", "GB", "TB", "PB" };
+		static String Getsize(double size)
+		{
+			double mod = 1024;
+			int i = 0;
+			while (size >= mod)
+			{
+				size /= mod;
+				i++;
+			}
+			return String.Format("{0:0.##} {1}", size, units[i]);
+		}
 
-        public static string DumpDebugInfo()
-        {
+		public static string DumpDebugInfo()
+		{
 
 #if DebugInfo
-            string result = string.Format("<color=#ff0000ff>c# sharpMemroy :{0} Unity emoji ManagedMemory:{1}</color>\n",  
-                                          Getsize(GC.GetTotalMemory(false)),
-                                          Getsize(unitymemorysize));
-            Debug.Log(result);
-            return result;
+			string result = string.Format("<color=#ff0000ff>c# sharpMemroy :{0} Unity emoji ManagedMemory:{1}</color>\n",
+								Getsize(GC.GetTotalMemory(false)),
+								Getsize(unitymemorysize));
+			Debug.Log(result);
+			return result;
 #endif
-        }
+		}
 
-        public static void AddUnityMemory(UnityEngine.Object obj)
-        {
+		public static void AddUnityMemory(UnityEngine.Object obj)
+		{
 #if DebugInfo
-            if (obj != null)
-                unitymemorysize += Profiler.GetRuntimeMemorySizeLong(obj);
+			if (obj != null)
+				unitymemorysize += Profiler.GetRuntimeMemorySizeLong(obj);
 #endif
 
-        }
+		}
 
-        public static void RemoveUnityMemory(UnityEngine.Object obj)
-        {
+		public static void RemoveUnityMemory(UnityEngine.Object obj)
+		{
 #if DebugInfo
-            if (obj != null)
-                unitymemorysize -= Profiler.GetRuntimeMemorySizeLong(obj);
+			if (obj != null)
+				unitymemorysize -= Profiler.GetRuntimeMemorySizeLong(obj);
 #endif
-        }
+		}
 
-        public static void BeginSample(string key)
-        {
+		public static void BeginSample(string key)
+		{
 #if UNITY_EDITOR
-            Profiler.BeginSample(key);
+			Profiler.BeginSample(key);
 #endif
-        }
+		}
 
-        public static void EndSample()
-        {
+		public static void EndSample()
+		{
 #if UNITY_EDITOR
-            Profiler.EndSample();
+			Profiler.EndSample();
 #endif
-        }
-    }
+		}
+	}
 }
 
 

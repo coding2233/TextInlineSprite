@@ -35,3 +35,4 @@
 *.csproj
 *.sln
 *.suo
+/Assets/Plugins
