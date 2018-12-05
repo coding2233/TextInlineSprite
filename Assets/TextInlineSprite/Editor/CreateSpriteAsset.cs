@@ -17,9 +17,17 @@ public static class CreateSpriteAsset
         var list = new List<Texture2D>(textures);
         list.Sort((lt, rt) => lt.name.CompareTo(rt.name));
         textures = list.ToArray();
+        Vector2 size = new Vector2(64, 64); // 表情默认大小
+        // 注意所有表情大小必须为2的n次方，且默认为正方形，根据具体的表情图片大小动态调整表情大小
+        if(null != textures && textures.Length > 0)
+        {
+            int w = textures[0].width;
+            size.x = w;
+            size.y = w;
+        }
         var atlas = CreateSprite(textures);
         var names = list.Select(t => t.name).ToArray();
-        var path = AutoSpriteSlicer.ProcessTexture(atlas, names);
+        var path = AutoSpriteSlicer.ProcessTexture(atlas, size, names);
 
         GenerateSpriteInfo(path);
         AssetDatabase.Refresh();

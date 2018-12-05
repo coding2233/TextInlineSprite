@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AutoSpriteSlicer
 {
-	public static string ProcessTexture(Texture2D texture, string[] spriteNames = null)
+	public static string ProcessTexture(Texture2D texture, Vector2 size, string[] spriteNames = null)
 	{
 		string path = AssetDatabase.GetAssetPath(texture);
 		var importer = AssetImporter.GetAtPath(path) as TextureImporter;
@@ -30,7 +30,6 @@ public class AutoSpriteSlicer
         //int extrudeSize = 0;
         //Rect[] rects = InternalSpriteUtility.GenerateAutomaticSpriteRectangles(texture, minimumSpriteSize, extrudeSize);
         Vector2 offset = Vector2.zero;
-        Vector2 size = new Vector2(64, 64);
         Vector2 padding = Vector2.zero;
         Rect[] rects = InternalSpriteUtility.GenerateGridSpriteRectangles(texture, offset, size, padding);
         var rectsList = new List<Rect>(rects);
