@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SpriteGraphic : MaskableGraphic {
-
-    public SpriteAsset m_spriteAsset;
+	
+	public SpriteAsset m_spriteAsset;
     public override Texture mainTexture
     {
         get
@@ -15,8 +15,8 @@ public class SpriteGraphic : MaskableGraphic {
                 return m_spriteAsset.TexSource;
         }
     }
-    
-    protected override void OnEnable()
+
+	protected override void OnEnable()
     {
         //不调用父类的OnEnable 他默认会渲染整张图片
         // base.OnEnable();  
