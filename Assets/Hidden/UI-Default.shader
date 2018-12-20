@@ -102,7 +102,7 @@ Shader "Hidden/UI/Default"
 
 				float cell = 1.0f / _CellAmount;
 				float timeValue = fmod(_Time.y*_Speed, _CellAmount);
-				timeValue = ceil(timeValue);
+				timeValue = floor(timeValue);
 				uv.x += cell * timeValue;
 				OUT.texcoord = uv;
                
