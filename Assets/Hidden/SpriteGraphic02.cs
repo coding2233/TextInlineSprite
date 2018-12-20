@@ -12,6 +12,18 @@ public class SpriteGraphic02 : MaskableGraphic
 
 	public SpriteAsset m_spriteAsset;
 
+	//测试索引
+	[SerializeField]
+	[Range(0,19)]
+	private int _testIndex=1;
+
+	//分割数量
+	[SerializeField]
+	private int _cellAmount=1;
+	//动画速度
+	[SerializeField]
+	private float _speed;
+
 	public override Texture mainTexture
 	{
 		get
@@ -30,17 +42,15 @@ public class SpriteGraphic02 : MaskableGraphic
 			if (_defaultMater == null)
 			{
 				_defaultMater = new Material(Shader.Find(_defaultShader));
+				_defaultMater.SetFloat("_CellAmount", _cellAmount);
+				_defaultMater.SetFloat("_Speed", _speed);
 			}
 			return _defaultMater;
 		}
 	}
-
-
-
+	
 	#endregion
-
-
-
+	
 	public override UnityEngine.Material GetModifiedMaterial(UnityEngine.Material baseMaterial)
 	{
 		return base.GetModifiedMaterial(baseMaterial);
@@ -76,51 +86,36 @@ public class SpriteGraphic02 : MaskableGraphic
 
 	protected override void OnPopulateMesh(Mesh h)
 	{
-		//if (s_Mesh != null&&s_Mesh.vertexCount==0)
-		//{
-		//	//s_Mesh
-		//}
-		//if (workerMesh != null || s_Mesh != null)
-		//{
-		//	Debug.Log("workmesh count:");
-		//}
 		//base.OnPopulateMesh(h);
 
 		if (m_spriteAsset != null&& h.vertexCount==0)
 		{
-		//	h.Clear();
 			var r = GetPixelAdjustedRect();
 			var v = new Vector4(r.x, r.y, r.x + r.width, r.y + r.height);
 			h.vertices = new Vector3[4] { new Vector3(v.x, v.y), new Vector3(v.x, v.w), new Vector3(v.z, v.w), new Vector3(v.z, v.y) };
 			h.colors = new Color[4] { color, color, color, color };
 			h.triangles = new int[6] {0,1,2,2,3,0 };
 			
-			List<SpriteInfor> spriteInfors = m_spriteAsset.ListSpriteGroup[1].ListSpriteInfor;
+			List<SpriteInfor> spriteInfors = m_spriteAsset.ListSpriteGroup[_testIndex].ListSpriteInfor;
 
 			h.uv = spriteInfors[0].Uv;
-			h.uv2 = spriteInfors[1].Uv;
-			h.uv3 = spriteInfors[2].Uv;
-			h.uv4 = spriteInfors[3].Uv;
 
-		
+			//--------------------------------------------------------------------------------------
+			//看到unity 的mesh支持多层uv  还在想shader渲染动图有思路了呢
+			//结果调试shader的时候发现uv1-uv3的值跟uv0一样
+			//意思就是 unity canvasrender  目前的设计，为了优化性能,不支持uv1-3,并不是bug,所以没法存多套uv。。。
+			//https://issuetracker.unity3d.com/issues/canvasrenderer-dot-setmesh-does-not-seem-to-support-more-than-one-uv-set
+			//不知道后面会不会更新 ------  于是现在还是用老办法吧， 规则图集 --> uv移动 
+			//--------------------------------------------------------------------------------------
 
-			//Color32 color32 = color;
-			//vh.Clear();
-			//vh.AddVert(new Vector3(v.x, v.y), color32, new Vector2(0f, 0f));
-			//vh.AddVert(new Vector3(v.x, v.w), color32, new Vector2(0f, 1f));
-			//vh.AddVert(new Vector3(v.z, v.w), color32, new Vector2(1f, 1f));
-			//vh.AddVert(new Vector3(v.z, v.y), color32, new Vector2(1f, 0f));
+			//h.uv2 = spriteInfors[1].Uv;
+			//h.uv3 = spriteInfors[2].Uv;
+			//h.uv4 = spriteInfors[3].Uv;
 
-			//vh.AddTriangle(0, 1, 2);
-			//vh.AddTriangle(2, 3, 0);
-
-			//canvasRenderer.SetMesh(h);
 		}
 	}
 	protected override void OnPopulateMesh(UnityEngine.UI.VertexHelper vh)
 	{
 		//	base.OnPopulateMesh(vh);
-
-	
 	}
 }
