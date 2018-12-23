@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Hidden/UI/Default"
+Shader "Hidden/UI/Emoji"
 {
     Properties
     {
@@ -19,6 +19,7 @@ Shader "Hidden/UI/Default"
         _ColorMask ("Color Mask", Float) = 15
 
         [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
+		[Toggle(EMOJI_ANIMATION)] _EMOJIANIMATION("Enable Emoji Animation", Int) = 1
     }
 
     SubShader
@@ -63,6 +64,7 @@ Shader "Hidden/UI/Default"
 
             #pragma multi_compile __ UNITY_UI_CLIP_RECT
             #pragma multi_compile __ UNITY_UI_ALPHACLIP
+			#pragma shader_feature EMOJI_ANIMATION
 
             struct appdata_t
             {
@@ -87,9 +89,10 @@ Shader "Hidden/UI/Default"
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
+#if EMOJI_ANIMATION
 			float _CellAmount;
 			float _Speed;
-
+#endif
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -97,15 +100,16 @@ Shader "Hidden/UI/Default"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
                 OUT.worldPosition = v.vertex;
                 OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
-				//OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+#if !EMOJI_ANIMATION
+				OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+#else
 				float2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);
-
 				float cell = 1.0f / _CellAmount;
 				float timeValue = fmod(_Time.y*_Speed, _CellAmount);
 				timeValue = floor(timeValue);
 				uv.x += cell * timeValue;
 				OUT.texcoord = uv;
-               
+#endif
                 OUT.color = v.color * _Color;
                 return OUT;
             }
@@ -127,4 +131,5 @@ Shader "Hidden/UI/Default"
         ENDCG
         }
     }
+	//CustomEditor "EmojiShaderGUI"
 }

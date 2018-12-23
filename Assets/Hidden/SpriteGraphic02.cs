@@ -7,7 +7,7 @@ public class SpriteGraphic02 : MaskableGraphic
 {
 	#region 属性
 	//默认shader
-	private const string _defaultShader = "Hidden/UI/Default";
+	private const string _defaultShader = "Hidden/UI/Emoji";
 	private Material _defaultMater = null;
 
 	public SpriteAsset m_spriteAsset;
@@ -44,6 +44,7 @@ public class SpriteGraphic02 : MaskableGraphic
 				_defaultMater = new Material(Shader.Find(_defaultShader));
 				_defaultMater.SetFloat("_CellAmount", _cellAmount);
 				_defaultMater.SetFloat("_Speed", _speed);
+				_defaultMater.EnableKeyword("EMOJI_ANIMATION");
 			}
 			return _defaultMater;
 		}

@@ -239,7 +239,7 @@ Camera:
   m_GameObject: {fileID: 1021482866}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -339,7 +339,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_spriteAsset: {fileID: 11400000, guid: 448421e4fa7e96a48aad0c3882565341, type: 2}
-  _testIndex: 17
+  _testIndex: 8
   _cellAmount: 8
   _speed: 10
 --- !u!222 &1023453308
