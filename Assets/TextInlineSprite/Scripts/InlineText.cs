@@ -42,6 +42,7 @@ public class InlineText : Text, IPointerClickHandler
     // 超链接信息列表  
     private readonly List<HrefInfo> _listHrefInfos = new List<HrefInfo>();
 	#endregion
+
 	#endregion
 
 	///// <summary>
@@ -407,9 +408,7 @@ public class InlineText : Text, IPointerClickHandler
         public readonly List<Rect> Boxes = new List<Rect>();
     }
     #endregion
-
-
-
+    
     #region 点击事件检测是否点击到超链接文本  
     public void OnPointerClick(PointerEventData eventData)
     {
