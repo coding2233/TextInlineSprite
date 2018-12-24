@@ -89,14 +89,14 @@ public class SpriteGraphic02 : MaskableGraphic
 	{
 		//base.OnPopulateMesh(h);
 
-		if (m_spriteAsset != null&& h.vertexCount==0)
+		if (m_spriteAsset != null && h.vertexCount == 0)
 		{
 			var r = GetPixelAdjustedRect();
 			var v = new Vector4(r.x, r.y, r.x + r.width, r.y + r.height);
 			h.vertices = new Vector3[4] { new Vector3(v.x, v.y), new Vector3(v.x, v.w), new Vector3(v.z, v.w), new Vector3(v.z, v.y) };
 			h.colors = new Color[4] { color, color, color, color };
-			h.triangles = new int[6] {0,1,2,2,3,0 };
-			
+			h.triangles = new int[6] { 0, 1, 2, 2, 3, 0 };
+
 			List<SpriteInfor> spriteInfors = m_spriteAsset.ListSpriteGroup[_testIndex].ListSpriteInfor;
 
 			h.uv = spriteInfors[0].Uv;

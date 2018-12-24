@@ -1,12 +1,4 @@
-﻿/// ========================================================
-/// file：InlineText.cs
-/// brief：
-/// author： coding2233
-/// date：
-/// version：v1.0
-/// ========================================================
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,124 +37,162 @@ public class InlineText : Text, IPointerClickHandler
 
 	#endregion
 
-	///// <summary>
-	///// 初始化 
-	///// </summary>
-	//protected override void OnEnable()
-	//{
-	//    //
-	//    base.OnEnable();
-	//    //支持富文本
-	//    supportRichText = true;
-	//    //对齐几何
-	//    alignByGeometry = true;
-	//    if (!_inlineManager)
-	//        _inlineManager = GetComponentInParent<InlineManager>();
-	//    //启动的是 更新顶点
-	//    SetVerticesDirty();
-	//}
+	[TextArea(3, 10)] [SerializeField]
+	protected string _text=string.Empty;
 
-	protected override void Start()
-    {
-        ActiveText();
-    }
+	public override string text
+	{
+		get
+		{
+			return m_Text;
+		}
+		set
+		{
+			if (String.IsNullOrEmpty(value))
+			{
+				if (String.IsNullOrEmpty(m_Text))
+					return;
+				m_Text = "";
+				SetVerticesDirty();
+			}
+			else if (_text != value)
+			{
+				m_Text = GetOutputText(value);
+				//m_Text = value;
+				SetVerticesDirty();
+				SetLayoutDirty();
+			}
+#if UNITY_EDITOR
+			//编辑器赋值 如果是一样的 也可以刷新一下
+			else
+			{
+				m_Text = GetOutputText(value);
+				SetVerticesDirty();
+				SetLayoutDirty();
+			}
+#endif
+			//输入字符备份
+			_text = value;
+		}
+	}
+
+	protected override void OnEnable()
+	{
+		base.OnEnable();
+		supportRichText = true;
+		alignByGeometry = true;
+		_inlineManager = GetComponentInParent<InlineManager>();
+	}
+
+	
+	//protected override void Start()
+	//   {
+	//       ActiveText();
+	//   }
 
 #if UNITY_EDITOR
-    protected override void OnValidate()
+	protected override void OnValidate()
     {
-        ActiveText();
+      //  ActiveText();
     }
 #endif
 	
 	public void ActiveText()
     {
-        //支持富文本
-        supportRichText = true;
-        //对齐几何
-        alignByGeometry = true;
         if (!_inlineManager)
             _inlineManager = GetComponentInParent<InlineManager>();
         //启动的是 更新顶点
-        SetVerticesDirty();
+      //  SetVerticesDirty();
     }
 
-    public override void SetVerticesDirty()
-    {
-        base.SetVerticesDirty();
-        if (!_inlineManager)
-        {
-            _outputText = m_Text;
-            return;
-        }
-        //设置新文本
-        _outputText = GetOutputText();
-    }
+	public override void SetVerticesDirty()
+	{
+		base.SetVerticesDirty();
 
-   
-    protected override void OnPopulateMesh(VertexHelper toFill)
+	//	DebugLog("SetVerticesDirty");
+		//if (!_inlineManager)
+		//{
+		//	_outputText = m_Text;
+		//	return;
+		//}
+		//设置新文本
+		//_outputText = GetOutputText();
+	}
+
+	protected override void UpdateGeometry()
+	{
+		base.UpdateGeometry();
+
+		//DebugLog("UpdateGeometry");
+	}
+
+
+	protected override void OnPopulateMesh(VertexHelper toFill)
     {
         if (font == null)
             return;
+		//base.OnPopulateMesh(toFill);
 
-        // We don't care if we the font Texture changes while we are doing our Update.
-        // The end result of cachedTextGenerator will be valid for this instance.
-        // Otherwise we can get issues like Case 619238.
-        m_DisableFontTextureRebuiltCallback = true;
+		//DebugLog("OnPopulateMesh");
+		// We don't care if we the font Texture changes while we are doing our Update.
+		// The end result of cachedTextGenerator will be valid for this instance.
+		// Otherwise we can get issues like Case 619238.
+		m_DisableFontTextureRebuiltCallback = true;
 
-        Vector2 extents = rectTransform.rect.size;
+		Vector2 extents = rectTransform.rect.size;
 
-        var settings = GetGenerationSettings(extents);
-        //   cachedTextGenerator.PopulateWithErrors(text, settings, gameObject);
-        cachedTextGenerator.Populate(_outputText, settings);
+		var settings = GetGenerationSettings(extents);
+		cachedTextGenerator.PopulateWithErrors(text, settings, gameObject);
+		//cachedTextGenerator.Populate(text, settings);
 
-        // Apply the offset to the vertices
-        IList<UIVertex> verts = cachedTextGenerator.verts;
-        float unitsPerPixel = 1 / pixelsPerUnit;
-        //Last 4 verts are always a new line... (\n)
-        int vertCount = verts.Count - 4;
-        Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
-        roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
-        toFill.Clear();
+		// Apply the offset to the vertices
+		IList<UIVertex> verts = cachedTextGenerator.verts;
+		float unitsPerPixel = 1 / pixelsPerUnit;
+		//Last 4 verts are always a new line... (\n)
+		int vertCount = verts.Count - 4;
+		Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
+		roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
+		toFill.Clear();
 
-        ClearQuadUVs(verts);
+		ClearQuadUVs(verts);
 
-        List<Vector3> listVertsPos = new List<Vector3>();
-        if (roundingOffset != Vector2.zero)
-        {
-            for (int i = 0; i < vertCount; ++i)
-            {
-                int tempVertsIndex = i & 3;
-                m_TempVerts[tempVertsIndex] = verts[i];
-                m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-                m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
-                m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
-                if (tempVertsIndex == 3)
-                    toFill.AddUIVertexQuad(m_TempVerts);
-                listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < vertCount; ++i)
-            {
-                int tempVertsIndex = i & 3;
-                m_TempVerts[tempVertsIndex] = verts[i];
-                m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-                if (tempVertsIndex == 3)
-                    toFill.AddUIVertexQuad(m_TempVerts);
-                listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
-             
-            }
-        }
+		List<Vector3> listVertsPos = new List<Vector3>();
+		if (roundingOffset != Vector2.zero)
+		{
+			for (int i = 0; i < vertCount; ++i)
+			{
+				int tempVertsIndex = i & 3;
+				m_TempVerts[tempVertsIndex] = verts[i];
+				m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
+				m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
+				m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
+				if (tempVertsIndex == 3)
+					toFill.AddUIVertexQuad(m_TempVerts);
+				listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < vertCount; ++i)
+			{
+				int tempVertsIndex = i & 3;
+				m_TempVerts[tempVertsIndex] = verts[i];
+				m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
+				if (tempVertsIndex == 3)
+					toFill.AddUIVertexQuad(m_TempVerts);
+				listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
 
-        //计算quad占位的信息
-        CalcQuadInfo(listVertsPos);
-        //计算包围盒
-        CalcBoundsInfo(listVertsPos, toFill, settings);
+			}
+		}
 
-        m_DisableFontTextureRebuiltCallback = false;
+		//计算quad占位的信息
+		CalcQuadInfo(listVertsPos);
+		//计算包围盒
+		CalcBoundsInfo(listVertsPos, toFill, settings);
 
-    }
+		m_DisableFontTextureRebuiltCallback = false;
+
+	}
 
     #region 文本所占的长宽
     public override float preferredWidth
@@ -330,13 +360,16 @@ public class InlineText : Text, IPointerClickHandler
     #endregion
 
     #region 根据正则规则更新文本
-    private string GetOutputText()
+    private string GetOutputText(string inputText)
     {
+		if (string.IsNullOrEmpty(inputText))
+			return "";
+
         _spriteInfo = new Dictionary<int, SpriteTagInfo>();
         StringBuilder textBuilder = new StringBuilder();
         int textIndex = 0;
 
-        foreach (Match match in _inputTagRegex.Matches(text))
+        foreach (Match match in _inputTagRegex.Matches(inputText))
         {
             int tempId = 0;
             if (!string.IsNullOrEmpty(match.Groups[1].Value)&& !match.Groups[1].Value.Equals("-"))
@@ -345,7 +378,7 @@ public class InlineText : Text, IPointerClickHandler
             //更新超链接
             if (tempId <0 )
             {
-                textBuilder.Append(text.Substring(textIndex, match.Index - textIndex));
+                textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
                 textBuilder.Append("<color=blue>");
                 int startIndex = textBuilder.Length * 4;
                 textBuilder.Append("[" + match.Groups[2].Value + "]");
@@ -365,12 +398,12 @@ public class InlineText : Text, IPointerClickHandler
             //更新表情
             else
             {
-                if (!_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
+                if (_inlineManager==null||!_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
                     || !_inlineManager.IndexSpriteInfo[tempId].ContainsKey(tempTag))
                     continue;
                 SpriteInforGroup tempGroup = _inlineManager.IndexSpriteInfo[tempId][tempTag];
 
-                textBuilder.Append(text.Substring(textIndex, match.Index - textIndex));
+                textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
                 int tempIndex = textBuilder.Length * 4;
                 textBuilder.Append(@"<quad size=" + tempGroup.Size + " width=" + tempGroup.Width + " />");
 
@@ -389,7 +422,7 @@ public class InlineText : Text, IPointerClickHandler
             textIndex = match.Index + match.Length;
         }
 
-        textBuilder.Append(text.Substring(textIndex, text.Length - textIndex));
+        textBuilder.Append(inputText.Substring(textIndex, inputText.Length - textIndex));
         return textBuilder.ToString();
     }
     #endregion
