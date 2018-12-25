@@ -19,3 +19,20 @@ public static class ListPool<T>
         _listPool.Release(toRelease);
     }
 }
+
+public static class DicPool<T> where T : IDictionary,new()
+{
+     // Object pool to avoid allocations.
+    private static readonly ObjectPool<T> _pool = new ObjectPool<T>(null, Clear);
+    static void Clear(T d) { d.Clear(); }
+
+    public static T Get()
+    {
+        return _pool.Get();
+    }
+
+    public static void Release(T toRelease)
+    {
+        _pool.Release(toRelease);
+    }
+}

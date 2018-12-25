@@ -18,7 +18,7 @@ public class InlineText : Text, IPointerClickHandler
     //更新后的文本
     private string _outputText = "";
     //表情位置索引信息
-    private Dictionary<int, SpriteTagInfo> _spriteInfo = new Dictionary<int, SpriteTagInfo>();
+    private List<SpriteTagInfo> _spriteInfo = new List<SpriteTagInfo>();
     //图集ID，相关信息
     private Dictionary<int, List<SpriteTagInfo>> _drawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
 	//保留之前的图集ID，相关信息
@@ -26,8 +26,11 @@ public class InlineText : Text, IPointerClickHandler
 	//计算定点信息的缓存数组
 	private readonly UIVertex[] m_TempVerts = new UIVertex[4];
 
-	#region 超链接
-	[System.Serializable]
+    private StringBuilder _textBuilder = new StringBuilder();
+
+
+    #region 超链接
+    [System.Serializable]
     public class HrefClickEvent : UnityEvent<string,int> { }
     //点击事件监听
     public HrefClickEvent OnHrefClick = new HrefClickEvent();
@@ -125,8 +128,7 @@ public class InlineText : Text, IPointerClickHandler
 
 		//DebugLog("UpdateGeometry");
 	}
-
-
+    
 	protected override void OnPopulateMesh(VertexHelper toFill)
     {
         if (font == null)
@@ -166,7 +168,7 @@ public class InlineText : Text, IPointerClickHandler
 				m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
 				m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
 				m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
-				if (tempVertsIndex == 3)
+                if (tempVertsIndex == 3)
 					toFill.AddUIVertexQuad(m_TempVerts);
 				listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
 			}
@@ -217,33 +219,38 @@ public class InlineText : Text, IPointerClickHandler
     #region 清除乱码
     private void ClearQuadUVs(IList<UIVertex> verts)
     {
-        foreach (var item in _spriteInfo)
+        for (int i = 0; i < _spriteInfo.Count; i++)
         {
-            if ((item.Key + 4) > verts.Count)
+            int index = _spriteInfo[i].Id;
+
+            if ((index + 4) > verts.Count)
                 continue;
-            for (int i = item.Key; i < item.Key + 4; i++)
+            for (int j = index; j < index + 4; j++)
             {
                 //清除乱码
-                UIVertex tempVertex = verts[i];
+                UIVertex tempVertex = verts[j];
                 tempVertex.uv0 = Vector2.zero;
-                verts[i] = tempVertex;
+                verts[j] = tempVertex;
             }
         }
+       
     }
 #endregion
 
     #region 计算Quad占位信息
     void CalcQuadInfo(List<Vector3> _listVertsPos)
     {
-        foreach (var item in _spriteInfo)
+        for (int i = 0; i < _spriteInfo.Count; i++)
         {
-            if ((item.Key + 4) > _listVertsPos.Count)
+            int index = _spriteInfo[i].Id;
+            if ((index + 4) > _listVertsPos.Count)
                 continue;
-            for (int i = item.Key; i < item.Key + 4; i++)
+            for (int j = index; j < index + 4; j++)
             {
-                item.Value.Pos[i - item.Key] = _listVertsPos[i];
+                _spriteInfo[i].Pos[j - index] = _listVertsPos[j];
             }
         }
+       
         //绘制表情
         UpdateDrawnSprite();
     }
@@ -256,24 +263,28 @@ public class InlineText : Text, IPointerClickHandler
 	    _oldDrawSpriteInfo = _drawSpriteInfo;
 
 		_drawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
-        foreach (var item in _spriteInfo)
+        for (int i = 0; i < _spriteInfo.Count; i++)
         {
-            int _id = item.Value.Id;
+            int id = _spriteInfo[i].Id;
 
             //更新绘制表情的信息
             List<SpriteTagInfo> listSpriteInfo = null;
-            if (_drawSpriteInfo.ContainsKey(_id))
-                listSpriteInfo = _drawSpriteInfo[_id];
+            if (_drawSpriteInfo.ContainsKey(id))
+                listSpriteInfo = _drawSpriteInfo[id];
             else
             {
                 listSpriteInfo = new List<SpriteTagInfo>();
-                _drawSpriteInfo.Add(_id, listSpriteInfo);
+                _drawSpriteInfo.Add(id, listSpriteInfo);
             }
-            listSpriteInfo.Add(item.Value);
-        }
+            listSpriteInfo.Add(_spriteInfo[i]);
 
-		//没有表情时也要提醒manager删除之前的信息
-	    foreach (var item in _oldDrawSpriteInfo)
+            //回收信息到对象池
+            Pool<SpriteTagInfo>.Release(_spriteInfo[i]);
+        }
+        _spriteInfo.Clear();
+
+        //没有表情时也要提醒manager删除之前的信息
+        foreach (var item in _oldDrawSpriteInfo)
 	    {
 		    if(!_drawSpriteInfo.ContainsKey(item.Key))
 			    _inlineManager.RemoveTextInfo(item.Key,this);
@@ -364,9 +375,9 @@ public class InlineText : Text, IPointerClickHandler
     {
 		if (string.IsNullOrEmpty(inputText))
 			return "";
+        
+        _textBuilder.Clear();
 
-        _spriteInfo = new Dictionary<int, SpriteTagInfo>();
-        StringBuilder textBuilder = new StringBuilder();
         int textIndex = 0;
 
         foreach (Match match in _inputTagRegex.Matches(inputText))
@@ -378,12 +389,12 @@ public class InlineText : Text, IPointerClickHandler
             //更新超链接
             if (tempId <0 )
             {
-                textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
-                textBuilder.Append("<color=blue>");
-                int startIndex = textBuilder.Length * 4;
-                textBuilder.Append("[" + match.Groups[2].Value + "]");
-                int endIndex = textBuilder.Length * 4 - 2;
-                textBuilder.Append("</color>");
+                _textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
+                _textBuilder.Append("<color=blue>");
+                int startIndex = _textBuilder.Length * 4;
+                _textBuilder.Append("[" + match.Groups[2].Value + "]");
+                int endIndex = _textBuilder.Length * 4 - 2;
+                _textBuilder.Append("</color>");
 
                 var hrefInfo = new HrefInfo
                 {
@@ -403,27 +414,27 @@ public class InlineText : Text, IPointerClickHandler
                     continue;
                 SpriteInforGroup tempGroup = _inlineManager.IndexSpriteInfo[tempId][tempTag];
 
-                textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
-                int tempIndex = textBuilder.Length * 4;
-                textBuilder.Append(@"<quad size=" + tempGroup.Size + " width=" + tempGroup.Width + " />");
+                _textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
+                int tempIndex = _textBuilder.Length * 4;
+                _textBuilder.Append(@"<quad size=" + tempGroup.Size + " width=" + tempGroup.Width + " />");
 
-                SpriteTagInfo tempSpriteTag = new SpriteTagInfo
-                {
-                    Id = tempId,
-                    Tag = tempTag,
-                    Size = new Vector2(tempGroup.Size * tempGroup.Width, tempGroup.Size),
-                    Pos = new Vector3[4],
-                    Uv = tempGroup.ListSpriteInfor[0].Uv
-                };
-                if (!_spriteInfo.ContainsKey(tempIndex))
-                    _spriteInfo.Add(tempIndex, tempSpriteTag);
+                //清理标签
+                SpriteTagInfo tempSpriteTag = Pool<SpriteTagInfo>.Get();
+                tempSpriteTag.Id = tempId;
+                tempSpriteTag.Tag = tempTag;
+                tempSpriteTag.Size = new Vector2(tempGroup.Size * tempGroup.Width, tempGroup.Size);
+                tempSpriteTag.Uv = tempGroup.ListSpriteInfor[0].Uv;
+
+                //添加正则表达式的信息
+                _spriteInfo.Add(tempSpriteTag);
+                //if (!_spriteInfo.ContainsKey(tempIndex))
+                //    _spriteInfo.Add(tempIndex, tempSpriteTag);
             }
-
             textIndex = match.Index + match.Length;
         }
 
-        textBuilder.Append(inputText.Substring(textIndex, inputText.Length - textIndex));
-        return textBuilder.ToString();
+        _textBuilder.Append(inputText.Substring(textIndex, inputText.Length - textIndex));
+        return _textBuilder.ToString();
     }
     #endregion
 
@@ -463,6 +474,17 @@ public class InlineText : Text, IPointerClickHandler
         }
     }
     #endregion
+
+
+    ////清理精灵的信息
+    //private void ClearSpriteTagInfo()
+    //{
+    //    foreach (var item in _spriteInfo.Values)
+    //    {
+    //        Pool<SpriteTagInfo>.Release(item);
+    //    }
+    //    _spriteInfo.Clear();
+    //}
 
 }
 
