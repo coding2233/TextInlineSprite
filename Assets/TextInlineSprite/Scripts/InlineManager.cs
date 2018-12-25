@@ -30,28 +30,23 @@ public class InlineManager : MonoBehaviour {
 	float _animationTime = 0.0f;
 	//动画索引
 	int _animationIndex = 0;
+
+	public readonly Dictionary<int, SpriteTagInfo> GetMeshInfo = new Dictionary<int, SpriteTagInfo>();
 	#endregion
 
 	// Use this for initialization
 	void OnEnable()
     {
-        Initialize();
+		Initialize();
     }
-
-    // Update is called once per frame
-    void Update () {
-        //动态表情
-        if(!_isStatic)
-            DrawSpriteAnimation();
-    }
-   
+	
     #region 初始化
     void Initialize()
     {
-        SpriteGraphic[] spriteGraphics = GetComponentsInChildren<SpriteGraphic>();
+		SpriteGraphic02[] spriteGraphics = GetComponentsInChildren<SpriteGraphic02>();
         for (int i = 0; i < spriteGraphics.Length; i++)
         {
-            SpriteAsset mSpriteAsset = spriteGraphics[i].m_spriteAsset;
+			SpriteAsset mSpriteAsset = spriteGraphics[i].m_spriteAsset;
             if (!_indexSpriteGraphic.ContainsKey(mSpriteAsset.Id)&&!IndexSpriteInfo.ContainsKey(mSpriteAsset.Id))
             {
                 SpriteGraphicInfo spriteGraphicInfo = new SpriteGraphicInfo()
@@ -76,56 +71,57 @@ public class InlineManager : MonoBehaviour {
 
     public void UpdateTextInfo(int id,InlineText key, List<SpriteTagInfo> value)
     {
-        if (!_indexSpriteGraphic.ContainsKey(id)||!_textMeshInfo.ContainsKey(id)|| value.Count<=0)
-            return;
-        int spriteTagCount = value.Count;
-        Vector3 textPos = key.transform.position;
-        Vector3 spritePos = _indexSpriteGraphic[id].SpriteGraphic.transform.position;
-		Vector3 disPos = (textPos - spritePos)*(1.0f/ key.pixelsPerUnit);
-		//新增摄像机模式的位置判断
-		if (key.canvas != null)
-        {
-            if (key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
-            {
-                Vector3 scale = key.canvas.transform.localScale;
-				disPos = new Vector3(disPos.x / scale.x, disPos.y / scale.y, disPos.z / scale.z);
-				disPos /= (1.0f / key.pixelsPerUnit);
-			}
-        }
+		GetMeshInfo[id] = value[0];
+  //      if (!_indexSpriteGraphic.ContainsKey(id)||!_textMeshInfo.ContainsKey(id)|| value.Count<=0)
+  //          return;
+  //      int spriteTagCount = value.Count;
+  //      Vector3 textPos = key.transform.position;
+  //      Vector3 spritePos = _indexSpriteGraphic[id].SpriteGraphic.transform.position;
+  //Vector3 disPos = (textPos - spritePos)*(1.0f/ key.pixelsPerUnit);
+  ////新增摄像机模式的位置判断
+  //if (key.canvas != null)
+  //      {
+  //          if (key.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+  //          {
+  //              Vector3 scale = key.canvas.transform.localScale;
+  //		disPos = new Vector3(disPos.x / scale.x, disPos.y / scale.y, disPos.z / scale.z);
+  //		disPos /= (1.0f / key.pixelsPerUnit);
+  //	}
+  //      }
 
-        MeshInfo meshInfo = new MeshInfo();
-        meshInfo.Tag = new string[spriteTagCount];
-        meshInfo.Vertices = new Vector3[spriteTagCount * 4];
-        meshInfo.Uv = new Vector2[spriteTagCount * 4];
-        meshInfo.Triangles = new int[spriteTagCount * 6];
-        for (int i = 0; i < value.Count; i++)
-        {
-            int m = i * 4;
-            //标签
-            meshInfo.Tag[i] = value[i].Tag;
-            //顶点位置
-            meshInfo.Vertices[m + 0] = value[i].Pos[0]+ disPos;
-            meshInfo.Vertices[m + 1] = value[i].Pos[1] + disPos;
-            meshInfo.Vertices[m + 2] = value[i].Pos[2] + disPos;
-            meshInfo.Vertices[m + 3] = value[i].Pos[3] + disPos;
-            //uv
-            meshInfo.Uv[m + 0] = value[i].Uv[0];
-            meshInfo.Uv[m + 1] = value[i].Uv[1];
-            meshInfo.Uv[m + 2] = value[i].Uv[2];
-            meshInfo.Uv[m + 3] = value[i].Uv[3];
-        }
-        if (_textMeshInfo[id].ContainsKey(key))
-        {
-            MeshInfo oldMeshInfo = _textMeshInfo[id][key];
-            if (!meshInfo.Equals(oldMeshInfo))
-                _textMeshInfo[id][key] = meshInfo;
-        }
-        else
-            _textMeshInfo[id].Add(key, meshInfo);
-        
-        //更新图片
-        DrawSprites(id);
-    }
+		//      MeshInfo meshInfo = new MeshInfo();
+		//      meshInfo.Tag = new string[spriteTagCount];
+		//      meshInfo.Vertices = new Vector3[spriteTagCount * 4];
+		//      meshInfo.Uv = new Vector2[spriteTagCount * 4];
+		//      meshInfo.Triangles = new int[spriteTagCount * 6];
+		//      for (int i = 0; i < value.Count; i++)
+		//      {
+		//          int m = i * 4;
+		//          //标签
+		//          meshInfo.Tag[i] = value[i].Tag;
+		//          //顶点位置
+		//          meshInfo.Vertices[m + 0] = value[i].Pos[0]+ disPos;
+		//          meshInfo.Vertices[m + 1] = value[i].Pos[1] + disPos;
+		//          meshInfo.Vertices[m + 2] = value[i].Pos[2] + disPos;
+		//          meshInfo.Vertices[m + 3] = value[i].Pos[3] + disPos;
+		//          //uv
+		//          meshInfo.Uv[m + 0] = value[i].Uv[0];
+		//          meshInfo.Uv[m + 1] = value[i].Uv[1];
+		//          meshInfo.Uv[m + 2] = value[i].Uv[2];
+		//          meshInfo.Uv[m + 3] = value[i].Uv[3];
+		//      }
+		//      if (_textMeshInfo[id].ContainsKey(key))
+		//      {
+		//          MeshInfo oldMeshInfo = _textMeshInfo[id][key];
+		//          if (!meshInfo.Equals(oldMeshInfo))
+		//              _textMeshInfo[id][key] = meshInfo;
+		//      }
+		//      else
+		//          _textMeshInfo[id].Add(key, meshInfo);
+
+		//      //更新图片
+		//      DrawSprites(id);
+	}
 
 	/// <summary>
 	/// 移除文本 
@@ -206,7 +202,7 @@ public class InlineManager : MonoBehaviour {
             || !_textMeshInfo.ContainsKey(id))
             return;
 
-		SpriteGraphic spriteGraphic = _indexSpriteGraphic[id].SpriteGraphic;
+		SpriteGraphic spriteGraphic = null;//_indexSpriteGraphic[id].SpriteGraphic;
         Mesh mesh = _indexSpriteGraphic[id].Mesh;
         Dictionary<InlineText, MeshInfo> data = _textMeshInfo[id];
         List<Vector3> vertices = new List<Vector3>();
@@ -256,32 +252,34 @@ public class InlineManager : MonoBehaviour {
     #region 精灵组信息
     private class SpriteGraphicInfo
     {
-        public SpriteGraphic SpriteGraphic;
+        public SpriteGraphic02 SpriteGraphic;
         public Mesh Mesh;
     }
     #endregion
 
-    #region 模型数据信息
-    private class MeshInfo
-    {
-        public string[] Tag;
-        public Vector3[] Vertices;
-        public Vector2[] Uv;
-        public int[] Triangles;
-
-        //比较数据是否一样
-        public bool Equals(MeshInfo value)
-        {
-            if (Tag.Length!= value.Tag.Length|| Vertices.Length!= value.Vertices.Length)
-                return false;
-            for (int i = 0; i < Tag.Length; i++)
-                if (Tag[i] != value.Tag[i])
-                    return false;
-            for (int i = 0; i < Vertices.Length; i++)
-                if (Vertices[i] != value.Vertices[i])
-                    return false;
-            return true;
-        }
-    }
-    #endregion
+    
 }
+
+#region 模型数据信息
+public class MeshInfo
+{
+	public string[] Tag;
+	public Vector3[] Vertices;
+	public Vector2[] Uv;
+	public int[] Triangles;
+
+	//比较数据是否一样
+	public bool Equals(MeshInfo value)
+	{
+		if (Tag.Length != value.Tag.Length || Vertices.Length != value.Vertices.Length)
+			return false;
+		for (int i = 0; i < Tag.Length; i++)
+			if (Tag[i] != value.Tag[i])
+				return false;
+		for (int i = 0; i < Vertices.Length; i++)
+			if (Vertices[i] != value.Vertices[i])
+				return false;
+		return true;
+	}
+}
+#endregion

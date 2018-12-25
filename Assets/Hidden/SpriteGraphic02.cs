@@ -24,6 +24,9 @@ public class SpriteGraphic02 : MaskableGraphic
 	[SerializeField]
 	private float _speed;
 
+	readonly UIVertex[] _tempVerts = new UIVertex[4];
+
+
 	public override Texture mainTexture
 	{
 		get
@@ -49,74 +52,51 @@ public class SpriteGraphic02 : MaskableGraphic
 			return _defaultMater;
 		}
 	}
-	
 	#endregion
-	
-	public override UnityEngine.Material GetModifiedMaterial(UnityEngine.Material baseMaterial)
-	{
-		return base.GetModifiedMaterial(baseMaterial);
-	}
+
+	protected InlineManager _inlineManager;
 
 	protected override void OnEnable()
 	{
 		base.OnEnable();
+		_inlineManager = GetComponentInParent<InlineManager>();
 	}
 
-	protected override void OnDisable()
+	protected override void OnPopulateMesh(VertexHelper vh)
 	{
-		base.OnDisable();
-	}
+		if (_inlineManager == null|| m_spriteAsset==null|| !_inlineManager.GetMeshInfo.ContainsKey(m_spriteAsset.Id))
+			return;
 
-	
-#if UNITY_EDITOR
-	protected override void OnValidate()
-	{
-		base.OnValidate();
-	}
-#endif
-
-	public override void SetMaterialDirty()
-	{
-		base.SetMaterialDirty();
-	}
-
-	protected override void UpdateMaterial()
-	{
-		base.UpdateMaterial();
-	}
-
-	protected override void OnPopulateMesh(Mesh h)
-	{
-		//base.OnPopulateMesh(h);
-
-		if (m_spriteAsset != null && h.vertexCount == 0)
+		SpriteTagInfo meshInfo = _inlineManager.GetMeshInfo[m_spriteAsset.Id];
+		if (meshInfo == null || meshInfo.Pos == null || meshInfo.Pos.Length == 0)
 		{
-			var r = GetPixelAdjustedRect();
-			var v = new Vector4(r.x, r.y, r.x + r.width, r.y + r.height);
-			h.vertices = new Vector3[4] { new Vector3(v.x, v.y), new Vector3(v.x, v.w), new Vector3(v.z, v.w), new Vector3(v.z, v.y) };
-			h.colors = new Color[4] { color, color, color, color };
-			h.triangles = new int[6] { 0, 1, 2, 2, 3, 0 };
-
-			List<SpriteInfor> spriteInfors = m_spriteAsset.ListSpriteGroup[_testIndex].ListSpriteInfor;
-
-			h.uv = spriteInfors[0].Uv;
-
-			//--------------------------------------------------------------------------------------
-			//看到unity 的mesh支持多层uv  还在想shader渲染动图有思路了呢
-			//结果调试shader的时候发现uv1-uv3的值跟uv0一样
-			//意思就是 unity canvasrender  目前的设计，为了优化性能,不支持uv1-3,并不是bug,所以没法存多套uv。。。
-			//https://issuetracker.unity3d.com/issues/canvasrenderer-dot-setmesh-does-not-seem-to-support-more-than-one-uv-set
-			//不知道后面会不会更新 ------  于是现在还是用老办法吧， 规则图集 --> uv移动 
-			//--------------------------------------------------------------------------------------
-
-			//h.uv2 = spriteInfors[1].Uv;
-			//h.uv3 = spriteInfors[2].Uv;
-			//h.uv4 = spriteInfors[3].Uv;
-
+			vh.Clear();
+			//base.OnPopulateMesh(vh);
 		}
-	}
-	protected override void OnPopulateMesh(UnityEngine.UI.VertexHelper vh)
-	{
-		//	base.OnPopulateMesh(vh);
+		else
+		{
+			vh.Clear();
+			for (int i = 0; i < meshInfo.Pos.Length; i++)
+			{
+				int tempVertsIndex = i & 3;
+				_tempVerts[tempVertsIndex].position = meshInfo.Pos[i];
+				_tempVerts[tempVertsIndex].uv0 = meshInfo.Uv[i];
+				_tempVerts[tempVertsIndex].color = color;
+				if (tempVertsIndex == 3)
+					vh.AddUIVertexQuad(_tempVerts);
+
+				//		//--------------------------------------------------------------------------------------
+				//		//看到unity 的mesh支持多层uv  还在想shader渲染动图有思路了呢
+				//		//结果调试shader的时候发现uv1-uv3的值跟uv0一样
+				//		//意思就是 unity canvasrender  目前的设计，为了优化性能,不支持uv1-3,并不是bug,所以没法存多套uv。。。
+				//		//https://issuetracker.unity3d.com/issues/canvasrenderer-dot-setmesh-does-not-seem-to-support-more-than-one-uv-set
+				//		//不知道后面会不会更新 ------  于是现在还是用老办法吧， 规则图集 --> uv移动 
+				//		//--------------------------------------------------------------------------------------
+
+				//		//h.uv2 = spriteInfors[1].Uv;
+				//		//h.uv3 = spriteInfors[2].Uv;
+				//		//h.uv4 = spriteInfors[3].Uv;
+			}
+		}
 	}
 }

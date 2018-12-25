@@ -133,67 +133,33 @@ public class InlineText : Text, IPointerClickHandler
     {
         if (font == null)
             return;
-		//base.OnPopulateMesh(toFill);
-
-		//DebugLog("OnPopulateMesh");
-		// We don't care if we the font Texture changes while we are doing our Update.
-		// The end result of cachedTextGenerator will be valid for this instance.
-		// Otherwise we can get issues like Case 619238.
+		base.OnPopulateMesh(toFill);
+		
+		//更新顶点位置&去掉乱码uv
 		m_DisableFontTextureRebuiltCallback = true;
-
-		Vector2 extents = rectTransform.rect.size;
-
-		var settings = GetGenerationSettings(extents);
-		cachedTextGenerator.PopulateWithErrors(text, settings, gameObject);
-		//cachedTextGenerator.Populate(text, settings);
-
-		// Apply the offset to the vertices
-		IList<UIVertex> verts = cachedTextGenerator.verts;
-		float unitsPerPixel = 1 / pixelsPerUnit;
-		//Last 4 verts are always a new line... (\n)
-		int vertCount = verts.Count - 4;
-		Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
-		roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
-		toFill.Clear();
-
-		ClearQuadUVs(verts);
-
-		List<Vector3> listVertsPos = new List<Vector3>();
-		if (roundingOffset != Vector2.zero)
+		int index = -1;
+		for (int i = 0; i < _spriteInfo.Count; i++)
 		{
-			for (int i = 0; i < vertCount; ++i)
+			index = _spriteInfo[i].Index;
+			if ((index+4) < toFill.currentVertCount)
 			{
-				int tempVertsIndex = i & 3;
-				m_TempVerts[tempVertsIndex] = verts[i];
-				m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-				m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
-				m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
-                if (tempVertsIndex == 3)
-					toFill.AddUIVertexQuad(m_TempVerts);
-				listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
-			}
-		}
-		else
-		{
-			for (int i = 0; i < vertCount; ++i)
-			{
-				int tempVertsIndex = i & 3;
-				m_TempVerts[tempVertsIndex] = verts[i];
-				m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-				if (tempVertsIndex == 3)
-					toFill.AddUIVertexQuad(m_TempVerts);
-				listVertsPos.Add(m_TempVerts[tempVertsIndex].position);
+				for (int j = index; j < index + 4; j++)
+				{
+					UIVertex vertex = UIVertex.simpleVert;
+					toFill.PopulateUIVertex(ref vertex, j);
+					//清理多余的乱码uv
+					vertex.uv0 = Vector2.zero;
+					//获取quad的位置
+					_spriteInfo[i].Pos[j - index] = vertex.position;
+					toFill.SetUIVertex(vertex, j);
+				}
 
 			}
 		}
-
-		//计算quad占位的信息
-		CalcQuadInfo(listVertsPos);
-		//计算包围盒
-		CalcBoundsInfo(listVertsPos, toFill, settings);
-
 		m_DisableFontTextureRebuiltCallback = false;
 
+		//绘制表情
+		UpdateDrawnSprite(); 
 	}
 
     #region 文本所占的长宽
@@ -214,48 +180,7 @@ public class InlineText : Text, IPointerClickHandler
         }
     }
     #endregion
-
-
-    #region 清除乱码
-    private void ClearQuadUVs(IList<UIVertex> verts)
-    {
-        for (int i = 0; i < _spriteInfo.Count; i++)
-        {
-            int index = _spriteInfo[i].Id;
-
-            if ((index + 4) > verts.Count)
-                continue;
-            for (int j = index; j < index + 4; j++)
-            {
-                //清除乱码
-                UIVertex tempVertex = verts[j];
-                tempVertex.uv0 = Vector2.zero;
-                verts[j] = tempVertex;
-            }
-        }
-       
-    }
-#endregion
-
-    #region 计算Quad占位信息
-    void CalcQuadInfo(List<Vector3> _listVertsPos)
-    {
-        for (int i = 0; i < _spriteInfo.Count; i++)
-        {
-            int index = _spriteInfo[i].Id;
-            if ((index + 4) > _listVertsPos.Count)
-                continue;
-            for (int j = index; j < index + 4; j++)
-            {
-                _spriteInfo[i].Pos[j - index] = _listVertsPos[j];
-            }
-        }
-       
-        //绘制表情
-        UpdateDrawnSprite();
-    }
-    #endregion
-
+	
     #region 绘制表情
     void UpdateDrawnSprite()
     {
@@ -376,8 +301,7 @@ public class InlineText : Text, IPointerClickHandler
 		if (string.IsNullOrEmpty(inputText))
 			return "";
         
-        _textBuilder.Clear();
-
+        _textBuilder.Remove(0, _textBuilder.Length);
         int textIndex = 0;
 
         foreach (Match match in _inputTagRegex.Matches(inputText))
@@ -408,10 +332,11 @@ public class InlineText : Text, IPointerClickHandler
             }
             //更新表情
             else
-            {
-                if (_inlineManager==null||!_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
-                    || !_inlineManager.IndexSpriteInfo[tempId].ContainsKey(tempTag))
-                    continue;
+			{
+				if (_inlineManager == null || !_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
+					|| !_inlineManager.IndexSpriteInfo[tempId].ContainsKey(tempTag))
+					continue;
+
                 SpriteInforGroup tempGroup = _inlineManager.IndexSpriteInfo[tempId][tempTag];
 
                 _textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
@@ -420,15 +345,14 @@ public class InlineText : Text, IPointerClickHandler
 
                 //清理标签
                 SpriteTagInfo tempSpriteTag = Pool<SpriteTagInfo>.Get();
-                tempSpriteTag.Id = tempId;
+				tempSpriteTag.Index = tempIndex;
+				tempSpriteTag.Id = tempId;
                 tempSpriteTag.Tag = tempTag;
                 tempSpriteTag.Size = new Vector2(tempGroup.Size * tempGroup.Width, tempGroup.Size);
                 tempSpriteTag.Uv = tempGroup.ListSpriteInfor[0].Uv;
 
                 //添加正则表达式的信息
                 _spriteInfo.Add(tempSpriteTag);
-                //if (!_spriteInfo.ContainsKey(tempIndex))
-                //    _spriteInfo.Add(tempIndex, tempSpriteTag);
             }
             textIndex = match.Index + match.Length;
         }
@@ -474,32 +398,23 @@ public class InlineText : Text, IPointerClickHandler
         }
     }
     #endregion
-
-
-    ////清理精灵的信息
-    //private void ClearSpriteTagInfo()
-    //{
-    //    foreach (var item in _spriteInfo.Values)
-    //    {
-    //        Pool<SpriteTagInfo>.Release(item);
-    //    }
-    //    _spriteInfo.Clear();
-    //}
-
+	
 }
 
 public class SpriteTagInfo
 {
-    //图集ID
+	//顶点索引id
+	public int Index;
+    //图集id
     public int Id;
     //标签标签
     public string Tag;
     //标签大小
     public Vector2 Size;
     //表情位置
-    public Vector3[] Pos;
+    public Vector3[] Pos=new Vector3[4];
     //uv
-    public Vector2[] Uv;
+    public Vector2[] Uv=new Vector2[4];
 }
 
 
