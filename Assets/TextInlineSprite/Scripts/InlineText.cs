@@ -122,11 +122,11 @@ public class InlineText : Text, IPointerClickHandler
 		//_outputText = GetOutputText();
 	}
 
-	protected override void UpdateGeometry()
+	public override void GraphicUpdateComplete()
 	{
-		base.UpdateGeometry();
+		base.GraphicUpdateComplete();
 
-		//DebugLog("UpdateGeometry");
+       // UpdateDrawnSprite();
 	}
     
 	protected override void OnPopulateMesh(VertexHelper toFill)
@@ -158,10 +158,10 @@ public class InlineText : Text, IPointerClickHandler
 		}
 		m_DisableFontTextureRebuiltCallback = false;
 
-		//绘制表情
-		UpdateDrawnSprite(); 
-	}
 
+        UpdateDrawnSprite();
+    }
+    
     #region 文本所占的长宽
     public override float preferredWidth
     {
@@ -333,7 +333,7 @@ public class InlineText : Text, IPointerClickHandler
             //更新表情
             else
 			{
-				if (_inlineManager == null || !_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
+                if (_inlineManager == null || !_inlineManager.IndexSpriteInfo.ContainsKey(tempId)
 					|| !_inlineManager.IndexSpriteInfo[tempId].ContainsKey(tempTag))
 					continue;
 
