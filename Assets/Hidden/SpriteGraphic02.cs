@@ -11,12 +11,7 @@ public class SpriteGraphic02 : MaskableGraphic
 	private Material _defaultMater = null;
 
 	public SpriteAsset m_spriteAsset;
-
-	//测试索引
-	[SerializeField]
-	[Range(0,19)]
-	private int _testIndex=1;
-
+    
 	//分割数量
 	[SerializeField]
 	private int _cellAmount=1;
@@ -24,61 +19,49 @@ public class SpriteGraphic02 : MaskableGraphic
 	[SerializeField]
 	private float _speed;
 
-    private SpriteTagInfo _spriteTagInfo;
-    public SpriteTagInfo MeshInfo
+    private MeshInfo _meshInfo;
+    public MeshInfo MeshInfo
     {
-        get { return _spriteTagInfo; }
+        get { return _meshInfo; }
         set
         {
-            s_Mesh = new Mesh();
-            //workerMesh.Clear();
+            //if (_spriteTagInfo.Equals(value))
+            //    return;
 
-            _spriteTagInfo = value;
+            workerMesh.Clear();
 
-            int length = _spriteTagInfo.Pos.Length;
+            _meshInfo = value;
 
-            s_Mesh.vertices = new Vector3[length];
-            s_Mesh.colors = new Color[length];
-            s_Mesh.colors32 = new Color32[length];
-            s_Mesh.uv = new Vector2[length];
-            s_Mesh.triangles = new int[length/2*3];
+            int length = _meshInfo.Vertices.Count;
 
-            s_Mesh.vertices = _spriteTagInfo.Pos;
-            s_Mesh.uv = _spriteTagInfo.Uv;
+            workerMesh.vertices = new Vector3[length];
+            workerMesh.colors = new Color[length];
+            workerMesh.uv = new Vector2[length];
+            workerMesh.triangles = new int[length/2*3];
 
-            List<Color> colors = new List<Color>();
-            List<int> index = new List<int>();
-          //  List<int> triangles = new List<int>();
             for (int i = 0; i < length; i++)
             {
-                colors.Add(color);
+                _meshInfo.Colors.Add(color);
 
                 if (i % 6 == 0)
                 {
                     int num = i / 6;
-                    index.Add( 0 + 4 * num);
-                    index.Add(1 + 4 * num);
-                    index.Add(2 + 4 * num);
+                    _meshInfo.Triangles.Add(0 + 4 * num);
+                    _meshInfo.Triangles.Add(1 + 4 * num);
+                    _meshInfo.Triangles.Add(2 + 4 * num);
 
-                    index.Add(0 + 4 * num);
-                    index.Add(2 + 4 * num);
-                    index.Add(3 + 4 * num);
-
-                    //s_Mesh.triangles[i + 0] = 0 + 4 * num;
-                    //s_Mesh.triangles[i + 1] = 1 + 4 * num;
-                    //s_Mesh.triangles[i + 2] = 2 + 4 * num;
-
-                    //s_Mesh.triangles[i + 3] = 0 + 4 * num;
-                    //s_Mesh.triangles[i + 4] = 2 + 4 * num;
-                    //s_Mesh.triangles[i + 5] = 3 + 4 * num;
+                    _meshInfo.Triangles.Add(2 + 4 * num);
+                    _meshInfo.Triangles.Add(3 + 4 * num);
+                    _meshInfo.Triangles.Add(0 + 4 * num);
                 }
-
             }
 
-            s_Mesh.SetColors(colors);
-            s_Mesh.triangles = index.ToArray();
+            workerMesh.SetVertices(_meshInfo.Vertices);
+            workerMesh.SetUVs(0,_meshInfo.UVs);
+            workerMesh.SetColors(_meshInfo.Colors);
+            workerMesh.triangles = _meshInfo.Triangles.ToArray();
 
-            canvasRenderer.SetMesh(s_Mesh);
+            canvasRenderer.SetMesh(workerMesh);
 
            // SetMaterialDirty();
             SetAllDirty();
@@ -100,23 +83,24 @@ public class SpriteGraphic02 : MaskableGraphic
 		}
 	}
 
-	public override Material material
-	{
-		get
-		{
-			if (_defaultMater == null)
-			{
-				_defaultMater = new Material(Shader.Find(_defaultShader));
-				_defaultMater.SetFloat("_CellAmount", _cellAmount);
-				_defaultMater.SetFloat("_Speed", _speed);
-				//_defaultMater.EnableKeyword("EMOJI_ANIMATION");
-			}
-			return _defaultMater;
-		}
-	}
-	#endregion
+    public override Material material
+    {
+        get
+        {
+            if (_defaultMater == null)
+            {
+                _defaultMater = new Material(Shader.Find(_defaultShader));
+                _defaultMater.SetFloat("_CellAmount", _cellAmount);
+                _defaultMater.SetFloat("_Speed", _speed);
+                _defaultMater.SetTexture("_MainTex", mainTexture);
+               // _defaultMater.EnableKeyword("EMOJI_ANIMATION");
+            }
+            return _defaultMater;
+        }
+    }
+    #endregion
 
-	protected InlineManager _inlineManager;
+    protected InlineManager _inlineManager;
 
 	protected override void OnEnable()
 	{
@@ -124,7 +108,7 @@ public class SpriteGraphic02 : MaskableGraphic
 		_inlineManager = GetComponentInParent<InlineManager>();
 	}
 
-	protected override void OnPopulateMesh(VertexHelper vh)
+    protected override void OnPopulateMesh(VertexHelper vh)
 	{
        // base.OnPopulateMesh(vh);
 

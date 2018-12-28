@@ -19,8 +19,6 @@ public class InlineText : Text, IPointerClickHandler
     private string _outputText = "";
     //表情位置索引信息
     private List<SpriteTagInfo> _spriteInfo = new List<SpriteTagInfo>();
-    //图集ID，相关信息
-    private Dictionary<int, List<SpriteTagInfo>> _drawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
 	//保留之前的图集ID，相关信息
 	private Dictionary<int, List<SpriteTagInfo>> _oldDrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
 	//计算定点信息的缓存数组
@@ -107,27 +105,7 @@ public class InlineText : Text, IPointerClickHandler
         //启动的是 更新顶点
       //  SetVerticesDirty();
     }
-
-	public override void SetVerticesDirty()
-	{
-		base.SetVerticesDirty();
-
-	//	DebugLog("SetVerticesDirty");
-		//if (!_inlineManager)
-		//{
-		//	_outputText = m_Text;
-		//	return;
-		//}
-		//设置新文本
-		//_outputText = GetOutputText();
-	}
-
-	public override void GraphicUpdateComplete()
-	{
-		base.GraphicUpdateComplete();
-
-       // UpdateDrawnSprite();
-	}
+    
     
 	protected override void OnPopulateMesh(VertexHelper toFill)
     {
@@ -157,11 +135,10 @@ public class InlineText : Text, IPointerClickHandler
 			}
 		}
 		m_DisableFontTextureRebuiltCallback = false;
-
-
+        
         UpdateDrawnSprite();
     }
-    
+
     #region 文本所占的长宽
     public override float preferredWidth
     {
@@ -180,44 +157,14 @@ public class InlineText : Text, IPointerClickHandler
         }
     }
     #endregion
-	
+
     #region 绘制表情
     void UpdateDrawnSprite()
     {
 		//记录之前的信息
-	    _oldDrawSpriteInfo = _drawSpriteInfo;
-
-		_drawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
         for (int i = 0; i < _spriteInfo.Count; i++)
         {
-            int id = _spriteInfo[i].Id;
-
-            //更新绘制表情的信息
-            List<SpriteTagInfo> listSpriteInfo = null;
-            if (_drawSpriteInfo.ContainsKey(id))
-                listSpriteInfo = _drawSpriteInfo[id];
-            else
-            {
-                listSpriteInfo = new List<SpriteTagInfo>();
-                _drawSpriteInfo.Add(id, listSpriteInfo);
-            }
-            listSpriteInfo.Add(_spriteInfo[i]);
-
-            //回收信息到对象池
-            Pool<SpriteTagInfo>.Release(_spriteInfo[i]);
-        }
-        _spriteInfo.Clear();
-
-        //没有表情时也要提醒manager删除之前的信息
-        foreach (var item in _oldDrawSpriteInfo)
-	    {
-		    if(!_drawSpriteInfo.ContainsKey(item.Key))
-			    _inlineManager.RemoveTextInfo(item.Key,this);
-		}
-
-	    foreach (var item in _drawSpriteInfo)
-        {
-            _inlineManager.UpdateTextInfo(item.Key, this, item.Value);
+            _inlineManager.UpdateTextInfo(_spriteInfo[i].Id, this, _spriteInfo[i]);
         }
     }
 
@@ -300,7 +247,8 @@ public class InlineText : Text, IPointerClickHandler
     {
 		if (string.IsNullOrEmpty(inputText))
 			return "";
-        
+
+        ReleaseSpriteTageInfo();
         _textBuilder.Remove(0, _textBuilder.Length);
         int textIndex = 0;
 
@@ -349,7 +297,7 @@ public class InlineText : Text, IPointerClickHandler
 				tempSpriteTag.Id = tempId;
                 tempSpriteTag.Tag = tempTag;
                 tempSpriteTag.Size = new Vector2(tempGroup.Size * tempGroup.Width, tempGroup.Size);
-                tempSpriteTag.Uv = tempGroup.ListSpriteInfor[0].Uv;
+                tempSpriteTag.UVs = tempGroup.ListSpriteInfor[0].Uv;
 
                 //添加正则表达式的信息
                 _spriteInfo.Add(tempSpriteTag);
@@ -398,7 +346,36 @@ public class InlineText : Text, IPointerClickHandler
         }
     }
     #endregion
-	
+
+    private void ReleaseSpriteTageInfo()
+    {
+        //记录之前的信息
+        for (int i = 0; i < _spriteInfo.Count; i++)
+        {
+            //回收信息到对象池
+            Pool<SpriteTagInfo>.Release(_spriteInfo[i]);
+        }
+        _spriteInfo.Clear();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        
+        //for (int i = 0; i < _spriteInfo.Count; i++)
+        //{
+        //    Vector2 point00= RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[0], transform, canvas);
+        //    Vector2 point01 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[1], transform, canvas);
+        //    Vector2 point02 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[2], transform, canvas);
+        //    Vector2 point03 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[3], transform, canvas);
+
+        //    Gizmos.DrawLine(point00, point01);
+        //    Gizmos.DrawLine(point01, point02);
+        //    Gizmos.DrawLine(point02, point03);
+        //    Gizmos.DrawLine(point00, point03);
+
+        //}
+    }
 }
 
 public class SpriteTagInfo
@@ -414,7 +391,7 @@ public class SpriteTagInfo
     //表情位置
     public Vector3[] Pos=new Vector3[4];
     //uv
-    public Vector2[] Uv=new Vector2[4];
+    public Vector2[] UVs=new Vector2[4];
 }
 
 
