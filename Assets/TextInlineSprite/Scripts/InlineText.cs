@@ -28,6 +28,7 @@ public class InlineText : Text, IPointerClickHandler
     private StringBuilder _textBuilder = new StringBuilder();
 
     UIVertex _tempVertex = UIVertex.simpleVert;
+	private List<int> _lastRenderIndexs = new List<int>();
     #region 超链接
     [System.Serializable]
     public class HrefClickEvent : UnityEvent<string,int> { }
@@ -86,28 +87,24 @@ public class InlineText : Text, IPointerClickHandler
 		_inlineManager = GetComponentInParent<InlineManager>();
     }
 
-	
-	//protected override void Start()
-	//   {
-	//       ActiveText();
-	//   }
+
+	protected override void Start()
+	{
+		m_Text = GetOutputText(_text);
+		SetVerticesDirty();
+		SetLayoutDirty();
+	}
 
 #if UNITY_EDITOR
 	protected override void OnValidate()
     {
-        //  ActiveText();
-    }
+		base.OnValidate();
+		m_Text = GetOutputText(_text);
+		SetVerticesDirty();
+		SetLayoutDirty();
+	}
 #endif
-	
-	public void ActiveText()
-    {
-        if (!_inlineManager)
-            _inlineManager = GetComponentInParent<InlineManager>();
-        //启动的是 更新顶点
-      //  SetVerticesDirty();
-    }
-    
-    
+
 	protected override void OnPopulateMesh(VertexHelper toFill)
     {
         if (font == null)
@@ -162,10 +159,25 @@ public class InlineText : Text, IPointerClickHandler
     void UpdateDrawnSprite()
     {
 		//记录之前的信息
-        for (int i = 0; i < _spriteInfo.Count; i++)
-        {
-            _inlineManager.UpdateTextInfo(_spriteInfo[i].Id, this, _spriteInfo[i]);
-        }
+		if (_spriteInfo == null || _spriteInfo.Count == 0&& _lastRenderIndexs.Count>0)
+		{
+			for (int i = 0; i < _lastRenderIndexs.Count; i++)
+			{
+				_inlineManager.UpdateTextInfo(this, _lastRenderIndexs[i], null);
+			}
+			_lastRenderIndexs.Clear();
+		}
+		else
+		{
+			_lastRenderIndexs.Clear();
+			for (int i = 0; i < _spriteInfo.Count; i++)
+			{
+				_inlineManager.UpdateTextInfo(this, _spriteInfo[i].Id,  _spriteInfo[i]);
+				//添加渲染id索引
+				if(_lastRenderIndexs.Contains(_spriteInfo[i].Id))
+					_lastRenderIndexs.Add(_spriteInfo[i].Id);
+			}
+		}
     }
 
     #endregion
@@ -358,12 +370,11 @@ public class InlineText : Text, IPointerClickHandler
         _spriteInfo.Clear();
     }
 
-    private void OnDrawGizmos()
+#if UNITY_EDITOR
+	private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-
-        Vector3 vec= transform.localToWorldMatrix.MultiplyPoint(Vector3.zero);
-        Gizmos.DrawCube(vec, Vector3.one);
+        Gizmos.color = Color.yellow;
+		
         for (int i = 0; i < _spriteInfo.Count; i++)
         {
             Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[1]);
@@ -372,6 +383,8 @@ public class InlineText : Text, IPointerClickHandler
             Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[3]);
         }
     }
+#endif
+
 }
 
 public class SpriteTagInfo

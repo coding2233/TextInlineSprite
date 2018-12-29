@@ -21,7 +21,7 @@ public class Utility  {
     /// <param name="transform"></param>
     /// <param name="point"></param>
     /// <returns></returns>
-    public static Vector3 Transform2World2Point(Transform transform, Vector3 point)
+    public static Vector3 TransformWorld2Point(Transform transform, Vector3 point)
     {
         return transform.worldToLocalMatrix.MultiplyPoint(point);
     }

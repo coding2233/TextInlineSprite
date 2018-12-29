@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class InlineManager : MonoBehaviour {
 
     #region 属性
@@ -37,7 +38,7 @@ public class InlineManager : MonoBehaviour {
 
 	public readonly Dictionary<int, SpriteTagInfo> GetMeshInfo = new Dictionary<int, SpriteTagInfo>();
 
-    private readonly Dictionary<int, MeshInfo> _graphicMeshInfo = new Dictionary<int, MeshInfo>();
+	private readonly Dictionary<int, Dictionary<InlineText, MeshInfo>> _graphicMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
 
     List<int> _renderIndexs = new List<int>();
    // private Queue<List<int>> _renderIndexs = new Queue<List<int>>();
@@ -87,7 +88,29 @@ public class InlineManager : MonoBehaviour {
                 SpriteGraphic02 spriteGraphic02 = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
                 if (spriteGraphic02 != null)
                 {
-                    spriteGraphic02.MeshInfo = _graphicMeshInfo[id];
+					if (!_graphicMeshInfo.ContainsKey(id))
+					{
+						spriteGraphic02.MeshInfo = null;
+						continue;
+					}
+
+					Dictionary<InlineText, MeshInfo> textMeshInfo = _graphicMeshInfo[id];
+					if (textMeshInfo == null || textMeshInfo.Count == 0)
+						spriteGraphic02.MeshInfo = null;
+					else
+					{
+						MeshInfo meshInfo = Pool<MeshInfo>.Get();
+						meshInfo.Clear();
+						foreach (var item in textMeshInfo)
+						{
+							meshInfo.Vertices.AddRange(item.Value.Vertices);
+							meshInfo.UVs.AddRange(item.Value.UVs);
+						}
+						if (spriteGraphic02.MeshInfo != null)
+							Pool<MeshInfo>.Release(spriteGraphic02.MeshInfo);
+
+						spriteGraphic02.MeshInfo = meshInfo;
+					}
                 }
             }
             //清掉渲染索引
@@ -95,26 +118,45 @@ public class InlineManager : MonoBehaviour {
         }
     }
 
-    public void UpdateTextInfo(int id,InlineText key, SpriteTagInfo value)
+    public void UpdateTextInfo(InlineText key, int id, SpriteTagInfo value)
     {
-        MeshInfo meshInfo;
-        if (!_graphicMeshInfo.TryGetValue(id, out meshInfo))
-        {
-            meshInfo = new MeshInfo();
-            _graphicMeshInfo[id] = meshInfo;
-        }
+		Dictionary<InlineText, MeshInfo> textMeshInfo;
+		if (value == null)
+		{
+			if (_graphicMeshInfo.TryGetValue(id, out textMeshInfo) && textMeshInfo.ContainsKey(key))
+			{
+				textMeshInfo[key].Release();
+				textMeshInfo.Remove(key);
+			}
+		}
+		else
+		{
+			if (!_graphicMeshInfo.TryGetValue(id, out textMeshInfo))
+			{
+				textMeshInfo = new Dictionary<InlineText, MeshInfo>();
+				_graphicMeshInfo.Add(id, textMeshInfo);
+			}
 
-        //添加到渲染列表里面  --  等待下一帧渲染
-        if (!_renderIndexs.Contains(id))
-        {
-            _renderIndexs.Add(id);
-            meshInfo.Clear();
-        }
+			MeshInfo meshInfo;
+			if (!textMeshInfo.TryGetValue(key, out meshInfo))
+			{
+				meshInfo = Pool<MeshInfo>.Get();
+				textMeshInfo.Add(key, meshInfo);
+			}
+			//else
+			//	meshInfo.Clear();
 
-        meshInfo.Vertices.AddRange(value.Pos);
-        meshInfo.UVs.AddRange(value.UVs);
+			meshInfo.Vertices.AddRange(value.Pos);
+			meshInfo.UVs.AddRange(value.UVs);
+		
+		}
 
-    }
+		//添加到渲染列表里面  --  等待下一帧渲染
+		if (!_renderIndexs.Contains(id))
+		{
+			_renderIndexs.Add(id);
+		}
+	}
     
 
     #region 精灵组信息
@@ -150,6 +192,8 @@ public class MeshInfo
         ListPool<Vector2>.Release(UVs);
         ListPool<Color>.Release(Colors);
         ListPool<int>.Release(Triangles);
+
+		Pool<MeshInfo>.Release(this);
     }
     
     //public string[] Tag;

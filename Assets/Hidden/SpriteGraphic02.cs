@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class SpriteGraphic02 : MaskableGraphic
 {
 	#region 属性
@@ -19,13 +20,18 @@ public class SpriteGraphic02 : MaskableGraphic
 	[SerializeField]
 	private float _speed;
 
-    private MeshInfo _meshInfo=new MeshInfo();
+    private MeshInfo _meshInfo;
     public MeshInfo MeshInfo
     {
         get { return _meshInfo; }
         set
         {
-            _meshInfo = value;
+			if (value == null&& _meshInfo!=null)
+			{
+				_meshInfo.Clear();
+			}
+			else
+				_meshInfo = value;
 
            SetAllDirty();
         }
@@ -54,23 +60,17 @@ public class SpriteGraphic02 : MaskableGraphic
                 _defaultMater = new Material(Shader.Find(_defaultShader));
                 _defaultMater.SetFloat("_CellAmount", _cellAmount);
                 _defaultMater.SetFloat("_Speed", _speed);
-                //_defaultMater.SetTexture("_MainTex", mainTexture);
-                // _defaultMater.EnableKeyword("EMOJI_ANIMATION");
-                _defaultMater.DisableKeyword("EMOJI_ANIMATION");
-            }
+                if(m_spriteAsset==null|| m_spriteAsset.IsStatic)
+					_defaultMater.DisableKeyword("EMOJI_ANIMATION");
+				else
+					_defaultMater.EnableKeyword("EMOJI_ANIMATION");
+
+			}
             return _defaultMater;
         }
     }
     #endregion
-
-    protected InlineManager _inlineManager;
-
-	protected override void OnEnable()
-	{
-		base.OnEnable();
-		_inlineManager = GetComponentInParent<InlineManager>();
-	}
-
+	
     protected override void OnPopulateMesh(VertexHelper vh)
 	{
         if (_meshInfo != null)
@@ -79,7 +79,7 @@ public class SpriteGraphic02 : MaskableGraphic
             for (int i = 0; i < _meshInfo.Vertices.Count; i++)
             {
                 int tempVertsIndex = i & 3;
-                _tempVerts[tempVertsIndex].position = Utility.Transform2World2Point(transform,_meshInfo.Vertices[i]);
+                _tempVerts[tempVertsIndex].position = Utility.TransformWorld2Point(transform,_meshInfo.Vertices[i]);
                 _tempVerts[tempVertsIndex].uv0 = _meshInfo.UVs[i];
                 _tempVerts[tempVertsIndex].color = color;
                 if (tempVertsIndex == 3)
