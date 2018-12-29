@@ -88,8 +88,6 @@ public class InlineManager : MonoBehaviour {
                 if (spriteGraphic02 != null)
                 {
                     spriteGraphic02.MeshInfo = _graphicMeshInfo[id];
-                    //清理掉渲染的数据
-                    _graphicMeshInfo[id].Clear();
                 }
             }
             //清掉渲染索引
@@ -106,12 +104,16 @@ public class InlineManager : MonoBehaviour {
             _graphicMeshInfo[id] = meshInfo;
         }
 
+        //添加到渲染列表里面  --  等待下一帧渲染
+        if (!_renderIndexs.Contains(id))
+        {
+            _renderIndexs.Add(id);
+            meshInfo.Clear();
+        }
+
         meshInfo.Vertices.AddRange(value.Pos);
         meshInfo.UVs.AddRange(value.UVs);
 
-        //添加到渲染列表里面  --  等待下一帧渲染
-        if (!_renderIndexs.Contains(id))
-            _renderIndexs.Add(id);
     }
     
 
@@ -133,7 +135,7 @@ public class MeshInfo
     public List<Vector2> UVs = ListPool<Vector2>.Get();
     public List<Color> Colors = ListPool<Color>.Get();
     public List<int> Triangles = ListPool<int>.Get();
-
+    
     public void Clear()
     {
         Vertices.Clear();

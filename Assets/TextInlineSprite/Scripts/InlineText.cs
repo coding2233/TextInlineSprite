@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
 
+[ExecuteInEditMode]
 public class InlineText : Text, IPointerClickHandler
 {
 	#region 属性

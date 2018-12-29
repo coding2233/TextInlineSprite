@@ -636,13 +636,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00000[#emoji_0]0000
+  m_Text: 00000[#emoji_0]000
   OnHrefClick:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: InlineText+HrefClickEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  _text: 00000[#emoji_0]0000
+  _text: 00000[#emoji_0]000
 --- !u!222 &1707421984
 CanvasRenderer:
   m_ObjectHideFlags: 0

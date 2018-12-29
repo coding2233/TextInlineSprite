@@ -19,52 +19,57 @@ public class SpriteGraphic02 : MaskableGraphic
 	[SerializeField]
 	private float _speed;
 
-    private MeshInfo _meshInfo;
+    private MeshInfo _meshInfo=new MeshInfo();
     public MeshInfo MeshInfo
     {
         get { return _meshInfo; }
         set
         {
+            //if (_meshInfo == null)
+            //{
+            //    _meshInfo = new MeshInfo();
+            //}
+
             //if (_spriteTagInfo.Equals(value))
             //    return;
 
-            workerMesh.Clear();
+        //    workerMesh.Clear();
 
             _meshInfo = value;
 
-            int length = _meshInfo.Vertices.Count;
+           // int length = _meshInfo.Vertices.Count;
 
-            workerMesh.vertices = new Vector3[length];
-            workerMesh.colors = new Color[length];
-            workerMesh.uv = new Vector2[length];
-            workerMesh.triangles = new int[length/2*3];
+           // workerMesh.vertices = new Vector3[length];
+           // workerMesh.colors = new Color[length];
+           // workerMesh.uv = new Vector2[length];
+           // workerMesh.triangles = new int[length/2*3];
 
-            for (int i = 0; i < length; i++)
-            {
-                _meshInfo.Colors.Add(color);
+           // for (int i = 0; i < length; i++)
+           // {
+           //     _meshInfo.Colors.Add(color);
 
-                if (i % 6 == 0)
-                {
-                    int num = i / 6;
-                    _meshInfo.Triangles.Add(0 + 4 * num);
-                    _meshInfo.Triangles.Add(1 + 4 * num);
-                    _meshInfo.Triangles.Add(2 + 4 * num);
+           //     if (i % 6 == 0)
+           //     {
+           //         int num = i / 6;
+           //         _meshInfo.Triangles.Add(0 + 4 * num);
+           //         _meshInfo.Triangles.Add(1 + 4 * num);
+           //         _meshInfo.Triangles.Add(2 + 4 * num);
 
-                    _meshInfo.Triangles.Add(2 + 4 * num);
-                    _meshInfo.Triangles.Add(3 + 4 * num);
-                    _meshInfo.Triangles.Add(0 + 4 * num);
-                }
-            }
+           //         _meshInfo.Triangles.Add(2 + 4 * num);
+           //         _meshInfo.Triangles.Add(3 + 4 * num);
+           //         _meshInfo.Triangles.Add(0 + 4 * num);
+           //     }
+           // }
 
-            workerMesh.SetVertices(_meshInfo.Vertices);
-            workerMesh.SetUVs(0,_meshInfo.UVs);
-            workerMesh.SetColors(_meshInfo.Colors);
-            workerMesh.triangles = _meshInfo.Triangles.ToArray();
+           // workerMesh.SetVertices(_meshInfo.Vertices);
+           // workerMesh.SetUVs(0,_meshInfo.UVs);
+           // workerMesh.SetColors(_meshInfo.Colors);
+           // workerMesh.triangles = _meshInfo.Triangles.ToArray();
 
-            canvasRenderer.SetMesh(workerMesh);
+           // canvasRenderer.SetMesh(workerMesh);
 
-           // SetMaterialDirty();
-            SetAllDirty();
+           //// SetMaterialDirty();
+           SetAllDirty();
             // UpdateMaterial();
         }
     }
@@ -92,8 +97,9 @@ public class SpriteGraphic02 : MaskableGraphic
                 _defaultMater = new Material(Shader.Find(_defaultShader));
                 _defaultMater.SetFloat("_CellAmount", _cellAmount);
                 _defaultMater.SetFloat("_Speed", _speed);
-                _defaultMater.SetTexture("_MainTex", mainTexture);
-               // _defaultMater.EnableKeyword("EMOJI_ANIMATION");
+                //_defaultMater.SetTexture("_MainTex", mainTexture);
+                // _defaultMater.EnableKeyword("EMOJI_ANIMATION");
+                _defaultMater.DisableKeyword("EMOJI_ANIMATION");
             }
             return _defaultMater;
         }
@@ -110,43 +116,58 @@ public class SpriteGraphic02 : MaskableGraphic
 
     protected override void OnPopulateMesh(VertexHelper vh)
 	{
-       // base.OnPopulateMesh(vh);
+        if (_meshInfo != null)
+        {
+            vh.Clear();
+            for (int i = 0; i < _meshInfo.Vertices.Count; i++)
+            {
+                int tempVertsIndex = i & 3;
+                _tempVerts[tempVertsIndex].position = _meshInfo.Vertices[i];
+                _tempVerts[tempVertsIndex].uv0 = _meshInfo.UVs[i];
+                _tempVerts[tempVertsIndex].color = color;
+                if (tempVertsIndex == 3)
+                    vh.AddUIVertexQuad(_tempVerts);
+            }
+        }
 
-		//if (_inlineManager == null|| m_spriteAsset==null|| !_inlineManager.GetMeshInfo.ContainsKey(m_spriteAsset.Id))
-		//	return;
 
-		//SpriteTagInfo meshInfo = _inlineManager.GetMeshInfo[m_spriteAsset.Id];
-		//if (meshInfo == null || meshInfo.Pos == null || meshInfo.Pos.Length == 0)
-		//{
-		//	vh.Clear();
-		//	//base.OnPopulateMesh(vh);
-		//}
-		//else
-		//{
-		//	vh.Clear();
-		//	for (int i = 0; i < meshInfo.Pos.Length; i++)
-		//	{
-		//		int tempVertsIndex = i & 3;
-		//		_tempVerts[tempVertsIndex].position = meshInfo.Pos[i];
-		//		_tempVerts[tempVertsIndex].uv0 = meshInfo.Uv[i];
-		//		_tempVerts[tempVertsIndex].color = color;
-		//		if (tempVertsIndex == 3)
-		//			vh.AddUIVertexQuad(_tempVerts);
+        // base.OnPopulateMesh(vh);
 
-		//		//		//--------------------------------------------------------------------------------------
-		//		//		//看到unity 的mesh支持多层uv  还在想shader渲染动图有思路了呢
-		//		//		//结果调试shader的时候发现uv1-uv3的值跟uv0一样
-		//		//		//意思就是 unity canvasrender  目前的设计，为了优化性能,不支持uv1-3,并不是bug,所以没法存多套uv。。。
-		//		//		//https://issuetracker.unity3d.com/issues/canvasrenderer-dot-setmesh-does-not-seem-to-support-more-than-one-uv-set
-		//		//		//不知道后面会不会更新 ------  于是现在还是用老办法吧， 规则图集 --> uv移动 
-		//		//		//--------------------------------------------------------------------------------------
+        //if (_inlineManager == null|| m_spriteAsset==null|| !_inlineManager.GetMeshInfo.ContainsKey(m_spriteAsset.Id))
+        //	return;
 
-		//		//		//h.uv2 = spriteInfors[1].Uv;
-		//		//		//h.uv3 = spriteInfors[2].Uv;
-		//		//		//h.uv4 = spriteInfors[3].Uv;
-		//	}
-		//}
-	}
+        //SpriteTagInfo meshInfo = _inlineManager.GetMeshInfo[m_spriteAsset.Id];
+        //if (meshInfo == null || meshInfo.Pos == null || meshInfo.Pos.Length == 0)
+        //{
+        //	vh.Clear();
+        //	//base.OnPopulateMesh(vh);
+        //}
+        //else
+        //{
+        //	vh.Clear();
+        //	for (int i = 0; i < meshInfo.Pos.Length; i++)
+        //	{
+        //		int tempVertsIndex = i & 3;
+        //		_tempVerts[tempVertsIndex].position = meshInfo.Pos[i];
+        //		_tempVerts[tempVertsIndex].uv0 = meshInfo.Uv[i];
+        //		_tempVerts[tempVertsIndex].color = color;
+        //		if (tempVertsIndex == 3)
+        //			vh.AddUIVertexQuad(_tempVerts);
+
+        //		//		//--------------------------------------------------------------------------------------
+        //		//		//看到unity 的mesh支持多层uv  还在想shader渲染动图有思路了呢
+        //		//		//结果调试shader的时候发现uv1-uv3的值跟uv0一样
+        //		//		//意思就是 unity canvasrender  目前的设计，为了优化性能,不支持uv1-3,并不是bug,所以没法存多套uv。。。
+        //		//		//https://issuetracker.unity3d.com/issues/canvasrenderer-dot-setmesh-does-not-seem-to-support-more-than-one-uv-set
+        //		//		//不知道后面会不会更新 ------  于是现在还是用老办法吧， 规则图集 --> uv移动 
+        //		//		//--------------------------------------------------------------------------------------
+
+        //		//		//h.uv2 = spriteInfors[1].Uv;
+        //		//		//h.uv3 = spriteInfors[2].Uv;
+        //		//		//h.uv4 = spriteInfors[3].Uv;
+        //	}
+        //}
+    }
 
 
 }
