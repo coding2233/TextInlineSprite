@@ -25,52 +25,9 @@ public class SpriteGraphic02 : MaskableGraphic
         get { return _meshInfo; }
         set
         {
-            //if (_meshInfo == null)
-            //{
-            //    _meshInfo = new MeshInfo();
-            //}
-
-            //if (_spriteTagInfo.Equals(value))
-            //    return;
-
-        //    workerMesh.Clear();
-
             _meshInfo = value;
 
-           // int length = _meshInfo.Vertices.Count;
-
-           // workerMesh.vertices = new Vector3[length];
-           // workerMesh.colors = new Color[length];
-           // workerMesh.uv = new Vector2[length];
-           // workerMesh.triangles = new int[length/2*3];
-
-           // for (int i = 0; i < length; i++)
-           // {
-           //     _meshInfo.Colors.Add(color);
-
-           //     if (i % 6 == 0)
-           //     {
-           //         int num = i / 6;
-           //         _meshInfo.Triangles.Add(0 + 4 * num);
-           //         _meshInfo.Triangles.Add(1 + 4 * num);
-           //         _meshInfo.Triangles.Add(2 + 4 * num);
-
-           //         _meshInfo.Triangles.Add(2 + 4 * num);
-           //         _meshInfo.Triangles.Add(3 + 4 * num);
-           //         _meshInfo.Triangles.Add(0 + 4 * num);
-           //     }
-           // }
-
-           // workerMesh.SetVertices(_meshInfo.Vertices);
-           // workerMesh.SetUVs(0,_meshInfo.UVs);
-           // workerMesh.SetColors(_meshInfo.Colors);
-           // workerMesh.triangles = _meshInfo.Triangles.ToArray();
-
-           // canvasRenderer.SetMesh(workerMesh);
-
-           //// SetMaterialDirty();
            SetAllDirty();
-            // UpdateMaterial();
         }
     }
 
@@ -122,7 +79,7 @@ public class SpriteGraphic02 : MaskableGraphic
             for (int i = 0; i < _meshInfo.Vertices.Count; i++)
             {
                 int tempVertsIndex = i & 3;
-                _tempVerts[tempVertsIndex].position = _meshInfo.Vertices[i];
+                _tempVerts[tempVertsIndex].position = Utility.Transform2World2Point(transform,_meshInfo.Vertices[i]);
                 _tempVerts[tempVertsIndex].uv0 = _meshInfo.UVs[i];
                 _tempVerts[tempVertsIndex].color = color;
                 if (tempVertsIndex == 3)

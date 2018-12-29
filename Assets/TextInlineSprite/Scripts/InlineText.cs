@@ -27,7 +27,7 @@ public class InlineText : Text, IPointerClickHandler
 
     private StringBuilder _textBuilder = new StringBuilder();
 
-
+    UIVertex _tempVertex = UIVertex.simpleVert;
     #region 超链接
     [System.Serializable]
     public class HrefClickEvent : UnityEvent<string,int> { }
@@ -84,7 +84,7 @@ public class InlineText : Text, IPointerClickHandler
 		supportRichText = true;
 		alignByGeometry = true;
 		_inlineManager = GetComponentInParent<InlineManager>();
-	}
+    }
 
 	
 	//protected override void Start()
@@ -95,7 +95,7 @@ public class InlineText : Text, IPointerClickHandler
 #if UNITY_EDITOR
 	protected override void OnValidate()
     {
-      //  ActiveText();
+        //  ActiveText();
     }
 #endif
 	
@@ -124,13 +124,12 @@ public class InlineText : Text, IPointerClickHandler
 			{
 				for (int j = index; j < index + 4; j++)
 				{
-					UIVertex vertex = UIVertex.simpleVert;
-					toFill.PopulateUIVertex(ref vertex, j);
+					toFill.PopulateUIVertex(ref _tempVertex, j);
 					//清理多余的乱码uv
-					vertex.uv0 = Vector2.zero;
-					//获取quad的位置
-					_spriteInfo[i].Pos[j - index] = vertex.position;
-					toFill.SetUIVertex(vertex, j);
+					_tempVertex.uv0 = Vector2.zero;
+					//获取quad的位置 --> 转为世界坐标
+					_spriteInfo[i].Pos[j - index] =Utility.TransformPoint2World(transform,_tempVertex.position);
+					toFill.SetUIVertex(_tempVertex, j);
 				}
 
 			}
@@ -361,21 +360,17 @@ public class InlineText : Text, IPointerClickHandler
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        
-        //for (int i = 0; i < _spriteInfo.Count; i++)
-        //{
-        //    Vector2 point00= RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[0], transform, canvas);
-        //    Vector2 point01 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[1], transform, canvas);
-        //    Vector2 point02 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[2], transform, canvas);
-        //    Vector2 point03 = RectTransformUtility.PixelAdjustPoint(_spriteInfo[i].Pos[3], transform, canvas);
+        Gizmos.color = Color.red;
 
-        //    Gizmos.DrawLine(point00, point01);
-        //    Gizmos.DrawLine(point01, point02);
-        //    Gizmos.DrawLine(point02, point03);
-        //    Gizmos.DrawLine(point00, point03);
-
-        //}
+        Vector3 vec= transform.localToWorldMatrix.MultiplyPoint(Vector3.zero);
+        Gizmos.DrawCube(vec, Vector3.one);
+        for (int i = 0; i < _spriteInfo.Count; i++)
+        {
+            Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[1]);
+            Gizmos.DrawLine(_spriteInfo[i].Pos[1], _spriteInfo[i].Pos[2]);
+            Gizmos.DrawLine(_spriteInfo[i].Pos[3], _spriteInfo[i].Pos[2]);
+            Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[3]);
+        }
     }
 }
 
