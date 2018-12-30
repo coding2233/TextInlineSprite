@@ -10,22 +10,17 @@ namespace EmojiText.Taurus
 
 		#region 属性
 		//所有的精灵消息
-		public Dictionary<int, Dictionary<string, SpriteInforGroup>> IndexSpriteInfo = new Dictionary<int, Dictionary<string, SpriteInforGroup>>();
-		//绘制图集的索引
-		private readonly Dictionary<int, SpriteGraphicInfo> _indexSpriteGraphic = new Dictionary<int, SpriteGraphicInfo>();
-		//绘制的模型数据索引
-		private Dictionary<int, Dictionary<InlineText, MeshInfo>> _textMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
-
+		public readonly Dictionary<int, Dictionary<string, SpriteInforGroup>> IndexSpriteInfo = new Dictionary<int, Dictionary<string, SpriteInforGroup>>();
+	
 		//图集
 		[SerializeField]
-		private List<SpriteGraphic02> _spriteGraphics = new List<SpriteGraphic02>();
-
-		public readonly Dictionary<int, SpriteTagInfo> GetMeshInfo = new Dictionary<int, SpriteTagInfo>();
-
+		private List<SpriteGraphic> _spriteGraphics = new List<SpriteGraphic>();
+		
+		//绘制的模型数据信息
 		private readonly Dictionary<int, Dictionary<InlineText, MeshInfo>> _graphicMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
 
+		//渲染列表
 		List<int> _renderIndexs = new List<int>();
-		// private Queue<List<int>> _renderIndexs = new Queue<List<int>>();
 		#endregion
 
 		// Use this for initialization
@@ -40,15 +35,8 @@ namespace EmojiText.Taurus
 			for (int i = 0; i < _spriteGraphics.Count; i++)
 			{
 				SpriteAsset mSpriteAsset = _spriteGraphics[i].m_spriteAsset;
-				if (!_indexSpriteGraphic.ContainsKey(mSpriteAsset.Id) && !IndexSpriteInfo.ContainsKey(mSpriteAsset.Id))
+				if (!IndexSpriteInfo.ContainsKey(mSpriteAsset.Id))
 				{
-					SpriteGraphicInfo spriteGraphicInfo = new SpriteGraphicInfo()
-					{
-						SpriteGraphic = _spriteGraphics[i],
-						Mesh = new Mesh(),
-					};
-					_indexSpriteGraphic.Add(mSpriteAsset.Id, spriteGraphicInfo);
-
 					Dictionary<string, SpriteInforGroup> spriteGroup = new Dictionary<string, SpriteInforGroup>();
 					foreach (var item in mSpriteAsset.ListSpriteGroup)
 					{
@@ -56,7 +44,6 @@ namespace EmojiText.Taurus
 							spriteGroup.Add(item.Tag, item);
 					}
 					IndexSpriteInfo.Add(mSpriteAsset.Id, spriteGroup);
-					_textMeshInfo.Add(mSpriteAsset.Id, new Dictionary<InlineText, MeshInfo>());
 				}
 			}
 		}
@@ -69,7 +56,7 @@ namespace EmojiText.Taurus
 				for (int i = 0; i < _renderIndexs.Count; i++)
 				{
 					int id = _renderIndexs[i];
-					SpriteGraphic02 spriteGraphic02 = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
+					SpriteGraphic spriteGraphic02 = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
 					if (spriteGraphic02 != null)
 					{
 						if (!_graphicMeshInfo.ContainsKey(id))
@@ -102,6 +89,7 @@ namespace EmojiText.Taurus
 			}
 		}
 
+		//更新Text文本信息
 		public void UpdateTextInfo(InlineText key, int id, List<SpriteTagInfo> value)
 		{
 			Dictionary<InlineText, MeshInfo> textMeshInfo;
@@ -143,15 +131,6 @@ namespace EmojiText.Taurus
 		}
 
 
-		#region 精灵组信息
-		private class SpriteGraphicInfo
-		{
-			public SpriteGraphic02 SpriteGraphic;
-			public Mesh Mesh;
-		}
-		#endregion
-
-
 	}
 
 	#region 模型数据信息
@@ -180,24 +159,6 @@ namespace EmojiText.Taurus
 			Pool<MeshInfo>.Release(this);
 		}
 
-		//public string[] Tag;
-		//public Vector3[] Vertices;
-		//public Vector2[] Uv;
-		//public int[] Triangles;
-
-		//比较数据是否一样
-		//public bool Equals(MeshInfo value)
-		//{
-		//	if (Tag.Length != value.Tag.Length || Vertices.Length != value.Vertices.Length)
-		//		return false;
-		//	for (int i = 0; i < Tag.Length; i++)
-		//		if (Tag[i] != value.Tag[i])
-		//			return false;
-		//	for (int i = 0; i < Vertices.Length; i++)
-		//		if (Vertices[i] != value.Vertices[i])
-		//			return false;
-		//	return true;
-		//}
 	}
 	#endregion
 }
