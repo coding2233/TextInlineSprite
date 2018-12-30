@@ -111,6 +111,7 @@ public class InlineText : Text, IPointerClickHandler
 		//更新顶点位置&去掉乱码uv
 		m_DisableFontTextureRebuiltCallback = true;
 		int index = -1;
+		//emoji 
 		for (int i = 0; i < _spriteInfo.Count; i++)
 		{
 			index = _spriteInfo[i].Index;
@@ -127,6 +128,39 @@ public class InlineText : Text, IPointerClickHandler
 				}
 
 			}
+		}
+		// 处理超链接包围框  
+		for (int i = 0; i < _listHrefInfos.Count; i++)
+		{
+			_listHrefInfos[i].Boxes.Clear();
+			if (_listHrefInfos[i].StartIndex >= toFill.currentVertCount)
+				continue;
+
+			toFill.PopulateUIVertex(ref _tempVertex, _listHrefInfos[i].StartIndex);
+			// 将超链接里面的文本顶点索引坐标加入到包围框  
+			var pos = _tempVertex.position;
+			var bounds = new Bounds(pos, Vector3.zero);
+			for (int j = _listHrefInfos[i].StartIndex+1; j < _listHrefInfos[i].EndIndex; j++)
+			{
+				if (j >= toFill.currentVertCount)
+				{
+					break;
+				}
+				toFill.PopulateUIVertex(ref _tempVertex, j);
+				pos = _tempVertex.position;
+				if (pos.x < bounds.min.x)
+				{
+					// 换行重新添加包围框  
+					_listHrefInfos[i].Boxes.Add(new Rect(bounds.min, bounds.size));
+					bounds = new Bounds(pos, Vector3.zero);
+				}
+				else
+				{
+					bounds.Encapsulate(pos); // 扩展包围框  
+				}
+			}
+			//添加包围盒
+			_listHrefInfos[i].Boxes.Add(new Rect(bounds.min, bounds.size));
 		}
 		m_DisableFontTextureRebuiltCallback = false;
         
@@ -207,8 +241,8 @@ public class InlineText : Text, IPointerClickHandler
                 pos = listVertsPos[i];
                 if (pos.x < bounds.min.x)
                 {
-                    // 换行重新添加包围框  
-                    hrefInfo.Boxes.Add(new Rect(bounds.min, bounds.size));
+					// 换行重新添加包围框  
+					hrefInfo.Boxes.Add(new Rect(bounds.min, bounds.size));
                     bounds = new Bounds(pos, Vector3.zero);
                 }
                 else
@@ -259,8 +293,10 @@ public class InlineText : Text, IPointerClickHandler
 		if (string.IsNullOrEmpty(inputText))
 			return "";
 
+		//回收各种对象
         ReleaseSpriteTageInfo();
-        _textBuilder.Remove(0, _textBuilder.Length);
+		ReleaseHrefInfos();
+		_textBuilder.Remove(0, _textBuilder.Length);
         int textIndex = 0;
 
         foreach (Match match in _inputTagRegex.Matches(inputText))
@@ -276,16 +312,15 @@ public class InlineText : Text, IPointerClickHandler
                 _textBuilder.Append("<color=blue>");
                 int startIndex = _textBuilder.Length * 4;
                 _textBuilder.Append("[" + match.Groups[2].Value + "]");
-                int endIndex = _textBuilder.Length * 4 - 2;
+                int endIndex = _textBuilder.Length * 4 - 1;
                 _textBuilder.Append("</color>");
 
-                var hrefInfo = new HrefInfo
-                {
-                    Id = Mathf.Abs(tempId),
-                    StartIndex = startIndex, // 超链接里的文本起始顶点索引
-                    EndIndex = endIndex,
-                    Name = match.Groups[2].Value
-                };
+
+				var hrefInfo = Pool<HrefInfo>.Get();
+				hrefInfo.Id = Mathf.Abs(tempId);
+				hrefInfo.StartIndex = startIndex;// 超链接里的文本起始顶点索引
+				hrefInfo.EndIndex = endIndex;
+				hrefInfo.Name = match.Groups[2].Value;
                 _listHrefInfos.Add(hrefInfo);
 
             }
@@ -322,7 +357,7 @@ public class InlineText : Text, IPointerClickHandler
     #endregion
 
     #region  超链接信息类
-    private class HrefInfo
+    public class HrefInfo
     {
         public int Id;
 
@@ -358,6 +393,7 @@ public class InlineText : Text, IPointerClickHandler
     }
     #endregion
 
+	//回收SpriteTagInfo
     private void ReleaseSpriteTageInfo()
     {
         //记录之前的信息
@@ -368,13 +404,49 @@ public class InlineText : Text, IPointerClickHandler
         }
         _spriteInfo.Clear();
     }
+	//回收超链接的信息
+	private void ReleaseHrefInfos()
+	{
+		for (int i = 0; i < _listHrefInfos.Count; i++)
+		{
+			Pool<HrefInfo>.Release(_listHrefInfos[i]);
+		}
+		_listHrefInfos.Clear();
+	}
 
 #if UNITY_EDITOR
+	Vector3[] _textWolrdVertexs = new Vector3[4];
 	private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-		
-        for (int i = 0; i < _spriteInfo.Count; i++)
+		//text
+        Gizmos.color = Color.white;
+		rectTransform.GetWorldCorners(_textWolrdVertexs);
+		Gizmos.DrawLine(_textWolrdVertexs[0], _textWolrdVertexs[1]);
+		Gizmos.DrawLine(_textWolrdVertexs[1], _textWolrdVertexs[2]);
+		Gizmos.DrawLine(_textWolrdVertexs[2], _textWolrdVertexs[3]);
+		Gizmos.DrawLine(_textWolrdVertexs[3], _textWolrdVertexs[0]);
+
+		//href
+		Gizmos.color = Color.green;
+		for (int i = 0; i < _listHrefInfos.Count; i++)
+		{
+			for (int j = 0; j < _listHrefInfos[i].Boxes.Count; j++)
+			{
+				Rect rect = _listHrefInfos[i].Boxes[j];
+				Vector3 point00 = Utility.TransformPoint2World(transform,rect.position);
+				Vector3 point01 = Utility.TransformPoint2World(transform, new Vector3(rect.x+rect.width,rect.y));
+				Vector3 point02 = Utility.TransformPoint2World(transform, new Vector3(rect.x+rect.width,rect.y+rect.height));
+				Vector3 point03 = Utility.TransformPoint2World(transform, new Vector3(rect.x,rect.y+rect.height));
+				Gizmos.DrawLine(point00, point01);
+				Gizmos.DrawLine(point01, point02);
+				Gizmos.DrawLine(point02, point03);
+				Gizmos.DrawLine(point03, point00);
+			}
+		}
+
+		//sprite
+		Gizmos.color = Color.yellow;
+		for (int i = 0; i < _spriteInfo.Count; i++)
         {
             Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[1]);
             Gizmos.DrawLine(_spriteInfo[i].Pos[1], _spriteInfo[i].Pos[2]);

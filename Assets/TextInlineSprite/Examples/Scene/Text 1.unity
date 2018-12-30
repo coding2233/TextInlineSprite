@@ -426,23 +426,23 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "<color=black>\u9759\u6001\u8868\u60C5:</color>\nNew Text<quad size=24 width=1
-    />\nNew Text<quad size=24 width=1 />\nNew Text<quad size=24 width=1 />\nNew Text<quad
-    size=24 width=1 />\nNew Text<quad size=24 width=1 />0\nNew Text<quad size=24 width=1
-    />00000000"
+    />\nNew Text<quad size=24 width=1 />\nNew T0000000ext<quad size=24 width=1 />\nNew
+    Text<quad size=24 width=1 />\nNew Text<quad size=24 width=1 />0\nNew Text<quad
+    size=24 width=1 />00000000"
   OnHrefClick:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: InlineText+HrefClickEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   _text: "<color=black>\u9759\u6001\u8868\u60C5:</color>\nNew Text[#emoji_0]\nNew
-    Text[#emoji_1]\nNew Text[#emoji_2]\nNew Text[#emoji_3]\nNew Text[#emoji_4]0\nNew
+    Text[#emoji_1]\nNew T0000000ext[#emoji_2]\nNew Text[#emoji_3]\nNew Text[#emoji_4]0\nNew
     Text[#emoji_5]00000000"
 --- !u!222 &1366302172
 CanvasRenderer:
@@ -563,8 +563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae7019e071d5fe4e9d442887a3ac0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isStatic: 0
-  _animationSpeed: 5
   _spriteGraphics:
   - {fileID: 1546337849}
 --- !u!222 &1670842538
@@ -641,13 +639,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00000<quad size=24 width=1 />0000<quad size=24 width=1 />00000
+  m_Text: 0000000000000<color=blue>[00000000000000000000000]</color>00<quad size=24
+    width=1 />0000<quad size=24 width=1 />00000
   OnHrefClick:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: InlineText+HrefClickEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  _text: 00000[#emoji_2]0000[#emoji_6]00000
+  _text: 0000000000000[-1#00000000000000000000000]00[#emoji_2]0000[#emoji_6]00000
 --- !u!222 &1707421984
 CanvasRenderer:
   m_ObjectHideFlags: 0
