@@ -42,10 +42,10 @@ namespace EmojiText.Taurus
 			_chatText.text = _chatString;
 			//  _chatText.ActiveText();
 			Vector2 _imagSize = _ChatTextSize;
-			if (_chatText.preferredWidth < _ChatTextSize.x)
-				_imagSize.x = _chatText.preferredWidth + 0.3f;
-			if (_chatText.preferredHeight > _ChatTextSize.y)
-				_imagSize.y = _chatText.preferredHeight + 0.8f;
+			//if (_chatText.preferredWidth < _ChatTextSize.x)
+				_imagSize.x = _chatText.preferredWidth + 0.0f;
+			//if (_chatText.preferredHeight > _ChatTextSize.y)
+				_imagSize.y = _chatText.preferredHeight + 0.0f;
 			_chatImage.rectTransform.sizeDelta = _imagSize;
 			Vector2 _pos = new Vector2(0.0f, _ViewHight);
 			_chatClone.GetComponent<RectTransform>().anchoredPosition = _pos;

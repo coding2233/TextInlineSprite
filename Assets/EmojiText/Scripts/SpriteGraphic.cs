@@ -77,6 +77,7 @@ namespace EmojiText.Taurus
 		protected override void OnPopulateMesh(VertexHelper vh)
 		{
 			vh.Clear();
+			//在这里可以做一个数据判断，如果数据一样 就不再刷新
 			if (_meshInfo != null)
 			{
 				for (int i = 0; i < _meshInfo.Vertices.Count; i++)

@@ -84,11 +84,16 @@ namespace EmojiText.Taurus
 			base.OnEnable();
 			supportRichText = true;
 			alignByGeometry = true;
-			_inlineManager = GetComponentInParent<InlineManager>();
+			if(_inlineManager==null)
+				_inlineManager = GetComponentInParent<InlineManager>();
 		}
 
 		protected override void Start()
 		{
+			base.Start();
+
+			if (_inlineManager == null)
+				_inlineManager = GetComponentInParent<InlineManager>();
 			m_Text = GetOutputText(_text);
 			SetVerticesDirty();
 			SetLayoutDirty();
@@ -119,7 +124,7 @@ namespace EmojiText.Taurus
 			{
 				var settings = GetGenerationSettings(Vector2.zero);
 				float width= cachedTextGeneratorForLayout.GetPreferredWidth(m_Text, settings) / pixelsPerUnit;
-				return width < rectTransform.sizeDelta.x || horizontalOverflow==HorizontalWrapMode.Overflow? width : rectTransform.sizeDelta.x;
+				return width < rectTransform.sizeDelta.x || horizontalOverflow==HorizontalWrapMode.Overflow ? width : rectTransform.sizeDelta.x;
 			}
 		}
 		public override float preferredHeight
