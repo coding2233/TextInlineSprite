@@ -20,18 +20,7 @@ public class InlineManager : MonoBehaviour {
     private readonly Dictionary<int, SpriteGraphicInfo> _indexSpriteGraphic = new Dictionary<int, SpriteGraphicInfo>();
     //绘制的模型数据索引
     private Dictionary<int, Dictionary<InlineText, MeshInfo>> _textMeshInfo = new Dictionary<int, Dictionary<InlineText, MeshInfo>>();
-    //静态表情
-    [SerializeField]
-    private bool _isStatic = true;
-    //动画速度
-    [SerializeField]
-    [Range(1, 10)]
-    private float _animationSpeed = 5.0f;
-    //动画时间
-    float _animationTime = 0.0f;
-    //动画索引
-    int _animationIndex = 0;
-
+    
     //图集
     [SerializeField]
     private List<SpriteGraphic02> _spriteGraphics = new List<SpriteGraphic02>();
@@ -118,7 +107,7 @@ public class InlineManager : MonoBehaviour {
         }
     }
 
-    public void UpdateTextInfo(InlineText key, int id, SpriteTagInfo value)
+    public void UpdateTextInfo(InlineText key, int id, List<SpriteTagInfo> value)
     {
 		Dictionary<InlineText, MeshInfo> textMeshInfo;
 		if (value == null)
@@ -143,12 +132,12 @@ public class InlineManager : MonoBehaviour {
 				meshInfo = Pool<MeshInfo>.Get();
 				textMeshInfo.Add(key, meshInfo);
 			}
-			//else
-			//	meshInfo.Clear();
-
-			meshInfo.Vertices.AddRange(value.Pos);
-			meshInfo.UVs.AddRange(value.UVs);
-		
+			meshInfo.Clear();
+			for (int i = 0; i < value.Count; i++)
+			{
+				meshInfo.Vertices.AddRange(value[i].Pos);
+				meshInfo.UVs.AddRange(value[i].UVs);
+			}
 		}
 
 		//添加到渲染列表里面  --  等待下一帧渲染

@@ -16,12 +16,9 @@ public class InlineText : Text, IPointerClickHandler
 	private static readonly Regex _inputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)\]", RegexOptions.Singleline);
     //文本表情管理器
     private InlineManager _inlineManager;
-    //更新后的文本
-    private string _outputText = "";
+ 
     //表情位置索引信息
     private List<SpriteTagInfo> _spriteInfo = new List<SpriteTagInfo>();
-	//保留之前的图集ID，相关信息
-	private Dictionary<int, List<SpriteTagInfo>> _oldDrawSpriteInfo = new Dictionary<int, List<SpriteTagInfo>>();
 	//计算定点信息的缓存数组
 	private readonly UIVertex[] m_TempVerts = new UIVertex[4];
 
@@ -137,29 +134,29 @@ public class InlineText : Text, IPointerClickHandler
     }
 
     #region 文本所占的长宽
-    public override float preferredWidth
-    {
-        get
-        {
-            var settings = GetGenerationSettings(Vector2.zero);
-            return cachedTextGeneratorForLayout.GetPreferredWidth(_outputText, settings) / pixelsPerUnit;
-        }
-    }
-    public override float preferredHeight
-    {
-        get
-        {
-            var settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
-            return cachedTextGeneratorForLayout.GetPreferredHeight(_outputText, settings) / pixelsPerUnit;
-        }
-    }
-    #endregion
+    //public override float preferredWidth
+    //{
+    //    get
+    //    {
+    //        var settings = GetGenerationSettings(Vector2.zero);
+    //        return cachedTextGeneratorForLayout.GetPreferredWidth(_outputText, settings) / pixelsPerUnit;
+    //    }
+    //}
+    //public override float preferredHeight
+    //{
+    //    get
+    //    {
+    //        var settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
+    //        return cachedTextGeneratorForLayout.GetPreferredHeight(_outputText, settings) / pixelsPerUnit;
+    //    }
+    //}
+	#endregion
 
-    #region 绘制表情
+	#region 绘制表情
     void UpdateDrawnSprite()
     {
 		//记录之前的信息
-		if (_spriteInfo == null || _spriteInfo.Count == 0&& _lastRenderIndexs.Count>0)
+		if ((_spriteInfo == null || _spriteInfo.Count == 0)&& _lastRenderIndexs.Count>0)
 		{
 			for (int i = 0; i < _lastRenderIndexs.Count; i++)
 			{
@@ -172,10 +169,12 @@ public class InlineText : Text, IPointerClickHandler
 			_lastRenderIndexs.Clear();
 			for (int i = 0; i < _spriteInfo.Count; i++)
 			{
-				_inlineManager.UpdateTextInfo(this, _spriteInfo[i].Id,  _spriteInfo[i]);
 				//添加渲染id索引
-				if(_lastRenderIndexs.Contains(_spriteInfo[i].Id))
+				if (!_lastRenderIndexs.Contains(_spriteInfo[i].Id))
+				{
+					_inlineManager.UpdateTextInfo(this, _spriteInfo[i].Id,_spriteInfo.FindAll(x=>x.Id== _spriteInfo[i].Id));
 					_lastRenderIndexs.Add(_spriteInfo[i].Id);
+				}
 			}
 		}
     }
