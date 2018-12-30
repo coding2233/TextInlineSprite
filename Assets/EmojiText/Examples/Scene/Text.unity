@@ -177,7 +177,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1807511896}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -308,8 +308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 94.5, y: -76.1}
-  m_SizeDelta: {x: 134.8, y: 182.2}
+  m_AnchoredPosition: {x: 76.69, y: -67.04}
+  m_SizeDelta: {x: 99.19, y: 164.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609976087
 MonoBehaviour:
@@ -535,12 +535,12 @@ Prefab:
     - target: {fileID: 224894336202030516, guid: 60411c537497e614b96c56ec7a2449c7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -76.1
+      value: -67.04
       objectReference: {fileID: 0}
     - target: {fileID: 224894336202030516, guid: 60411c537497e614b96c56ec7a2449c7,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 182.2
+      value: 164.08
       objectReference: {fileID: 0}
     - target: {fileID: 224894336202030516, guid: 60411c537497e614b96c56ec7a2449c7,
         type: 2}
@@ -590,6 +590,11 @@ Prefab:
         type: 2}
       propertyPath: _text
       value: "<color=black>\u9759\u6001\u8868\u60C5</color>\nNewText[#emoji_0]\nNewText[#emoji_1]\nNewText[#emoji_2]\nNewText[#emoji_3]\nNewText[#emoji_4]"
+      objectReference: {fileID: 0}
+    - target: {fileID: 224894336202030516, guid: 60411c537497e614b96c56ec7a2449c7,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114914968845199358, guid: 60411c537497e614b96c56ec7a2449c7, type: 2}
@@ -722,6 +727,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a43be44be4e113479cbf3f4c3faeec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1251678750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1502221938520230, guid: 60411c537497e614b96c56ec7a2449c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251678751}
+  - component: {fileID: 1251678754}
+  - component: {fileID: 1251678753}
+  - component: {fileID: 1251678752}
+  m_Layer: 5
+  m_Name: Text (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1251678751
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 224894336202030516, guid: 60411c537497e614b96c56ec7a2449c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251678750}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1913370633}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -217.6}
+  m_SizeDelta: {x: 197, y: 117.31}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1251678752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251678750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a43be44be4e113479cbf3f4c3faeec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1251678753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114718484989583292, guid: 60411c537497e614b96c56ec7a2449c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251678750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe91fb1d3926f5940bad17bb75cfd5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: <quad size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad
+    size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24
+    width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1
+    /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad
+    size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24
+    width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1
+    /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad
+    size=24 width=1 /><quad size=24 width=1 /><quad size=24 width=1 /><quad size=24
+    width=1 /><quad size=24 width=1 />
+  OnHrefClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EmojiText.Taurus.InlineText+HrefClickEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _text: '[#emoji_0][#emoji_1][#emoji_2][#emoji_3][#emoji_4][#emoji_5][#emoji_6][#emoji_7][#emoji_0][#emoji_1][#emoji_2][#emoji_3][#emoji_4][#emoji_5][#emoji_6][#emoji_7][#emoji_0][#emoji_1][#emoji_2][#emoji_3][#emoji_4][#emoji_5][#emoji_6][#emoji_7][1#angry][#emoji_0][1#roll][0#emoji_0]'
+--- !u!222 &1251678754
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 222279214585701088, guid: 60411c537497e614b96c56ec7a2449c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251678750}
+  m_CullTransparentMesh: 0
 --- !u!1 &1302729960
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +1063,7 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 1
@@ -962,14 +1072,14 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "<color=black>\u591A\u56FE\u96C6\u8868\u60C5</color>\nNewText<quad size=24
-    width=1 />NewText<quad size=24 width=1 />\nNewText<quad size=24 width=1 />NewText<quad
+    width=1 />NewText<quad size=24 width=1 />\nNewText<quad size=24 width=1 />New00Text<quad
     size=24 width=1 />"
   OnHrefClick:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: EmojiText.Taurus.InlineText+HrefClickEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _text: "<color=black>\u591A\u56FE\u96C6\u8868\u60C5</color>\nNewText[0#emoji_0]NewText[1#angry]\nNewText[1#roll]NewText[0#emoji_0]"
+  _text: "<color=black>\u591A\u56FE\u96C6\u8868\u60C5</color>\nNewText[#emoji_0]NewText[1#angry]\nNewText[1#roll]New00Text[0#emoji_0]"
 --- !u!222 &1835673699
 CanvasRenderer:
   m_ObjectHideFlags: 0

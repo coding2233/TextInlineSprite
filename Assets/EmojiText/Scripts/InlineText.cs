@@ -111,25 +111,26 @@ namespace EmojiText.Taurus
 			UpdateDrawSprite();
 		}
 
-		#region 文本所占的长宽
-		//public override float preferredWidth
-		//{
-		//    get
-		//    {
-		//        var settings = GetGenerationSettings(Vector2.zero);
-		//        return cachedTextGeneratorForLayout.GetPreferredWidth(_outputText, settings) / pixelsPerUnit;
-		//    }
-		//}
-		//public override float preferredHeight
-		//{
-		//    get
-		//    {
-		//        var settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
-		//        return cachedTextGeneratorForLayout.GetPreferredHeight(_outputText, settings) / pixelsPerUnit;
-		//    }
-		//}
-		#endregion
-
+		// 重写文本所占的长宽
+		//文本的宽度计算好像有bug，超过sizeDelta就取sizeDelta
+		public override float preferredWidth
+		{
+			get
+			{
+				var settings = GetGenerationSettings(Vector2.zero);
+				float width= cachedTextGeneratorForLayout.GetPreferredWidth(m_Text, settings) / pixelsPerUnit;
+				return width < rectTransform.sizeDelta.x || horizontalOverflow==HorizontalWrapMode.Overflow? width : rectTransform.sizeDelta.x;
+			}
+		}
+		public override float preferredHeight
+		{
+			get
+			{
+				var settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
+				float height= cachedTextGeneratorForLayout.GetPreferredHeight(m_Text, settings) / pixelsPerUnit;
+				return height < rectTransform.sizeDelta.y || verticalOverflow == VerticalWrapMode.Overflow ? height : rectTransform.sizeDelta.y;
+			}
+		}
 		#endregion
 
 		#region 事件回调
@@ -381,40 +382,52 @@ namespace EmojiText.Taurus
 		private void OnDrawGizmos()
 		{
 			//text
-			Gizmos.color = Color.white;
 			rectTransform.GetWorldCorners(_textWolrdVertexs);
-			Gizmos.DrawLine(_textWolrdVertexs[0], _textWolrdVertexs[1]);
-			Gizmos.DrawLine(_textWolrdVertexs[1], _textWolrdVertexs[2]);
-			Gizmos.DrawLine(_textWolrdVertexs[2], _textWolrdVertexs[3]);
-			Gizmos.DrawLine(_textWolrdVertexs[3], _textWolrdVertexs[0]);
+			GizmosDrawLine(Color.white,_textWolrdVertexs);
+
+			//preferred size
+			Vector2 pivot = GetTextAnchorPivot(alignment);
+			Rect rect = new Rect();
+			Vector2 size = rectTransform.sizeDelta - new Vector2(preferredWidth, preferredHeight);
+			rect.position = pivot * size - rectTransform.sizeDelta / 2.0f;
+			rect.width = preferredWidth;
+			rect.height = preferredHeight;
+			_textWolrdVertexs[0] = Utility.TransformPoint2World(transform,new Vector3(rect.x, rect.y));
+			_textWolrdVertexs[1] = Utility.TransformPoint2World(transform, new Vector3(rect.x+rect.width, rect.y));
+			_textWolrdVertexs[2] = Utility.TransformPoint2World(transform, new Vector3(rect.x + rect.width, rect.y+rect.height));
+			_textWolrdVertexs[3] = Utility.TransformPoint2World(transform, new Vector3(rect.x, rect.y+rect.height));
+			GizmosDrawLine(Color.blue,_textWolrdVertexs);
 
 			//href
-			Gizmos.color = Color.green;
 			for (int i = 0; i < _listHrefInfos.Count; i++)
 			{
 				for (int j = 0; j < _listHrefInfos[i].Boxes.Count; j++)
 				{
-					Rect rect = _listHrefInfos[i].Boxes[j];
-					Vector3 point00 = Utility.TransformPoint2World(transform, rect.position);
-					Vector3 point01 = Utility.TransformPoint2World(transform, new Vector3(rect.x + rect.width, rect.y));
-					Vector3 point02 = Utility.TransformPoint2World(transform, new Vector3(rect.x + rect.width, rect.y + rect.height));
-					Vector3 point03 = Utility.TransformPoint2World(transform, new Vector3(rect.x, rect.y + rect.height));
-					Gizmos.DrawLine(point00, point01);
-					Gizmos.DrawLine(point01, point02);
-					Gizmos.DrawLine(point02, point03);
-					Gizmos.DrawLine(point03, point00);
+					rect = _listHrefInfos[i].Boxes[j];
+					_textWolrdVertexs[0] = Utility.TransformPoint2World(transform, rect.position);
+					_textWolrdVertexs[1] = Utility.TransformPoint2World(transform, new Vector3(rect.x + rect.width, rect.y));
+					_textWolrdVertexs[2] = Utility.TransformPoint2World(transform, new Vector3(rect.x + rect.width, rect.y + rect.height));
+					_textWolrdVertexs[3] = Utility.TransformPoint2World(transform, new Vector3(rect.x, rect.y + rect.height));
+					
+					GizmosDrawLine(Color.green,_textWolrdVertexs);
 				}
 			}
 
 			//sprite
-			Gizmos.color = Color.yellow;
 			for (int i = 0; i < _spriteInfo.Count; i++)
 			{
-				Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[1]);
-				Gizmos.DrawLine(_spriteInfo[i].Pos[1], _spriteInfo[i].Pos[2]);
-				Gizmos.DrawLine(_spriteInfo[i].Pos[3], _spriteInfo[i].Pos[2]);
-				Gizmos.DrawLine(_spriteInfo[i].Pos[0], _spriteInfo[i].Pos[3]);
+				GizmosDrawLine(Color.yellow,_spriteInfo[i].Pos);
 			}
+		}
+		//划线
+		private void GizmosDrawLine(Color color,Vector3[] pos)
+		{
+			Gizmos.color = color;
+
+			Gizmos.DrawLine(pos[0], pos[1]);
+			Gizmos.DrawLine(pos[1], pos[2]);
+			Gizmos.DrawLine(pos[2], pos[3]);
+			Gizmos.DrawLine(pos[3], pos[0]);
 		}
 #endif
 		#endregion
