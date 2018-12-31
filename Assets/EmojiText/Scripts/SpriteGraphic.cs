@@ -83,7 +83,7 @@ namespace EmojiText.Taurus
 				for (int i = 0; i < _meshInfo.Vertices.Count; i++)
 				{
 					int tempVertsIndex = i & 3;
-					_tempVerts[tempVertsIndex].position = Utility.TransformWorld2Point(transform, _meshInfo.Vertices[i]);
+					_tempVerts[tempVertsIndex].position = _meshInfo.Vertices[i];// Utility.TransformWorld2Point(transform, _meshInfo.Vertices[i]);
 					_tempVerts[tempVertsIndex].uv0 = _meshInfo.UVs[i];
 					_tempVerts[tempVertsIndex].color = color;
 					if (tempVertsIndex == 3)

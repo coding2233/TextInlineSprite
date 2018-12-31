@@ -55,7 +55,8 @@ namespace EmojiText.Taurus
 				{
 					if (String.IsNullOrEmpty(m_Text))
 						return;
-					m_Text = "";
+					//m_Text = "";
+					m_Text = GetOutputText(value);
 					SetVerticesDirty();
 				}
 				else if (_text != value)
@@ -165,12 +166,13 @@ namespace EmojiText.Taurus
 		//根据正则规则更新文本
 		private string GetOutputText(string inputText)
 		{
-			if (string.IsNullOrEmpty(inputText))
-				return "";
-
 			//回收各种对象
 			ReleaseSpriteTageInfo();
 			ReleaseHrefInfos();
+
+			if (string.IsNullOrEmpty(inputText))
+				return "";
+			
 			_textBuilder.Remove(0, _textBuilder.Length);
 			int textIndex = 0;
 
@@ -394,7 +396,7 @@ namespace EmojiText.Taurus
 			Vector2 pivot = GetTextAnchorPivot(alignment);
 			Rect rect = new Rect();
 			Vector2 size = rectTransform.sizeDelta - new Vector2(preferredWidth, preferredHeight);
-			rect.position = pivot * size - rectTransform.sizeDelta / 2.0f;
+			rect.position = pivot * size - rectTransform.sizeDelta *(rectTransform.pivot);
 			rect.width = preferredWidth;
 			rect.height = preferredHeight;
 			_textWolrdVertexs[0] = Utility.TransformPoint2World(transform,new Vector3(rect.x, rect.y));

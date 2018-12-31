@@ -56,18 +56,18 @@ namespace EmojiText.Taurus
 				for (int i = 0; i < _renderIndexs.Count; i++)
 				{
 					int id = _renderIndexs[i];
-					SpriteGraphic spriteGraphic02 = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
-					if (spriteGraphic02 != null)
+					SpriteGraphic spriteGraphic = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
+					if (spriteGraphic != null)
 					{
 						if (!_graphicMeshInfo.ContainsKey(id))
 						{
-							spriteGraphic02.MeshInfo = null;
+							spriteGraphic.MeshInfo = null;
 							continue;
 						}
 
 						Dictionary<InlineText, MeshInfo> textMeshInfo = _graphicMeshInfo[id];
 						if (textMeshInfo == null || textMeshInfo.Count == 0)
-							spriteGraphic02.MeshInfo = null;
+							spriteGraphic.MeshInfo = null;
 						else
 						{
 							MeshInfo meshInfo = Pool<MeshInfo>.Get();
@@ -77,10 +77,10 @@ namespace EmojiText.Taurus
 								meshInfo.Vertices.AddRange(item.Value.Vertices);
 								meshInfo.UVs.AddRange(item.Value.UVs);
 							}
-							if (spriteGraphic02.MeshInfo != null)
-								Pool<MeshInfo>.Release(spriteGraphic02.MeshInfo);
+							if (spriteGraphic.MeshInfo != null)
+								Pool<MeshInfo>.Release(spriteGraphic.MeshInfo);
 
-							spriteGraphic02.MeshInfo = meshInfo;
+							spriteGraphic.MeshInfo = meshInfo;
 						}
 					}
 				}
@@ -103,23 +103,31 @@ namespace EmojiText.Taurus
 			}
 			else
 			{
-				if (!_graphicMeshInfo.TryGetValue(id, out textMeshInfo))
+				SpriteGraphic spriteGraphic = _spriteGraphics.Find(x => x.m_spriteAsset != null && x.m_spriteAsset.Id == id);
+				if (spriteGraphic != null)
 				{
-					textMeshInfo = new Dictionary<InlineText, MeshInfo>();
-					_graphicMeshInfo.Add(id, textMeshInfo);
-				}
+					if (!_graphicMeshInfo.TryGetValue(id, out textMeshInfo))
+					{
+						textMeshInfo = new Dictionary<InlineText, MeshInfo>();
+						_graphicMeshInfo.Add(id, textMeshInfo);
+					}
 
-				MeshInfo meshInfo;
-				if (!textMeshInfo.TryGetValue(key, out meshInfo))
-				{
-					meshInfo = Pool<MeshInfo>.Get();
-					textMeshInfo.Add(key, meshInfo);
-				}
-				meshInfo.Clear();
-				for (int i = 0; i < value.Count; i++)
-				{
-					meshInfo.Vertices.AddRange(value[i].Pos);
-					meshInfo.UVs.AddRange(value[i].UVs);
+					MeshInfo meshInfo;
+					if (!textMeshInfo.TryGetValue(key, out meshInfo))
+					{
+						meshInfo = Pool<MeshInfo>.Get();
+						textMeshInfo.Add(key, meshInfo);
+					}
+					meshInfo.Clear();
+					for (int i = 0; i < value.Count; i++)
+					{
+						for (int j = 0; j < value[i].Pos.Length; j++)
+						{
+							//世界转本地坐标->避免位置变换的错位
+							meshInfo.Vertices.Add(Utility.TransformWorld2Point(spriteGraphic.transform, value[i].Pos[j]));
+						}
+						meshInfo.UVs.AddRange(value[i].UVs);
+					}
 				}
 			}
 

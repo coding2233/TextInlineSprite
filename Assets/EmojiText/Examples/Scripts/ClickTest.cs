@@ -1,12 +1,4 @@
-﻿/// ========================================================
-/// file：ClickTest.cs
-/// brief：
-/// author： coding2233
-/// date：
-/// version：v1.0
-/// ========================================================
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
