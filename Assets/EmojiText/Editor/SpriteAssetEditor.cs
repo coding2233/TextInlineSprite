@@ -22,6 +22,8 @@ namespace EmojiText.Taurus
 		private bool _addTag;
 		//添加的标签的名称
 		private string _addTagName;
+		//选择
+		private Dictionary<SpriteInforGroup, bool> _selectSpriteGroup = new Dictionary<SpriteInforGroup, bool>();
 
 		public void OnEnable()
 		{
@@ -56,7 +58,7 @@ namespace EmojiText.Taurus
 			_spriteAsset.IsStatic = EditorGUILayout.Toggle("Static:", _spriteAsset.IsStatic);
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal();
-			if (GUILayout.Button("Add Tag"))
+			if (GUILayout.Button("New Tag"))
 			{
 				_addTag = !_addTag;
 			}
@@ -91,6 +93,34 @@ namespace EmojiText.Taurus
 				}
 				GUILayout.EndHorizontal();
 			}
+
+			if (GUILayout.Button("Add Tag"))
+			{
+				GenericMenu gm = new GenericMenu();
+				for (int n = 0; n < _tags.Count; n++)
+				{
+					string newTag = _tags[n];
+					gm.AddItem(new GUIContent(_tags[n]), false,
+							delegate ()
+						{
+							List<SpriteInforGroup> selectGroup = new List<SpriteInforGroup>();
+							foreach (var item in _selectSpriteGroup)
+							{
+								if (item.Value)
+									selectGroup.Add(item.Key);
+							}
+
+							for (int j = 0; j < selectGroup.Count; j++)
+							{
+								for (int i = 0; i < selectGroup[j].ListSpriteInfor.Count; i++)
+								{
+									ChangeTag(newTag, selectGroup[j].ListSpriteInfor[i]);
+								}
+							}
+						});
+				}
+				gm.ShowAsContext();
+			}
 			GUILayout.BeginHorizontal();
 			if (GUILayout.Button("Clear Tag"))
 			{
@@ -111,6 +141,7 @@ namespace EmojiText.Taurus
 			for (int i = 0; i < _spriteAsset.ListSpriteGroup.Count; i++)
 			{
 				GUILayout.BeginHorizontal("HelpBox");
+				_selectSpriteGroup[_spriteAsset.ListSpriteGroup[i]] = GUILayout.Toggle(_selectSpriteGroup[_spriteAsset.ListSpriteGroup[i]],"");
 				#region 展开与收缩按钮
 				if (GUILayout.Button(_spriteAsset.ListSpriteGroup[i].Tag, _showIndex == i ? "OL Minus" : "OL Plus"))
 				{
@@ -233,10 +264,12 @@ namespace EmojiText.Taurus
 		{
 			_tags = new List<string>();
 			_playIndexs = new List<int>();
+			_selectSpriteGroup.Clear();
 			for (int i = 0; i < _spriteAsset.ListSpriteGroup.Count; i++)
 			{
 				_tags.Add(_spriteAsset.ListSpriteGroup[i].Tag);
 				_playIndexs.Add(0);
+				_selectSpriteGroup.Add(_spriteAsset.ListSpriteGroup[i], false);
 			}
 			_playIndex = 0;
 			_showIndex = -1;
