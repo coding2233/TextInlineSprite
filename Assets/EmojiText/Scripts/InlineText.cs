@@ -14,7 +14,7 @@ namespace EmojiText.Taurus
 	{
 		#region 属性
 		// 用正则取  [图集ID#表情Tag] ID值==-1 ,表示为超链接
-		private static readonly Regex _inputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)\]", RegexOptions.Singleline);
+		private static readonly Regex _inputTagRegex = new Regex(@"\[(\-{0,1}\d{0,})#(.+?)(:{1}(.+?))?\]", RegexOptions.Singleline);
 		//文本表情管理器
 		private InlineManager _inlineManager;
 
@@ -154,7 +154,7 @@ namespace EmojiText.Taurus
 				{
 					if (boxes[i].Contains(lp))
 					{
-						OnHrefClick.Invoke(hrefInfo.Name, hrefInfo.Id);
+						OnHrefClick.Invoke(hrefInfo.HrefValue, hrefInfo.Id);
 						return;
 					}
 				}
@@ -198,6 +198,7 @@ namespace EmojiText.Taurus
 					hrefInfo.StartIndex = startIndex;// 超链接里的文本起始顶点索引
 					hrefInfo.EndIndex = endIndex;
 					hrefInfo.Name = match.Groups[2].Value;
+					hrefInfo.HrefValue = match.Groups[3].Value;
 					_listHrefInfos.Add(hrefInfo);
 
 				}
@@ -493,6 +494,10 @@ namespace EmojiText.Taurus
 		/// 名称
 		/// </summary>
 		public string Name;
+		/// <summary>
+		/// 超链接的值
+		/// </summary>
+		public string HrefValue;
 		/// <summary>
 		/// 碰撞盒范围
 		/// </summary>
