@@ -157,13 +157,8 @@ namespace EmojiText.Taurus
 				#endregion
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("Size:", GUILayout.Width(40));
-				_spriteAsset.ListSpriteGroup[i].Size = EditorGUILayout.FloatField("", _spriteAsset.ListSpriteGroup[i].Size, GUILayout.Width(40));
-				GUILayout.EndHorizontal();
-
-				GUILayout.BeginHorizontal();
-				GUILayout.Label("Width:", GUILayout.Width(40));
-				_spriteAsset.ListSpriteGroup[i].Width = EditorGUILayout.FloatField("", _spriteAsset.ListSpriteGroup[i].Width, GUILayout.Width(40));
+				GUILayout.Label("Scale:", GUILayout.Width(40));
+				_spriteAsset.ListSpriteGroup[i].Scale = EditorGUILayout.FloatField("", _spriteAsset.ListSpriteGroup[i].Scale, GUILayout.Width(40));
 				GUILayout.EndHorizontal();
 
 				#region 未展开的sprite组，播放序列帧动画（帧数大于1的序列帧动画才播放）
