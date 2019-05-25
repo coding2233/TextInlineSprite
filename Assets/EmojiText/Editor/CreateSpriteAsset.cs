@@ -43,9 +43,14 @@ namespace EmojiText.Taurus
 			}
 		}
 
-        private Vector2 _texScrollView;
+        private Vector2 _texScrollView = Vector2.zero;
+        private string _assetPath = "配置文件暂未保存";
+        private string[] _spriteNames = null;
+        private Vector2 _spritesScrollView = Vector2.zero;
+        private SpriteAsset _spriteAsset;
+        private int _showIndex = -1;
         private int _row=0;
-        private int _column=0;
+        private int _column = 0;
 
         private void OnGUI()
         {
@@ -59,52 +64,102 @@ namespace EmojiText.Taurus
                 //参数设置---------------
                 GUILayout.BeginVertical("HelpBox");
                 GUILayout.Label(_sourceTex.name);
-                GUILayout.Label(_sourceTex.width+"*"+_sourceTex.width);
+                GUILayout.Label(_sourceTex.width+"*"+_sourceTex.height);
+                //保存
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(_assetPath);
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Save"))
+                {
+                    string filePath = EditorUtility.SaveFilePanelInProject("保存表情的序列化文件", _sourceTex.name, "asset", "保存表情的序列化文件");
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        _assetPath = filePath;
+                        //创建序列化文件
+                        _spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
+                        _spriteAsset.TexSource = _sourceTex;
+                        _spriteAsset.ListSpriteGroup = new List<SpriteInforGroup>();
+                       // spriteAsset.ListSpriteGroup = GetAssetSpriteInfor(sourceTex);
+                        AssetDatabase.CreateAsset(_spriteAsset, _assetPath);
+                    }
+                    
+                }
+                GUILayout.EndHorizontal();
+
                 GUILayout.Space(5);
-                GUILayout.Label("Row:");
-                _row = EditorGUILayout.IntField(_row);
-                GUILayout.Label("Column:");
-                _column = EditorGUILayout.IntField(_column);
+                if (_spriteAsset)
+                {
+                    //行列
+                    GUILayout.BeginVertical("HelpBox");
+                    _spriteAsset.IsStatic = GUILayout.Toggle(_spriteAsset.IsStatic, "是否为静态表情?");
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Row:", GUILayout.Width(100));
+                    _spriteAsset.Row = EditorGUILayout.IntField(_spriteAsset.Row);
+                    GUILayout.EndHorizontal();
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Column:", GUILayout.Width(100));
+                    _spriteAsset.Column = EditorGUILayout.IntField(_spriteAsset.Column);
+                    GUILayout.EndHorizontal();
+                    GUILayout.EndVertical();
+                    //名称
+                    //if ((_row > 1 && _column > 1) && _isStatic)
+                    //{
+                    //    int count = _row * _column;
+                    //    if (_spriteNames == null || _spriteNames.Length != count)
+                    //    {
+                    //        _spriteNames = new string[count];
+                    //    }
+                    //}
+                    //else if ((_row > 1 && _column > 1) && !_isStatic)
+                    //{
+                    //    if (_spriteNames == null || _spriteNames.Length != _row)
+                    //    {
+                    //        _spriteNames = new string[_row];
+                    //    }
+                    //}
+
+                    if (_spriteNames != null)
+                    {
+                        GUILayout.Label("精灵信息:");
+                        _spritesScrollView = GUILayout.BeginScrollView(_spritesScrollView, "HelpBox");
+                        for (int i = 0; i < _spriteNames.Length; i++)
+                        {
+                            GUILayout.BeginHorizontal();
+                            if (GUILayout.Button(i.ToString(), _showIndex == i ? "OL Minus" : "OL Plus"))
+                            {
+                                if (_showIndex == i)
+                                    _showIndex = -1;
+                                else
+                                    _showIndex = i;
+                            }
+                            GUILayout.Label(" -- " + i + ":");
+                            GUILayout.EndHorizontal();
+                        }
+                        GUILayout.EndScrollView();
+                    }
+
+                   
+                }
+
                 GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
+
+                //非自动布局绘制------------------
+                //绘制线
+                DrawTextureLines();
+
             }
 
-            Handles.BeginGUI();
-            Handles.color = Color.green;
+            //更新信息
+            UpdateSpriteGroup();
 
-            if (_row > 0)
-            {
-                float yP = _sourceTex.height / _row;
-                float temy = _texScrollView.y % yP;
-                int maxRow =(int)(Screen.height / yP);
-                
-                for (int i = 0; i < maxRow; i++)
-                {
-                    float h = (yP * i) + (yP- temy);
-                    float endx = 0.625f * Screen.width - 10.0f;
-                    endx = endx > _sourceTex.width ? _sourceTex.width : endx;
-                    Handles.DrawLine(new Vector3(5, h), new Vector3(endx, h));
-                }
-            }
+            //保存序列化文件
+            if (_spriteAsset)
+                EditorUtility.SetDirty(_spriteAsset);
 
-            if (_column > 0)
-            {
-                float xP = _sourceTex.height / _row;
-                float temx = _texScrollView.x % xP;
-                float scrWidth = 0.625f * Screen.width;
-                scrWidth = scrWidth > _sourceTex.width ? _sourceTex.width : scrWidth;
-                int maxColumn = (int)(scrWidth / xP);
-
-                for (int i = 0; i < maxColumn; i++)
-                {
-                    float w = (xP * i) + (xP - temx);
-                    float endy = Screen.height > _sourceTex.height ? _sourceTex.height : Screen.height;
-                    Handles.DrawLine(new Vector3(w, 0), new Vector3(w, endy));
-                }
-            }
-
-            Handles.EndGUI();
         }
+
+     
 
         public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
 		{
@@ -167,5 +222,120 @@ namespace EmojiText.Taurus
 			return uv;
 		}
 
-	}
+
+        //绘制纹理上的线
+        private void DrawTextureLines()
+        {
+            if (_sourceTex && _spriteAsset)
+            {
+                Handles.BeginGUI();
+
+                //行 - line 
+                if (_spriteAsset.Row > 0)
+                {
+                    Handles.color = _spriteAsset.IsStatic ? Color.green : Color.red;
+                    float interval = _sourceTex.height / _spriteAsset.Row;
+                    float remain = _texScrollView.y % interval;
+                    int max = (int)(Screen.height / interval);
+
+                    for (int i = 0; i < max; i++)
+                    {
+                        float h = (interval * i) + (interval - remain);
+                        float endx = 0.625f * Screen.width - 15.0f;
+                        endx = endx > _sourceTex.width ? _sourceTex.width : endx;
+                        Handles.DrawLine(new Vector3(5, h), new Vector3(endx, h));
+                    }
+                }
+                //列 - line
+                if (_spriteAsset.Column > 0)
+                {
+                    Handles.color = Color.green;
+                    float interval = _sourceTex.width / _spriteAsset.Column;
+                    float remain = _texScrollView.x % interval;
+                    float scrollViewWidth = 0.625f * Screen.width;
+                    scrollViewWidth = scrollViewWidth > _sourceTex.width ? _sourceTex.width : scrollViewWidth;
+                    int max = (int)(scrollViewWidth / interval);
+
+                    for (int i = 0; i < max; i++)
+                    {
+                        float w = (interval * i) + (interval - remain);
+                        float endy = Screen.height > _sourceTex.height ? _sourceTex.height : (Screen.height);
+                        Handles.DrawLine(new Vector3(w, 5), new Vector3(w, endy));
+                    }
+                }
+
+                Handles.EndGUI();
+            }
+        }
+
+
+        //更新精灵组的信息
+        private void UpdateSpriteGroup()
+        {
+            if (_spriteAsset&& _spriteAsset.TexSource&& _spriteAsset.Row>1&&_spriteAsset.Column>1)
+            {
+                int count = _spriteAsset.IsStatic ? _spriteAsset.Row * _spriteAsset.Column : _spriteAsset.Row;
+                if (_spriteAsset.ListSpriteGroup.Count != count)
+                {
+                    _spriteAsset.ListSpriteGroup.Clear();
+                    //更新
+                    //----------------------------------
+                    Vector2 texSize = new Vector2(_spriteAsset.TexSource.width, _spriteAsset.TexSource.height);
+                    Vector2 size = new Vector2((_spriteAsset.TexSource.width / (float)_spriteAsset.Column)
+                        , (_spriteAsset.TexSource.height / (float)_spriteAsset.Row));
+                    if (_spriteAsset.IsStatic)
+                    {
+                        int index = -1;
+                        for (int i = 0; i < _spriteAsset.Row; i++)
+                        {
+                            for (int j = 0; j < _spriteAsset.Column; j++)
+                            {
+                                index++;
+                                SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
+                                SpriteInfor infor = Pool<SpriteInfor>.Get();
+                                infor.Id = index;
+                                infor.Name = i.ToString();
+                                infor.Rect = new Rect(size.y*j, texSize.y - i * size.x, size.x, size.y);
+                                infor.Uv = GetSpriteUV(texSize, infor.Rect);
+
+                                inforGroup.Tag = infor.Name;
+                                inforGroup.ListSpriteInfor.Add(infor);
+                                _spriteAsset.ListSpriteGroup.Add(inforGroup);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int index = -1;
+                        for (int i = 0; i < _spriteAsset.Row; i++)
+                        {
+                            SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
+                            inforGroup.Tag = (index + 1).ToString();
+                            for (int j = 0; j < _spriteAsset.Column; j++)
+                            {
+                                index++;
+                                
+                                SpriteInfor infor = Pool<SpriteInfor>.Get();
+                                infor.Id = index;
+                                infor.Name = index.ToString();
+                                infor.Rect = new Rect(size.y * j, texSize.y - i * size.x, size.x, size.y);
+                                infor.Uv = GetSpriteUV(texSize, infor.Rect);
+
+                                inforGroup.ListSpriteInfor.Add(infor);
+                            }
+                            _spriteAsset.ListSpriteGroup.Add(inforGroup);
+                        }
+                    }
+                   
+
+                }
+            }
+        }
+
+
+
+
+
+
+    }
 }

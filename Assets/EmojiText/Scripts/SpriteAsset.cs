@@ -18,10 +18,18 @@ namespace EmojiText.Taurus
 		/// 图片资源
 		/// </summary>
 		public Texture TexSource;
-		/// <summary>
-		/// 所有sprite信息 SpriteAssetInfor类为具体的信息类
-		/// </summary>
-		public List<SpriteInforGroup> ListSpriteGroup;
+        /// <summary>
+        /// 行
+        /// </summary>
+        public int Row;
+        /// <summary>
+        /// 列
+        /// </summary>
+        public int Column;
+        /// <summary>
+        /// 所有sprite信息 SpriteAssetInfor类为具体的信息类
+        /// </summary>
+        public List<SpriteInforGroup> ListSpriteGroup;
 	}
 
 	[System.Serializable]
