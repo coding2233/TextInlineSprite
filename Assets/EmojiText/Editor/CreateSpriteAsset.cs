@@ -6,18 +6,25 @@ using System.Collections.Generic;
 
 namespace EmojiText.Taurus
 {
-	public static class CreateSpriteAsset
+	public class CreateSpriteAsset:EditorWindow
 	{
+        static Texture2D _sourceTex;
+
 		[MenuItem("Assets/Create/Sprite Asset", false, 10)]
 		static void main()
 		{
+            GetWindow<CreateSpriteAsset>("Asset Window");
+           // return;
+
 			Object target = Selection.activeObject;
 			if (target == null || target.GetType() != typeof(Texture2D))
 				return;
 
 			Texture2D sourceTex = target as Texture2D;
-			//整体路径
-			string filePathWithName = AssetDatabase.GetAssetPath(sourceTex);
+            _sourceTex = sourceTex;
+            return;
+            //整体路径
+            string filePathWithName = AssetDatabase.GetAssetPath(sourceTex);
 			//带后缀的文件名
 			string fileNameWithExtension = Path.GetFileName(filePathWithName);
 			//不带后缀的文件名
@@ -36,7 +43,70 @@ namespace EmojiText.Taurus
 			}
 		}
 
-		public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
+        private Vector2 _texScrollView;
+        private int _row=0;
+        private int _column=0;
+
+        private void OnGUI()
+        {
+            if (_sourceTex != null)
+            {
+                GUILayout.BeginHorizontal();
+                //纹理渲染--------------
+                _texScrollView = GUILayout.BeginScrollView(_texScrollView, "",GUILayout.Width(0.625f*Screen.width));
+                GUILayout.Label(_sourceTex);
+                GUILayout.EndScrollView();
+                //参数设置---------------
+                GUILayout.BeginVertical("HelpBox");
+                GUILayout.Label(_sourceTex.name);
+                GUILayout.Label(_sourceTex.width+"*"+_sourceTex.width);
+                GUILayout.Space(5);
+                GUILayout.Label("Row:");
+                _row = EditorGUILayout.IntField(_row);
+                GUILayout.Label("Column:");
+                _column = EditorGUILayout.IntField(_column);
+                GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
+            }
+
+            Handles.BeginGUI();
+            Handles.color = Color.green;
+
+            if (_row > 0)
+            {
+                float yP = _sourceTex.height / _row;
+                float temy = _texScrollView.y % yP;
+                int maxRow =(int)(Screen.height / yP);
+                
+                for (int i = 0; i < maxRow; i++)
+                {
+                    float h = (yP * i) + (yP- temy);
+                    float endx = 0.625f * Screen.width - 10.0f;
+                    endx = endx > _sourceTex.width ? _sourceTex.width : endx;
+                    Handles.DrawLine(new Vector3(5, h), new Vector3(endx, h));
+                }
+            }
+
+            if (_column > 0)
+            {
+                float xP = _sourceTex.height / _row;
+                float temx = _texScrollView.x % xP;
+                float scrWidth = 0.625f * Screen.width;
+                scrWidth = scrWidth > _sourceTex.width ? _sourceTex.width : scrWidth;
+                int maxColumn = (int)(scrWidth / xP);
+
+                for (int i = 0; i < maxColumn; i++)
+                {
+                    float w = (xP * i) + (xP - temx);
+                    float endy = Screen.height > _sourceTex.height ? _sourceTex.height : Screen.height;
+                    Handles.DrawLine(new Vector3(w, 0), new Vector3(w, endy));
+                }
+            }
+
+            Handles.EndGUI();
+        }
+
+        public static List<SpriteInforGroup> GetAssetSpriteInfor(Texture2D tex)
 		{
 			List<SpriteInforGroup> _listGroup = new List<SpriteInforGroup>();
 			string filePath = UnityEditor.AssetDatabase.GetAssetPath(tex);

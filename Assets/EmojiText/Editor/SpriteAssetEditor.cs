@@ -43,11 +43,11 @@ namespace EmojiText.Taurus
 
 		public override void OnInspectorGUI()
 		{
-
-			_ve2ScorllView = GUILayout.BeginScrollView(_ve2ScorllView);
-
-			#region 标题栏
-			EditorGUILayout.HelpBox("Number Of Tags:" + _spriteAsset.ListSpriteGroup.Count + "     Number Of Group:" + _spriteAsset.ListSpriteGroup.Count, MessageType.Info);
+            _ve2ScorllView = GUILayout.BeginScrollView(_ve2ScorllView);
+          //  GUILayout.Label(_spriteAsset.TexSource, new GUILayoutOption[] { GUILayout.Width(Screen.width) });
+            
+            #region 标题栏
+            EditorGUILayout.HelpBox("Number Of Tags:" + _spriteAsset.ListSpriteGroup.Count + "     Number Of Group:" + _spriteAsset.ListSpriteGroup.Count, MessageType.Info);
 
 			GUILayout.BeginVertical("HelpBox");
 			GUILayout.BeginHorizontal();
@@ -57,7 +57,19 @@ namespace EmojiText.Taurus
 			GUILayout.BeginHorizontal();
 			_spriteAsset.IsStatic = EditorGUILayout.Toggle("Static:", _spriteAsset.IsStatic);
 			GUILayout.EndHorizontal();
-			GUILayout.BeginHorizontal();
+
+            GUILayout.BeginHorizontal();
+            //_spriteAsset.IsStatic = EditorGUILayout.Toggle("Static:", _spriteAsset.IsStatic);
+            GUILayout.Label("row:");
+            EditorGUILayout.IntField(1);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("column:");
+            EditorGUILayout.IntField(1);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
 			if (GUILayout.Button("New Tag"))
 			{
 				_addTag = !_addTag;
