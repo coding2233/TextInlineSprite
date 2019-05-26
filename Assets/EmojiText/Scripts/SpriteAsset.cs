@@ -80,7 +80,6 @@ namespace EmojiText.Taurus
 	{
 		public string Tag = "";
 		public List<SpriteInfor> ListSpriteInfor = new List<SpriteInfor>();
-		public float Width = 1.0f;
-		public float Size = 24.0f;
+		public float Scale = 1.0f;
 	}
 }
