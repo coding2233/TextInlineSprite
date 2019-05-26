@@ -213,14 +213,15 @@ namespace EmojiText.Taurus
 
 					_textBuilder.Append(inputText.Substring(textIndex, match.Index - textIndex));
 					int tempIndex = _textBuilder.Length * 4;
-					_textBuilder.Append(@"<quad size=" + tempGroup.Size + " width=" + tempGroup.Width + " />");
+					var originalSize = tempGroup.ListSpriteInfor[0].Rect.size;
+                    			_textBuilder.Append(@"<quad size=" + originalSize.y * tempGroup.Scale + " height=" + originalSize.y / originalSize.x + " />");
 
 					//清理标签
 					SpriteTagInfo tempSpriteTag = Pool<SpriteTagInfo>.Get();
 					tempSpriteTag.Index = tempIndex;
 					tempSpriteTag.Id = tempId;
 					tempSpriteTag.Tag = tempTag;
-					tempSpriteTag.Size = new Vector2(tempGroup.Size * tempGroup.Width, tempGroup.Size);
+					tempSpriteTag.Size = originalSize * tempGroup.Scale;
 					tempSpriteTag.UVs = tempGroup.ListSpriteInfor[0].Uv;
 
 					//添加正则表达式的信息
