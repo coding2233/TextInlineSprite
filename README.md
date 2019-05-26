@@ -31,13 +31,13 @@
 ---
 ### **使用步骤**  
 1. 选择一张表情图片，导入在unity里，为了支持透明通道，记得在图片属性中勾选`Alpha Is Transparent` 
-2. 右键选择图片，点击`Create/Sprite Asset`,打开资源窗口编辑器,点击`Load`或者`Save`来加载或者保存配置文件
+2. 右键选择图片，点击`Create/Sprite Asset`,打开资源窗口编辑器,点击`Save`来保存配置文件
     ![](ShotScreens/editor_01.png) 
 3. 在保存配置文件后，首先为图集设置一个唯一Id,然后设置图集表情的行列数，来自动切分表情，动态表情会自动将一排的Sprite自动归纳为一个表情，最后为每个表情设置一个可读的Tag，后续提供给Text调用。
     ![](ShotScreens/editor_02.png) 
 4. 配置文件创建完成后，在编辑器中，也可以预览，操作与资源窗口编辑器类型，并且点击`Open Asset Window`也可以打开编辑器窗口
     ![](ShotScreens/editor_03.png) 
-5. 文字使用方式，参考demo厂家'Text'，输入`NewText[1#rock]`即可显示表情
+5. 文字使用方式，参考demo场景'Text'，输入`NewText[1#rock]`即可显示表情
 
 ---  
 
