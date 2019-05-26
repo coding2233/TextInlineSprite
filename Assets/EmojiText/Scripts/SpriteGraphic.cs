@@ -16,12 +16,12 @@ namespace EmojiText.Taurus
 
 		public SpriteAsset m_spriteAsset;
 
-		//分割数量
-		[SerializeField]
-		private int _cellAmount = 1;
-		//动画速度
-		[SerializeField]
-		private float _speed;
+		////分割数量
+		//[SerializeField]
+		//private int _cellAmount = 1;
+		////动画速度
+		//[SerializeField]
+		//private float _speed;
 		//顶点缓存数据
 		readonly UIVertex[] _tempVerts = new UIVertex[4];
 
@@ -58,16 +58,18 @@ namespace EmojiText.Taurus
 		{
 			get
 			{
-				if (_defaultMater == null)
+				if (_defaultMater == null&& m_spriteAsset!=null)
 				{
 					_defaultMater = new Material(Shader.Find(_defaultShader));
-					_defaultMater.SetFloat("_CellAmount", _cellAmount);
-					_defaultMater.SetFloat("_Speed", _speed);
-					//是否开启动画
-					if (m_spriteAsset == null || m_spriteAsset.IsStatic)
-						_defaultMater.DisableKeyword("EMOJI_ANIMATION");
-					else
-						_defaultMater.EnableKeyword("EMOJI_ANIMATION");
+                    //是否开启动画
+                    if (m_spriteAsset.IsStatic)
+                        _defaultMater.DisableKeyword("EMOJI_ANIMATION");
+                    else
+                    {
+                        _defaultMater.EnableKeyword("EMOJI_ANIMATION");
+                        _defaultMater.SetFloat("_CellAmount", m_spriteAsset.Column);
+                        _defaultMater.SetFloat("_Speed", m_spriteAsset.Speed);
+                    }
 				}
 				return _defaultMater;
 			}

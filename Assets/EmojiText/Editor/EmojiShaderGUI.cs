@@ -11,7 +11,7 @@ namespace EmojiText.Taurus
 
 		public override void OnGUI(UnityEditor.MaterialEditor materialEditor, UnityEditor.MaterialProperty[] properties)
 		{
-			////	base.OnGUI(materialEditor, properties);
+			//base.OnGUI(materialEditor, properties);
 
 			//Material targetMat = materialEditor.target as Material;
 

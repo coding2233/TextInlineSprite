@@ -33,7 +33,9 @@ namespace EmojiText.Taurus
         {
             if (_spriteAsset)
             {
+                EditorGUILayout.HelpBox("强烈建议将资源图片上的所有表情，制成规格完全一样的！有规律才支持程序自动分割处理！如果需要实在特殊，请更行更改代码，或者通过github(https://github.com/coding2233/TextInlineSprite)与我沟通。", MessageType.Info);
                 //属性
+                GUILayout.Label("属性:");
                 GUILayout.BeginVertical("HelpBox");
                 //id
                 GUILayout.BeginHorizontal();
@@ -42,7 +44,14 @@ namespace EmojiText.Taurus
                 GUILayout.EndHorizontal();
                 //是否为静态表情
                 GUILayout.BeginHorizontal();
-                _spriteAsset.IsStatic = GUILayout.Toggle(_spriteAsset.IsStatic, "是否为静态表情?");
+                bool isStatic = GUILayout.Toggle(_spriteAsset.IsStatic, "是否为静态表情?");
+                if (isStatic != _spriteAsset.IsStatic)
+                {
+                    if (EditorUtility.DisplayDialog("提示", "切换表情类型，会导致重新命名Tag,请确认操作", "确认", "取消"))
+                    {
+                        _spriteAsset.IsStatic = isStatic;
+                    }
+                }
                 GUILayout.FlexibleSpace();
                 //动画的速度
                 if (!_spriteAsset.IsStatic)
@@ -179,7 +188,7 @@ namespace EmojiText.Taurus
                                 SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
                                 SpriteInfor infor = GetSpriteInfo(index, i, j, size, texSize);
 
-                                inforGroup.Tag = infor.Id.ToString();
+                                inforGroup.Tag = "emoji_"+infor.Id;
                                 inforGroup.ListSpriteInfor.Add(infor);
                                 _spriteAsset.ListSpriteGroup.Add(inforGroup);
                             }
@@ -191,7 +200,7 @@ namespace EmojiText.Taurus
                         for (int i = 0; i < _spriteAsset.Row; i++)
                         {
                             SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
-                            inforGroup.Tag = (index + 1).ToString();
+                            inforGroup.Tag = "emoji_"+(index + 1);
                             for (int j = 0; j < _spriteAsset.Column; j++)
                             {
                                 index++;

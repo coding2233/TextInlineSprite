@@ -11,7 +11,7 @@ namespace EmojiText.Taurus
         private static Texture2D _sourceTex;
 
         private Vector2 _texScrollView = Vector2.zero;
-        private string _assetPath = "配置文件暂未保存";
+        private static string _assetPath = "";
         private static SpriteAsset _spriteAsset;
         private static DrawSpriteAsset _drawSpriteAsset;
 
@@ -38,6 +38,7 @@ namespace EmojiText.Taurus
                 _spriteAsset = spriteAsset;
                 _sourceTex = (Texture2D)_spriteAsset.TexSource;
                 SetDrawSpriteAsset(_spriteAsset);
+                _assetPath = AssetDatabase.GetAssetPath(_spriteAsset);
                 GetWindow<CreateSpriteAsset>("Asset Window");
             }
         }
@@ -59,36 +60,35 @@ namespace EmojiText.Taurus
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("纹理名称",GUILayout.Width(80));
                 GUILayout.Label(_sourceTex.name);
+                GUILayout.FlexibleSpace();
+                //加载 图片
+                if (GUILayout.Button("Load"))
+                {
+                    string filePath = EditorUtility.OpenFilePanel("加载图集文件", "", "png");
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        //绝对路径->相对路径
+                        filePath = "Assets" + filePath.Replace(Application.dataPath, "");
+                        Texture2D tex2d = AssetDatabase.LoadAssetAtPath<Texture2D>(filePath);
+                        if (tex2d != null)
+                        {
+                            _sourceTex = tex2d;
+                            if (_spriteAsset)
+                                _spriteAsset.TexSource = _sourceTex;
+                        }
+                    }
+                }
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("纹理分辨率", GUILayout.Width(80));
                 GUILayout.Label(_sourceTex.width+" * "+_sourceTex.height);
                 GUILayout.EndHorizontal();
+                
                 //保存
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("配置文件路径", GUILayout.Width(80));
                 GUILayout.Label(_assetPath);
                 GUILayout.FlexibleSpace();
-                //加载
-                if (_spriteAsset == null && GUILayout.Button("Load"))
-                {
-                    string filePath = EditorUtility.OpenFilePanel("加载表情序列化文件","", "asset");
-                    if (!string.IsNullOrEmpty(filePath))
-                    {
-                        //绝对路径->相对路径
-                        filePath = "Assets"+filePath.Replace(Application.dataPath, "");
-                        _spriteAsset = AssetDatabase.LoadAssetAtPath<SpriteAsset>(filePath);
-                        if (_spriteAsset != null && _spriteAsset.TexSource != null)
-                        {
-                            _sourceTex = (Texture2D)_spriteAsset.TexSource;
-                            _assetPath = filePath;
-
-                            //设置精灵信息的绘制类
-                            SetDrawSpriteAsset(_spriteAsset);
-                        }
-                    }
-                }
-                //保存
                 if (GUILayout.Button(_spriteAsset==null?"Save":"Save As"))
                 {
                     string filePath = EditorUtility.SaveFilePanelInProject("保存表情的序列化文件", _sourceTex.name, "asset", "保存表情的序列化文件");

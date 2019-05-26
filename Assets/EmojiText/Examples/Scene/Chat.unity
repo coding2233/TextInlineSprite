@@ -647,8 +647,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_spriteAsset: {fileID: 11400000, guid: 448421e4fa7e96a48aad0c3882565341, type: 2}
-  _cellAmount: 8
-  _speed: 10
 --- !u!222 &446499072
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1478,9 +1476,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_spriteAsset: {fileID: 11400000, guid: 0ac9fb18f96c6664cac54a380bcb070e, type: 2}
-  _cellAmount: 1
-  _speed: 0
+  m_spriteAsset: {fileID: 11400000, guid: d54a8ddeedd4f8b4eac3f365f086b8ab, type: 2}
 --- !u!222 &1147398750
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1691,7 +1687,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 749037430}
   m_HandleRect: {fileID: 749037429}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
