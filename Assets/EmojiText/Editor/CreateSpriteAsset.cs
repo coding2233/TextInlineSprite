@@ -45,12 +45,12 @@ namespace EmojiText.Taurus
 
         private Vector2 _texScrollView = Vector2.zero;
         private string _assetPath = "配置文件暂未保存";
-        private string[] _spriteNames = null;
         private Vector2 _spritesScrollView = Vector2.zero;
         private SpriteAsset _spriteAsset;
         private int _showIndex = -1;
         private int _row=0;
         private int _column = 0;
+      
 
         private void OnGUI()
         {
@@ -101,29 +101,16 @@ namespace EmojiText.Taurus
                     _spriteAsset.Column = EditorGUILayout.IntField(_spriteAsset.Column);
                     GUILayout.EndHorizontal();
                     GUILayout.EndVertical();
-                    //名称
-                    //if ((_row > 1 && _column > 1) && _isStatic)
-                    //{
-                    //    int count = _row * _column;
-                    //    if (_spriteNames == null || _spriteNames.Length != count)
-                    //    {
-                    //        _spriteNames = new string[count];
-                    //    }
-                    //}
-                    //else if ((_row > 1 && _column > 1) && !_isStatic)
-                    //{
-                    //    if (_spriteNames == null || _spriteNames.Length != _row)
-                    //    {
-                    //        _spriteNames = new string[_row];
-                    //    }
-                    //}
-
-                    if (_spriteNames != null)
+                    //具体的精灵信息
+                    if (_spriteAsset&&_spriteAsset.ListSpriteGroup.Count>0)
                     {
+                        List<SpriteInforGroup> inforGroups = _spriteAsset.ListSpriteGroup;
                         GUILayout.Label("精灵信息:");
                         _spritesScrollView = GUILayout.BeginScrollView(_spritesScrollView, "HelpBox");
-                        for (int i = 0; i < _spriteNames.Length; i++)
+                        for (int i = 0; i < inforGroups.Count; i++)
                         {
+                            GUILayout.BeginVertical("HelpBox");
+                            //标题信息..........
                             GUILayout.BeginHorizontal();
                             if (GUILayout.Button(i.ToString(), _showIndex == i ? "OL Minus" : "OL Plus"))
                             {
@@ -131,9 +118,46 @@ namespace EmojiText.Taurus
                                     _showIndex = -1;
                                 else
                                     _showIndex = i;
+
+                                //_showSprites.Clear();
                             }
-                            GUILayout.Label(" -- " + i + ":");
+                            GUILayout.Label("Tag:");
+                            inforGroups[i].Tag=EditorGUILayout.TextField(inforGroups[i].Tag);
+                            GUILayout.Label("Size:");
+                            inforGroups[i].Size = EditorGUILayout.FloatField(inforGroups[i].Size);
+                            GUILayout.Label("Width:");
+                            inforGroups[i].Width = EditorGUILayout.FloatField(inforGroups[i].Width);
                             GUILayout.EndHorizontal();
+                            //具体信息
+                            if (_showIndex == i)
+                            {
+                                List<SpriteInfor> spriteInfors = inforGroups[i].ListSpriteInfor;
+                              //  bool createSprite = _showSprites.Count > 0 ? false : true;
+                                for (int m = 0; m < spriteInfors.Count; m++)
+                                {
+                                    //if (createSprite)
+                                    //{
+                                    //    Sprite sprite = Sprite.Create((Texture2D)_spriteAsset.TexSource, spriteInfors[m].Rect, new Vector2(0.5f,0.5f));
+                                    //    _showSprites.Add(sprite);
+                                    //}
+
+                                    GUILayout.BeginHorizontal("Box");
+                                    //渲染精灵图片
+                                  //  EditorGUILayout.ObjectField(_showSprites[m],typeof(Sprite),false,GUILayout.Height(80.0f), GUILayout.Width(80));
+                                    //渲染其他信息
+                                    GUILayout.BeginVertical("HelpBox");
+                                    GUILayout.Label(spriteInfors[m].Id.ToString());
+                                    GUILayout.Label(spriteInfors[m].Name);
+                                    GUILayout.Label(spriteInfors[m].Tag);
+                                    GUILayout.Label(spriteInfors[m].Rect.ToString());
+                                    GUILayout.Label(spriteInfors[m].Uv.ToString());
+                                    GUILayout.EndVertical();
+                                    GUILayout.EndHorizontal();
+                                }
+                               
+                            }
+                            GUILayout.EndVertical();
+
                         }
                         GUILayout.EndScrollView();
                     }
@@ -283,6 +307,7 @@ namespace EmojiText.Taurus
                     Vector2 texSize = new Vector2(_spriteAsset.TexSource.width, _spriteAsset.TexSource.height);
                     Vector2 size = new Vector2((_spriteAsset.TexSource.width / (float)_spriteAsset.Column)
                         , (_spriteAsset.TexSource.height / (float)_spriteAsset.Row));
+
                     if (_spriteAsset.IsStatic)
                     {
                         int index = -1;
@@ -292,11 +317,7 @@ namespace EmojiText.Taurus
                             {
                                 index++;
                                 SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
-                                SpriteInfor infor = Pool<SpriteInfor>.Get();
-                                infor.Id = index;
-                                infor.Name = i.ToString();
-                                infor.Rect = new Rect(size.y*j, texSize.y - i * size.x, size.x, size.y);
-                                infor.Uv = GetSpriteUV(texSize, infor.Rect);
+                                SpriteInfor infor = GetSpriteInfo(index, i, j, size, texSize);
 
                                 inforGroup.Tag = infor.Name;
                                 inforGroup.ListSpriteInfor.Add(infor);
@@ -314,12 +335,8 @@ namespace EmojiText.Taurus
                             for (int j = 0; j < _spriteAsset.Column; j++)
                             {
                                 index++;
-                                
-                                SpriteInfor infor = Pool<SpriteInfor>.Get();
-                                infor.Id = index;
-                                infor.Name = index.ToString();
-                                infor.Rect = new Rect(size.y * j, texSize.y - i * size.x, size.x, size.y);
-                                infor.Uv = GetSpriteUV(texSize, infor.Rect);
+
+                                SpriteInfor infor = GetSpriteInfo(index, i, j, size, texSize);
 
                                 inforGroup.ListSpriteInfor.Add(infor);
                             }
@@ -327,12 +344,21 @@ namespace EmojiText.Taurus
                         }
                     }
                    
-
                 }
             }
         }
 
 
+        //获取精灵信息
+        private SpriteInfor GetSpriteInfo(int index,int row, int column,Vector2 size,Vector2 texSize)
+        {
+            SpriteInfor infor = Pool<SpriteInfor>.Get();
+            infor.Id = index;
+            infor.Name = index.ToString();
+            infor.Rect = new Rect(size.y * column, texSize.y - (row + 1) * size.x, size.x, size.y);
+            infor.Uv = GetSpriteUV(texSize, infor.Rect);
+            return infor;
+        }
 
 
 

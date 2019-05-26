@@ -14,6 +14,8 @@ MonoBehaviour:
   Id: 1
   IsStatic: 0
   TexSource: {fileID: 2800000, guid: 0f80732ede17ee84fbda8d7d2448dd61, type: 3}
+  Row: 0
+  Column: 0
   ListSpriteGroup:
   - Tag: angry
     ListSpriteInfor:
