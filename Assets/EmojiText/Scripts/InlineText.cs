@@ -397,7 +397,7 @@ namespace EmojiText.Taurus
 			Vector2 pivot = GetTextAnchorPivot(alignment);
 			Rect rect = new Rect();
 			Vector2 size = rectTransform.sizeDelta - new Vector2(preferredWidth, preferredHeight);
-			rect.position = pivot * size - rectTransform.sizeDelta *(rectTransform.pivot);
+            rect.position = new Vector2(pivot.x * size.x, pivot.y * size.y) - new Vector2(rectTransform.sizeDelta.x* rectTransform.pivot.x, rectTransform.sizeDelta.y * rectTransform.pivot.y);
 			rect.width = preferredWidth;
 			rect.height = preferredHeight;
 			_textWolrdVertexs[0] = Utility.TransformPoint2World(transform,new Vector3(rect.x, rect.y));
