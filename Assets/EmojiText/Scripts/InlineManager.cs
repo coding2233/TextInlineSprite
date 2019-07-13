@@ -74,8 +74,11 @@ namespace EmojiText.Taurus
 							meshInfo.Clear();
 							foreach (var item in textMeshInfo)
 							{
-								meshInfo.Vertices.AddRange(item.Value.Vertices);
-								meshInfo.UVs.AddRange(item.Value.UVs);
+								if (item.Value.visable)
+								{
+                                    meshInfo.Vertices.AddRange(item.Value.Vertices);
+                                    meshInfo.UVs.AddRange(item.Value.UVs);
+								}
 							}
 							if (spriteGraphic.MeshInfo != null)
 								Pool<MeshInfo>.Release(spriteGraphic.MeshInfo);
@@ -90,7 +93,7 @@ namespace EmojiText.Taurus
 		}
 
 		//更新Text文本信息
-		public void UpdateTextInfo(InlineText key, int id, List<SpriteTagInfo> value)
+		public void UpdateTextInfo(InlineText key, int id, List<SpriteTagInfo> value, bool visable)
 		{
 			Dictionary<InlineText, MeshInfo> textMeshInfo;
 			if (value == null)
@@ -119,6 +122,7 @@ namespace EmojiText.Taurus
 						textMeshInfo.Add(key, meshInfo);
 					}
 					meshInfo.Clear();
+					meshInfo.visable = visable;
 					for (int i = 0; i < value.Count; i++)
 					{
 						for (int j = 0; j < value[i].Pos.Length; j++)
@@ -148,6 +152,7 @@ namespace EmojiText.Taurus
 		public List<Vector2> UVs = ListPool<Vector2>.Get();
 		public List<Color> Colors = ListPool<Color>.Get();
 		public List<int> Triangles = ListPool<int>.Get();
+		public bool visable = true;
 
 		public void Clear()
 		{
