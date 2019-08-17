@@ -34,7 +34,7 @@ namespace EmojiText.Taurus
 			{
 				if (value == null && _meshInfo != null)
 				{
-					_meshInfo.Clear();
+					_meshInfo.Reset();
 				}
 				else
 					_meshInfo = value;
