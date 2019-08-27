@@ -167,13 +167,13 @@ namespace EmojiText.Taurus
 				listsInitalized = true;
             }
 
-			if (Vertices)
+			if (Vertices != null)
             	Vertices.Clear();
-			if (UVs)
+			if (UVs != null)
                 UVs.Clear();
-            if (Colors)
+            if (Colors != null)
                 Colors.Clear();
-			if (Triangles)
+			if (Triangles != null)
                 Triangles.Clear();
         }
 
