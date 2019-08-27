@@ -153,7 +153,7 @@ namespace EmojiText.Taurus
 		public List<Color> Colors = null;
 		public List<int> Triangles = null;
 		public bool visable = true;
-		public bool listsInitalized = true;
+		public bool listsInitalized = false;
 
 		public void Reset()
 		{
