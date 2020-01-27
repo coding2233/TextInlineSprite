@@ -4,10 +4,10 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 
-namespace EmojiText.Taurus
+namespace Wanderer.EmojiText
 {
-	public class CreateSpriteAsset:EditorWindow
-	{
+    public class CreateSpriteAsset : EditorWindow
+    {
         private static Texture2D _sourceTex;
 
         private Vector2 _texScrollView = Vector2.zero;
@@ -16,11 +16,11 @@ namespace EmojiText.Taurus
         private static DrawSpriteAsset _drawSpriteAsset;
 
         [MenuItem("Assets/Create/Sprite Asset", false, 10)]
-		static void main()
-		{
-			Object target = Selection.activeObject;
-			if (target == null || target.GetType() != typeof(Texture2D))
-				return;
+        static void main()
+        {
+            Object target = Selection.activeObject;
+            if (target == null || target.GetType() != typeof(Texture2D))
+                return;
 
             _sourceTex = target as Texture2D;
 
@@ -43,7 +43,7 @@ namespace EmojiText.Taurus
             }
         }
 
-      
+
 
         private void OnGUI()
         {
@@ -51,14 +51,14 @@ namespace EmojiText.Taurus
             {
                 GUILayout.BeginHorizontal();
                 //纹理渲染--------------
-                _texScrollView = GUILayout.BeginScrollView(_texScrollView, "",GUILayout.Width(0.625f*Screen.width));
+                _texScrollView = GUILayout.BeginScrollView(_texScrollView, "", GUILayout.Width(0.625f * Screen.width));
                 GUILayout.Label(_sourceTex);
                 GUILayout.EndScrollView();
                 //参数设置---------------
                 GUILayout.BeginVertical();
                 GUILayout.BeginVertical("HelpBox");
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("纹理名称",GUILayout.Width(80));
+                GUILayout.Label("纹理名称", GUILayout.Width(80));
                 GUILayout.Label(_sourceTex.name);
                 GUILayout.FlexibleSpace();
                 //加载 图片
@@ -81,15 +81,15 @@ namespace EmojiText.Taurus
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("纹理分辨率", GUILayout.Width(80));
-                GUILayout.Label(_sourceTex.width+" * "+_sourceTex.height);
+                GUILayout.Label(_sourceTex.width + " * " + _sourceTex.height);
                 GUILayout.EndHorizontal();
-                
+
                 //保存
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("配置文件路径", GUILayout.Width(80));
                 GUILayout.Label(_assetPath);
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button(_spriteAsset==null?"Save":"Save As"))
+                if (GUILayout.Button(_spriteAsset == null ? "Save" : "Save As"))
                 {
                     string filePath = EditorUtility.SaveFilePanelInProject("保存表情的序列化文件", _sourceTex.name, "asset", "保存表情的序列化文件");
                     if (!string.IsNullOrEmpty(filePath))
@@ -99,13 +99,13 @@ namespace EmojiText.Taurus
                         _spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
                         _spriteAsset.TexSource = _sourceTex;
                         _spriteAsset.ListSpriteGroup = new List<SpriteInforGroup>();
-                       // spriteAsset.ListSpriteGroup = GetAssetSpriteInfor(sourceTex);
+                        // spriteAsset.ListSpriteGroup = GetAssetSpriteInfor(sourceTex);
                         AssetDatabase.CreateAsset(_spriteAsset, _assetPath);
 
                         //设置精灵信息的绘制类
                         SetDrawSpriteAsset(_spriteAsset);
                     }
-                    
+
                 }
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
@@ -113,9 +113,9 @@ namespace EmojiText.Taurus
                 GUILayout.Space(5);
 
                 //绘制属性
-                if(_drawSpriteAsset!=null)
+                if (_drawSpriteAsset != null)
                     _drawSpriteAsset.Draw();
-              
+
                 GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
 
@@ -133,8 +133,8 @@ namespace EmojiText.Taurus
                 EditorUtility.SetDirty(_spriteAsset);
 
         }
-        
-	
+
+
         //绘制纹理上的线
         private void DrawTextureLines()
         {

@@ -1,4 +1,31 @@
-﻿### **新增功能**  
+﻿### **2020-01-27**
+0. 支持`unity2019+`
+1. `unity2019`的文本的模型数据有所改动，具体的计算代码在c++代码底层，没有追踪到具体的信息，暂时测试出来的信息，如果Text文本，长度足够自动换行，模型顶点的数据信息跟`unity2017`一样，如果长度保持在一行以内或者手动换行，`unity2019`会不再计算`富文本标签`的顶点信息，所以需要手动替换`富文本标签`。
+2. 替换富文本示例`(InlineText :429)`:
+```csharp
+//换掉富文本
+private string ReplaceRichText(string str)
+{
+    str = Regex.Replace(str, @"<color=(.+?)>", "");
+    str = str.Replace("</color>", "");
+    str = str.Replace("<b>", "");
+    str = str.Replace("</b>", "");
+    str = str.Replace("<i>", "");
+    str = str.Replace("</i>", "");
+    str = str.Replace("\n", "");
+    str = str.Replace("\t", "");
+    str = str.Replace("\r", "");
+    str = str.Replace(" ", "");
+
+    return str;
+}
+```
+3. 如果使用中，有多余的`富文本标签`，建议自己在上述代码中添加/修改。
+4. `unity2019`的底层更改，增加了此插件不少必要的计算，导致维护难度上升不少，尽是一些吃力不讨好的事，坐等下次大更新。
+
+---
+
+### **新增功能**  
 0. 重写了配置文件编辑工具，可快速生成表情配置文件
 1. 使用shader渲染表情动画，取消了在update中循环更新模型数据  
 2. 支持在编辑器中直接预览(支持不完全)  

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace EmojiText.Taurus
+namespace Wanderer.EmojiText
 {
-    public class DrawSpriteAsset 
+    public class DrawSpriteAsset
     {
         private string _assetPath = "配置文件暂未保存";
         private Vector2 _spritesScrollView = Vector2.zero;
         private int _showIndex = -1;
         private SpriteAsset _spriteAsset;
-        
+
         public DrawSpriteAsset(SpriteAsset spriteAsset)
         {
             _spriteAsset = spriteAsset;
@@ -145,7 +145,7 @@ namespace EmojiText.Taurus
 
                                 GUILayout.EndVertical();
                                 GUI.enabled = true;
-                                
+
                                 GUILayout.EndHorizontal();
                             }
 
@@ -155,7 +155,7 @@ namespace EmojiText.Taurus
                     }
                     GUILayout.EndScrollView();
                 }
-                
+
             }
         }
 
@@ -188,7 +188,7 @@ namespace EmojiText.Taurus
                                 SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
                                 SpriteInfor infor = GetSpriteInfo(index, i, j, size, texSize);
 
-                                inforGroup.Tag = "emoji_"+infor.Id;
+                                inforGroup.Tag = "emoji_" + infor.Id;
                                 inforGroup.ListSpriteInfor.Add(infor);
                                 _spriteAsset.ListSpriteGroup.Add(inforGroup);
                             }
@@ -200,7 +200,7 @@ namespace EmojiText.Taurus
                         for (int i = 0; i < _spriteAsset.Row; i++)
                         {
                             SpriteInforGroup inforGroup = Pool<SpriteInforGroup>.Get();
-                            inforGroup.Tag = "emoji_"+(index + 1);
+                            inforGroup.Tag = "emoji_" + (index + 1);
                             for (int j = 0; j < _spriteAsset.Column; j++)
                             {
                                 index++;

@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace EmojiText.Taurus
+namespace Wanderer.EmojiText
 {
     [CustomEditor(typeof(SpriteAsset))]
     public class SpriteAssetEditor : Editor
@@ -14,7 +14,7 @@ namespace EmojiText.Taurus
         {
             _spriteAsset = (SpriteAsset)target;
 
-            if(_spriteAsset)
+            if (_spriteAsset)
                 SetDrawSpriteAsset(_spriteAsset);
         }
 
@@ -52,7 +52,7 @@ namespace EmojiText.Taurus
         public override void OnPreviewSettings()
         {
             //  GUILayout.Label("文本", "preLabel");
-            if (GUILayout.Button("Open Asset Window", "preButton")&& _spriteAsset!=null)
+            if (GUILayout.Button("Open Asset Window", "preButton") && _spriteAsset != null)
             {
                 CreateSpriteAsset.OpenAsset(_spriteAsset);
             }
@@ -62,7 +62,7 @@ namespace EmojiText.Taurus
         public override void OnPreviewGUI(Rect r, GUIStyle background)
         {
             // base.OnPreviewGUI(r, background);
-            
+
             if (_spriteAsset && _spriteAsset.TexSource)
             {
                 Rect drawRect = r;
@@ -72,7 +72,7 @@ namespace EmojiText.Taurus
                 GUI.Label(drawRect, _spriteAsset.TexSource);
 
                 //绘制线
-               // DrawTextureLines(drawRect);
+                // DrawTextureLines(drawRect);
             }
         }
 
