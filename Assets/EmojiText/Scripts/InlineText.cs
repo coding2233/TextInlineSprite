@@ -418,16 +418,15 @@ namespace Wanderer.EmojiText
         //是否换行
         private bool AutoLF()
         {
-
-#if UNITY_2019_3_OR_NEWER
-            return true;
-#endif
-
+            //width
             var settings = GetGenerationSettings(Vector2.zero);
             float width = cachedTextGeneratorForLayout.GetPreferredWidth(m_Text, settings) / pixelsPerUnit;
-            bool result = width < rectTransform.sizeDelta.x || horizontalOverflow == HorizontalWrapMode.Overflow;
-            // result &= cachedTextGeneratorForLayout.lineCount <= 1;
-            return !result;
+            bool widthResult = width < rectTransform.sizeDelta.x || horizontalOverflow == HorizontalWrapMode.Overflow;
+            //height
+            settings = GetGenerationSettings(new Vector2(rectTransform.rect.size.x, 0.0f));
+            float height = cachedTextGeneratorForLayout.GetPreferredHeight(m_Text, settings) / pixelsPerUnit;
+            bool heightResult = height < rectTransform.sizeDelta.y || verticalOverflow == VerticalWrapMode.Overflow;
+            return !widthResult || !heightResult;
         }
 
         //换掉富文本
