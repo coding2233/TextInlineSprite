@@ -418,6 +418,11 @@ namespace Wanderer.EmojiText
         //是否换行
         private bool AutoLF()
         {
+
+#if UNITY_2019_3_OR_NEWER
+            return true;
+#endif
+
             var settings = GetGenerationSettings(Vector2.zero);
             float width = cachedTextGeneratorForLayout.GetPreferredWidth(m_Text, settings) / pixelsPerUnit;
             bool result = width < rectTransform.sizeDelta.x || horizontalOverflow == HorizontalWrapMode.Overflow;
