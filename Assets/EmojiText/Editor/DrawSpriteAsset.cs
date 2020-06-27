@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Wanderer.EmojiText
 {
@@ -11,10 +12,15 @@ namespace Wanderer.EmojiText
         private Vector2 _spritesScrollView = Vector2.zero;
         private int _showIndex = -1;
         private SpriteAsset _spriteAsset;
+        private bool _isSponsor;
+        private Texture[] _payTexs;
 
         public DrawSpriteAsset(SpriteAsset spriteAsset)
         {
             _spriteAsset = spriteAsset;
+            _payTexs = new Texture[2];
+            _payTexs[0] = Resources.Load<Texture>("emoji-alipay");
+            _payTexs[1] = Resources.Load<Texture>("emoji-wechatpay");
         }
 
         /// <summary>
@@ -33,7 +39,25 @@ namespace Wanderer.EmojiText
         {
             if (_spriteAsset)
             {
-                EditorGUILayout.HelpBox("强烈建议将资源图片上的所有表情，制成规格完全一样的！有规律才支持程序自动分割处理！如果需要实在特殊，请更行更改代码，或者通过github(https://github.com/coding2233/TextInlineSprite)与我沟通。", MessageType.Info);
+                //赞助
+                _isSponsor = EditorGUILayout.Toggle("请作者喝杯咖啡？", _isSponsor);
+                if (_isSponsor&& _payTexs!=null)
+                {
+                    GUILayout.BeginHorizontal("HelpBox");
+                    for (int i = 0; i < _payTexs.Length; i++)
+                    {
+                        Texture payTex = _payTexs[i];
+                        if (payTex != null)
+                        {
+                            float height =450.0f;
+                            float width = (payTex.width / (float)payTex.height) * height;
+                            GUILayout.Label(payTex, GUILayout.Width(width),GUILayout.Height(height));
+                        }
+                        GUILayout.Space(5);
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                EditorGUILayout.HelpBox("强烈建议将资源图片上的所有表情，制成规格完全一样的！有规律才支持程序自动分割处理！如果需要实在特殊，请更行更改代码，或者通过(https://github.com/coding2233/TextInlineSprite)与我沟通。", MessageType.Info);
                 //属性
                 GUILayout.Label("属性:");
                 GUILayout.BeginVertical("HelpBox");
@@ -155,6 +179,7 @@ namespace Wanderer.EmojiText
                     }
                     GUILayout.EndScrollView();
                 }
+
 
             }
         }

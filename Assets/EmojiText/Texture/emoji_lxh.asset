@@ -165,7 +165,7 @@ MonoBehaviour:
       - {x: 1, y: 0.95238096}
       - {x: 0.875, y: 0.95238096}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: watermelon
     ListSpriteInfor:
     - Id: 8
@@ -313,7 +313,7 @@ MonoBehaviour:
       - {x: 1, y: 0.9047619}
       - {x: 0.875, y: 0.9047619}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: run
     ListSpriteInfor:
     - Id: 16
@@ -461,7 +461,7 @@ MonoBehaviour:
       - {x: 1, y: 0.85714287}
       - {x: 0.875, y: 0.85714287}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: die
     ListSpriteInfor:
     - Id: 24
@@ -609,7 +609,7 @@ MonoBehaviour:
       - {x: 1, y: 0.8095238}
       - {x: 0.875, y: 0.8095238}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: meat
     ListSpriteInfor:
     - Id: 32
@@ -757,7 +757,7 @@ MonoBehaviour:
       - {x: 1, y: 0.7619048}
       - {x: 0.875, y: 0.7619048}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: roll
     ListSpriteInfor:
     - Id: 40
@@ -905,7 +905,7 @@ MonoBehaviour:
       - {x: 1, y: 0.71428573}
       - {x: 0.875, y: 0.71428573}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: yawn
     ListSpriteInfor:
     - Id: 48
@@ -1053,7 +1053,7 @@ MonoBehaviour:
       - {x: 1, y: 0.6666667}
       - {x: 0.875, y: 0.6666667}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: boring
     ListSpriteInfor:
     - Id: 56
@@ -1201,7 +1201,7 @@ MonoBehaviour:
       - {x: 1, y: 0.61904764}
       - {x: 0.875, y: 0.61904764}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: happy
     ListSpriteInfor:
     - Id: 64
@@ -1349,7 +1349,7 @@ MonoBehaviour:
       - {x: 1, y: 0.5714286}
       - {x: 0.875, y: 0.5714286}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: rock
     ListSpriteInfor:
     - Id: 72
@@ -1497,7 +1497,7 @@ MonoBehaviour:
       - {x: 1, y: 0.52380955}
       - {x: 0.875, y: 0.52380955}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: gargle
     ListSpriteInfor:
     - Id: 80
@@ -1645,7 +1645,7 @@ MonoBehaviour:
       - {x: 1, y: 0.47619048}
       - {x: 0.875, y: 0.47619048}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: sleep
     ListSpriteInfor:
     - Id: 88
@@ -1793,7 +1793,7 @@ MonoBehaviour:
       - {x: 1, y: 0.42857143}
       - {x: 0.875, y: 0.42857143}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: idle
     ListSpriteInfor:
     - Id: 96
@@ -1941,7 +1941,7 @@ MonoBehaviour:
       - {x: 1, y: 0.3809524}
       - {x: 0.875, y: 0.3809524}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: pain
     ListSpriteInfor:
     - Id: 104
@@ -2089,7 +2089,7 @@ MonoBehaviour:
       - {x: 1, y: 0.33333334}
       - {x: 0.875, y: 0.33333334}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: play
     ListSpriteInfor:
     - Id: 112
@@ -2237,7 +2237,7 @@ MonoBehaviour:
       - {x: 1, y: 0.2857143}
       - {x: 0.875, y: 0.2857143}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: rose
     ListSpriteInfor:
     - Id: 120
@@ -2385,7 +2385,7 @@ MonoBehaviour:
       - {x: 1, y: 0.23809524}
       - {x: 0.875, y: 0.23809524}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: walk
     ListSpriteInfor:
     - Id: 128
@@ -2533,7 +2533,7 @@ MonoBehaviour:
       - {x: 1, y: 0.1904762}
       - {x: 0.875, y: 0.1904762}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: angry
     ListSpriteInfor:
     - Id: 136
@@ -2681,7 +2681,7 @@ MonoBehaviour:
       - {x: 1, y: 0.14285715}
       - {x: 0.875, y: 0.14285715}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: bleeding
     ListSpriteInfor:
     - Id: 144
@@ -2829,7 +2829,7 @@ MonoBehaviour:
       - {x: 1, y: 0.0952381}
       - {x: 0.875, y: 0.0952381}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: nurturing
     ListSpriteInfor:
     - Id: 152
@@ -2977,7 +2977,7 @@ MonoBehaviour:
       - {x: 1, y: 0.04761905}
       - {x: 0.875, y: 0.04761905}
     Width: 1
-    Size: 14
+    Size: 34
   - Tag: ou
     ListSpriteInfor:
     - Id: 160
@@ -3125,4 +3125,4 @@ MonoBehaviour:
       - {x: 1, y: 0}
       - {x: 0.875, y: 0}
     Width: 1
-    Size: 14
+    Size: 34

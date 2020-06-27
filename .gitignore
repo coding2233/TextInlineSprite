@@ -34,3 +34,6 @@
 *.csproj
 *.sln
 *.suo
+
+
+.vscode/
